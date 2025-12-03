@@ -15,7 +15,7 @@ export default function UserSelector() {
   return (
     <div className="p-4 bg-slate-100 rounded-lg">
       <label className="block text-sm font-medium mb-2">
-        Who's eating?
+        Who&apos;s eating?
       </label>
       <select
         value={currentUser?.id || ''}

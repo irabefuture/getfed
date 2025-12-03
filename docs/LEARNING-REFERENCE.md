@@ -295,6 +295,33 @@ npm install @anthropic-ai/sdk
 - Established end-of-session save workflow
 - Docs: PROJECT-STATUS.md for quick state, LEARNING-REFERENCE.md for details
 
+**UI Decision (from Day 3 evening discussion):**
+
+Three-column layout agreed:
+```
+┌─────────────────────────────────────────────────────────────────┐
+│ SIDEBAR      │  GENERATE (middle)      │  WEEK PLAN (right)     │
+│              │                         │                        │
+│ User select  │  Constraints: ____      │  Thu 5 Dec             │
+│ Macro targets│  Serves/Meals/Snacks    │  - Lunch: [empty]      │
+│ Navigation   │  [Generate Week]        │  - Snack: [empty]      │
+│              │                         │  - Dinner: [empty]     │
+│              │  Generated Meals        │  - Snack: [empty]      │
+│              │  [draggable cards]      │                        │
+│              │                         │  Fri 6 Dec...          │
+│              │  Generated Snacks       │                        │
+│              │  [draggable cards]      │  [Commit All]          │
+│              │                         │  [Clear Week]          │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+**Key features:**
+- Drag-and-drop from generated meals to day slots
+- "Commit All Suggestions" for fast acceptance
+- Visual completion (see when slots filled)
+- Snacks separate from main meals
+- Per day: Lunch → Snack → Dinner → Snack (Galveston 16:8 fasting)
+
 ---
 
 ## End-of-Session Workflow
