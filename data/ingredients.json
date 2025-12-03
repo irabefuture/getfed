@@ -1,0 +1,1726 @@
+{
+  "metadata": {
+    "source": "Australian Food Composition Database (AFCD) Release 2 + Galveston Diet book",
+    "diet_type": "anti_inflammatory",
+    "last_updated": "2025-12-01",
+    "notes": "All values per 100g edible portion. Aligned with Galveston Diet + Ian's documented eating patterns."
+  },
+  "ingredients": [
+    {
+      "id": "protein_001",
+      "name": "Salmon, Atlantic, raw",
+      "category": "fish",
+      "protein_g": 20.4,
+      "fat_g": 13.4,
+      "carbs_g": 0,
+      "calories": 208,
+      "anti_inflammatory_compounds": ["omega-3", "vitamin D"]
+    },
+    {
+      "id": "protein_002",
+      "name": "Salmon, Atlantic, baked",
+      "category": "fish",
+      "protein_g": 25.4,
+      "fat_g": 8.1,
+      "carbs_g": 0,
+      "calories": 182,
+      "anti_inflammatory_compounds": ["omega-3", "vitamin D"]
+    },
+    {
+      "id": "protein_003",
+      "name": "Salmon, smoked",
+      "category": "fish",
+      "protein_g": 18.3,
+      "fat_g": 4.3,
+      "carbs_g": 0,
+      "calories": 117,
+      "anti_inflammatory_compounds": ["omega-3", "vitamin D"]
+    },
+    {
+      "id": "protein_004",
+      "name": "Mackerel, raw",
+      "category": "fish",
+      "protein_g": 18.6,
+      "fat_g": 13.9,
+      "carbs_g": 0,
+      "calories": 205,
+      "anti_inflammatory_compounds": ["omega-3"]
+    },
+    {
+      "id": "protein_005",
+      "name": "Sardines, canned in oil, drained",
+      "category": "fish",
+      "protein_g": 24.6,
+      "fat_g": 11.5,
+      "carbs_g": 0,
+      "calories": 208,
+      "anti_inflammatory_compounds": ["omega-3", "calcium"]
+    },
+    {
+      "id": "protein_006",
+      "name": "Tuna, raw",
+      "category": "fish",
+      "protein_g": 23.3,
+      "fat_g": 4.9,
+      "carbs_g": 0,
+      "calories": 144,
+      "anti_inflammatory_compounds": ["omega-3", "selenium"]
+    },
+    {
+      "id": "protein_007",
+      "name": "Barramundi, raw",
+      "category": "fish",
+      "protein_g": 19.4,
+      "fat_g": 2.0,
+      "carbs_g": 0,
+      "calories": 97,
+      "anti_inflammatory_compounds": ["omega-3"]
+    },
+    {
+      "id": "protein_008",
+      "name": "Trout, rainbow, raw",
+      "category": "fish",
+      "protein_g": 20.5,
+      "fat_g": 6.6,
+      "carbs_g": 0,
+      "calories": 141,
+      "anti_inflammatory_compounds": ["omega-3"]
+    },
+    {
+      "id": "protein_009",
+      "name": "Herring, raw",
+      "category": "fish",
+      "protein_g": 17.9,
+      "fat_g": 9.0,
+      "carbs_g": 0,
+      "calories": 158,
+      "anti_inflammatory_compounds": ["omega-3", "vitamin D"]
+    },
+    {
+      "id": "protein_010",
+      "name": "Anchovies, canned in oil, drained",
+      "category": "fish",
+      "protein_g": 28.9,
+      "fat_g": 9.7,
+      "carbs_g": 0,
+      "calories": 210,
+      "anti_inflammatory_compounds": ["omega-3", "calcium"]
+    },
+    {
+      "id": "seafood_001",
+      "name": "Prawns, raw",
+      "category": "seafood",
+      "protein_g": 20.1,
+      "fat_g": 0.8,
+      "carbs_g": 0.9,
+      "calories": 85,
+      "anti_inflammatory_compounds": ["selenium", "zinc"]
+    },
+    {
+      "id": "seafood_002",
+      "name": "Scallops, raw",
+      "category": "seafood",
+      "protein_g": 17.0,
+      "fat_g": 0.8,
+      "carbs_g": 3.2,
+      "calories": 88,
+      "anti_inflammatory_compounds": ["selenium", "B12"]
+    },
+    {
+      "id": "seafood_003",
+      "name": "Mussels, raw",
+      "category": "seafood",
+      "protein_g": 11.9,
+      "fat_g": 2.2,
+      "carbs_g": 3.7,
+      "calories": 86,
+      "anti_inflammatory_compounds": ["omega-3", "selenium"]
+    },
+    {
+      "id": "seafood_004",
+      "name": "Crab, raw",
+      "category": "seafood",
+      "protein_g": 18.1,
+      "fat_g": 0.9,
+      "carbs_g": 0,
+      "calories": 83,
+      "anti_inflammatory_compounds": ["selenium", "zinc"]
+    },
+    {
+      "id": "poultry_001",
+      "name": "Chicken breast, raw, skinless",
+      "category": "poultry",
+      "protein_g": 22.5,
+      "fat_g": 1.3,
+      "carbs_g": 0,
+      "calories": 104,
+      "anti_inflammatory_compounds": ["B vitamins"]
+    },
+    {
+      "id": "poultry_002",
+      "name": "Chicken thigh, raw, skinless",
+      "category": "poultry",
+      "protein_g": 19.7,
+      "fat_g": 4.3,
+      "carbs_g": 0,
+      "calories": 119,
+      "anti_inflammatory_compounds": ["B vitamins"]
+    },
+    {
+      "id": "poultry_003",
+      "name": "Turkey breast, raw",
+      "category": "poultry",
+      "protein_g": 24.1,
+      "fat_g": 1.0,
+      "carbs_g": 0,
+      "calories": 104,
+      "anti_inflammatory_compounds": ["selenium", "B vitamins"]
+    },
+    {
+      "id": "red_meat_001",
+      "name": "Beef, lean mince, raw",
+      "category": "red_meat",
+      "protein_g": 20.0,
+      "fat_g": 10.0,
+      "carbs_g": 0,
+      "calories": 176,
+      "anti_inflammatory_compounds": ["B12", "zinc", "iron"],
+      "notes": "Choose grass-fed when possible for better omega ratio"
+    },
+    {
+      "id": "red_meat_002",
+      "name": "Beef, sirloin steak, raw",
+      "category": "red_meat",
+      "protein_g": 21.3,
+      "fat_g": 8.5,
+      "carbs_g": 0,
+      "calories": 165,
+      "anti_inflammatory_compounds": ["B12", "zinc", "iron"]
+    },
+    {
+      "id": "red_meat_003",
+      "name": "Beef, eye fillet, raw",
+      "category": "red_meat",
+      "protein_g": 22.0,
+      "fat_g": 5.0,
+      "carbs_g": 0,
+      "calories": 136,
+      "anti_inflammatory_compounds": ["B12", "zinc", "iron"]
+    },
+    {
+      "id": "red_meat_004",
+      "name": "Lamb, leg, lean, raw",
+      "category": "red_meat",
+      "protein_g": 20.3,
+      "fat_g": 8.8,
+      "carbs_g": 0,
+      "calories": 162,
+      "anti_inflammatory_compounds": ["B12", "zinc", "CLA"]
+    },
+    {
+      "id": "red_meat_005",
+      "name": "Lamb, loin chop, lean, raw",
+      "category": "red_meat",
+      "protein_g": 19.9,
+      "fat_g": 9.5,
+      "carbs_g": 0,
+      "calories": 168,
+      "anti_inflammatory_compounds": ["B12", "zinc", "CLA"]
+    },
+    {
+      "id": "pork_001",
+      "name": "Pork, loin, lean, raw",
+      "category": "pork",
+      "protein_g": 21.0,
+      "fat_g": 3.5,
+      "carbs_g": 0,
+      "calories": 117,
+      "anti_inflammatory_compounds": ["B vitamins", "selenium"]
+    },
+    {
+      "id": "pork_002",
+      "name": "Pork, fillet (tenderloin), raw",
+      "category": "pork",
+      "protein_g": 22.0,
+      "fat_g": 2.5,
+      "carbs_g": 0,
+      "calories": 109,
+      "anti_inflammatory_compounds": ["B vitamins", "selenium"]
+    },
+    {
+      "id": "cured_001",
+      "name": "Prosciutto",
+      "category": "cured_meats",
+      "protein_g": 26.0,
+      "fat_g": 18.0,
+      "carbs_g": 0.5,
+      "calories": 270,
+      "anti_inflammatory_compounds": ["B vitamins"],
+      "notes": "Use in moderation - high sodium"
+    },
+    {
+      "id": "cured_002",
+      "name": "Bacon, uncured, nitrate-free",
+      "category": "cured_meats",
+      "protein_g": 13.0,
+      "fat_g": 41.0,
+      "carbs_g": 1.0,
+      "calories": 417,
+      "anti_inflammatory_compounds": ["B vitamins"],
+      "notes": "Choose nitrate-free varieties"
+    },
+    {
+      "id": "cured_003",
+      "name": "Beef jerky",
+      "category": "cured_meats",
+      "protein_g": 33.2,
+      "fat_g": 7.0,
+      "carbs_g": 11.0,
+      "calories": 250,
+      "anti_inflammatory_compounds": ["B12", "zinc"],
+      "notes": "Choose low-sugar varieties"
+    },
+    {
+      "id": "egg_001",
+      "name": "Eggs, whole, raw",
+      "category": "eggs",
+      "protein_g": 12.6,
+      "fat_g": 9.5,
+      "carbs_g": 0.7,
+      "calories": 143,
+      "anti_inflammatory_compounds": ["choline", "vitamin D"]
+    },
+    {
+      "id": "legume_001",
+      "name": "Tofu, firm",
+      "category": "legumes",
+      "protein_g": 12.7,
+      "fat_g": 6.4,
+      "carbs_g": 2.4,
+      "calories": 117,
+      "anti_inflammatory_compounds": ["isoflavones"]
+    },
+    {
+      "id": "legume_002",
+      "name": "Tempeh",
+      "category": "legumes",
+      "protein_g": 18.5,
+      "fat_g": 10.8,
+      "carbs_g": 9.4,
+      "calories": 193,
+      "anti_inflammatory_compounds": ["isoflavones", "probiotics"]
+    },
+    {
+      "id": "legume_003",
+      "name": "Lentils, brown, cooked",
+      "category": "legumes",
+      "protein_g": 9.0,
+      "fat_g": 0.4,
+      "carbs_g": 20.1,
+      "calories": 116,
+      "anti_inflammatory_compounds": ["fiber", "polyphenols"]
+    },
+    {
+      "id": "legume_004",
+      "name": "Chickpeas, cooked",
+      "category": "legumes",
+      "protein_g": 8.9,
+      "fat_g": 2.6,
+      "carbs_g": 27.4,
+      "calories": 164,
+      "anti_inflammatory_compounds": ["fiber", "folate"]
+    },
+    {
+      "id": "legume_005",
+      "name": "Black beans, cooked",
+      "category": "legumes",
+      "protein_g": 8.9,
+      "fat_g": 0.5,
+      "carbs_g": 23.7,
+      "calories": 132,
+      "anti_inflammatory_compounds": ["anthocyanins", "fiber"]
+    },
+    {
+      "id": "legume_006",
+      "name": "Kidney beans, cooked",
+      "category": "legumes",
+      "protein_g": 8.7,
+      "fat_g": 0.5,
+      "carbs_g": 22.8,
+      "calories": 127,
+      "anti_inflammatory_compounds": ["fiber", "folate"]
+    },
+    {
+      "id": "legume_007",
+      "name": "Cannellini beans, cooked",
+      "category": "legumes",
+      "protein_g": 9.7,
+      "fat_g": 0.3,
+      "carbs_g": 21.2,
+      "calories": 118,
+      "anti_inflammatory_compounds": ["fiber", "iron"]
+    },
+    {
+      "id": "legume_008",
+      "name": "Edamame, cooked",
+      "category": "legumes",
+      "protein_g": 11.9,
+      "fat_g": 5.2,
+      "carbs_g": 8.9,
+      "calories": 121,
+      "anti_inflammatory_compounds": ["isoflavones", "fiber"]
+    },
+    {
+      "id": "veg_001",
+      "name": "Spinach, raw",
+      "category": "leafy_greens",
+      "protein_g": 2.9,
+      "fat_g": 0.4,
+      "carbs_g": 3.6,
+      "calories": 23,
+      "anti_inflammatory_compounds": ["vitamin K", "lutein", "folate"]
+    },
+    {
+      "id": "veg_002",
+      "name": "Kale, raw",
+      "category": "leafy_greens",
+      "protein_g": 4.3,
+      "fat_g": 0.9,
+      "carbs_g": 8.8,
+      "calories": 49,
+      "anti_inflammatory_compounds": ["vitamin K", "vitamin C", "quercetin"]
+    },
+    {
+      "id": "veg_003",
+      "name": "Silverbeet, raw",
+      "category": "leafy_greens",
+      "protein_g": 1.8,
+      "fat_g": 0.2,
+      "carbs_g": 3.7,
+      "calories": 19,
+      "anti_inflammatory_compounds": ["vitamin K", "magnesium"]
+    },
+    {
+      "id": "veg_004",
+      "name": "Rocket, raw",
+      "category": "leafy_greens",
+      "protein_g": 2.6,
+      "fat_g": 0.7,
+      "carbs_g": 3.6,
+      "calories": 25,
+      "anti_inflammatory_compounds": ["vitamin K", "glucosinolates"]
+    },
+    {
+      "id": "veg_005",
+      "name": "Bok choy, raw",
+      "category": "leafy_greens",
+      "protein_g": 1.5,
+      "fat_g": 0.2,
+      "carbs_g": 2.2,
+      "calories": 13,
+      "anti_inflammatory_compounds": ["vitamin K", "vitamin C"]
+    },
+    {
+      "id": "veg_006",
+      "name": "Watercress, raw",
+      "category": "leafy_greens",
+      "protein_g": 2.3,
+      "fat_g": 0.1,
+      "carbs_g": 1.3,
+      "calories": 11,
+      "anti_inflammatory_compounds": ["vitamin K", "PEITC"]
+    },
+    {
+      "id": "veg_007",
+      "name": "Broccoli, raw",
+      "category": "cruciferous",
+      "protein_g": 2.8,
+      "fat_g": 0.4,
+      "carbs_g": 6.6,
+      "calories": 34,
+      "anti_inflammatory_compounds": ["sulforaphane", "vitamin C"]
+    },
+    {
+      "id": "veg_008",
+      "name": "Broccoli, steamed",
+      "category": "cruciferous",
+      "protein_g": 3.0,
+      "fat_g": 0.4,
+      "carbs_g": 4.4,
+      "calories": 28,
+      "anti_inflammatory_compounds": ["sulforaphane", "vitamin C"]
+    },
+    {
+      "id": "veg_009",
+      "name": "Cauliflower, raw",
+      "category": "cruciferous",
+      "protein_g": 1.9,
+      "fat_g": 0.3,
+      "carbs_g": 5.0,
+      "calories": 25,
+      "anti_inflammatory_compounds": ["vitamin C", "glucosinolates"]
+    },
+    {
+      "id": "veg_010",
+      "name": "Brussels sprouts, raw",
+      "category": "cruciferous",
+      "protein_g": 3.4,
+      "fat_g": 0.3,
+      "carbs_g": 9.0,
+      "calories": 43,
+      "anti_inflammatory_compounds": ["vitamin K", "sulforaphane"]
+    },
+    {
+      "id": "veg_011",
+      "name": "Cabbage, green, raw",
+      "category": "cruciferous",
+      "protein_g": 1.3,
+      "fat_g": 0.1,
+      "carbs_g": 5.8,
+      "calories": 25,
+      "anti_inflammatory_compounds": ["vitamin K", "glucosinolates"]
+    },
+    {
+      "id": "veg_012",
+      "name": "Cabbage, red, raw",
+      "category": "cruciferous",
+      "protein_g": 1.4,
+      "fat_g": 0.2,
+      "carbs_g": 7.4,
+      "calories": 31,
+      "anti_inflammatory_compounds": ["anthocyanins", "glucosinolates"]
+    },
+    {
+      "id": "veg_013",
+      "name": "Radishes, raw",
+      "category": "cruciferous",
+      "protein_g": 0.7,
+      "fat_g": 0.1,
+      "carbs_g": 3.4,
+      "calories": 16,
+      "anti_inflammatory_compounds": ["glucosinolates", "vitamin C"]
+    },
+    {
+      "id": "veg_014",
+      "name": "Capsicum, red, raw",
+      "category": "vegetables",
+      "protein_g": 1.0,
+      "fat_g": 0.3,
+      "carbs_g": 6.0,
+      "calories": 31,
+      "anti_inflammatory_compounds": ["vitamin C", "beta-carotene"]
+    },
+    {
+      "id": "veg_015",
+      "name": "Capsicum, green, raw",
+      "category": "vegetables",
+      "protein_g": 0.9,
+      "fat_g": 0.2,
+      "carbs_g": 4.6,
+      "calories": 20,
+      "anti_inflammatory_compounds": ["vitamin C"]
+    },
+    {
+      "id": "veg_016",
+      "name": "Tomato, raw",
+      "category": "vegetables",
+      "protein_g": 0.9,
+      "fat_g": 0.2,
+      "carbs_g": 3.9,
+      "calories": 18,
+      "anti_inflammatory_compounds": ["lycopene", "vitamin C"]
+    },
+    {
+      "id": "veg_017",
+      "name": "Cherry tomatoes, raw",
+      "category": "vegetables",
+      "protein_g": 0.9,
+      "fat_g": 0.2,
+      "carbs_g": 3.9,
+      "calories": 18,
+      "anti_inflammatory_compounds": ["lycopene", "vitamin C"]
+    },
+    {
+      "id": "veg_018",
+      "name": "Zucchini, raw",
+      "category": "vegetables",
+      "protein_g": 1.2,
+      "fat_g": 0.3,
+      "carbs_g": 3.1,
+      "calories": 17,
+      "anti_inflammatory_compounds": ["vitamin C", "manganese"]
+    },
+    {
+      "id": "veg_019",
+      "name": "Eggplant, raw",
+      "category": "vegetables",
+      "protein_g": 1.0,
+      "fat_g": 0.2,
+      "carbs_g": 5.9,
+      "calories": 25,
+      "anti_inflammatory_compounds": ["nasunin", "fiber"]
+    },
+    {
+      "id": "veg_020",
+      "name": "Cucumber, raw",
+      "category": "vegetables",
+      "protein_g": 0.7,
+      "fat_g": 0.1,
+      "carbs_g": 3.6,
+      "calories": 15,
+      "anti_inflammatory_compounds": ["cucurbitacins", "vitamin K"]
+    },
+    {
+      "id": "veg_021",
+      "name": "Celery, raw",
+      "category": "vegetables",
+      "protein_g": 0.7,
+      "fat_g": 0.2,
+      "carbs_g": 3.0,
+      "calories": 14,
+      "anti_inflammatory_compounds": ["apigenin", "luteolin"]
+    },
+    {
+      "id": "veg_022",
+      "name": "Carrot, raw",
+      "category": "vegetables",
+      "protein_g": 0.9,
+      "fat_g": 0.2,
+      "carbs_g": 9.6,
+      "calories": 41,
+      "anti_inflammatory_compounds": ["beta-carotene"]
+    },
+    {
+      "id": "veg_023",
+      "name": "Sweet potato, baked",
+      "category": "vegetables",
+      "protein_g": 2.0,
+      "fat_g": 0.1,
+      "carbs_g": 20.7,
+      "calories": 90,
+      "anti_inflammatory_compounds": ["beta-carotene", "vitamin C"]
+    },
+    {
+      "id": "veg_024",
+      "name": "Pumpkin, baked",
+      "category": "vegetables",
+      "protein_g": 1.0,
+      "fat_g": 0.1,
+      "carbs_g": 6.5,
+      "calories": 26,
+      "anti_inflammatory_compounds": ["beta-carotene", "vitamin C"]
+    },
+    {
+      "id": "veg_025",
+      "name": "Beetroot, raw",
+      "category": "vegetables",
+      "protein_g": 1.6,
+      "fat_g": 0.2,
+      "carbs_g": 9.6,
+      "calories": 43,
+      "anti_inflammatory_compounds": ["betalains", "nitrates"]
+    },
+    {
+      "id": "veg_026",
+      "name": "Asparagus, raw",
+      "category": "vegetables",
+      "protein_g": 2.2,
+      "fat_g": 0.1,
+      "carbs_g": 3.9,
+      "calories": 20,
+      "anti_inflammatory_compounds": ["saponins", "folate"]
+    },
+    {
+      "id": "veg_027",
+      "name": "Green beans, raw",
+      "category": "vegetables",
+      "protein_g": 1.8,
+      "fat_g": 0.1,
+      "carbs_g": 7.0,
+      "calories": 31,
+      "anti_inflammatory_compounds": ["vitamin K", "silicon"]
+    },
+    {
+      "id": "veg_028",
+      "name": "Snow peas, raw",
+      "category": "vegetables",
+      "protein_g": 2.8,
+      "fat_g": 0.2,
+      "carbs_g": 7.6,
+      "calories": 42,
+      "anti_inflammatory_compounds": ["vitamin C", "fiber"]
+    },
+    {
+      "id": "veg_029",
+      "name": "Mushrooms, button, raw",
+      "category": "vegetables",
+      "protein_g": 3.1,
+      "fat_g": 0.3,
+      "carbs_g": 3.3,
+      "calories": 22,
+      "anti_inflammatory_compounds": ["selenium", "ergothioneine"]
+    },
+    {
+      "id": "veg_030",
+      "name": "Artichoke hearts, canned",
+      "category": "vegetables",
+      "protein_g": 2.9,
+      "fat_g": 0.3,
+      "carbs_g": 9.4,
+      "calories": 44,
+      "anti_inflammatory_compounds": ["cynarin", "fiber"]
+    },
+    {
+      "id": "allium_001",
+      "name": "Garlic, raw",
+      "category": "alliums",
+      "protein_g": 6.4,
+      "fat_g": 0.5,
+      "carbs_g": 33.1,
+      "calories": 149,
+      "anti_inflammatory_compounds": ["allicin", "sulfur compounds"]
+    },
+    {
+      "id": "allium_002",
+      "name": "Onion, brown, raw",
+      "category": "alliums",
+      "protein_g": 1.1,
+      "fat_g": 0.1,
+      "carbs_g": 9.3,
+      "calories": 40,
+      "anti_inflammatory_compounds": ["quercetin", "sulfur compounds"]
+    },
+    {
+      "id": "allium_003",
+      "name": "Onion, red, raw",
+      "category": "alliums",
+      "protein_g": 1.1,
+      "fat_g": 0.1,
+      "carbs_g": 9.3,
+      "calories": 40,
+      "anti_inflammatory_compounds": ["anthocyanins", "quercetin"]
+    },
+    {
+      "id": "allium_004",
+      "name": "Leek, raw",
+      "category": "alliums",
+      "protein_g": 1.5,
+      "fat_g": 0.3,
+      "carbs_g": 14.2,
+      "calories": 61,
+      "anti_inflammatory_compounds": ["kaempferol", "fiber"]
+    },
+    {
+      "id": "allium_005",
+      "name": "Spring onion, raw",
+      "category": "alliums",
+      "protein_g": 1.8,
+      "fat_g": 0.2,
+      "carbs_g": 7.3,
+      "calories": 32,
+      "anti_inflammatory_compounds": ["quercetin", "vitamin K"]
+    },
+    {
+      "id": "fruit_001",
+      "name": "Blueberries, raw",
+      "category": "berries",
+      "protein_g": 0.7,
+      "fat_g": 0.3,
+      "carbs_g": 14.5,
+      "calories": 57,
+      "anti_inflammatory_compounds": ["anthocyanins", "pterostilbene"]
+    },
+    {
+      "id": "fruit_002",
+      "name": "Strawberries, raw",
+      "category": "berries",
+      "protein_g": 0.7,
+      "fat_g": 0.3,
+      "carbs_g": 7.7,
+      "calories": 32,
+      "anti_inflammatory_compounds": ["anthocyanins", "vitamin C"]
+    },
+    {
+      "id": "fruit_003",
+      "name": "Raspberries, raw",
+      "category": "berries",
+      "protein_g": 1.2,
+      "fat_g": 0.7,
+      "carbs_g": 11.9,
+      "calories": 52,
+      "anti_inflammatory_compounds": ["ellagic acid", "fiber"]
+    },
+    {
+      "id": "fruit_004",
+      "name": "Blackberries, raw",
+      "category": "berries",
+      "protein_g": 1.4,
+      "fat_g": 0.5,
+      "carbs_g": 9.6,
+      "calories": 43,
+      "anti_inflammatory_compounds": ["anthocyanins", "vitamin C"]
+    },
+    {
+      "id": "fruit_005",
+      "name": "Cherries, raw",
+      "category": "berries",
+      "protein_g": 1.1,
+      "fat_g": 0.2,
+      "carbs_g": 16.0,
+      "calories": 63,
+      "anti_inflammatory_compounds": ["anthocyanins", "melatonin"]
+    },
+    {
+      "id": "fruit_006",
+      "name": "Cranberries, raw",
+      "category": "berries",
+      "protein_g": 0.4,
+      "fat_g": 0.1,
+      "carbs_g": 12.2,
+      "calories": 46,
+      "anti_inflammatory_compounds": ["proanthocyanidins", "vitamin C"]
+    },
+    {
+      "id": "fruit_007",
+      "name": "Avocado, raw",
+      "category": "fruit",
+      "protein_g": 2.0,
+      "fat_g": 14.7,
+      "carbs_g": 8.5,
+      "calories": 160,
+      "anti_inflammatory_compounds": ["oleic acid", "vitamin E"]
+    },
+    {
+      "id": "fruit_008",
+      "name": "Orange, raw",
+      "category": "fruit",
+      "protein_g": 0.9,
+      "fat_g": 0.1,
+      "carbs_g": 11.8,
+      "calories": 47,
+      "anti_inflammatory_compounds": ["vitamin C", "hesperidin"]
+    },
+    {
+      "id": "fruit_009",
+      "name": "Grapefruit, raw",
+      "category": "fruit",
+      "protein_g": 0.8,
+      "fat_g": 0.1,
+      "carbs_g": 10.7,
+      "calories": 42,
+      "anti_inflammatory_compounds": ["vitamin C", "naringenin"]
+    },
+    {
+      "id": "fruit_010",
+      "name": "Lemon, raw",
+      "category": "fruit",
+      "protein_g": 1.1,
+      "fat_g": 0.3,
+      "carbs_g": 9.3,
+      "calories": 29,
+      "anti_inflammatory_compounds": ["vitamin C", "limonene"]
+    },
+    {
+      "id": "fruit_011",
+      "name": "Apple, raw, with skin",
+      "category": "fruit",
+      "protein_g": 0.3,
+      "fat_g": 0.2,
+      "carbs_g": 13.8,
+      "calories": 52,
+      "anti_inflammatory_compounds": ["quercetin", "fiber"]
+    },
+    {
+      "id": "fruit_012",
+      "name": "Pear, raw",
+      "category": "fruit",
+      "protein_g": 0.4,
+      "fat_g": 0.1,
+      "carbs_g": 15.2,
+      "calories": 57,
+      "anti_inflammatory_compounds": ["fiber", "vitamin C"]
+    },
+    {
+      "id": "fruit_013",
+      "name": "Plums, raw",
+      "category": "fruit",
+      "protein_g": 0.7,
+      "fat_g": 0.3,
+      "carbs_g": 11.4,
+      "calories": 46,
+      "anti_inflammatory_compounds": ["anthocyanins", "vitamin C"]
+    },
+    {
+      "id": "fruit_014",
+      "name": "Grapes, red, raw",
+      "category": "fruit",
+      "protein_g": 0.7,
+      "fat_g": 0.2,
+      "carbs_g": 18.1,
+      "calories": 69,
+      "anti_inflammatory_compounds": ["resveratrol", "quercetin"]
+    },
+    {
+      "id": "fruit_015",
+      "name": "Kiwifruit, raw",
+      "category": "fruit",
+      "protein_g": 1.1,
+      "fat_g": 0.5,
+      "carbs_g": 14.7,
+      "calories": 61,
+      "anti_inflammatory_compounds": ["vitamin C", "vitamin E"]
+    },
+    {
+      "id": "fruit_016",
+      "name": "Pineapple, raw",
+      "category": "fruit",
+      "protein_g": 0.5,
+      "fat_g": 0.1,
+      "carbs_g": 13.1,
+      "calories": 50,
+      "anti_inflammatory_compounds": ["bromelain", "vitamin C"]
+    },
+    {
+      "id": "fruit_017",
+      "name": "Mango, raw",
+      "category": "fruit",
+      "protein_g": 0.8,
+      "fat_g": 0.4,
+      "carbs_g": 15.0,
+      "calories": 60,
+      "anti_inflammatory_compounds": ["vitamin C", "beta-carotene"]
+    },
+    {
+      "id": "fruit_018",
+      "name": "Papaya, raw",
+      "category": "fruit",
+      "protein_g": 0.5,
+      "fat_g": 0.3,
+      "carbs_g": 10.8,
+      "calories": 43,
+      "anti_inflammatory_compounds": ["papain", "vitamin C"]
+    },
+    {
+      "id": "fruit_019",
+      "name": "Olives, green",
+      "category": "fruit",
+      "protein_g": 1.0,
+      "fat_g": 15.3,
+      "carbs_g": 3.8,
+      "calories": 145,
+      "anti_inflammatory_compounds": ["oleic acid", "oleuropein"]
+    },
+    {
+      "id": "fruit_020",
+      "name": "Olives, kalamata",
+      "category": "fruit",
+      "protein_g": 0.8,
+      "fat_g": 10.7,
+      "carbs_g": 3.8,
+      "calories": 115,
+      "anti_inflammatory_compounds": ["oleic acid", "oleuropein", "anthocyanins"]
+    },
+    {
+      "id": "nut_001",
+      "name": "Walnuts, raw",
+      "category": "nuts",
+      "protein_g": 15.2,
+      "fat_g": 65.2,
+      "carbs_g": 13.7,
+      "calories": 654,
+      "anti_inflammatory_compounds": ["omega-3 (ALA)", "polyphenols"]
+    },
+    {
+      "id": "nut_002",
+      "name": "Almonds, raw",
+      "category": "nuts",
+      "protein_g": 21.2,
+      "fat_g": 49.4,
+      "carbs_g": 21.7,
+      "calories": 579,
+      "anti_inflammatory_compounds": ["vitamin E", "magnesium"]
+    },
+    {
+      "id": "nut_003",
+      "name": "Cashews, raw",
+      "category": "nuts",
+      "protein_g": 18.2,
+      "fat_g": 43.9,
+      "carbs_g": 30.2,
+      "calories": 553,
+      "anti_inflammatory_compounds": ["magnesium", "copper"]
+    },
+    {
+      "id": "nut_004",
+      "name": "Macadamias, raw",
+      "category": "nuts",
+      "protein_g": 7.9,
+      "fat_g": 75.8,
+      "carbs_g": 13.8,
+      "calories": 718,
+      "anti_inflammatory_compounds": ["oleic acid", "palmitoleic acid"]
+    },
+    {
+      "id": "nut_005",
+      "name": "Brazil nuts, raw",
+      "category": "nuts",
+      "protein_g": 14.3,
+      "fat_g": 66.4,
+      "carbs_g": 12.3,
+      "calories": 656,
+      "anti_inflammatory_compounds": ["selenium", "magnesium"]
+    },
+    {
+      "id": "nut_006",
+      "name": "Pecans, raw",
+      "category": "nuts",
+      "protein_g": 9.2,
+      "fat_g": 72.0,
+      "carbs_g": 13.9,
+      "calories": 691,
+      "anti_inflammatory_compounds": ["oleic acid", "vitamin E"]
+    },
+    {
+      "id": "nut_007",
+      "name": "Hazelnuts, raw",
+      "category": "nuts",
+      "protein_g": 15.0,
+      "fat_g": 60.8,
+      "carbs_g": 16.7,
+      "calories": 628,
+      "anti_inflammatory_compounds": ["oleic acid", "vitamin E"]
+    },
+    {
+      "id": "nut_008",
+      "name": "Pistachios, raw",
+      "category": "nuts",
+      "protein_g": 20.2,
+      "fat_g": 45.3,
+      "carbs_g": 27.2,
+      "calories": 560,
+      "anti_inflammatory_compounds": ["lutein", "vitamin B6"]
+    },
+    {
+      "id": "nut_009",
+      "name": "Peanuts, raw",
+      "category": "nuts",
+      "protein_g": 25.8,
+      "fat_g": 49.2,
+      "carbs_g": 16.1,
+      "calories": 567,
+      "anti_inflammatory_compounds": ["resveratrol", "niacin"]
+    },
+    {
+      "id": "nut_010",
+      "name": "Coconut flakes, desiccated",
+      "category": "nuts",
+      "protein_g": 5.6,
+      "fat_g": 62.0,
+      "carbs_g": 23.7,
+      "calories": 660,
+      "anti_inflammatory_compounds": ["MCTs", "lauric acid"]
+    },
+    {
+      "id": "seed_001",
+      "name": "Chia seeds",
+      "category": "seeds",
+      "protein_g": 16.5,
+      "fat_g": 30.7,
+      "carbs_g": 42.1,
+      "calories": 486,
+      "anti_inflammatory_compounds": ["omega-3 (ALA)", "fiber"]
+    },
+    {
+      "id": "seed_002",
+      "name": "Flaxseeds (linseeds)",
+      "category": "seeds",
+      "protein_g": 18.3,
+      "fat_g": 42.2,
+      "carbs_g": 28.9,
+      "calories": 534,
+      "anti_inflammatory_compounds": ["omega-3 (ALA)", "lignans"]
+    },
+    {
+      "id": "seed_003",
+      "name": "Pumpkin seeds (pepitas)",
+      "category": "seeds",
+      "protein_g": 30.2,
+      "fat_g": 49.1,
+      "carbs_g": 10.7,
+      "calories": 559,
+      "anti_inflammatory_compounds": ["magnesium", "zinc"]
+    },
+    {
+      "id": "seed_004",
+      "name": "Sunflower seeds",
+      "category": "seeds",
+      "protein_g": 20.8,
+      "fat_g": 51.5,
+      "carbs_g": 20.0,
+      "calories": 584,
+      "anti_inflammatory_compounds": ["vitamin E", "selenium"]
+    },
+    {
+      "id": "seed_005",
+      "name": "Sesame seeds",
+      "category": "seeds",
+      "protein_g": 17.7,
+      "fat_g": 49.7,
+      "carbs_g": 23.4,
+      "calories": 573,
+      "anti_inflammatory_compounds": ["sesamin", "calcium"]
+    },
+    {
+      "id": "seed_006",
+      "name": "Hemp hearts",
+      "category": "seeds",
+      "protein_g": 31.6,
+      "fat_g": 48.8,
+      "carbs_g": 8.7,
+      "calories": 553,
+      "anti_inflammatory_compounds": ["omega-3", "GLA"]
+    },
+    {
+      "id": "grain_001",
+      "name": "Oats, rolled, dry",
+      "category": "whole_grains",
+      "protein_g": 16.9,
+      "fat_g": 6.9,
+      "carbs_g": 66.3,
+      "calories": 389,
+      "anti_inflammatory_compounds": ["beta-glucan", "avenanthramides"]
+    },
+    {
+      "id": "grain_002",
+      "name": "Quinoa, cooked",
+      "category": "whole_grains",
+      "protein_g": 4.4,
+      "fat_g": 1.9,
+      "carbs_g": 21.3,
+      "calories": 120,
+      "anti_inflammatory_compounds": ["quercetin", "complete protein"]
+    },
+    {
+      "id": "grain_003",
+      "name": "Brown rice, cooked",
+      "category": "whole_grains",
+      "protein_g": 2.6,
+      "fat_g": 0.9,
+      "carbs_g": 22.8,
+      "calories": 111,
+      "anti_inflammatory_compounds": ["fiber", "manganese"]
+    },
+    {
+      "id": "grain_004",
+      "name": "Buckwheat, cooked",
+      "category": "whole_grains",
+      "protein_g": 3.4,
+      "fat_g": 0.6,
+      "carbs_g": 19.9,
+      "calories": 92,
+      "anti_inflammatory_compounds": ["rutin", "quercetin"]
+    },
+    {
+      "id": "grain_005",
+      "name": "Barley, pearl, cooked",
+      "category": "whole_grains",
+      "protein_g": 2.3,
+      "fat_g": 0.4,
+      "carbs_g": 28.2,
+      "calories": 123,
+      "anti_inflammatory_compounds": ["beta-glucan", "fiber"]
+    },
+    {
+      "id": "grain_006",
+      "name": "Farro, cooked",
+      "category": "whole_grains",
+      "protein_g": 5.0,
+      "fat_g": 1.0,
+      "carbs_g": 28.0,
+      "calories": 140,
+      "anti_inflammatory_compounds": ["fiber", "magnesium"]
+    },
+    {
+      "id": "oil_001",
+      "name": "Olive oil, extra virgin",
+      "category": "oils",
+      "protein_g": 0,
+      "fat_g": 99.9,
+      "carbs_g": 0,
+      "calories": 884,
+      "anti_inflammatory_compounds": ["oleocanthal", "oleic acid", "polyphenols"]
+    },
+    {
+      "id": "oil_002",
+      "name": "Avocado oil",
+      "category": "oils",
+      "protein_g": 0,
+      "fat_g": 99.9,
+      "carbs_g": 0,
+      "calories": 884,
+      "anti_inflammatory_compounds": ["oleic acid", "vitamin E"]
+    },
+    {
+      "id": "oil_003",
+      "name": "Coconut oil",
+      "category": "oils",
+      "protein_g": 0,
+      "fat_g": 99.1,
+      "carbs_g": 0,
+      "calories": 862,
+      "anti_inflammatory_compounds": ["lauric acid", "MCTs"]
+    },
+    {
+      "id": "oil_004",
+      "name": "Sesame oil",
+      "category": "oils",
+      "protein_g": 0,
+      "fat_g": 99.9,
+      "carbs_g": 0,
+      "calories": 884,
+      "anti_inflammatory_compounds": ["sesamin", "sesamol"]
+    },
+    {
+      "id": "fat_001",
+      "name": "Butter, unsalted",
+      "category": "dairy_fats",
+      "protein_g": 0.9,
+      "fat_g": 81.1,
+      "carbs_g": 0.1,
+      "calories": 717,
+      "anti_inflammatory_compounds": ["CLA", "butyrate"],
+      "notes": "Choose grass-fed when possible"
+    },
+    {
+      "id": "fat_002",
+      "name": "Ghee (clarified butter)",
+      "category": "dairy_fats",
+      "protein_g": 0,
+      "fat_g": 99.5,
+      "carbs_g": 0,
+      "calories": 876,
+      "anti_inflammatory_compounds": ["CLA", "butyrate"],
+      "notes": "Lactose-free, higher smoke point"
+    },
+    {
+      "id": "fat_003",
+      "name": "Thickened cream (heavy cream)",
+      "category": "dairy_fats",
+      "protein_g": 2.1,
+      "fat_g": 35.0,
+      "carbs_g": 2.8,
+      "calories": 340,
+      "anti_inflammatory_compounds": ["CLA"]
+    },
+    {
+      "id": "fat_004",
+      "name": "Sour cream",
+      "category": "dairy_fats",
+      "protein_g": 2.4,
+      "fat_g": 19.4,
+      "carbs_g": 4.6,
+      "calories": 198,
+      "anti_inflammatory_compounds": ["probiotics", "CLA"]
+    },
+    {
+      "id": "dairy_001",
+      "name": "Yoghurt, Greek, plain",
+      "category": "dairy",
+      "protein_g": 9.0,
+      "fat_g": 5.0,
+      "carbs_g": 3.6,
+      "calories": 97,
+      "anti_inflammatory_compounds": ["probiotics", "calcium"]
+    },
+    {
+      "id": "dairy_002",
+      "name": "Kefir, plain",
+      "category": "dairy",
+      "protein_g": 3.4,
+      "fat_g": 1.0,
+      "carbs_g": 4.5,
+      "calories": 41,
+      "anti_inflammatory_compounds": ["probiotics", "kefiran"]
+    },
+    {
+      "id": "cheese_001",
+      "name": "Feta cheese",
+      "category": "cheese",
+      "protein_g": 14.2,
+      "fat_g": 21.3,
+      "carbs_g": 4.1,
+      "calories": 264,
+      "anti_inflammatory_compounds": ["CLA", "probiotics"]
+    },
+    {
+      "id": "cheese_002",
+      "name": "Mozzarella, fresh",
+      "category": "cheese",
+      "protein_g": 22.2,
+      "fat_g": 22.4,
+      "carbs_g": 2.2,
+      "calories": 300,
+      "anti_inflammatory_compounds": ["CLA", "calcium"]
+    },
+    {
+      "id": "cheese_003",
+      "name": "Parmesan, grated",
+      "category": "cheese",
+      "protein_g": 35.8,
+      "fat_g": 25.8,
+      "carbs_g": 3.2,
+      "calories": 392,
+      "anti_inflammatory_compounds": ["calcium", "B vitamins"]
+    },
+    {
+      "id": "cheese_004",
+      "name": "Cheddar cheese",
+      "category": "cheese",
+      "protein_g": 24.9,
+      "fat_g": 33.1,
+      "carbs_g": 1.3,
+      "calories": 403,
+      "anti_inflammatory_compounds": ["CLA", "calcium"]
+    },
+    {
+      "id": "cheese_005",
+      "name": "Goat cheese, soft",
+      "category": "cheese",
+      "protein_g": 18.5,
+      "fat_g": 21.1,
+      "carbs_g": 0.9,
+      "calories": 268,
+      "anti_inflammatory_compounds": ["CLA", "MCTs"]
+    },
+    {
+      "id": "cheese_006",
+      "name": "Cream cheese",
+      "category": "cheese",
+      "protein_g": 5.9,
+      "fat_g": 34.2,
+      "carbs_g": 4.1,
+      "calories": 342,
+      "anti_inflammatory_compounds": ["CLA"]
+    },
+    {
+      "id": "cheese_007",
+      "name": "Cottage cheese",
+      "category": "cheese",
+      "protein_g": 11.1,
+      "fat_g": 4.3,
+      "carbs_g": 3.4,
+      "calories": 98,
+      "anti_inflammatory_compounds": ["casein", "probiotics"]
+    },
+    {
+      "id": "cheese_008",
+      "name": "Havarti cheese",
+      "category": "cheese",
+      "protein_g": 23.2,
+      "fat_g": 30.9,
+      "carbs_g": 1.7,
+      "calories": 378,
+      "anti_inflammatory_compounds": ["CLA", "calcium"]
+    },
+    {
+      "id": "cheese_009",
+      "name": "Swiss cheese",
+      "category": "cheese",
+      "protein_g": 26.9,
+      "fat_g": 27.8,
+      "carbs_g": 5.4,
+      "calories": 380,
+      "anti_inflammatory_compounds": ["calcium", "B12"]
+    },
+    {
+      "id": "cheese_010",
+      "name": "Blue cheese",
+      "category": "cheese",
+      "protein_g": 21.4,
+      "fat_g": 28.7,
+      "carbs_g": 2.3,
+      "calories": 353,
+      "anti_inflammatory_compounds": ["probiotics", "spermidine"]
+    },
+    {
+      "id": "milk_alt_001",
+      "name": "Almond milk, unsweetened",
+      "category": "milk_alternatives",
+      "protein_g": 0.4,
+      "fat_g": 1.1,
+      "carbs_g": 0.3,
+      "calories": 13,
+      "anti_inflammatory_compounds": ["vitamin E"]
+    },
+    {
+      "id": "milk_alt_002",
+      "name": "Coconut milk, unsweetened",
+      "category": "milk_alternatives",
+      "protein_g": 0.2,
+      "fat_g": 2.1,
+      "carbs_g": 0.5,
+      "calories": 20,
+      "anti_inflammatory_compounds": ["MCTs"]
+    },
+    {
+      "id": "milk_alt_003",
+      "name": "Coconut cream",
+      "category": "milk_alternatives",
+      "protein_g": 2.3,
+      "fat_g": 21.3,
+      "carbs_g": 2.7,
+      "calories": 197,
+      "anti_inflammatory_compounds": ["MCTs", "lauric acid"]
+    },
+    {
+      "id": "milk_alt_004",
+      "name": "Cashew milk, unsweetened",
+      "category": "milk_alternatives",
+      "protein_g": 0.5,
+      "fat_g": 1.0,
+      "carbs_g": 1.0,
+      "calories": 16,
+      "anti_inflammatory_compounds": ["magnesium"]
+    },
+    {
+      "id": "condiment_001",
+      "name": "Mayonnaise, olive oil based",
+      "category": "condiments",
+      "protein_g": 1.0,
+      "fat_g": 70.0,
+      "carbs_g": 1.0,
+      "calories": 630,
+      "anti_inflammatory_compounds": ["oleic acid"]
+    },
+    {
+      "id": "condiment_002",
+      "name": "Balsamic vinegar",
+      "category": "condiments",
+      "protein_g": 0.5,
+      "fat_g": 0,
+      "carbs_g": 17.0,
+      "calories": 88,
+      "anti_inflammatory_compounds": ["polyphenols", "acetic acid"]
+    },
+    {
+      "id": "condiment_003",
+      "name": "Apple cider vinegar",
+      "category": "condiments",
+      "protein_g": 0,
+      "fat_g": 0,
+      "carbs_g": 0.9,
+      "calories": 22,
+      "anti_inflammatory_compounds": ["acetic acid"]
+    },
+    {
+      "id": "condiment_004",
+      "name": "Red wine vinegar",
+      "category": "condiments",
+      "protein_g": 0,
+      "fat_g": 0,
+      "carbs_g": 0.3,
+      "calories": 19,
+      "anti_inflammatory_compounds": ["polyphenols"]
+    },
+    {
+      "id": "condiment_005",
+      "name": "Dijon mustard",
+      "category": "condiments",
+      "protein_g": 5.3,
+      "fat_g": 3.3,
+      "carbs_g": 5.8,
+      "calories": 66,
+      "anti_inflammatory_compounds": ["selenium", "turmeric"]
+    },
+    {
+      "id": "condiment_006",
+      "name": "Tamari (gluten-free soy sauce)",
+      "category": "condiments",
+      "protein_g": 10.5,
+      "fat_g": 0.1,
+      "carbs_g": 5.6,
+      "calories": 60,
+      "anti_inflammatory_compounds": ["isoflavones"]
+    },
+    {
+      "id": "condiment_007",
+      "name": "Capers, drained",
+      "category": "condiments",
+      "protein_g": 2.4,
+      "fat_g": 0.9,
+      "carbs_g": 4.9,
+      "calories": 23,
+      "anti_inflammatory_compounds": ["quercetin", "rutin"]
+    },
+    {
+      "id": "condiment_008",
+      "name": "Tahini",
+      "category": "condiments",
+      "protein_g": 17.0,
+      "fat_g": 53.8,
+      "carbs_g": 21.2,
+      "calories": 595,
+      "anti_inflammatory_compounds": ["sesamin", "calcium"]
+    },
+    {
+      "id": "condiment_009",
+      "name": "Almond butter",
+      "category": "nut_butters",
+      "protein_g": 21.0,
+      "fat_g": 55.5,
+      "carbs_g": 18.8,
+      "calories": 614,
+      "anti_inflammatory_compounds": ["vitamin E", "magnesium"]
+    },
+    {
+      "id": "condiment_010",
+      "name": "Peanut butter, natural",
+      "category": "nut_butters",
+      "protein_g": 25.1,
+      "fat_g": 50.4,
+      "carbs_g": 20.0,
+      "calories": 588,
+      "anti_inflammatory_compounds": ["resveratrol", "niacin"]
+    },
+    {
+      "id": "baking_001",
+      "name": "Almond flour",
+      "category": "baking",
+      "protein_g": 21.0,
+      "fat_g": 50.6,
+      "carbs_g": 19.9,
+      "calories": 590,
+      "anti_inflammatory_compounds": ["vitamin E", "magnesium"]
+    },
+    {
+      "id": "baking_002",
+      "name": "Coconut flour",
+      "category": "baking",
+      "protein_g": 19.3,
+      "fat_g": 8.4,
+      "carbs_g": 60.0,
+      "calories": 400,
+      "anti_inflammatory_compounds": ["fiber", "MCTs"]
+    },
+    {
+      "id": "baking_003",
+      "name": "Cacao powder, raw",
+      "category": "baking",
+      "protein_g": 19.6,
+      "fat_g": 13.7,
+      "carbs_g": 57.9,
+      "calories": 228,
+      "anti_inflammatory_compounds": ["flavanols", "magnesium"]
+    },
+    {
+      "id": "baking_004",
+      "name": "Collagen powder",
+      "category": "baking",
+      "protein_g": 90.0,
+      "fat_g": 0,
+      "carbs_g": 0,
+      "calories": 360,
+      "anti_inflammatory_compounds": ["glycine", "proline"]
+    },
+    {
+      "id": "baking_005",
+      "name": "Protein powder, whey",
+      "category": "baking",
+      "protein_g": 80.0,
+      "fat_g": 5.0,
+      "carbs_g": 8.0,
+      "calories": 400,
+      "anti_inflammatory_compounds": ["lactoferrin", "immunoglobulins"]
+    },
+    {
+      "id": "sweetener_001",
+      "name": "Stevia, powder",
+      "category": "sweeteners",
+      "protein_g": 0,
+      "fat_g": 0,
+      "carbs_g": 0,
+      "calories": 0,
+      "anti_inflammatory_compounds": ["steviosides"]
+    },
+    {
+      "id": "sweetener_002",
+      "name": "Monk fruit sweetener",
+      "category": "sweeteners",
+      "protein_g": 0,
+      "fat_g": 0,
+      "carbs_g": 0,
+      "calories": 0,
+      "anti_inflammatory_compounds": ["mogrosides"]
+    },
+    {
+      "id": "spice_001",
+      "name": "Turmeric, ground",
+      "category": "spices",
+      "protein_g": 7.8,
+      "fat_g": 9.9,
+      "carbs_g": 64.9,
+      "calories": 312,
+      "anti_inflammatory_compounds": ["curcumin"]
+    },
+    {
+      "id": "spice_002",
+      "name": "Ginger, fresh",
+      "category": "spices",
+      "protein_g": 1.8,
+      "fat_g": 0.8,
+      "carbs_g": 17.8,
+      "calories": 80,
+      "anti_inflammatory_compounds": ["gingerol", "shogaol"]
+    },
+    {
+      "id": "spice_003",
+      "name": "Cinnamon, ground",
+      "category": "spices",
+      "protein_g": 4.0,
+      "fat_g": 1.2,
+      "carbs_g": 80.6,
+      "calories": 247,
+      "anti_inflammatory_compounds": ["cinnamaldehyde", "polyphenols"]
+    },
+    {
+      "id": "spice_004",
+      "name": "Black pepper, ground",
+      "category": "spices",
+      "protein_g": 10.4,
+      "fat_g": 3.3,
+      "carbs_g": 63.9,
+      "calories": 251,
+      "anti_inflammatory_compounds": ["piperine"]
+    },
+    {
+      "id": "spice_005",
+      "name": "Cayenne pepper",
+      "category": "spices",
+      "protein_g": 12.0,
+      "fat_g": 17.3,
+      "carbs_g": 56.6,
+      "calories": 318,
+      "anti_inflammatory_compounds": ["capsaicin"]
+    },
+    {
+      "id": "spice_006",
+      "name": "Rosemary, dried",
+      "category": "herbs",
+      "protein_g": 4.9,
+      "fat_g": 15.2,
+      "carbs_g": 64.1,
+      "calories": 331,
+      "anti_inflammatory_compounds": ["rosmarinic acid", "carnosic acid"]
+    },
+    {
+      "id": "spice_007",
+      "name": "Oregano, dried",
+      "category": "herbs",
+      "protein_g": 9.0,
+      "fat_g": 4.3,
+      "carbs_g": 68.9,
+      "calories": 265,
+      "anti_inflammatory_compounds": ["carvacrol", "thymol"]
+    },
+    {
+      "id": "spice_008",
+      "name": "Basil, fresh",
+      "category": "herbs",
+      "protein_g": 3.2,
+      "fat_g": 0.6,
+      "carbs_g": 2.7,
+      "calories": 23,
+      "anti_inflammatory_compounds": ["eugenol", "rosmarinic acid"]
+    },
+    {
+      "id": "spice_009",
+      "name": "Parsley, fresh",
+      "category": "herbs",
+      "protein_g": 3.0,
+      "fat_g": 0.8,
+      "carbs_g": 6.3,
+      "calories": 36,
+      "anti_inflammatory_compounds": ["apigenin", "vitamin K"]
+    },
+    {
+      "id": "spice_010",
+      "name": "Thyme, fresh",
+      "category": "herbs",
+      "protein_g": 5.6,
+      "fat_g": 1.7,
+      "carbs_g": 24.5,
+      "calories": 101,
+      "anti_inflammatory_compounds": ["thymol", "carvacrol"]
+    },
+    {
+      "id": "other_001",
+      "name": "Dark chocolate, 70% cocoa",
+      "category": "other",
+      "protein_g": 7.8,
+      "fat_g": 42.6,
+      "carbs_g": 45.9,
+      "calories": 598,
+      "anti_inflammatory_compounds": ["flavanols", "polyphenols"]
+    },
+    {
+      "id": "other_002",
+      "name": "Green tea, brewed",
+      "category": "beverages",
+      "protein_g": 0,
+      "fat_g": 0,
+      "carbs_g": 0,
+      "calories": 1,
+      "anti_inflammatory_compounds": ["EGCG", "catechins"]
+    },
+    {
+      "id": "other_003",
+      "name": "Bone broth, chicken",
+      "category": "other",
+      "protein_g": 5.0,
+      "fat_g": 0.5,
+      "carbs_g": 0.5,
+      "calories": 26,
+      "anti_inflammatory_compounds": ["collagen", "glycine"]
+    },
+    {
+      "id": "fermented_001",
+      "name": "Kimchi",
+      "category": "fermented",
+      "protein_g": 1.1,
+      "fat_g": 0.5,
+      "carbs_g": 2.4,
+      "calories": 15,
+      "anti_inflammatory_compounds": ["probiotics", "vitamin K"]
+    },
+    {
+      "id": "fermented_002",
+      "name": "Sauerkraut, unpasteurised",
+      "category": "fermented",
+      "protein_g": 0.9,
+      "fat_g": 0.1,
+      "carbs_g": 4.3,
+      "calories": 19,
+      "anti_inflammatory_compounds": ["probiotics", "vitamin C"]
+    },
+    {
+      "id": "fermented_003",
+      "name": "Kombucha, plain",
+      "category": "fermented",
+      "protein_g": 0,
+      "fat_g": 0,
+      "carbs_g": 3.0,
+      "calories": 15,
+      "anti_inflammatory_compounds": ["probiotics", "polyphenols"]
+    },
+    {
+      "id": "fermented_004",
+      "name": "Pickles, dill, fermented",
+      "category": "fermented",
+      "protein_g": 0.3,
+      "fat_g": 0.2,
+      "carbs_g": 2.3,
+      "calories": 11,
+      "anti_inflammatory_compounds": ["probiotics"]
+    }
+  ]
+}
