@@ -1,25 +1,23 @@
 'use client'
 
+import { useState } from 'react'
 import { useUser } from '@/context/UserContext'
-import { Button } from '@/components/ui/button'
 import { Avatar, AvatarFallback } from '@/components/ui/avatar'
 import { 
-  UtensilsCrossed, 
   CalendarDays, 
-  History, 
+  CalendarPlus,
+  ShoppingCart,
   Settings,
   ChevronDown,
-  LogOut
 } from 'lucide-react'
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
 
-export default function Sidebar() {
+export default function Sidebar({ activeView = 'this-week', onNavigate }) {
   const { users, user, setUser, targets, loading } = useUser()
   
   if (loading) {
@@ -35,9 +33,10 @@ export default function Sidebar() {
   }
 
   const navItems = [
-    { icon: CalendarDays, label: 'Meal Plan', href: '/', active: true },
-    { icon: History, label: 'History', href: '/history', active: false },
-    { icon: Settings, label: 'Settings', href: '/settings', active: false },
+    { id: 'this-week', icon: CalendarDays, label: 'This Week' },
+    { id: 'next-week', icon: CalendarPlus, label: 'Next Week' },
+    { id: 'shopping', icon: ShoppingCart, label: 'Shopping List' },
+    { id: 'settings', icon: Settings, label: 'Settings' },
   ]
 
   return (
@@ -88,48 +87,42 @@ export default function Sidebar() {
         </DropdownMenu>
       </div>
       
-      {/* Macro Targets */}
-      {targets && (
-        <div className="px-4 py-3 border-b bg-muted/30">
-          <div className="text-xs font-medium text-muted-foreground mb-2">Daily Targets</div>
-          <div className="grid grid-cols-3 gap-2 text-center">
-            <div className="bg-background rounded p-2">
-              <div className="text-sm font-semibold">{targets.protein}g</div>
-              <div className="text-[10px] text-muted-foreground">Protein</div>
-            </div>
-            <div className="bg-background rounded p-2">
-              <div className="text-sm font-semibold">{targets.fat}g</div>
-              <div className="text-[10px] text-muted-foreground">Fat</div>
-            </div>
-            <div className="bg-background rounded p-2">
-              <div className="text-sm font-semibold">{targets.carbs}g</div>
-              <div className="text-[10px] text-muted-foreground">Carbs</div>
-            </div>
-          </div>
-        </div>
-      )}
-      
       {/* Navigation */}
       <nav className="flex-1 p-4">
         <ul className="space-y-1">
-          {navItems.map((item) => (
-            <li key={item.label}>
-              <a
-                href={item.href}
-                className={`flex items-center gap-3 px-3 py-2 rounded-lg transition-colors ${
-                  item.active 
-                    ? 'bg-primary text-primary-foreground' 
-                    : 'hover:bg-accent text-muted-foreground hover:text-foreground'
-                }`}
-              >
-                <item.icon className="h-4 w-4" />
-                <span className="text-sm font-medium">{item.label}</span>
-              </a>
-            </li>
-          ))}
+          {navItems.map((item) => {
+            const isActive = activeView === item.id
+            return (
+              <li key={item.id}>
+                <button
+                  onClick={() => onNavigate?.(item.id)}
+                  className={`w-full flex items-center gap-3 px-3 py-2 rounded-lg transition-colors ${
+                    isActive 
+                      ? 'bg-primary text-primary-foreground' 
+                      : 'hover:bg-accent text-muted-foreground hover:text-foreground'
+                  }`}
+                >
+                  <item.icon className="h-4 w-4" />
+                  <span className="text-sm font-medium">{item.label}</span>
+                </button>
+              </li>
+            )
+          })}
         </ul>
       </nav>
       
+      {/* Daily Targets - compact footer */}
+      {targets && (
+        <div className="p-4 border-t bg-muted/30">
+          <div className="text-xs font-medium text-muted-foreground mb-2">Daily Targets</div>
+          <div className="flex justify-between text-xs">
+            <span>{targets.dailyCalories} cal</span>
+            <span>{targets.protein}g P</span>
+            <span>{targets.fat}g F</span>
+            <span>{targets.carbs}g C</span>
+          </div>
+        </div>
+      )}
     </aside>
   )
 }

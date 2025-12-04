@@ -1,0 +1,350 @@
+{
+  "_metadata": {
+    "description": "Sample snack recipes extracted from Galveston Diet book",
+    "source": "galveston_book",
+    "created": "2025-12-04",
+    "status": "reference_only",
+    "notes": "Converted to metric, AU ingredient names. For personal use validation."
+  },
+  
+  "recipes": [
+    {
+      "id": "cheese-and-walnuts",
+      "name": "Cheese and Walnuts",
+      "description": "Simple, satisfying combination of creamy cheese and crunchy walnuts. Ready in seconds.",
+      
+      "meal_type": "snack_afternoon",
+      "phase": [1, 2, 3],
+      "category": "dairy",
+      "cuisine": "universal",
+      "tags": ["quick", "no-cook", "portable", "high-fat", "keto-friendly"],
+      
+      "batch_friendly": false,
+      "batch_notes": null,
+      "components": null,
+      "freezer_friendly": false,
+      "good_for_lunchbox": true,
+      
+      "flavour_profile": ["salty", "mild", "rich"],
+      "texture": ["creamy", "crunchy"],
+      "temperature": "room_temp",
+      
+      "difficulty": "no_cook",
+      "active_cooking": false,
+      "prep_time_mins": 2,
+      "cook_time_mins": 0,
+      "total_time_mins": 2,
+      
+      "dietary": {
+        "dairy_free": false,
+        "gluten_free": true,
+        "nut_free": false,
+        "egg_free": true,
+        "vegetarian": true,
+        "vegan": false
+      },
+      
+      "base_servings": 1,
+      "ingredients": [
+        { "id": "walnuts", "name": "Walnut halves", "grams": 30 },
+        { "id": "cheese-stick", "name": "Cheese stick", "grams": 28, "notes": "any variety" }
+      ],
+      
+      "instructions": [
+        "Arrange walnuts on a small plate.",
+        "Add cheese stick alongside.",
+        "Serve immediately or pack for later."
+      ],
+      
+      "per_serve": {
+        "calories": 280,
+        "protein_g": 10,
+        "fat_g": 26,
+        "carbs_g": 2,
+        "fibre_g": 1
+      },
+      
+      "source": "galveston_book",
+      "source_ref": "p.209",
+      
+      "created_at": "2025-12-04",
+      "updated_at": "2025-12-04",
+      "version": 1
+    },
+    
+    {
+      "id": "celery-sticks-almond-butter",
+      "name": "Celery Sticks with Almond Butter",
+      "description": "Classic crunchy celery with creamy almond butter. Simple, filling, and perfect for afternoon energy.",
+      
+      "meal_type": "snack_afternoon",
+      "phase": [1, 2, 3],
+      "category": "nuts_seeds",
+      "cuisine": "universal",
+      "tags": ["quick", "no-cook", "crunchy", "high-fat", "classic"],
+      
+      "batch_friendly": false,
+      "batch_notes": "Celery can be pre-cut, but don't apply butter until serving or it gets soggy.",
+      "components": null,
+      "freezer_friendly": false,
+      "good_for_lunchbox": true,
+      
+      "flavour_profile": ["mild", "rich", "light"],
+      "texture": ["crunchy", "creamy"],
+      "temperature": "cold",
+      
+      "difficulty": "no_cook",
+      "active_cooking": false,
+      "prep_time_mins": 3,
+      "cook_time_mins": 0,
+      "total_time_mins": 3,
+      
+      "dietary": {
+        "dairy_free": true,
+        "gluten_free": true,
+        "nut_free": false,
+        "egg_free": true,
+        "vegetarian": true,
+        "vegan": true
+      },
+      
+      "base_servings": 1,
+      "ingredients": [
+        { "id": "almond-butter", "name": "Almond butter", "grams": 32, "notes": "unsweetened" },
+        { "id": "celery", "name": "Celery stalks", "grams": 100, "notes": "trimmed, about 2 stalks" }
+      ],
+      
+      "instructions": [
+        "Trim celery stalks and cut to desired length.",
+        "Spread almond butter evenly along the celery groove.",
+        "Serve immediately."
+      ],
+      
+      "per_serve": {
+        "calories": 210,
+        "protein_g": 7,
+        "fat_g": 18,
+        "carbs_g": 6,
+        "fibre_g": 3
+      },
+      
+      "source": "galveston_book",
+      "source_ref": "p.207",
+      
+      "created_at": "2025-12-04",
+      "updated_at": "2025-12-04",
+      "version": 1
+    },
+    
+    {
+      "id": "deviled-eggs",
+      "name": "Deviled Eggs with Capsicum",
+      "description": "Classic deviled eggs with a turmeric twist, served with fresh capsicum strips.",
+      
+      "meal_type": "snack_afternoon",
+      "phase": [1, 2, 3],
+      "category": "eggs",
+      "cuisine": "universal",
+      "tags": ["high-protein", "make-ahead", "classic", "anti-inflammatory"],
+      
+      "batch_friendly": true,
+      "batch_notes": "Filling can be made ahead. Stuff eggs just before serving for best texture.",
+      "components": {
+        "reheatable": [],
+        "fresh_only": ["stuffed eggs"]
+      },
+      "freezer_friendly": false,
+      "good_for_lunchbox": true,
+      
+      "flavour_profile": ["rich", "mild", "earthy"],
+      "texture": ["creamy", "soft"],
+      "temperature": "cold",
+      
+      "difficulty": "easy",
+      "active_cooking": false,
+      "prep_time_mins": 10,
+      "cook_time_mins": 0,
+      "total_time_mins": 10,
+      
+      "dietary": {
+        "dairy_free": true,
+        "gluten_free": true,
+        "nut_free": true,
+        "egg_free": false,
+        "vegetarian": true,
+        "vegan": false
+      },
+      
+      "base_servings": 1,
+      "ingredients": [
+        { "id": "eggs", "name": "Eggs", "grams": 100, "notes": "2 large, hard-boiled" },
+        { "id": "mayonnaise-avocado", "name": "Avocado oil mayonnaise", "grams": 15 },
+        { "id": "chia-seeds", "name": "Chia seeds", "grams": 12 },
+        { "id": "turmeric", "name": "Ground turmeric", "grams": 1 },
+        { "id": "capsicum-green", "name": "Green capsicum", "grams": 80, "notes": "sliced into strips" }
+      ],
+      
+      "instructions": [
+        "Peel hard-boiled eggs and cut each in half lengthwise.",
+        "Gently remove yolks and place in a small bowl.",
+        "Mash yolks with mayonnaise, chia seeds, and turmeric until smooth.",
+        "Spoon filling back into egg white halves.",
+        "Serve with capsicum strips alongside."
+      ],
+      
+      "per_serve": {
+        "calories": 320,
+        "protein_g": 16,
+        "fat_g": 24,
+        "carbs_g": 8,
+        "fibre_g": 4
+      },
+      
+      "source": "galveston_book",
+      "source_ref": "p.214",
+      
+      "created_at": "2025-12-04",
+      "updated_at": "2025-12-04",
+      "version": 1
+    },
+    
+    {
+      "id": "aloha-avocado",
+      "name": "Aloha Avocado",
+      "description": "Creamy avocado halves filled with macadamia nuts and coconut flakes. Tropical and satisfying.",
+      
+      "meal_type": "snack_evening",
+      "phase": [1, 2, 3],
+      "category": "fats_oils",
+      "cuisine": "tropical",
+      "tags": ["high-fat", "tropical", "no-cook", "filling"],
+      
+      "batch_friendly": false,
+      "batch_notes": "Must be made fresh - avocado oxidises quickly.",
+      "components": null,
+      "freezer_friendly": false,
+      "good_for_lunchbox": false,
+      
+      "flavour_profile": ["rich", "mild", "fatty", "sweet"],
+      "texture": ["creamy", "crunchy"],
+      "temperature": "room_temp",
+      
+      "difficulty": "no_cook",
+      "active_cooking": false,
+      "prep_time_mins": 5,
+      "cook_time_mins": 0,
+      "total_time_mins": 5,
+      
+      "dietary": {
+        "dairy_free": true,
+        "gluten_free": true,
+        "nut_free": false,
+        "egg_free": true,
+        "vegetarian": true,
+        "vegan": true
+      },
+      
+      "base_servings": 1,
+      "ingredients": [
+        { "id": "avocado", "name": "Avocado", "grams": 100, "notes": "half a medium avocado" },
+        { "id": "macadamia-nuts", "name": "Macadamia nuts", "grams": 30, "notes": "halved" },
+        { "id": "coconut-flakes", "name": "Coconut flakes", "grams": 15, "notes": "unsweetened" }
+      ],
+      
+      "instructions": [
+        "Cut avocado in half and remove pit.",
+        "Fill the cavity with macadamia nuts.",
+        "Top with coconut flakes.",
+        "Eat directly from the skin with a spoon."
+      ],
+      
+      "per_serve": {
+        "calories": 380,
+        "protein_g": 5,
+        "fat_g": 38,
+        "carbs_g": 10,
+        "fibre_g": 7
+      },
+      
+      "source": "galveston_book",
+      "source_ref": "p.208",
+      
+      "created_at": "2025-12-04",
+      "updated_at": "2025-12-04",
+      "version": 1
+    },
+    
+    {
+      "id": "blueberry-pie-smoothie",
+      "name": "Blueberry Pie Smoothie",
+      "description": "Creamy, antioxidant-rich smoothie with blueberries, spinach, and almond butter. Tastes like dessert.",
+      
+      "meal_type": "snack_afternoon",
+      "phase": [1, 2, 3],
+      "category": "smoothie",
+      "cuisine": "universal",
+      "tags": ["quick", "blended", "antioxidant", "filling", "sweet"],
+      
+      "batch_friendly": false,
+      "batch_notes": "Best made fresh. Can prep dry ingredients ahead.",
+      "components": null,
+      "freezer_friendly": false,
+      "good_for_lunchbox": false,
+      
+      "flavour_profile": ["sweet", "rich", "mild"],
+      "texture": ["smooth", "creamy"],
+      "temperature": "cold",
+      
+      "difficulty": "easy",
+      "active_cooking": false,
+      "prep_time_mins": 5,
+      "cook_time_mins": 0,
+      "total_time_mins": 5,
+      
+      "dietary": {
+        "dairy_free": true,
+        "gluten_free": true,
+        "nut_free": false,
+        "egg_free": true,
+        "vegetarian": true,
+        "vegan": true
+      },
+      
+      "base_servings": 1,
+      "ingredients": [
+        { "id": "collagen-powder", "name": "Collagen powder", "grams": 20, "notes": "2 scoops" },
+        { "id": "mct-powder", "name": "MCT powder or coconut oil", "grams": 10, "notes": "1 scoop" },
+        { "id": "spinach", "name": "Fresh spinach", "grams": 30, "notes": "roughly chopped" },
+        { "id": "blueberries", "name": "Fresh blueberries", "grams": 75 },
+        { "id": "chia-seeds", "name": "Chia seeds", "grams": 24 },
+        { "id": "flax-seeds", "name": "Flax seeds", "grams": 14 },
+        { "id": "almond-butter", "name": "Almond butter", "grams": 32, "notes": "unsweetened" },
+        { "id": "almond-extract", "name": "Almond extract", "grams": 2 },
+        { "id": "nutmeg", "name": "Grated nutmeg", "grams": 0.5, "optional": true }
+      ],
+      
+      "instructions": [
+        "Add collagen powder, MCT powder, spinach, blueberries, chia seeds, flax seeds, and almond butter to a blender.",
+        "Add 240ml water or to desired consistency.",
+        "Blend until smooth.",
+        "Add almond extract and nutmeg, pulse once more.",
+        "Pour into a glass and serve immediately."
+      ],
+      
+      "per_serve": {
+        "calories": 450,
+        "protein_g": 25,
+        "fat_g": 32,
+        "carbs_g": 20,
+        "fibre_g": 14
+      },
+      
+      "source": "galveston_book",
+      "source_ref": "p.218",
+      
+      "created_at": "2025-12-04",
+      "updated_at": "2025-12-04",
+      "version": 1
+    }
+  ]
+}

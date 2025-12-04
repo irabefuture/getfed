@@ -1,0 +1,164 @@
+{
+  "_metadata": {
+    "description": "Imperial to Metric unit conversions for recipe transformation",
+    "created": "2025-12-04",
+    "version": 1,
+    "notes": "US measurements converted to metric. Note AU tablespoon = 20mL, US = 15mL."
+  },
+  
+  "weight": {
+    "_note": "For solid ingredients - convert to grams (g)",
+    "units": {
+      "oz": {
+        "to_grams": 28.35,
+        "example": "4 oz chicken = 113g chicken"
+      },
+      "lb": {
+        "to_grams": 454,
+        "example": "1 lb beef = 454g beef"
+      },
+      "grain": {
+        "to_mg": 65,
+        "note": "Pharmaceutical/supplement use only"
+      }
+    }
+  },
+  
+  "volume": {
+    "_note": "For liquid ingredients - convert to millilitres (mL)",
+    "units": {
+      "fl_oz": {
+        "to_ml": 29.57,
+        "example": "8 fl oz water = 237mL water"
+      },
+      "tsp": {
+        "us_to_ml": 4.93,
+        "au_standard_ml": 5,
+        "note": "US teaspoon ≈ 5mL (rounded for practical use)"
+      },
+      "tbsp": {
+        "us_to_ml": 14.79,
+        "au_standard_ml": 20,
+        "note": "CRITICAL: US tablespoon ≈ 15mL, AU tablespoon = 20mL. When converting US recipes, use 15mL not 20mL.",
+        "conversion_factor": 0.75,
+        "example": "1 US Tbsp = 15mL = 0.75 AU Tbsp"
+      },
+      "cup": {
+        "us_to_ml": 236.6,
+        "au_standard_ml": 250,
+        "note": "US cup ≈ 237mL, AU cup = 250mL. Use 240mL as practical US conversion.",
+        "conversion_factor": 0.95,
+        "example": "1 US cup ≈ 0.95 AU cups"
+      },
+      "pint": {
+        "us_to_ml": 473,
+        "example": "1 US pint = 473mL"
+      },
+      "quart": {
+        "us_to_ml": 946,
+        "to_litres": 0.946,
+        "example": "1 US quart ≈ 1L"
+      },
+      "gallon": {
+        "us_to_ml": 3785,
+        "to_litres": 3.785,
+        "example": "1 US gallon ≈ 3.8L"
+      }
+    }
+  },
+  
+  "temperature": {
+    "_note": "Oven temperatures - Fahrenheit to Celsius",
+    "formula": "(F - 32) × 5/9 = C",
+    "common_conversions": {
+      "300F": "150C",
+      "325F": "160C",
+      "350F": "180C",
+      "375F": "190C",
+      "400F": "200C",
+      "425F": "220C",
+      "450F": "230C",
+      "475F": "245C",
+      "500F": "260C"
+    },
+    "descriptive": {
+      "low": "150C",
+      "moderate": "180C",
+      "moderately_hot": "190-200C",
+      "hot": "220C",
+      "very_hot": "230-250C"
+    }
+  },
+  
+  "butter": {
+    "_note": "US butter is sold in 'sticks'",
+    "stick_to_grams": 113,
+    "stick_to_tbsp": 8,
+    "common_conversions": {
+      "1 stick": "113g",
+      "1/2 stick": "57g",
+      "1/4 stick": "28g",
+      "2 sticks": "226g",
+      "1 tbsp butter": "14g"
+    }
+  },
+  
+  "common_ingredient_weights": {
+    "_note": "Weight equivalents for common US volume measurements of specific ingredients",
+    "flour_plain": {
+      "1_cup_us": "125g",
+      "1_tbsp": "8g"
+    },
+    "sugar_white": {
+      "1_cup_us": "200g",
+      "1_tbsp": "12g"
+    },
+    "sugar_brown_packed": {
+      "1_cup_us": "220g"
+    },
+    "sugar_icing": {
+      "1_cup_us": "120g"
+    },
+    "butter": {
+      "1_cup_us": "227g",
+      "1_tbsp": "14g"
+    },
+    "oil": {
+      "1_cup_us": "218g",
+      "1_tbsp": "14g"
+    },
+    "honey": {
+      "1_cup_us": "340g",
+      "1_tbsp": "21g"
+    },
+    "nuts_chopped": {
+      "1_cup_us": "120g"
+    },
+    "cheese_grated": {
+      "1_cup_us": "100g"
+    },
+    "greek_yogurt": {
+      "1_cup_us": "245g"
+    },
+    "almond_butter": {
+      "1_tbsp": "16g"
+    },
+    "chia_seeds": {
+      "1_tbsp": "12g"
+    },
+    "flax_seeds_ground": {
+      "1_tbsp": "7g"
+    },
+    "coconut_flakes": {
+      "1_cup_us": "80g"
+    }
+  },
+  
+  "conversion_priority": {
+    "_note": "When converting recipes, prefer weight (grams) over volume for accuracy",
+    "solids": "Always convert to grams where possible",
+    "liquids": "Use millilitres",
+    "spices_small_amounts": "Use metric teaspoons (5mL) - difference is negligible",
+    "baking": "Convert all measurements to grams for accuracy"
+  }
+}

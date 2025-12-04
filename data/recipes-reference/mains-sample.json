@@ -1,0 +1,237 @@
+{
+  "_metadata": {
+    "description": "Sample main meal recipes extracted from Galveston Diet book",
+    "source": "galveston_book",
+    "created": "2025-12-04",
+    "status": "reference_only",
+    "notes": "Converted to metric, AU ingredient names. For personal use validation."
+  },
+  
+  "recipes": [
+    {
+      "id": "egg-scramble-spinach-tomato",
+      "name": "Egg Scramble with Spinach and Tomato",
+      "description": "Fluffy scrambled eggs with fresh spinach and tomatoes. Simple, satisfying breakfast.",
+      
+      "meal_type": "breakfast",
+      "phase": [1, 2, 3],
+      "category": "eggs",
+      "cuisine": "universal",
+      "tags": ["quick", "high-protein", "classic", "weekday"],
+      
+      "batch_friendly": false,
+      "batch_notes": "Eggs are best fresh. Don't reheat.",
+      "components": null,
+      "freezer_friendly": false,
+      "good_for_lunchbox": false,
+      
+      "flavour_profile": ["mild", "rich", "light"],
+      "texture": ["soft", "creamy"],
+      "temperature": "hot",
+      
+      "difficulty": "easy",
+      "active_cooking": true,
+      "prep_time_mins": 5,
+      "cook_time_mins": 5,
+      "total_time_mins": 10,
+      
+      "dietary": {
+        "dairy_free": false,
+        "gluten_free": true,
+        "nut_free": true,
+        "egg_free": false,
+        "vegetarian": true,
+        "vegan": false
+      },
+      
+      "base_servings": 1,
+      "ingredients": [
+        { "id": "eggs", "name": "Eggs", "grams": 100, "notes": "2 large" },
+        { "id": "butter", "name": "Butter", "grams": 14 },
+        { "id": "spinach", "name": "Fresh spinach leaves", "grams": 30 },
+        { "id": "tomato", "name": "Tomato", "grams": 75, "notes": "chopped" },
+        { "id": "salt", "name": "Salt", "grams": 1, "notes": "pinch" },
+        { "id": "black-pepper", "name": "Black pepper", "grams": 0.5, "notes": "pinch" },
+        { "id": "raspberries", "name": "Fresh raspberries", "grams": 60, "optional": true, "notes": "to serve alongside" }
+      ],
+      
+      "instructions": [
+        "Crack eggs into a bowl, add a pinch of salt and pepper, and whisk until blended.",
+        "Melt butter in a frypan over low heat.",
+        "Pour in eggs and cook until edges firm up.",
+        "Gently fold eggs over, cook another 30 seconds, then push and fold around the pan.",
+        "Add spinach and tomatoes, stir to incorporate.",
+        "Continue folding until eggs are barely set but still look slightly soft on top.",
+        "Serve immediately, with raspberries alongside if desired."
+      ],
+      
+      "per_serve": {
+        "calories": 320,
+        "protein_g": 15,
+        "fat_g": 26,
+        "carbs_g": 6,
+        "fibre_g": 2
+      },
+      
+      "source": "galveston_book",
+      "source_ref": "p.174",
+      
+      "created_at": "2025-12-04",
+      "updated_at": "2025-12-04",
+      "version": 1
+    },
+    
+    {
+      "id": "tuna-salad-side-salad",
+      "name": "Tuna Salad with Side Salad",
+      "description": "Creamy tuna salad with pecans, served over fresh mixed greens with lemon dressing.",
+      
+      "meal_type": "lunch",
+      "phase": [1, 2, 3],
+      "category": "fish",
+      "cuisine": "universal",
+      "tags": ["no-cook", "high-protein", "quick", "portable"],
+      
+      "batch_friendly": false,
+      "batch_notes": "Tuna salad component keeps 2-3 days refrigerated. Side salad must be fresh - dress just before serving.",
+      "components": {
+        "reheatable": [],
+        "fresh_only": ["side salad with dressing"]
+      },
+      "freezer_friendly": false,
+      "good_for_lunchbox": true,
+      
+      "flavour_profile": ["sour", "rich", "light"],
+      "texture": ["creamy", "crunchy"],
+      "temperature": "cold",
+      
+      "difficulty": "no_cook",
+      "active_cooking": false,
+      "prep_time_mins": 10,
+      "cook_time_mins": 0,
+      "total_time_mins": 10,
+      
+      "dietary": {
+        "dairy_free": true,
+        "gluten_free": true,
+        "nut_free": false,
+        "egg_free": true,
+        "vegetarian": false,
+        "vegan": false
+      },
+      
+      "base_servings": 1,
+      "ingredients": [
+        { "id": "tuna-canned", "name": "Tuna in water", "grams": 56, "notes": "drained, about half a small tin" },
+        { "id": "onion-red", "name": "Red onion", "grams": 15, "notes": "finely chopped" },
+        { "id": "mayonnaise-avocado", "name": "Avocado oil mayonnaise", "grams": 30 },
+        { "id": "pecans", "name": "Pecans", "grams": 20, "notes": "roughly chopped" },
+        { "id": "mixed-greens", "name": "Mixed salad greens", "grams": 30 },
+        { "id": "tomato", "name": "Tomato", "grams": 60, "notes": "chopped" },
+        { "id": "carrot", "name": "Carrot", "grams": 40, "notes": "chopped or grated" },
+        { "id": "celery", "name": "Celery", "grams": 30, "notes": "chopped" },
+        { "id": "olive-oil", "name": "Olive oil", "grams": 15 },
+        { "id": "lemon", "name": "Lemon juice", "grams": 15, "notes": "fresh" }
+      ],
+      
+      "instructions": [
+        "Make the tuna salad: Empty drained tuna into a bowl.",
+        "Add red onion, mayonnaise, and pecans. Stir to blend well.",
+        "Make the side salad: Place mixed greens, tomato, carrot, and celery in a salad bowl.",
+        "Drizzle with olive oil and lemon juice, toss gently.",
+        "Top the dressed greens with tuna salad and serve."
+      ],
+      
+      "per_serve": {
+        "calories": 480,
+        "protein_g": 22,
+        "fat_g": 42,
+        "carbs_g": 10,
+        "fibre_g": 4
+      },
+      
+      "source": "galveston_book",
+      "source_ref": "p.179",
+      
+      "created_at": "2025-12-04",
+      "updated_at": "2025-12-04",
+      "version": 1
+    },
+    
+    {
+      "id": "chicken-blt-lettuce-wrap",
+      "name": "Chicken and BLT Lettuce Wrap",
+      "description": "Low-carb wrap with shredded chicken, turkey bacon, avocado, and ranch dressing in crisp lettuce.",
+      
+      "meal_type": "dinner",
+      "phase": [1, 2, 3],
+      "category": "poultry",
+      "cuisine": "universal",
+      "tags": ["low-carb", "high-protein", "quick", "light-dinner"],
+      
+      "batch_friendly": true,
+      "batch_notes": "Chicken and bacon can be prepped ahead. Assemble wraps just before eating.",
+      "components": {
+        "reheatable": ["chicken", "turkey bacon"],
+        "fresh_only": ["lettuce wrap assembly"]
+      },
+      "freezer_friendly": false,
+      "good_for_lunchbox": true,
+      
+      "flavour_profile": ["salty", "rich", "light", "umami"],
+      "texture": ["crunchy", "creamy", "soft"],
+      "temperature": "room_temp",
+      
+      "difficulty": "easy",
+      "active_cooking": false,
+      "prep_time_mins": 10,
+      "cook_time_mins": 0,
+      "total_time_mins": 10,
+      
+      "dietary": {
+        "dairy_free": false,
+        "gluten_free": true,
+        "nut_free": true,
+        "egg_free": true,
+        "vegetarian": false,
+        "vegan": false
+      },
+      
+      "base_servings": 1,
+      "ingredients": [
+        { "id": "lettuce-cos", "name": "Cos lettuce leaves", "grams": 60, "notes": "2 large leaves" },
+        { "id": "avocado", "name": "Avocado", "grams": 60, "notes": "sliced" },
+        { "id": "chicken-breast", "name": "Rotisserie chicken breast", "grams": 90, "notes": "shredded" },
+        { "id": "tomato", "name": "Tomato", "grams": 40, "notes": "chopped" },
+        { "id": "turkey-bacon", "name": "Turkey bacon", "grams": 30, "notes": "2 slices, cooked" },
+        { "id": "ranch-dressing", "name": "Ranch dressing", "grams": 30, "notes": "Primal Kitchen or similar clean brand" },
+        { "id": "black-pepper", "name": "Black pepper", "grams": 0.5 },
+        { "id": "cheese-cheddar", "name": "Cheddar cheese", "grams": 28, "notes": "grated" }
+      ],
+      
+      "instructions": [
+        "Lay lettuce leaves flat on a board.",
+        "Layer avocado slices on each leaf.",
+        "Add shredded chicken, then tomato and turkey bacon.",
+        "Drizzle with ranch dressing.",
+        "Season with pepper and sprinkle with cheese.",
+        "Fold up sides of lettuce and eat like a wrap."
+      ],
+      
+      "per_serve": {
+        "calories": 520,
+        "protein_g": 35,
+        "fat_g": 40,
+        "carbs_g": 8,
+        "fibre_g": 5
+      },
+      
+      "source": "galveston_book",
+      "source_ref": "p.178",
+      
+      "created_at": "2025-12-04",
+      "updated_at": "2025-12-04",
+      "version": 1
+    }
+  ]
+}

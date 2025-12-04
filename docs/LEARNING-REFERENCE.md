@@ -435,6 +435,122 @@ npm install @anthropic-ai/sdk
 
 ---
 
+### Session 2 (Afternoon) - Recipe Library Architecture
+
+**Major Pivot: AI Generation → Pre-made Library**
+
+The key insight from discussion with Rhonda:
+- On-demand generation is too slow (10-50 seconds)
+- No quality control over generated recipes
+- Snacks were being generated as full meals (wrong)
+- Pre-made recipes can be curated, verified, and instant
+
+**What was accomplished:**
+- Complete recipe schema designed (RECIPE-SCHEMA.md)
+- US → AU ingredient mapping created
+- Imperial → Metric conversion reference created
+- 8 sample recipes extracted (5 snacks, 3 mains)
+- Book content saved to project for extraction
+
+**New concepts learned:**
+
+#### Recipe Schema Design
+- Rich metadata enables smart AI recommendations
+- Categories expanded to 22 (proteins, plants, carbs, fats, sweets, beverages)
+- Flavour profiles based on taste science (16 terms)
+- Batch-friendly = entire dish, not just components
+- Source tracking for commercial considerations
+
+#### Filtering Strategy
+- **User-facing:** meal type, protein, time, difficulty, dietary
+- **AI-facing:** all above + phase, batch, lunchbox, flavour, history, ratings
+
+#### Key Insight: Ian's Value
+Product decisions, architecture, domain knowledge, quality control - NOT the coding.
+This IS the Technical Product Owner role.
+
+---
+
+### Files Created Day 4 Session 2
+
+| File | Purpose |
+|------|---------|
+| `data/schemas/RECIPE-SCHEMA.md` | Full schema definition |
+| `data/mappings/us-to-au-ingredients.json` | Ingredient name mapping |
+| `data/mappings/imperial-to-metric.json` | Unit conversions |
+| `data/recipes-reference/snacks-sample.json` | 5 sample snacks |
+| `data/recipes-reference/mains-sample.json` | 3 sample mains |
+| `docs/galveston-guide/galveston-diet-book.md` | Book content for extraction |
+
+---
+
+### Next Steps (Day 5)
+
+1. Extract full recipe set from book (~70+ recipes)
+2. Convert all to schema with metric/AU
+3. Wire recipe library into app
+4. Build Recipes page with filtering
+
+---
+
+### Session 2 (Afternoon) - Recipe Library Architecture
+
+**Major Pivot: AI Generation → Pre-made Library**
+
+The key insight from discussion with Rhonda:
+- On-demand generation is too slow (10-50 seconds)
+- No quality control over generated recipes
+- Snacks were being generated as full meals (wrong)
+- Pre-made recipes can be curated, verified, and instant
+
+**What was accomplished:**
+- Complete recipe schema designed (RECIPE-SCHEMA.md)
+- US → AU ingredient mapping created
+- Imperial → Metric conversion reference created
+- 8 sample recipes extracted (5 snacks, 3 mains)
+- Book content saved to project for extraction
+
+**New concepts learned:**
+
+#### Recipe Schema Design
+- Rich metadata enables smart AI recommendations
+- Categories expanded to 22 (proteins, plants, carbs, fats, sweets, beverages)
+- Flavour profiles based on taste science (16 terms)
+- Batch-friendly = entire dish, not just components
+- Source tracking for commercial considerations
+
+#### Filtering Strategy
+- **User-facing:** meal type, protein, time, difficulty, dietary
+- **AI-facing:** all above + phase, batch, lunchbox, flavour, history, ratings
+
+#### Key Insight: Ian's Value
+Product decisions, architecture, domain knowledge, quality control - NOT the coding.
+This IS the Technical Product Owner role.
+
+---
+
+### Files Created Day 4 Session 2
+
+| File | Purpose |
+|------|---------||
+| `data/schemas/RECIPE-SCHEMA.md` | Full schema definition |
+| `data/mappings/us-to-au-ingredients.json` | Ingredient name mapping |
+| `data/mappings/imperial-to-metric.json` | Unit conversions |
+| `data/recipes-reference/snacks-sample.json` | 5 sample snacks |
+| `data/recipes-reference/mains-sample.json` | 3 sample mains |
+| `docs/galveston-guide/galveston-diet-book.md` | Book content for extraction |
+
+---
+
+### Next Steps (Day 5)
+
+1. Extract full recipe set from book (~70+ recipes)
+2. Convert all to schema with metric/AU
+3. Wire recipe library into app
+4. Build Recipes page with filtering
+
+---
+
 ## End-of-Session Workflow
 
 **At end of each session, ask Claude:**
@@ -449,4 +565,4 @@ git commit -m "Day X Session Y - brief description"
 
 ---
 
-*Last updated: Thursday 4 December 2025, 11:30 AM AEDT - Day 4 Session 1*
+*Last updated: Thursday 4 December 2025, 3:30 PM AEDT - Day 4 Session 2*
