@@ -7,6 +7,41 @@
 
 ---
 
+## How We Work
+
+**Ian's Role: Technical Product Owner**
+
+Not becoming a software engineer. Learning to direct AI agents to build - a legitimate role (BuiltWith's Gary Brewer model).
+
+**What Ian needs to UNDERSTAND:**
+- How components connect (architecture)
+- What's possible vs what's hard
+- How to read code well enough to spot problems
+- When something is over-engineered vs appropriately simple
+
+**What Ian DOES:**
+- Make product decisions (what should it do?)
+- Run terminal commands (start server, commit code)
+- Test the app and provide feedback
+- Direct the AI on what to build next
+
+**What AI DOES:**
+- Write the actual code
+- Explain concepts when asked
+- Debug errors
+- Suggest implementation approaches
+
+**Our Build Process:**
+1. AI explains what we're creating and why
+2. Ian decides on open questions (design choices)
+3. AI shows planned file structure
+4. Ian approves or adjusts
+5. AI writes code, explaining key parts
+6. Ian tests and gives feedback
+7. We iterate based on what Ian sees
+
+---
+
 ## Quick Reference: The Stack
 
 | Layer | Tool | What It Does |
@@ -274,7 +309,7 @@ npm install @anthropic-ai/sdk
 - [ ] JSONB queries in Supabase
 - [ ] Date/time handling in JavaScript
 - [ ] Mobile-responsive cooking mode
-- [ ] Drag-and-drop for meal planning
+- [x] ~~Drag-and-drop for meal planning~~ Simplified to click-to-assign
 - [ ] Shopping list aggregation algorithm
 
 ---
@@ -283,51 +318,127 @@ npm install @anthropic-ai/sdk
 
 ## Day 4 - Thursday 4 December 2025
 
-### Session 1 (Morning) - Setup & Planning
+### Session 1 (Morning) - Major Scope Revision
 
-**Status check:**
-- Confirmed all Day 3 work is in place (API, UI, database)
-- Identified gap: meals generate and select but don't persist
-- Next: Add date assignment + save to database
+**What was accomplished:**
+- Git repository initialized (first commit of Days 1-3)
+- ESLint issues fixed (apostrophe escaping)
+- **MAJOR PIVOT:** Three-column desktop layout → Day-centric mobile-friendly design
+- Detailed component structure documented
+- PROJECT-SPEC.md updated to v3.0
+- Workflow clarified (Ian = Technical Product Owner)
 
-**Process improvement:**
-- Set up git for version control (first commit)
-- Established end-of-session save workflow
-- Docs: PROJECT-STATUS.md for quick state, LEARNING-REFERENCE.md for details
+---
 
-**UI Decision (from Day 3 evening discussion):**
+#### The Pivot (Key Decision)
 
-Three-column layout agreed:
-```
-┌─────────────────────────────────────────────────────────────────┐
-│ SIDEBAR      │  GENERATE (middle)      │  WEEK PLAN (right)     │
-│              │                         │                        │
-│ User select  │  Constraints: ____      │  Thu 5 Dec             │
-│ Macro targets│  Serves/Meals/Snacks    │  - Lunch: [empty]      │
-│ Navigation   │  [Generate Week]        │  - Snack: [empty]      │
-│              │                         │  - Dinner: [empty]     │
-│              │  Generated Meals        │  - Snack: [empty]      │
-│              │  [draggable cards]      │                        │
-│              │                         │  Fri 6 Dec...          │
-│              │  Generated Snacks       │                        │
-│              │  [draggable cards]      │  [Commit All]          │
-│              │                         │  [Clear Week]          │
-└─────────────────────────────────────────────────────────────────┘
-```
+**Original design (Day 3 evening):**
+- Three columns: Sidebar | Generate (middle) | Week Plan (right)
+- Drag-and-drop meals to day slots
+- Desktop-first approach
+- Manual meal generation and assignment
 
-**Key features:**
-- Drag-and-drop from generated meals to day slots
-- "Commit All Suggestions" for fast acceptance
-- Visual completion (see when slots filled)
-- Snacks separate from main meals
-- Per day: Lunch → Snack → Dinner → Snack (Galveston 16:8 fasting)
+**New design (Day 4):**
+- Fixed Mon-Sun week with This Week / Next Week tabs
+- Day-centric view (click day to see meals)
+- Single user logged in, their own calendar
+- AI generates full week at once (button triggered)
+- Servings chosen at generation time (1, 2, 4)
+- Shopping list as separate view
+
+**Why the change:**
+- Real use case: "Open on weekend, plan next week, generate shopping list"
+- Three columns impractical on mobile/tablet
+- Couples often cook together (serving size choice)
+- Simpler is better for MVP
+
+---
+
+#### Key Product Decisions Made
+
+| Decision | Choice | Reason |
+|----------|--------|--------|
+| Week structure | Fixed Mon-Sun | Matches real planning rhythm |
+| Week tabs | This Week + Next Week | Plan ahead on weekends |
+| User model | Single user logged in | Cleaner, each person has own view |
+| Serving size | Choose at generation (1, 2, 4) | Flexibility for cooking together |
+| +1 button | Quick double individual meal | "Join me for dinner" scenario |
+| Meals per day | 4: Lunch, Snack, Dinner, Snack | 16:8 fasting (12:00-20:00 window) |
+| Archive | Automatic (date-based) | No manual rollover needed |
+
+---
+
+#### Reference Material Reviewed
+
+**MyNetDiary mobile screenshots:**
+- Clean card-based UI
+- Day navigation with `< Today >` arrows
+- Meal list by type (Breakfast/Lunch/Dinner/Snacks)
+- Bottom nav bar (simplified for our needs)
+- Macro display with progress bars
+
+**Key takeaways:**
+- Cards are intuitive for meal display
+- Day navigation should be prominent
+- Keep it simple - don't copy all features
+
+---
+
+#### Future Feature Ideas Captured
+
+**Recipe Import (Phase 2):**
+- "Add Recipes" tab in sidebar
+- Paste URL from sites like "Plant by Babes"
+- System analyzes for Galveston compliance
+- Stores as user's saved recipe
+
+**+1 Partner Feature:**
+- Click +1 on any meal to double servings
+- Affects shopping list quantities
+- Partner joining for dinner scenario
+
+---
+
+#### Files Created/Updated
+
+| File | Action | Purpose |
+|------|--------|---------|
+| `docs/COMPONENT-STRUCTURE.md` | Created | Detailed component breakdown |
+| `docs/PROJECT-SPEC.md` | Updated to v3.0 | New scope and structure |
+| `docs/PROJECT-STATUS.md` | Updated | Current state and next steps |
+| `docs/LEARNING-REFERENCE.md` | Updated | This file, session notes |
+
+---
+
+### MVP Scope Confirmed (Ship Dec 10)
+
+**Must Have:**
+- Sidebar: user picker, This Week, Next Week, Shopping List
+- Week view with day cards (Mon-Sun)
+- Generate Week button with serving selector
+- MealCard: name, macros, expand recipe, mark done
+- Day totals (macro progress)
+- Basic shopping list (grouped, checkboxes)
+- Save/load from Supabase
+
+**Stretch:**
+- +1 button on individual meals
+- Next Week tab
+- Send shopping list to Apple Reminders
+
+**Phase 2 (After Ship):**
+- Recipe URL import
+- Weight tracking
+- Thumbs up/down ratings
+- User preferences (love/like/dislike)
+- My Day cooking mode
 
 ---
 
 ## End-of-Session Workflow
 
 **At end of each session, ask Claude:**
-> "End of session. Update PROJECT-STATUS.md and LEARNING-REFERENCE.md, then tell me the git command."
+> "End of session - update the docs"
 
 **Then run in terminal:**
 ```bash
@@ -338,4 +449,4 @@ git commit -m "Day X Session Y - brief description"
 
 ---
 
-*Last updated: Thursday 4 December 2025, 9:30 AM AEDT - Day 4 Session 1*
+*Last updated: Thursday 4 December 2025, 11:30 AM AEDT - Day 4 Session 1*

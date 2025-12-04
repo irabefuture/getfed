@@ -1,7 +1,7 @@
 # Adaptive Meal Builder - Project Specification
 
-**Version:** 2.0 (Major Revision)  
-**Date:** 3 December 2025  
+**Version:** 3.0 (Day 4 Revision)  
+**Date:** 4 December 2025  
 **Ship Date:** 10 December 2025
 
 ---
@@ -10,12 +10,28 @@
 
 A web application for weekly meal planning following the Galveston Diet, with:
 - AI-generated meal suggestions using anti-inflammatory ingredients
-- Multi-day planning with shopping list generation
+- **Fixed week structure** (Mon-Sun) with This Week / Next Week views
 - Calculated nutrition targets from body stats (not manual entry)
-- Two-user support (Ian + Rhonda) with individual portion logging
+- Two-user support (Ian + Rhonda) - each sees their own calendar
+- Shopping list generation from confirmed weekly plan
 - Australian ingredients and metric measurements
 
-**Why this matters:** Replaces daily ad-hoc recipe requests to Claude with a structured system that plans ahead and generates shopping lists.
+**Primary use case:** Open on weekend, generate next week's meals, produce shopping list, know what to cook each day.
+
+---
+
+## Key UX Decisions (Day 4)
+
+| Decision | Choice | Reason |
+|----------|--------|--------|
+| Week structure | Fixed Mon-Sun | Matches real planning rhythm |
+| Week tabs | This Week + Next Week | Plan ahead on weekends |
+| User model | Single user logged in | Each person has their own view |
+| Serving size | Choose at generation (1, 2, 4) | Couples often cook together |
+| +1 button | Quick double for partner joining | "Join me for dinner" scenario |
+| Meals per day | 4 (Lunch, Afternoon Snack, Dinner, Evening Snack) | 16:8 fasting window 12:00-20:00 |
+| Shopping list | Separate view, checkboxes | Mark "have it" vs "need to buy" |
+| Archive | Automatic (week passes, becomes history) | No manual rollover needed |
 
 ---
 
@@ -48,371 +64,322 @@ A web application for weekly meal planning following the Galveston Diet, with:
 | Goal | Lose |
 | Current phase | Phase 1 |
 | Eating window | 12:00 - 20:00 |
+| Preferences | Vegetarian-leaning, prefers plant-based |
 | **Calculated calories** | **1,850/day** |
 | **Phase 1 macros** | **93g P / 144g F / 46g C** |
 
 ---
 
-## Galveston Diet Phases
+## App Structure
 
-| Phase | Fat | Protein | Carbs | When |
-|-------|-----|---------|-------|------|
-| Phase 1 (Fat-Burning) | 70% | 20% | 10% | First 4-6 weeks or reset |
-| Phase 2 (Transition) | 50% | 20% | 30% | Gradual carb reintroduction |
-| Phase 3 (Maintenance) | 40% | 20% | 40% | Long-term sustainable |
-
-**Three pillars (constant):**
-1. 16:8 intermittent fasting (8-hour eating window)
-2. Anti-inflammatory foods (berries, leafy greens, fatty fish, nuts, olive oil, avocado)
-3. Macro tracking with net carbs
-
----
-
-## Calculated Nutrition Targets
-
-Targets are **calculated, not stored** - automatically update when weight changes.
-
-### Formulas
-
-**BMR (Basal Metabolic Rate) - Mifflin-St Jeor:**
-- Women: (10 × weight_kg) + (6.25 × height_cm) - (5 × age) - 161
-- Men: (10 × weight_kg) + (6.25 × height_cm) - (5 × age) + 5
-
-**TDEE (Total Daily Energy Expenditure):** BMR × activity multiplier
-- Sedentary: 1.2
-- Lightly Active: 1.375
-- Moderately Active: 1.55
-- Active: 1.725
-- Very Active: 1.9
-
-**Goal adjustment:**
-- Lose weight: TDEE - 500
-- Maintain: TDEE
-- Gain: TDEE + 300
-
-**Macros from phase ratios:**
-- Fat: calories × phase_fat_% ÷ 9
-- Protein: calories × phase_protein_% ÷ 4
-- Carbs: calories × phase_carbs_% ÷ 4
-
----
-
-## Database Schema
-
-### Existing Table (Expand)
-
-**ingredients** (171 rows → expand to 500+ later)
+### Sidebar Navigation
 ```
-id (text, PK)
-name (text)
-category (text)
-protein_per_100g (float8)
-fat_per_100g (float8)
-carbs_per_100g (float8)
-calories_per_100g (int4)
--- ADD:
-shopping_unit (text) - 'g', 'piece', 'head', 'bunch', 'fillet'
-shopping_unit_grams (float8) - conversion factor
+┌─────────────────────┐
+│  [User: Ian ▼]      │  ← Switch user
+│                     │
+│  📅 This Week       │  ← Mon-Sun current week
+│  📅 Next Week       │  ← Mon-Sun following week
+│                     │
+│  🛒 Shopping List   │  ← Generated from week plan
+│                     │
+│  ⚙️ Settings        │  ← Profile, preferences
+└─────────────────────┘
 ```
 
-### New Tables
-
-**users**
+### Week View (Main Screen)
 ```
-id (uuid, PK)
-name (text)
-gender (text) - 'male', 'female'
-date_of_birth (date)
-height_cm (float8)
-current_weight_kg (float8)
-target_weight_kg (float8)
-activity_level (text) - 'sedentary', 'light', 'moderate', 'active', 'very_active'
-goal (text) - 'lose', 'maintain', 'gain'
-current_phase (text) - 'phase1', 'phase2', 'phase3'
-eating_window_start (time)
-eating_window_end (time)
-created_at (timestamp)
-updated_at (timestamp)
-```
-*Note: Calorie/macro targets are CALCULATED, not stored*
-
-**preferences**
-```
-id (uuid, PK)
-user_id (uuid, FK → users)
-ingredient_id (text, FK → ingredients)
-rating (text) - 'love', 'like', 'dislike', 'never'
-```
-
-**pantry_staples**
-```
-id (uuid, PK)
-ingredient_id (text, FK → ingredients)
--- Items to hide from shopping list (olive oil, garlic, salt, etc.)
+┌─────────────────────────────────────────────────────────────┐
+│  This Week: Dec 2-8                    [Generate Week ▼]    │
+│                                        Servings: [2 ▼]      │
+├─────────────────────────────────────────────────────────────┤
+│  Mon │ Tue │ Wed │ Thu │ Fri │ Sat │ Sun                   │
+│  ✓   │ ✓   │ ✓   │ ●   │     │     │                       │
+│              (● = today, ✓ = has meals, empty = no plan)    │
+├─────────────────────────────────────────────────────────────┤
+│  THURSDAY 5 DECEMBER                                        │
+│  ┌──────────────────────────────────────────────────────┐  │
+│  │ 🥗 LUNCH                                    [+1] [✓] │  │
+│  │ Mediterranean Salmon Bowl                            │  │
+│  │ 485 cal • 42g P • 28g F • 12g C                     │  │
+│  │ [View Recipe ▼]                                      │  │
+│  └──────────────────────────────────────────────────────┘  │
+│  ┌──────────────────────────────────────────────────────┐  │
+│  │ 🍎 AFTERNOON SNACK                          [+1] [✓] │  │
+│  │ Celery with Almond Butter                            │  │
+│  │ 180 cal • 6g P • 14g F • 8g C                       │  │
+│  └──────────────────────────────────────────────────────┘  │
+│  ... Dinner, Evening Snack ...                              │
+│                                                             │
+│  Day Total: 2,180 / 2,300 cal                              │
+│  ████████████████████░░░ 95%                               │
+└─────────────────────────────────────────────────────────────┘
 ```
 
-**planned_meals**
-```
-id (uuid, PK)
-date (date)
-meal_type (text) - 'breakfast', 'lunch', 'dinner', 'snack'
-name (text)
-cooking_serves (int) - how many portions cooked (1, 2, 4)
-prep_time_mins (int)
-cook_time_mins (int)
-instructions (text)
-ingredients_json (jsonb) - [{ingredient_id, quantity_g, name}]
-protein_g (float8) - per serve
-fat_g (float8) - per serve
-carbs_g (float8) - per serve
-calories (int) - per serve
-status (text) - 'planned', 'cooked', 'skipped', 'rescheduled'
-source (text) - 'ai_generated', 'recipe_book', 'user_created'
-created_at (timestamp)
-```
-
-**meal_logs**
-```
-id (uuid, PK)
-user_id (uuid, FK → users)
-planned_meal_id (uuid, FK → planned_meals, nullable)
-date (date)
-meal_type (text)
-name (text)
-servings (float8) - 0.5, 1, 1.5, 2 (person's portion)
-protein_g (float8) - actual total for this person
-fat_g (float8)
-carbs_g (float8)
-calories (int)
-rating (text) - 'thumbs_up', 'thumbs_down', null
-rating_reason (text, nullable)
-off_plan (boolean) - true if not from planned_meals
-off_plan_estimate (text) - 'high_carb', 'high_fat', 'balanced', null
-created_at (timestamp)
-```
-
-**saved_meals** (templates for quick-add)
-```
-id (uuid, PK)
-user_id (uuid, FK → users)
-name (text) - "Ian's smoothie"
-meal_type (text)
-ingredients_json (jsonb)
-protein_g (float8)
-fat_g (float8)
-carbs_g (float8)
-calories (int)
-is_default (boolean) - show at top of quick-add
-created_at (timestamp)
-```
-
-**recipes** (curated proven meals - LATER PHASE)
-```
-id (uuid, PK)
-name (text)
-description (text)
-meal_type (text)
-serves (int)
-prep_time_mins (int)
-cook_time_mins (int)
-instructions (text)
-ingredients_json (jsonb)
-phase_suitable (text[]) - ['phase1', 'phase2', 'phase3']
-tested (boolean)
-rating_average (float8)
-created_at (timestamp)
-```
+### Component Structure
+See: `/docs/COMPONENT-STRUCTURE.md`
 
 ---
 
 ## Core User Flows
 
-### Flow 1: Plan Meals
-1. Select days to plan (Mon-Thu dinners)
-2. Select meal types and cooking quantity (serves 2)
-3. OPTIONAL: Guide AI with constraints ("use the lamb", "quick meals only", "no fish this week")
-4. AI generates plan with metadata (prep time, cook time, macros per serve)
-5. Review suggestions, swap any meals that don't suit
-6. Confirm → saved to planned_meals
+### Flow 1: Generate Weekly Plan
+1. User selects "This Week" or "Next Week"
+2. Clicks "Generate Week" button
+3. Chooses serving size (1, 2, or 4)
+4. AI generates 28 meals (7 days × 4 meals)
+5. Progress shown: "Generating meals... Generating snacks..."
+6. Meals appear in day cards
+7. User can expand recipe, mark as done, or +1 for partner
 
-### Flow 2: Shopping List
-1. View aggregated ingredients from all planned meals
-2. Quantities combined (Mon 150g + Wed 150g = 300g salmon)
-3. Converted to practical units ("2 fillets" not "300g")
-4. Pantry staples hidden (configurable)
-5. Checklist UI to mark items while shopping
+### Flow 2: View and Execute Daily Plan
+1. Open app → This Week is default
+2. Today is highlighted in day strip
+3. Click today to see 4 meal cards
+4. Expand recipe to see ingredients and instructions
+5. Mark meal as done when eaten
+6. Day totals show macro progress
 
-### Flow 3: Daily Cooking
-1. Open app, see today's planned meal(s)
-2. Tap "Start Cooking" → cooking mode (large text, step-by-step, screen stays on)
-3. Finish cooking → Quick log (as planned, 1 tap) OR Detailed log (edit portions/ingredients)
-4. Each person logs their own portion (Rhonda: 1 serve, Ian: 1.5 serves)
+### Flow 3: Shopping List
+1. Navigate to Shopping List in sidebar
+2. See all ingredients aggregated from week plan
+3. Grouped by category (Produce, Protein, Pantry)
+4. Check items you already have
+5. Unchecked items = shopping list
+6. Print or send to Apple Reminders (stretch goal)
 
-### Flow 4: Flexibility (Life Happens)
-- Reschedule meal to different day (drag or menu)
-- Skip meal (remove from plan)
-- Ate off-plan → quick estimate entry (rough category: high_carb, high_fat, balanced)
-- App doesn't break when plans change
+### Flow 4: +1 Partner Joining
+1. Partner says "I'll join you for dinner"
+2. Click +1 on that meal card
+3. Servings double (affects shopping list)
+4. Macros stay as per-serve reference
 
-### Flow 5: Reactive Mode (No Plan)
-- No meals planned, need suggestion now
-- Optionally guide: "something quick", "use the chicken"
-- AI suggests single meal
-- Cook or request alternative
+---
+
+## Database Schema
+
+### Tables Required (MVP)
+
+**users**
+```sql
+id uuid PRIMARY KEY,
+name text NOT NULL,
+gender text, -- 'male', 'female'
+date_of_birth date,
+height_cm float8,
+current_weight_kg float8,
+target_weight_kg float8,
+activity_level text, -- 'sedentary', 'light', 'moderate', 'active', 'very_active'
+goal text, -- 'lose', 'maintain', 'gain'
+current_phase text, -- 'phase1', 'phase2', 'phase3'
+eating_window_start time,
+eating_window_end time,
+created_at timestamp DEFAULT now(),
+updated_at timestamp DEFAULT now()
+```
+
+**planned_meals**
+```sql
+id uuid PRIMARY KEY,
+user_id uuid REFERENCES users(id),
+date date NOT NULL,
+meal_slot text NOT NULL, -- 'lunch', 'afternoon_snack', 'dinner', 'evening_snack'
+name text NOT NULL,
+servings int DEFAULT 1, -- can be increased with +1
+prep_time_mins int,
+cook_time_mins int,
+instructions text,
+ingredients_json jsonb, -- [{ingredient_id, quantity_g, name}]
+calories int, -- per serve
+protein_g float8,
+fat_g float8,
+carbs_g float8,
+completed boolean DEFAULT false,
+created_at timestamp DEFAULT now()
+```
+
+**preferences** (future)
+```sql
+id uuid PRIMARY KEY,
+user_id uuid REFERENCES users(id),
+ingredient_id text REFERENCES ingredients(id),
+rating text -- 'love', 'like', 'dislike', 'never'
+```
+
+**ingredients** (existing - 171 rows)
+```sql
+id text PRIMARY KEY,
+name text,
+category text,
+protein_per_100g float8,
+fat_per_100g float8,
+carbs_per_100g float8,
+calories_per_100g int
+```
 
 ---
 
 ## AI Integration
 
-### Prompt Context (sent to Claude API)
-- Full ingredient list with macros (171 approved foods)
-- User's current phase and calculated macro targets
-- Preferences (love/like/dislike/never for each ingredient)
-- Last 14 days of meal logs (for variety awareness)
-- User's pre-generation constraints
-- Number of meals to generate
+### Generation Flow
+1. User clicks "Generate Week"
+2. API call to `/api/generate-meals`
+3. Prompt includes:
+   - Full ingredient list (171 approved foods)
+   - User's calculated macro targets
+   - Serving size requested
+   - User's preferences (when implemented)
+   - Recent meal history (to avoid repetition)
+4. Claude returns structured JSON
+5. Meals inserted into `planned_meals` table
 
-### AI Returns
-```json
-{
-  "meals": [
-    {
-      "name": "Herb-Crusted Salmon with Roasted Vegetables",
-      "meal_type": "dinner",
-      "serves": 2,
-      "prep_time_mins": 15,
-      "cook_time_mins": 25,
-      "ingredients": [
-        {"ingredient_id": "salmon", "quantity_g": 300, "name": "Salmon fillet"},
-        {"ingredient_id": "broccoli", "quantity_g": 200, "name": "Broccoli"}
-      ],
-      "instructions": "1. Preheat oven to 200°C...",
-      "per_serve": {
-        "protein_g": 42,
-        "fat_g": 28,
-        "carbs_g": 12,
-        "calories": 468
-      }
-    }
-  ]
-}
+### Prompt Structure
+```
+Generate 28 meals for a week following the Galveston Diet Phase 1.
+
+User targets: 2,300 cal/day, 115g P, 179g F, 58g C
+Serving size: 2 people
+Meal slots: Lunch, Afternoon Snack, Dinner, Evening Snack
+
+RULES:
+- ONLY use ingredients from the provided list
+- Each meal must include macros per serve
+- Vary proteins (don't repeat within 4 days)
+- Include prep/cook times
+- Australian metric measurements
+
+INGREDIENTS:
+[list of 171 ingredients with macros]
+
+Return JSON array of meals...
 ```
 
-### Variety Logic
-- Don't repeat same protein within 4 days
-- Don't suggest disliked ingredients
-- Favour loved ingredients
-- Flag if something hasn't been eaten in 2+ weeks
-
-### Constraint Types
-- Use ingredient: "Use the lamb mince in the fridge"
-- Exclude ingredient: "No fish this week"
-- Time constraint: "Quick meals only (under 30 min total)"
-- Equipment: "Include a slow cooker meal"
-- Cuisine: "Something Asian-inspired"
-
-### Preventing Hallucination
-- Ingredient list explicitly provided in prompt
-- Instruction: "ONLY use ingredients from this list"
-- Future: Validate AI response against allowed ingredient IDs
+### Generation Timing
+- Full week (28 meals): ~30-60 seconds
+- Strategy: Generate meals (14) first, then snacks (14)
+- Show progress: "Generating meals..." → "Generating snacks..."
 
 ---
 
-## Build Phases
+## MVP Scope (Ship Dec 10)
 
-### Phase 1: Foundation
-- [ ] Create all database tables in Supabase
-- [ ] Insert Ian + Rhonda user profiles
-- [ ] User selector component (who's using the app)
-- [ ] Display calculated targets for selected user
-- [ ] Verify calculations match expected values
+### Must Have ✅
+- [ ] Sidebar with user picker and navigation
+- [ ] This Week view (Mon-Sun)
+- [ ] Day strip navigation (click day to see meals)
+- [ ] Generate Week button with serving selector
+- [ ] MealCard component (name, macros, expand recipe)
+- [ ] Mark meal as complete
+- [ ] Day totals (macros progress)
+- [ ] Shopping list view (basic - grouped, checkboxes)
+- [ ] Save meals to Supabase
+- [ ] Load meals from Supabase
 
-### Phase 2: Meal Planning
-- [ ] Claude API route (`/api/generate-meals`)
-- [ ] Plan generation UI (select days, meals, serves)
-- [ ] Pre-generation constraint input
-- [ ] Display AI suggestions with metadata
-- [ ] Swap/regenerate individual meals
-- [ ] Confirm and save plan to database
+### Stretch (If Time)
+- [ ] Next Week tab
+- [ ] +1 button on individual meal
+- [ ] Send shopping list to Apple Reminders
+- [ ] Generation progress indicator
 
-### Phase 3: Shopping List
-- [ ] Aggregate ingredients from date range
-- [ ] Combine quantities for same ingredient
-- [ ] Convert to shopping units where configured
-- [ ] Filter out pantry staples
-- [ ] Checklist UI with tap-to-check
-
-### Phase 4: Daily Execution
-- [ ] Today's meal view
-- [ ] Cooking mode (large text, step-by-step)
-- [ ] Quick log (as planned)
-- [ ] Detailed log (edit ingredients/portions)
-- [ ] Individual portion logging per person
-
-### Phase 5: Flexibility
-- [ ] Reschedule meal to different day
-- [ ] Skip meal
-- [ ] Off-plan quick entry with estimate
-- [ ] Reactive single-meal suggestion
-
-### Phase 6: Learning
-- [ ] Thumbs up/down rating after cooking
-- [ ] Optional reason capture
-- [ ] Include ratings in AI prompt context
-- [ ] Recency/variety awareness in AI logic
-
-### Phase 7: Preferences & Settings
-- [ ] Mark ingredients love/like/dislike/never
-- [ ] Configure pantry staples list
-- [ ] Edit profile (weight, phase, eating window)
-- [ ] Reset to Phase 1 option
-
-### Phase 8: Expansion (Future)
-- [ ] Recipe database (proven meals)
-- [ ] Expanded ingredients (500+)
-- [ ] Week macro overview chart
-- [ ] Progress tracking over time
+### Phase 2 (After Ship)
+- [ ] Recipe URL import ("Add Recipes" tab)
+- [ ] Auto-archive week rollover
+- [ ] Weight tracking / progress visualization
+- [ ] Thumbs up/down ratings
+- [ ] User preferences (love/like/dislike ingredients)
+- [ ] My Day cooking mode (recipe stays open)
+- [ ] Notification when generation complete
 
 ---
 
-## Success Criteria (MVP)
+## Galveston Diet Reference
 
-App is "done enough" when you can:
-1. ✅ Plan Mon-Thu dinners with AI
-2. ✅ Guide AI with constraints before generating
-3. ✅ Review plan, swap meals that don't suit
-4. ✅ Generate shopping list (minus pantry staples)
-5. ✅ See today's planned meal with recipe
-6. ✅ Log meal as cooked (quick or detailed)
-7. ✅ Each person logs their own portion
-8. ✅ Skip or reschedule when plans change
-9. ✅ Rate meals thumbs up/down
-10. ✅ AI uses ratings and history for future suggestions
+### Phases
+| Phase | Fat | Protein | Carbs | When |
+|-------|-----|---------|-------|------|
+| Phase 1 | 70% | 20% | 10% | First 4-6 weeks or reset |
+| Phase 2 | 50% | 20% | 30% | Gradual carb reintroduction |
+| Phase 3 | 40% | 20% | 40% | Long-term sustainable |
 
----
+### Three Pillars
+1. **16:8 intermittent fasting** (8-hour eating window)
+2. **Anti-inflammatory foods** (berries, leafy greens, fatty fish, nuts, olive oil, avocado)
+3. **Macro tracking** with net carbs
 
-## What We Keep From Current Build
-
-- ✅ Next.js project structure
-- ✅ Supabase connection
-- ✅ Vercel deployment
-- ✅ 171 ingredients database
-- ✅ Ingredient browser UI (becomes secondary feature)
-- ✅ Tailwind CSS styling
-- ⏸️ Manual meal builder (paused, may become "build custom meal" later)
+### Meal Structure (16:8 window 12:00-20:00)
+- 12:00 - Lunch
+- 15:00 - Afternoon Snack
+- 18:00 - Dinner
+- 19:30 - Evening Snack
 
 ---
 
-## Key Decisions Made
+## Calculated Nutrition Targets
 
-| Decision | Choice | Reason |
-|----------|--------|--------|
-| Pantry staples | Yes - configurable list | Hide items always in stock from shopping |
-| Shared vs separate logging | Separate entries per person | Even same meal, different portions |
-| Recipe ratings | Thumbs up/down | Simple, optional reason only if useful |
-| Pre-generation constraints | Full support | User will use often to guide AI |
-| Calorie entry | Calculate from body stats | Proper nutrition app, auto-adjusts |
-| Macro approach | Galveston phases for both | Simplicity, eating together |
+Targets calculated from body stats, auto-update when weight changes.
+
+**BMR (Mifflin-St Jeor):**
+- Women: (10 × weight_kg) + (6.25 × height_cm) - (5 × age) - 161
+- Men: (10 × weight_kg) + (6.25 × height_cm) - (5 × age) + 5
+
+**TDEE:** BMR × activity multiplier (Moderate = 1.55)
+
+**Goal adjustment:**
+- Lose: TDEE - 500
+- Maintain: TDEE
+- Gain: TDEE + 300
+
+**Macros:** From phase ratios applied to daily calories
+
+---
+
+## Technical Stack
+
+| Layer | Technology |
+|-------|------------|
+| Framework | Next.js 14 (App Router) |
+| Styling | Tailwind CSS |
+| Database | Supabase (PostgreSQL) |
+| Auth | Supabase Auth (future) |
+| AI | Claude API (Anthropic) |
+| Hosting | Vercel |
+| State | React Context |
+
+---
+
+## File Structure
+
+```
+adaptive-meal-builder/
+├── src/
+│   ├── app/
+│   │   ├── page.js              # Home → WeekView
+│   │   ├── layout.js            # App shell with sidebar
+│   │   ├── shopping/page.js     # Shopping list view
+│   │   └── api/
+│   │       └── generate-meals/route.js
+│   ├── components/
+│   │   ├── Sidebar.jsx          # Navigation
+│   │   ├── UserSelector.js      # User picker
+│   │   ├── WeekView.jsx         # Main week display
+│   │   ├── DayStrip.jsx         # Mon-Sun tabs
+│   │   ├── MealCard.jsx         # Individual meal
+│   │   ├── GenerateButton.jsx   # Generate controls
+│   │   ├── DayTotals.jsx        # Macro progress
+│   │   └── ShoppingListView.jsx # Shopping list
+│   ├── context/
+│   │   └── UserContext.js       # Selected user state
+│   ├── lib/
+│   │   ├── supabase.js          # Database client
+│   │   └── nutrition.js         # Calculation functions
+│   └── styles/
+│       └── globals.css
+├── docs/
+│   ├── PROJECT-SPEC.md          # This file
+│   ├── PROJECT-STATUS.md        # Current progress
+│   ├── COMPONENT-STRUCTURE.md   # Component breakdown
+│   └── LEARNING-REFERENCE.md    # Session notes
+└── package.json
+```
 
 ---
 
@@ -420,13 +387,13 @@ App is "done enough" when you can:
 
 | Phase | Status | Notes |
 |-------|--------|-------|
-| 1.1 Ingredients Database | ✅ Complete | 171 foods loaded |
-| 1.2 React Fundamentals | ✅ Complete | Components, props, state |
-| 1.3 Search & Filter | ✅ Complete | Working ingredient browser |
-| 2.0 Project Spec | ✅ Complete | This document |
-| 2.1 Database Schema | 🔜 Next | Create all tables |
-| 2.2 User Profiles | ⏳ Pending | Insert Ian + Rhonda |
+| Days 1-3: Foundation | ✅ Complete | 171 ingredients, React components, Supabase |
+| Day 4 Session 1: Scope | ✅ Complete | Revised to week-based structure |
+| Day 4 Session 2: Build | 🔜 Next | Create new components |
+| Days 5-7: Core Features | ⏳ Pending | Week view, generation, shopping |
+| Days 8-9: Polish | ⏳ Pending | Styling, edge cases |
+| Day 10: Ship | ⏳ Pending | Deploy and test |
 
 ---
 
-*Last updated: 3 December 2025*
+*Last updated: 4 December 2025 - Day 4 Session 1*
