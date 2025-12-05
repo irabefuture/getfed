@@ -2,39 +2,36 @@
 
 import { useState } from 'react'
 import { UserProvider } from '@/context/UserContext'
-import Sidebar from '@/components/Sidebar'
+import { DesktopSidebar, MobileBottomNav, MobileHeader } from '@/components/Sidebar'
 import WeekView from '@/components/WeekView'
+import RecipesView from '@/components/RecipesView'
+import ShoppingListView from '@/components/ShoppingListView'
+import SettingsView from '@/components/SettingsView'
+import AppSettingsView from '@/components/AppSettingsView'
 
 export default function Home() {
-  const [activeView, setActiveView] = useState('this-week')
-
-  const handleNavigate = (viewId) => {
-    setActiveView(viewId)
-  }
+  const [activeView, setActiveView] = useState('planner')
 
   return (
     <UserProvider>
       <div className="min-h-screen bg-background">
-        {/* Sidebar */}
-        <Sidebar activeView={activeView} onNavigate={handleNavigate} />
+        {/* Desktop Sidebar */}
+        <DesktopSidebar activeView={activeView} onNavigate={setActiveView} />
         
-        {/* Main Content - offset by sidebar width */}
-        <main className="ml-64 min-h-screen flex">
-          {activeView === 'this-week' && <WeekView weekOffset={0} />}
-          {activeView === 'next-week' && <WeekView weekOffset={1} />}
-          {activeView === 'shopping' && (
-            <div className="flex-1 p-6">
-              <h1 className="text-2xl font-bold mb-4">Shopping List</h1>
-              <p className="text-muted-foreground">Coming soon...</p>
-            </div>
-          )}
-          {activeView === 'settings' && (
-            <div className="flex-1 p-6">
-              <h1 className="text-2xl font-bold mb-4">Settings</h1>
-              <p className="text-muted-foreground">Coming soon...</p>
-            </div>
-          )}
+        {/* Mobile Header */}
+        <MobileHeader />
+        
+        {/* Main Content */}
+        <main className="md:ml-64 min-h-screen pt-14 pb-20 md:pt-0 md:pb-0">
+          {activeView === 'planner' && <WeekView />}
+          {activeView === 'recipes' && <RecipesView />}
+          {activeView === 'shopping' && <ShoppingListView />}
+          {activeView === 'family' && <SettingsView />}
+          {activeView === 'settings' && <AppSettingsView />}
         </main>
+        
+        {/* Mobile Bottom Nav */}
+        <MobileBottomNav activeView={activeView} onNavigate={setActiveView} />
       </div>
     </UserProvider>
   )

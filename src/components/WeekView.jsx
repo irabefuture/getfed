@@ -1,218 +1,494 @@
 'use client'
 
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useEffect, useRef } from 'react'
 import { useUser } from '@/context/UserContext'
 import { Button } from '@/components/ui/button'
-import { 
-  getWeekStart, 
-  getWeekDates, 
-  formatWeekRange, 
+import {
+  getDatesFromStart,
+  formatDateRange,
   formatDayTab,
   formatDayHeader,
   isSameDay,
   toISODate
 } from '@/lib/dates'
-import { Loader2 } from 'lucide-react'
+import { generateDayMeals, getAlternativesForSlot } from '@/lib/mealPlanner'
+import {
+  generateSmartWeek,
+  generateSmartWeekForHousehold,
+  calculateMemberPortion,
+  calculateMemberDayTotals,
+  formatPortion
+} from '@/lib/smartPlanner'
+import { generateShoppingList, saveShoppingList, loadShoppingList, generateMealPlanHash } from '@/lib/shoppingList'
+import { RefreshCw, X, Clock, ShoppingCart, Check, AlertCircle, Sparkles, Loader2, ChevronLeft, ChevronRight } from 'lucide-react'
 
 // Meal slots for the day (16:8 fasting window: 12:00-20:00)
 const MEAL_SLOTS = [
   { id: 'lunch', label: 'Lunch', icon: '🥗', time: '12:00' },
-  { id: 'afternoon_snack', label: 'Afternoon Snack', icon: '🍎', time: '15:00' },
+  { id: 'snack_afternoon', label: 'Afternoon Snack', icon: '🍎', time: '15:00' },
   { id: 'dinner', label: 'Dinner', icon: '🍽️', time: '18:00' },
-  { id: 'evening_snack', label: 'Evening Snack', icon: '🫐', time: '19:30' },
+  { id: 'snack_evening', label: 'Evening Snack', icon: '🫐', time: '19:30' },
 ]
 
-// Transform API meal to our UI format
-function transformMeal(apiMeal, slot, date, servings) {
-  return {
-    name: apiMeal.name,
-    description: apiMeal.description,
-    slot: slot,
-    date: date,
-    servings: apiMeal.serves || servings,
-    prepTime: apiMeal.prep_time_mins,
-    cookTime: apiMeal.cook_time_mins,
-    // Flatten per_serve macros for easier access
-    calories: apiMeal.per_serve?.calories || 0,
-    protein: apiMeal.per_serve?.protein_g || 0,
-    fat: apiMeal.per_serve?.fat_g || 0,
-    carbs: apiMeal.per_serve?.carbs_g || 0,
-    // Transform ingredients: { id, name, grams } → { quantity, unit, name }
-    ingredients: (apiMeal.ingredients || []).map(ing => ({
-      name: ing.name,
-      quantity: ing.grams,
-      unit: 'g'
-    })),
-    // Keep instructions as-is (string with \n)
-    instructions: apiMeal.instructions,
-  }
-}
+// Number of days to show in slider
+const VISIBLE_DAYS = 7
 
-export default function WeekView({ weekOffset = 0 }) {
-  const { user, targets } = useUser()
+export default function WeekView() {
+  const {
+    user,
+    targets,
+    household,
+    members,
+    activeMember,
+    setActiveMember,
+    isHouseholdMode,
+    householdDietaryRestrictions
+  } = useUser()
   
-  // Calculate week dates
-  const today = new Date()
-  const weekStart = useMemo(() => {
-    const start = getWeekStart(today)
-    start.setDate(start.getDate() + (weekOffset * 7))
-    return start
-  }, [weekOffset])
+  // Today is always the starting point
+  const today = useMemo(() => {
+    const d = new Date()
+    d.setHours(0, 0, 0, 0)
+    return d
+  }, [])
   
-  const weekDates = useMemo(() => getWeekDates(weekStart), [weekStart])
+  // Generate dates starting from today
+  const allDates = useMemo(() => getDatesFromStart(today, VISIBLE_DAYS), [today])
   
-  // State
-  const [selectedDate, setSelectedDate] = useState(() => {
-    // Default to today if in this week, otherwise Monday
-    if (weekOffset === 0) {
-      return today
+  // LocalStorage key for this user's meals
+  const storageKey = user ? `meal-plan-${user.id}` : 'meal-plan-guest'
+  
+  // Refs for scrolling
+  const scrollContainerRef = useRef(null)
+  
+  // State - initialize with defaults, hydrate in useEffect to avoid SSR mismatch
+  const [selectedDate, setSelectedDate] = useState(today)
+  const [meals, setMeals] = useState({})
+  const [isHydrated, setIsHydrated] = useState(false)
+  const [selectedForGeneration, setSelectedForGeneration] = useState([]) // Date keys selected for Smart Generate
+  
+  // Hydrate from localStorage after mount (avoids SSR mismatch)
+  useEffect(() => {
+    setSelectedDate(today)
+    
+    // Default: select first 7 days for generation
+    const defaultSelected = allDates.slice(0, 7).map(d => toISODate(d))
+    setSelectedForGeneration(defaultSelected)
+    
+    // Load meals from localStorage
+    if (storageKey) {
+      try {
+        const saved = localStorage.getItem(storageKey)
+        if (saved) {
+          setMeals(JSON.parse(saved))
+        }
+      } catch (e) {
+        console.error('Failed to load meals from localStorage:', e)
+      }
     }
-    return weekStart
-  })
-  const [meals, setMeals] = useState({}) // keyed by ISO date, then slot
+    
+    setIsHydrated(true)
+  }, [])
+  
+  const [swappingSlot, setSwappingSlot] = useState(null)
+  const [justCommitted, setJustCommitted] = useState(false)
+  const [committedHash, setCommittedHash] = useState(null)
   const [isGenerating, setIsGenerating] = useState(false)
-  const [servings, setServings] = useState(2)
+  const [generationError, setGenerationError] = useState(null)
+  
+  // Load committed hash on mount
+  useEffect(() => {
+    if (user) {
+      const saved = loadShoppingList(user.id)
+      if (saved?.mealPlanHash) {
+        setCommittedHash(saved.mealPlanHash)
+      }
+    }
+  }, [user?.id])
+  
+  // Save to localStorage whenever meals change
+  const saveMeals = (newMeals) => {
+    setMeals(newMeals)
+    if (typeof window !== 'undefined') {
+      try {
+        localStorage.setItem(storageKey, JSON.stringify(newMeals))
+      } catch (e) {
+        console.error('Failed to save meals to localStorage:', e)
+      }
+    }
+  }
+  
+  // Reload from localStorage when user changes
+  useEffect(() => {
+    if (isHydrated && user) {
+      try {
+        const saved = localStorage.getItem(storageKey)
+        setMeals(saved ? JSON.parse(saved) : {})
+      } catch (e) {
+        console.error('Failed to reload meals:', e)
+      }
+    }
+  }, [user?.id, isHydrated, storageKey])
   
   // Get meals for selected day
   const selectedDateKey = toISODate(selectedDate)
   const dayMeals = meals[selectedDateKey] || {}
   
+  // Get all used recipe IDs (for variety)
+  const usedRecipeIds = useMemo(() => {
+    const ids = []
+    Object.values(meals).forEach(dayMeals => {
+      Object.values(dayMeals).forEach(recipe => {
+        if (recipe?.id && !ids.includes(recipe.id)) {
+          ids.push(recipe.id)
+        }
+      })
+    })
+    return ids
+  }, [meals])
+  
   // Calculate day totals
   const dayTotals = useMemo(() => {
+    if (isHouseholdMode && activeMember) {
+      return calculateMemberDayTotals(dayMeals, activeMember)
+    }
+
     const totals = { calories: 0, protein: 0, fat: 0, carbs: 0 }
-    Object.values(dayMeals).forEach(meal => {
-      if (meal) {
-        totals.calories += meal.calories || 0
-        totals.protein += meal.protein || 0
-        totals.fat += meal.fat || 0
-        totals.carbs += meal.carbs || 0
+    Object.values(dayMeals).forEach(recipe => {
+      if (recipe?.per_serve) {
+        totals.calories += recipe.per_serve.calories || 0
+        totals.protein += recipe.per_serve.protein_g || 0
+        totals.fat += recipe.per_serve.fat_g || 0
+        totals.carbs += recipe.per_serve.carbs_g || 0
       }
     })
     return totals
-  }, [dayMeals])
+  }, [dayMeals, isHouseholdMode, activeMember])
 
-  // Generate meals for the SELECTED DAY (not whole week - more reliable)
-  const handleGenerate = async () => {
-    if (!user) return
+  // Toggle a date for generation selection
+  const toggleDateSelection = (dateKey, e) => {
+    e.stopPropagation() // Don't trigger the view selection
     
-    setIsGenerating(true)
-    try {
-      const response = await fetch('/api/generate-meals', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          constraints: '', // Could add user constraints here
-          serves: servings,
-          mealCount: 4, // 4 meals for the day
-          userTargets: targets,
-        }),
-      })
-      
-      const data = await response.json()
-      
-      if (data.success && data.meals) {
-        // Assign meals to the selected day's slots
-        const dateKey = toISODate(selectedDate)
-        const dayMeals = {}
-        
-        MEAL_SLOTS.forEach((slot, index) => {
-          if (index < data.meals.length) {
-            dayMeals[slot.id] = transformMeal(
-              data.meals[index],
-              slot.id,
-              dateKey,
-              servings
-            )
-          }
-        })
-        
-        // Merge with existing meals (preserves other days)
-        setMeals(prev => ({
-          ...prev,
-          [dateKey]: dayMeals
-        }))
-      } else if (data.error) {
-        console.error('API error:', data.error)
-        alert('Failed to generate meals. Try again.')
+    setSelectedForGeneration(prev => {
+      if (prev.includes(dateKey)) {
+        return prev.filter(d => d !== dateKey)
+      } else {
+        // Keep sorted by date
+        const newSelection = [...prev, dateKey].sort()
+        return newSelection
       }
+    })
+  }
+  
+  // Select all / clear all
+  const selectAllDays = () => {
+    setSelectedForGeneration(allDates.map(d => toISODate(d)))
+  }
+  
+  const clearAllDays = () => {
+    setSelectedForGeneration([])
+  }
+
+  // Generate meals using AI (for selected days)
+  const handleSmartGenerateWeek = async () => {
+    if (!user || !targets) {
+      setGenerationError('Please set up your profile first')
+      return
+    }
+    
+    if (selectedForGeneration.length === 0) {
+      setGenerationError('Please select at least one day to generate')
+      return
+    }
+
+    setIsGenerating(true)
+    setGenerationError(null)
+
+    try {
+      let result
+
+      if (isHouseholdMode && members.length > 0) {
+        result = await generateSmartWeekForHousehold(members, {
+          batchFriendly: true,
+          ...householdDietaryRestrictions,
+        })
+      } else {
+        result = await generateSmartWeek(user, targets, {
+          dairyFree: false,
+          glutenFree: false,
+          batchFriendly: true,
+        })
+      }
+
+      // Apply generated meals only to selected days
+      const newMeals = { ...meals }
+      selectedForGeneration.forEach((dateKey, index) => {
+        // Use modulo in case we have more selected days than generated
+        const planIndex = index % result.weekPlan.length
+        if (result.weekPlan[planIndex]?.meals) {
+          newMeals[dateKey] = result.weekPlan[planIndex].meals
+        }
+      })
+
+      saveMeals(newMeals)
+      setSwappingSlot(null)
+
+      console.log('Smart generation cost:', result.usage?.estimated_cost)
+
     } catch (error) {
-      console.error('Failed to generate meals:', error)
-      alert('Failed to generate meals. Check console for details.')
+      console.error('Smart generation failed:', error)
+      setGenerationError(error.message || 'Failed to generate meals')
     } finally {
       setIsGenerating(false)
     }
   }
+  
+  // Swap a meal in a slot
+  const handleSwapMeal = (slotId, newRecipe) => {
+    saveMeals({
+      ...meals,
+      [selectedDateKey]: {
+        ...meals[selectedDateKey],
+        [slotId]: newRecipe
+      }
+    })
+    setSwappingSlot(null)
+  }
+  
+  // Clear a slot
+  const handleClearSlot = (slotId) => {
+    const newDayMeals = { ...meals[selectedDateKey] }
+    delete newDayMeals[slotId]
+    saveMeals({
+      ...meals,
+      [selectedDateKey]: newDayMeals
+    })
+    setSwappingSlot(null)
+  }
+  
+  // Get alternatives for current swap
+  const alternatives = useMemo(() => {
+    if (!swappingSlot) return []
+    const currentRecipe = dayMeals[swappingSlot]
+    return getAlternativesForSlot(
+      swappingSlot, 
+      currentRecipe?.id, 
+      usedRecipeIds
+    )
+  }, [swappingSlot, dayMeals, usedRecipeIds])
+  
+  // Count meals planned in selected days
+  const selectedMealCount = useMemo(() => {
+    let count = 0
+    selectedForGeneration.forEach(dateKey => {
+      count += Object.keys(meals[dateKey] || {}).length
+    })
+    return count
+  }, [meals, selectedForGeneration])
+  
+  // Calculate current meal plan hash (for selected days)
+  const currentHash = useMemo(() => {
+    return generateMealPlanHash(meals, selectedForGeneration)
+  }, [meals, selectedForGeneration])
+  
+  // Check if shopping list is stale
+  const isListStale = committedHash && currentHash !== committedHash
+  
+  // Get dates for selected generation range (for display)
+  const selectedDatesForDisplay = useMemo(() => {
+    if (selectedForGeneration.length === 0) return null
+    const sorted = [...selectedForGeneration].sort()
+    const first = new Date(sorted[0] + 'T00:00:00')
+    const last = new Date(sorted[sorted.length - 1] + 'T00:00:00')
+    return { first, last }
+  }, [selectedForGeneration])
+  
+  // Commit to shopping list (for selected days)
+  const handleCommitToShoppingList = () => {
+    if (!user) return
+    if (selectedForGeneration.length === 0) return
+
+    const shoppingList = isHouseholdMode && members.length > 0
+      ? generateShoppingList(meals, selectedForGeneration, members)
+      : generateShoppingList(meals, selectedForGeneration, 1)
+
+    const weekLabel = selectedDatesForDisplay 
+      ? formatDateRange(selectedDatesForDisplay.first, selectedDatesForDisplay.last)
+      : 'Selected days'
+    const hash = generateMealPlanHash(meals, selectedForGeneration)
+
+    saveShoppingList(user.id, shoppingList, weekLabel, hash)
+    setCommittedHash(hash)
+
+    setJustCommitted(true)
+    setTimeout(() => setJustCommitted(false), 2000)
+  }
+  
+  // Scroll handlers for day strip
+  const scrollLeft = () => {
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.scrollLeft -= 200
+    }
+  }
+  
+  const scrollRight = () => {
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.scrollLeft += 200
+    }
+  }
 
   return (
-    <div className="flex-1 p-6">
-      {/* Week Header */}
-      <div className="flex items-center justify-between mb-6">
-        <div>
-          <h1 className="text-2xl font-bold">
-            {weekOffset === 0 ? 'This Week' : 'Next Week'}
-          </h1>
-          <p className="text-muted-foreground">
-            {formatWeekRange(weekStart)}
-          </p>
+    <div className="flex-1 p-4 md:p-6">
+      {/* Header */}
+      <div className="mb-6">
+        <div className="flex items-center justify-between mb-1">
+          <h1 className="text-xl md:text-2xl font-bold">Planner</h1>
+          <div className="flex gap-2 text-xs">
+            <button 
+              onClick={selectAllDays}
+              className="text-primary hover:underline"
+            >
+              Select all
+            </button>
+            <span className="text-muted-foreground">·</span>
+            <button 
+              onClick={clearAllDays}
+              className="text-primary hover:underline"
+            >
+              Clear
+            </button>
+          </div>
+        </div>
+        <p className="text-sm text-muted-foreground">
+          {selectedForGeneration.length > 0 && selectedDatesForDisplay
+            ? `${selectedForGeneration.length} days selected · ${formatDateRange(selectedDatesForDisplay.first, selectedDatesForDisplay.last)}`
+            : 'Select days to generate'
+          }
+        </p>
+      </div>
+
+      {/* Error message */}
+      {generationError && (
+        <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded-lg text-red-700 text-sm flex items-center gap-2">
+          <AlertCircle className="h-4 w-4" />
+          {generationError}
+          <button
+            onClick={() => setGenerationError(null)}
+            className="ml-auto text-red-500 hover:text-red-700"
+          >
+            <X className="h-4 w-4" />
+          </button>
+        </div>
+      )}
+      
+      {/* Day Strip + Action Buttons */}
+      <div className="flex items-stretch gap-2 mb-6 pb-4 border-b">
+        {/* Day cards */}
+        <div className="flex gap-1.5 flex-1">
+          {allDates.map((date) => {
+            const dateKey = toISODate(date)
+            const isViewing = isSameDay(date, selectedDate)
+            const isToday = isSameDay(date, today)
+            const isSelectedForGen = selectedForGeneration.includes(dateKey)
+            const dayMealCount = Object.keys(meals[dateKey] || {}).length
+            const dayOfWeek = date.getDay()
+            const isWeekend = dayOfWeek === 0 || dayOfWeek === 6
+            
+            return (
+              <div
+                key={dateKey}
+                className={`flex-1 min-w-0 rounded-lg overflow-hidden border transition-all ${
+                  isViewing 
+                    ? 'bg-primary text-primary-foreground border-primary' 
+                    : isSelectedForGen
+                      ? 'bg-muted border-foreground/30 shadow-inner'
+                      : isWeekend
+                        ? 'bg-muted/60 border-border hover:border-muted-foreground/50'
+                        : 'bg-card border-border hover:border-muted-foreground/50'
+                }`}
+              >
+                {/* Clickable date area */}
+                <button
+                  onClick={() => {
+                    setSelectedDate(date)
+                    setSwappingSlot(null)
+                  }}
+                  className="w-full py-2 px-1 text-center"
+                >
+                  <div className="text-xs font-medium truncate">{formatDayTab(date)}</div>
+                  {dayMealCount > 0 ? (
+                    <div className={`text-[10px] mt-0.5 ${isViewing ? 'text-primary-foreground/70' : 'text-muted-foreground'}`}>
+                      {dayMealCount} meals
+                    </div>
+                  ) : isToday && !isViewing ? (
+                    <div className="text-[10px] mt-0.5 text-primary font-medium">Today</div>
+                  ) : (
+                    <div className="text-[10px] mt-0.5 text-transparent">-</div>
+                  )}
+                </button>
+                
+                {/* Select button at bottom */}
+                <button
+                  onClick={(e) => toggleDateSelection(dateKey, e)}
+                  className={`w-full py-1 text-[10px] font-medium transition-colors border-t ${
+                    isSelectedForGen
+                      ? isViewing
+                        ? 'bg-primary-foreground/20 text-primary-foreground border-primary-foreground/20'
+                        : 'bg-foreground/10 text-foreground border-foreground/10'
+                      : isViewing
+                        ? 'bg-primary-foreground/10 text-primary-foreground/70 border-primary-foreground/20 hover:bg-primary-foreground/20'
+                        : 'bg-muted/30 text-muted-foreground border-border hover:bg-muted hover:text-foreground'
+                  }`}
+                >
+                  {isSelectedForGen ? '✓' : 'Select'}
+                </button>
+              </div>
+            )
+          })}
         </div>
         
-        <div className="flex items-center gap-3">
-          <select 
-            value={servings}
-            onChange={(e) => setServings(Number(e.target.value))}
-            className="border rounded-md px-3 py-2 text-sm bg-background"
-          >
-            <option value={1}>1 serving</option>
-            <option value={2}>2 servings</option>
-            <option value={4}>4 servings</option>
-          </select>
-          
+        {/* Action Buttons */}
+        <div className="flex flex-col gap-1.5 shrink-0">
           <Button 
-            onClick={handleGenerate}
-            disabled={isGenerating || !user}
-            className="min-w-[140px]"
+            size="sm"
+            onClick={handleSmartGenerateWeek}
+            disabled={isGenerating || !user || selectedForGeneration.length === 0}
+            className="h-auto py-2 px-3 bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white border-0 text-xs"
           >
             {isGenerating ? (
-              <>
-                <Loader2 className="h-4 w-4 mr-2 animate-spin" />
-                Generating...
-              </>
+              <Loader2 className="h-4 w-4 animate-spin" />
             ) : (
-              'Generate Day'
+              <>
+                <Sparkles className="h-3.5 w-3.5 mr-1" />
+                Generate
+              </>
+            )}
+          </Button>
+          
+          <Button 
+            size="sm"
+            variant={justCommitted ? "default" : isListStale ? "default" : "outline"}
+            onClick={handleCommitToShoppingList}
+            disabled={selectedMealCount === 0}
+            className={`h-auto py-2 px-3 text-xs ${
+              justCommitted 
+                ? "bg-green-600 hover:bg-green-600" 
+                : isListStale 
+                  ? "bg-amber-500 hover:bg-amber-600" 
+                  : ""
+            }`}
+          >
+            {justCommitted ? (
+              <><Check className="h-3.5 w-3.5 mr-1" />Done</>
+            ) : isListStale ? (
+              <><AlertCircle className="h-3.5 w-3.5 mr-1" />Update</>
+            ) : committedHash ? (
+              <><Check className="h-3.5 w-3.5 mr-1" />Ready</>
+            ) : (
+              <><ShoppingCart className="h-3.5 w-3.5 mr-1" />Commit</>
             )}
           </Button>
         </div>
-      </div>
-      
-      {/* Day Strip */}
-      <div className="flex gap-2 mb-6 border-b pb-4">
-        {weekDates.map(date => {
-          const isSelected = isSameDay(date, selectedDate)
-          const isToday = isSameDay(date, today)
-          const dateKey = toISODate(date)
-          const hasMeals = meals[dateKey] && Object.keys(meals[dateKey]).length > 0
-          
-          return (
-            <button
-              key={dateKey}
-              onClick={() => setSelectedDate(date)}
-              className={`flex-1 py-3 px-2 rounded-lg text-center transition-colors ${
-                isSelected 
-                  ? 'bg-primary text-primary-foreground' 
-                  : isToday
-                    ? 'bg-primary/10 hover:bg-primary/20'
-                    : 'hover:bg-accent'
-              }`}
-            >
-              <div className="text-sm font-medium">{formatDayTab(date)}</div>
-              {hasMeals && (
-                <div className={`text-xs mt-1 ${isSelected ? 'text-primary-foreground/70' : 'text-muted-foreground'}`}>
-                  {Object.keys(meals[dateKey]).length} meals
-                </div>
-              )}
-            </button>
-          )
-        })}
       </div>
       
       {/* Day Detail */}
@@ -222,43 +498,84 @@ export default function WeekView({ weekOffset = 0 }) {
         {/* Meal Slots */}
         <div className="space-y-4">
           {MEAL_SLOTS.map(slot => {
-            const meal = dayMeals[slot.id]
+            const recipe = dayMeals[slot.id]
+            const isSwapping = swappingSlot === slot.id
             
             return (
-              <MealSlotCard 
-                key={slot.id}
-                slot={slot}
-                meal={meal}
-              />
+              <div key={slot.id}>
+                <MealSlotCard 
+                  slot={slot}
+                  recipe={recipe}
+                  onSwap={() => setSwappingSlot(isSwapping ? null : slot.id)}
+                  onClear={() => handleClearSlot(slot.id)}
+                  isSwapping={isSwapping}
+                />
+                
+                {/* Alternatives Panel */}
+                {isSwapping && (
+                  <div className="mt-2 p-4 bg-muted/30 rounded-lg border">
+                    <div className="flex items-center justify-between mb-3">
+                      <h4 className="text-sm font-medium">Choose alternative:</h4>
+                      <button 
+                        onClick={() => setSwappingSlot(null)}
+                        className="text-muted-foreground hover:text-foreground"
+                      >
+                        <X className="h-4 w-4" />
+                      </button>
+                    </div>
+                    
+                    {alternatives.length > 0 ? (
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+                        {alternatives.slice(0, 6).map(alt => (
+                          <button
+                            key={alt.id}
+                            onClick={() => handleSwapMeal(slot.id, alt)}
+                            className="text-left p-3 bg-card border rounded-lg hover:border-primary transition-colors"
+                          >
+                            <div className="font-medium text-sm">{alt.name}</div>
+                            <div className="text-xs text-muted-foreground mt-1">
+                              {alt.per_serve?.calories} cal · {alt.total_time_mins} min
+                            </div>
+                          </button>
+                        ))}
+                      </div>
+                    ) : (
+                      <p className="text-sm text-muted-foreground">
+                        No alternatives available. Try generating new meals.
+                      </p>
+                    )}
+                  </div>
+                )}
+              </div>
             )
           })}
         </div>
         
-        {/* Day Totals */}
-        {Object.keys(dayMeals).length > 0 && targets && (
-          <div className="mt-6 p-4 bg-muted/30 rounded-lg">
-            <h3 className="text-sm font-medium text-muted-foreground mb-3">Day Totals</h3>
-            <div className="grid grid-cols-4 gap-4">
-              <MacroProgress 
-                label="Calories" 
-                current={dayTotals.calories} 
+        {/* Day Totals - Single User (non-household mode) */}
+        {Object.keys(dayMeals).length > 0 && !isHouseholdMode && targets && (
+          <div className="mt-4 md:mt-6 p-3 md:p-4 bg-muted/30 rounded-lg">
+            <h3 className="text-xs md:text-sm font-medium text-muted-foreground mb-2 md:mb-3">Day Totals</h3>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
+              <MacroProgress
+                label="Calories"
+                current={dayTotals.calories}
                 target={targets.dailyCalories}
               />
-              <MacroProgress 
-                label="Protein" 
-                current={dayTotals.protein} 
+              <MacroProgress
+                label="Protein"
+                current={dayTotals.protein}
                 target={targets.protein}
                 unit="g"
               />
-              <MacroProgress 
-                label="Fat" 
-                current={dayTotals.fat} 
+              <MacroProgress
+                label="Fat"
+                current={dayTotals.fat}
                 target={targets.fat}
                 unit="g"
               />
-              <MacroProgress 
-                label="Carbs" 
-                current={dayTotals.carbs} 
+              <MacroProgress
+                label="Carbs"
+                current={dayTotals.carbs}
                 target={targets.carbs}
                 unit="g"
               />
@@ -271,45 +588,78 @@ export default function WeekView({ weekOffset = 0 }) {
 }
 
 // Sub-component: Meal slot card
-function MealSlotCard({ slot, meal }) {
+function MealSlotCard({ slot, recipe, onSwap, onClear, isSwapping }) {
   const [isExpanded, setIsExpanded] = useState(false)
   
-  if (!meal) {
+  if (!recipe) {
     return (
-      <div className="border border-dashed rounded-lg p-4 text-center text-muted-foreground">
-        <span className="text-xl mr-2">{slot.icon}</span>
-        <span className="text-sm">{slot.label} - Not planned</span>
+      <div className="border border-dashed rounded-lg p-4 flex items-center justify-between">
+        <div className="text-muted-foreground">
+          <span className="text-xl mr-2">{slot.icon}</span>
+          <span className="text-sm">{slot.label} - Not planned</span>
+        </div>
+        <Button variant="ghost" size="sm" onClick={onSwap}>
+          Add
+        </Button>
       </div>
     )
   }
   
+  const macros = recipe.per_serve || {}
+  
   return (
-    <div className="border rounded-lg overflow-hidden">
+    <div className={`border rounded-lg overflow-hidden ${isSwapping ? 'border-primary' : ''}`}>
       {/* Header */}
       <div className="p-4 bg-card">
         <div className="flex items-start justify-between">
-          <div>
+          <div className="flex-1">
             <div className="flex items-center gap-2 text-xs text-muted-foreground mb-1">
               <span>{slot.icon}</span>
               <span className="uppercase tracking-wide">{slot.label}</span>
               <span>• {slot.time}</span>
+              {recipe.total_time_mins && (
+                <span className="flex items-center gap-1">
+                  <Clock className="h-3 w-3" />
+                  {recipe.total_time_mins} min
+                </span>
+              )}
             </div>
-            <h3 className="font-medium">{meal.name}</h3>
+            <h3 className="font-medium">{recipe.name}</h3>
+            <p className="text-sm text-muted-foreground mt-1 line-clamp-1">
+              {recipe.description}
+            </p>
           </div>
-          <div className="text-right text-sm">
-            <div className="font-medium">{meal.calories} cal</div>
+          <div className="text-right text-sm ml-4">
+            <div className="font-medium">{macros.calories} cal</div>
             <div className="text-xs text-muted-foreground">
-              {meal.protein}g P • {meal.fat}g F • {meal.carbs}g C
+              {macros.protein_g}P · {macros.fat_g}F · {macros.carbs_g}C
             </div>
           </div>
         </div>
         
-        <button 
-          onClick={() => setIsExpanded(!isExpanded)}
-          className="mt-2 text-sm text-primary hover:underline"
-        >
-          {isExpanded ? 'Hide recipe ▲' : 'View recipe ▼'}
-        </button>
+        {/* Actions row */}
+        <div className="flex items-center gap-2 mt-3">
+          <button 
+            onClick={() => setIsExpanded(!isExpanded)}
+            className="text-sm text-primary hover:underline"
+          >
+            {isExpanded ? 'Hide recipe ▲' : 'View recipe ▼'}
+          </button>
+          <span className="text-muted-foreground/30">|</span>
+          <button 
+            onClick={onSwap}
+            className={`text-sm hover:underline ${isSwapping ? 'text-primary font-medium' : 'text-muted-foreground'}`}
+          >
+            <RefreshCw className="h-3 w-3 inline mr-1" />
+            Swap
+          </button>
+          <button 
+            onClick={onClear}
+            className="text-sm text-muted-foreground hover:text-destructive hover:underline"
+          >
+            Remove
+          </button>
+        </div>
       </div>
       
       {/* Expanded Recipe */}
@@ -317,14 +667,13 @@ function MealSlotCard({ slot, meal }) {
         <div className="p-4 bg-muted/30 border-t space-y-4">
           {/* Ingredients */}
           <div>
-            <h4 className="text-sm font-medium mb-2">
-              Ingredients ({meal.servings || 1} serving{(meal.servings || 1) > 1 ? 's' : ''})
-            </h4>
+            <h4 className="text-sm font-medium mb-2">Ingredients</h4>
             <ul className="text-sm space-y-1">
-              {meal.ingredients?.map((ing, i) => (
+              {recipe.ingredients?.map((ing, i) => (
                 <li key={i} className="flex gap-2">
-                  <span className="text-muted-foreground">{ing.quantity}{ing.unit}</span>
+                  <span className="text-muted-foreground w-12">{ing.grams}g</span>
                   <span>{ing.name}</span>
+                  {ing.notes && <span className="text-muted-foreground">({ing.notes})</span>}
                 </li>
               ))}
             </ul>
@@ -332,16 +681,20 @@ function MealSlotCard({ slot, meal }) {
           
           {/* Instructions */}
           <div>
-            <h4 className="text-sm font-medium mb-2">Instructions</h4>
+            <h4 className="text-sm font-medium mb-2">Method</h4>
             <ol className="text-sm space-y-2 list-decimal list-inside">
-              {(typeof meal.instructions === 'string' 
-                ? meal.instructions.split('\n').filter(Boolean)
-                : meal.instructions || []
-              ).map((step, i) => (
-                <li key={i}>{step.replace(/^\d+\.\s*/, '')}</li>
+              {recipe.instructions?.map((step, i) => (
+                <li key={i}>{step}</li>
               ))}
             </ol>
           </div>
+          
+          {/* Batch notes */}
+          {recipe.batch_notes && (
+            <div className="text-sm text-muted-foreground italic">
+              💡 {recipe.batch_notes}
+            </div>
+          )}
         </div>
       )}
     </div>

@@ -103,11 +103,15 @@ export function isSameDay(date1, date2) {
 
 /**
  * Format date as ISO string for database (YYYY-MM-DD)
+ * Uses local timezone to avoid date shifting
  * @param {Date} date 
  * @returns {string}
  */
 export function toISODate(date) {
-  return date.toISOString().split('T')[0]
+  const year = date.getFullYear()
+  const month = String(date.getMonth() + 1).padStart(2, '0')
+  const day = String(date.getDate()).padStart(2, '0')
+  return `${year}-${month}-${day}`
 }
 
 /**
@@ -118,4 +122,39 @@ export function toISODate(date) {
 export function fromISODate(isoDate) {
   const [year, month, day] = isoDate.split('-').map(Number)
   return new Date(year, month - 1, day)
+}
+
+/**
+ * Get array of consecutive dates starting from a date
+ * @param {Date} startDate - First date
+ * @param {number} count - Number of days to include
+ * @returns {Date[]} - Array of dates
+ */
+export function getDatesFromStart(startDate, count = 14) {
+  const dates = []
+  for (let i = 0; i < count; i++) {
+    const date = new Date(startDate)
+    date.setDate(startDate.getDate() + i)
+    dates.push(date)
+  }
+  return dates
+}
+
+/**
+ * Format date range as "Dec 5-18" or "Dec 28 - Jan 10"
+ * @param {Date} startDate
+ * @param {Date} endDate
+ * @returns {string}
+ */
+export function formatDateRange(startDate, endDate) {
+  const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 
+                  'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+  
+  const startMonth = months[startDate.getMonth()]
+  const endMonth = months[endDate.getMonth()]
+  
+  if (startMonth === endMonth) {
+    return `${startMonth} ${startDate.getDate()}-${endDate.getDate()}`
+  }
+  return `${startMonth} ${startDate.getDate()} - ${endMonth} ${endDate.getDate()}`
 }

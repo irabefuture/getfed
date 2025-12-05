@@ -1,8 +1,9 @@
 'use client'
 
-import { createContext, useContext, useState, useEffect } from 'react'
+import { createContext, useContext, useState, useEffect, useMemo } from 'react'
 import { supabase } from '@/lib/supabase'
 import { calculateNutritionTargets } from '@/lib/nutrition'
+import { calculateMemberTargets } from './HouseholdContext'
 
 // 1. Create the Context
 const UserContext = createContext()
@@ -13,20 +14,31 @@ export function UserProvider({ children }) {
   const [user, setUser] = useState(null)
   const [loading, setLoading] = useState(true)
 
+  // Household state
+  const [household, setHousehold] = useState(null)
+  const [members, setMembers] = useState([])
+  const [activeMember, setActiveMember] = useState(null)
+
   // Fetch users from Supabase when component mounts
   useEffect(() => {
     async function fetchUsers() {
       const { data, error } = await supabase
         .from('users')
         .select('*')
-      
+
       if (error) {
         console.error('Error fetching users:', error)
       } else {
         setUsers(data)
         // Auto-select first user if none selected
         if (data.length > 0) {
-          setUser(data[0])
+          const selectedUser = data[0]
+          setUser(selectedUser)
+
+          // If user has household, fetch it
+          if (selectedUser.household_id) {
+            fetchHousehold(selectedUser.household_id)
+          }
         }
       }
       setLoading(false)
@@ -35,16 +47,99 @@ export function UserProvider({ children }) {
     fetchUsers()
   }, [])
 
-  // Calculate nutrition targets for current user
-  const targets = user ? calculateNutritionTargets(user) : null
+  // Fetch household and members
+  async function fetchHousehold(householdId) {
+    try {
+      // Fetch household
+      const { data: householdData, error: householdError } = await supabase
+        .from('households')
+        .select('*')
+        .eq('id', householdId)
+        .single()
+
+      if (householdError) throw householdError
+
+      setHousehold(householdData)
+
+      // Fetch members
+      const { data: memberData, error: membersError } = await supabase
+        .from('household_members')
+        .select('*')
+        .eq('household_id', householdId)
+        .order('is_primary', { ascending: false })
+
+      if (membersError) throw membersError
+
+      // Add calculated targets to each member
+      const membersWithTargets = (memberData || []).map(m => ({
+        ...m,
+        targets: calculateMemberTargets(m),
+      }))
+
+      setMembers(membersWithTargets)
+
+      // Set primary member as active
+      const primary = membersWithTargets.find(m => m.is_primary)
+      setActiveMember(primary || membersWithTargets[0] || null)
+
+    } catch (err) {
+      console.error('Error fetching household:', err)
+    }
+  }
+
+  // Calculate nutrition targets for current user (legacy)
+  // Now also considers active member if in household mode
+  const targets = useMemo(() => {
+    if (activeMember?.targets) {
+      return activeMember.targets
+    }
+    if (user) {
+      return calculateNutritionTargets(user)
+    }
+    return null
+  }, [user, activeMember])
+
+  // Check if we're in household mode
+  const isHouseholdMode = household !== null && members.length > 0
+
+  // Get combined dietary restrictions from all members
+  const householdDietaryRestrictions = useMemo(() => {
+    if (!members || members.length === 0) return {}
+    return {
+      dairyFree: members.some(m => m.dietary_restrictions?.dairy_free),
+      glutenFree: members.some(m => m.dietary_restrictions?.gluten_free),
+      nutFree: members.some(m => m.dietary_restrictions?.nut_free),
+      vegetarian: members.some(m => m.dietary_restrictions?.vegetarian),
+      vegan: members.some(m => m.dietary_restrictions?.vegan),
+    }
+  }, [members])
+
+  // Get most restrictive phase
+  const householdPhase = useMemo(() => {
+    if (!members || members.length === 0) return 1
+    return Math.min(...members.map(m => m.current_phase || 1))
+  }, [members])
 
   // What we're making available to other components
   const value = {
+    // Legacy user support
     users,
     user,
     setUser,
     targets,
-    loading
+    loading,
+
+    // Household support
+    household,
+    members,
+    activeMember,
+    setActiveMember,
+    isHouseholdMode,
+    householdDietaryRestrictions,
+    householdPhase,
+
+    // Refresh function
+    refreshHousehold: () => user?.household_id && fetchHousehold(user.household_id),
   }
 
   return (

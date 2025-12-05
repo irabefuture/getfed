@@ -1,0 +1,1456 @@
+{
+  "_metadata": {
+    "description": "Dinner main recipes extracted from Galveston Diet book",
+    "source": "galveston_book",
+    "created": "2025-12-05",
+    "status": "extracted",
+    "notes": "Converted to metric, AU ingredient names. For personal use."
+  },
+
+  "recipes": [
+    {
+      "id": "sesame-ginger-pork-green-beans",
+      "name": "Sesame Ginger Pork with Green Beans",
+      "description": "Asian-inspired pork strips with garlic, ginger, and green beans, finished with toasted sesame.",
+
+      "meal_type": "dinner",
+      "phase": [1, 2, 3],
+      "category": "pork",
+      "cuisine": "asian",
+      "tags": ["high-protein", "quick", "stir-fry"],
+
+      "batch_friendly": true,
+      "batch_notes": "Reheats well. Green beans may soften.",
+      "components": {
+        "reheatable": ["pork", "green beans"],
+        "fresh_only": []
+      },
+      "freezer_friendly": true,
+      "good_for_lunchbox": true,
+
+      "flavour_profile": ["umami", "pungent", "salty"],
+      "texture": ["soft", "crunchy"],
+      "temperature": "hot",
+
+      "difficulty": "easy",
+      "active_cooking": true,
+      "prep_time_mins": 10,
+      "cook_time_mins": 20,
+      "total_time_mins": 30,
+
+      "dietary": {
+        "dairy_free": true,
+        "gluten_free": false,
+        "nut_free": true,
+        "egg_free": true,
+        "vegetarian": false,
+        "vegan": false
+      },
+
+      "base_servings": 4,
+      "ingredients": [
+        { "id": "sesame-seeds", "name": "Sesame seeds", "grams": 35 },
+        { "id": "pork-loin", "name": "Boneless pork loin", "grams": 225, "notes": "cut into strips" },
+        { "id": "salt", "name": "Salt", "grams": 2 },
+        { "id": "black-pepper", "name": "Black pepper", "grams": 1 },
+        { "id": "coconut-oil", "name": "Coconut oil", "grams": 30 },
+        { "id": "garlic", "name": "Garlic", "grams": 16, "notes": "4 cloves, minced" },
+        { "id": "ginger", "name": "Fresh ginger", "grams": 10, "notes": "grated" },
+        { "id": "green-beans", "name": "Fresh green beans", "grams": 300, "notes": "trimmed" },
+        { "id": "tamari", "name": "Tamari", "grams": 10 },
+        { "id": "sesame-oil", "name": "Toasted sesame oil", "grams": 15 }
+      ],
+
+      "instructions": [
+        "Place the sesame seeds in a small frypan over medium heat and toast until fragrant and lightly browned.",
+        "Lightly coat a medium frypan with cooking spray, add the pork strips and cook for 6-8 minutes until lightly browned.",
+        "Season the pork with salt and pepper, then transfer to a plate.",
+        "Add the coconut oil to the frypan. When melted, add the garlic, ginger, and green beans. Saute for 6-8 minutes until beans are tender.",
+        "Add the pork strips back to the frypan and drizzle in the tamari. Toss to combine.",
+        "Transfer to plates, sprinkle with toasted sesame seeds, and drizzle with sesame oil."
+      ],
+
+      "per_serve": {
+        "calories": 280,
+        "protein_g": 18,
+        "fat_g": 20,
+        "carbs_g": 8,
+        "fibre_g": 3
+      },
+
+      "source": "galveston_book",
+      "source_ref": "p.186",
+
+      "created_at": "2025-12-05",
+      "updated_at": "2025-12-05",
+      "version": 1
+    },
+    {
+      "id": "capsicum-stuffed-turkey-cauliflower-rice",
+      "name": "Capsicum Stuffed with Turkey and Cauliflower Rice",
+      "description": "Red capsicum halves stuffed with spiced turkey mince and cauliflower rice, topped with melted cheddar.",
+
+      "meal_type": "dinner",
+      "phase": [1, 2, 3],
+      "category": "poultry",
+      "cuisine": "american",
+      "tags": ["low-carb", "high-protein", "comfort-food"],
+
+      "batch_friendly": true,
+      "batch_notes": "Stuffed capsicums reheat well. Can freeze unbaked.",
+      "components": {
+        "reheatable": ["stuffed capsicums"],
+        "fresh_only": []
+      },
+      "freezer_friendly": true,
+      "good_for_lunchbox": true,
+
+      "flavour_profile": ["umami", "spicy", "salty"],
+      "texture": ["soft", "chewy"],
+      "temperature": "hot",
+
+      "difficulty": "easy",
+      "active_cooking": true,
+      "prep_time_mins": 15,
+      "cook_time_mins": 25,
+      "total_time_mins": 40,
+
+      "dietary": {
+        "dairy_free": false,
+        "gluten_free": true,
+        "nut_free": true,
+        "egg_free": true,
+        "vegetarian": false,
+        "vegan": false
+      },
+
+      "base_servings": 4,
+      "ingredients": [
+        { "id": "coconut-oil", "name": "Coconut oil", "grams": 60 },
+        { "id": "turkey-mince", "name": "Lean turkey mince", "grams": 340 },
+        { "id": "cauliflower-rice", "name": "Cauliflower rice", "grams": 150 },
+        { "id": "garlic", "name": "Garlic", "grams": 8, "notes": "2 cloves, minced" },
+        { "id": "cumin", "name": "Ground cumin", "grams": 2 },
+        { "id": "paprika", "name": "Paprika", "grams": 2 },
+        { "id": "black-pepper", "name": "Black pepper", "grams": 1 },
+        { "id": "coriander-fresh", "name": "Fresh coriander", "grams": 10, "notes": "minced" },
+        { "id": "capsicum-red", "name": "Red capsicum", "grams": 400, "notes": "2 large, halved and cored" },
+        { "id": "cheese-cheddar", "name": "Cheddar cheese", "grams": 230, "notes": "shredded" }
+      ],
+
+      "instructions": [
+        "Preheat the oven to 150C. Lightly coat a medium baking dish with cooking spray.",
+        "Add the coconut oil to a medium frypan over medium heat. Add the turkey and cook for 5-8 minutes until no longer pink.",
+        "Transfer the turkey to a large bowl and add the cauliflower rice and garlic.",
+        "Season with cumin, paprika, pepper, and coriander. Mix well.",
+        "Arrange the capsicum halves on a board. Stuff the turkey mixture into the capsicum halves, patting firmly.",
+        "Top the stuffed capsicums with the cheese.",
+        "Place in the baking dish and bake for 10 minutes until cheese is lightly browned."
+      ],
+
+      "per_serve": {
+        "calories": 420,
+        "protein_g": 32,
+        "fat_g": 28,
+        "carbs_g": 12,
+        "fibre_g": 3
+      },
+
+      "source": "galveston_book",
+      "source_ref": "p.187",
+
+      "created_at": "2025-12-05",
+      "updated_at": "2025-12-05",
+      "version": 1
+    },
+    {
+      "id": "prawns-asparagus",
+      "name": "Prawns and Asparagus",
+      "description": "Sauteed prawns with asparagus in lemon butter sauce, finished with parmesan and flaxseed.",
+
+      "meal_type": "dinner",
+      "phase": [1, 2, 3],
+      "category": "shellfish",
+      "cuisine": "mediterranean",
+      "tags": ["quick", "light", "elegant"],
+
+      "batch_friendly": false,
+      "batch_notes": "Best made fresh. Prawns don't reheat well.",
+      "components": {
+        "reheatable": [],
+        "fresh_only": ["prawns", "asparagus"]
+      },
+      "freezer_friendly": false,
+      "good_for_lunchbox": false,
+
+      "flavour_profile": ["sour", "salty", "rich"],
+      "texture": ["soft", "crunchy"],
+      "temperature": "hot",
+
+      "difficulty": "easy",
+      "active_cooking": true,
+      "prep_time_mins": 10,
+      "cook_time_mins": 10,
+      "total_time_mins": 20,
+
+      "dietary": {
+        "dairy_free": false,
+        "gluten_free": true,
+        "nut_free": true,
+        "egg_free": true,
+        "vegetarian": false,
+        "vegan": false
+      },
+
+      "base_servings": 4,
+      "ingredients": [
+        { "id": "butter", "name": "Butter", "grams": 30 },
+        { "id": "olive-oil", "name": "Olive oil", "grams": 30 },
+        { "id": "prawns", "name": "Prawns", "grams": 450, "notes": "peeled and deveined" },
+        { "id": "asparagus", "name": "Fresh asparagus", "grams": 450, "notes": "trimmed and sliced" },
+        { "id": "garlic", "name": "Garlic", "grams": 15, "notes": "minced" },
+        { "id": "salt", "name": "Salt", "grams": 2 },
+        { "id": "black-pepper", "name": "Black pepper", "grams": 1 },
+        { "id": "paprika-smoked", "name": "Smoked paprika", "grams": 1, "optional": true },
+        { "id": "lemon", "name": "Lemon", "grams": 50, "notes": "zested and juiced" },
+        { "id": "parmesan", "name": "Parmesan cheese", "grams": 60, "notes": "grated" },
+        { "id": "flaxseed", "name": "Ground flaxseed", "grams": 30 }
+      ],
+
+      "instructions": [
+        "In a large frypan over medium heat, melt the butter and add the olive oil.",
+        "When oil is shimmering, add the prawns and asparagus and lightly saute for 3-4 minutes.",
+        "Add the garlic, stir well, then season with salt, pepper, and paprika if using.",
+        "Add the lemon zest and juice. Cook until prawns are pink throughout and asparagus is tender.",
+        "In a small bowl, combine the parmesan and flaxseed.",
+        "Sprinkle the cheese-flaxseed mixture over the prawns and asparagus, stir to coat, and serve."
+      ],
+
+      "per_serve": {
+        "calories": 320,
+        "protein_g": 30,
+        "fat_g": 20,
+        "carbs_g": 8,
+        "fibre_g": 4
+      },
+
+      "source": "galveston_book",
+      "source_ref": "p.188",
+
+      "created_at": "2025-12-05",
+      "updated_at": "2025-12-05",
+      "version": 1
+    },
+    {
+      "id": "pumpkin-chicken-curry-cauliflower-rice",
+      "name": "Pumpkin and Chicken Curry with Cauliflower Rice",
+      "description": "Creamy coconut curry with chicken, pumpkin, and red capsicum, served over cauliflower rice.",
+
+      "meal_type": "dinner",
+      "phase": [1, 2, 3],
+      "category": "poultry",
+      "cuisine": "asian",
+      "tags": ["curry", "comfort-food", "spicy"],
+
+      "batch_friendly": true,
+      "batch_notes": "Curry reheats well. Make fresh cauliflower rice.",
+      "components": {
+        "reheatable": ["curry"],
+        "fresh_only": ["cauliflower rice"]
+      },
+      "freezer_friendly": true,
+      "good_for_lunchbox": true,
+
+      "flavour_profile": ["spicy", "rich", "earthy"],
+      "texture": ["soft", "creamy"],
+      "temperature": "hot",
+
+      "difficulty": "easy",
+      "active_cooking": true,
+      "prep_time_mins": 10,
+      "cook_time_mins": 20,
+      "total_time_mins": 30,
+
+      "dietary": {
+        "dairy_free": true,
+        "gluten_free": true,
+        "nut_free": true,
+        "egg_free": true,
+        "vegetarian": false,
+        "vegan": false
+      },
+
+      "base_servings": 2,
+      "ingredients": [
+        { "id": "coconut-oil", "name": "Coconut oil", "grams": 30 },
+        { "id": "chicken-breast", "name": "Chicken breast", "grams": 115, "notes": "cubed" },
+        { "id": "capsicum-red", "name": "Red capsicum", "grams": 75, "notes": "chopped" },
+        { "id": "pumpkin-puree", "name": "Pumpkin puree", "grams": 160, "notes": "canned" },
+        { "id": "curry-powder", "name": "Curry powder", "grams": 5 },
+        { "id": "coconut-milk", "name": "Coconut milk", "grams": 240, "notes": "unsweetened" },
+        { "id": "thai-basil", "name": "Fresh Thai basil", "grams": 10, "notes": "julienned" },
+        { "id": "cauliflower-rice", "name": "Cauliflower rice", "grams": 200, "notes": "cooked" }
+      ],
+
+      "instructions": [
+        "In a medium frypan over medium heat, heat the coconut oil until melted and hot.",
+        "Add the chicken and cook for 3-4 minutes, stirring continuously, until almost cooked through.",
+        "Add the red capsicum, pumpkin puree, curry powder, and any other spices of your choice. Stir well to coat.",
+        "Add the coconut milk, increase heat to medium-high, and bring to a boil.",
+        "Reduce heat to a simmer and cook slowly for 10 minutes.",
+        "Adjust spices to taste.",
+        "Transfer the curry to bowls and garnish with Thai basil. Serve with cauliflower rice."
+      ],
+
+      "per_serve": {
+        "calories": 480,
+        "protein_g": 24,
+        "fat_g": 38,
+        "carbs_g": 18,
+        "fibre_g": 5
+      },
+
+      "source": "galveston_book",
+      "source_ref": "p.189",
+
+      "created_at": "2025-12-05",
+      "updated_at": "2025-12-05",
+      "version": 1
+    },
+    {
+      "id": "tofu-peanut-sauce",
+      "name": "Tofu in Peanut Sauce",
+      "description": "Crispy tofu cubes in spicy turmeric-ginger peanut sauce, served with steamed broccolini.",
+
+      "meal_type": "dinner",
+      "phase": [1, 2, 3],
+      "category": "tofu_tempeh",
+      "cuisine": "asian",
+      "tags": ["vegan", "spicy", "high-protein"],
+
+      "batch_friendly": true,
+      "batch_notes": "Tofu and sauce reheat well. Can serve over cauliflower rice.",
+      "components": {
+        "reheatable": ["tofu in sauce"],
+        "fresh_only": ["broccolini"]
+      },
+      "freezer_friendly": false,
+      "good_for_lunchbox": true,
+
+      "flavour_profile": ["spicy", "pungent", "rich"],
+      "texture": ["crispy", "soft"],
+      "temperature": "hot",
+
+      "difficulty": "medium",
+      "active_cooking": true,
+      "prep_time_mins": 40,
+      "cook_time_mins": 20,
+      "total_time_mins": 60,
+
+      "dietary": {
+        "dairy_free": true,
+        "gluten_free": false,
+        "nut_free": false,
+        "egg_free": true,
+        "vegetarian": true,
+        "vegan": true
+      },
+
+      "base_servings": 4,
+      "ingredients": [
+        { "id": "tofu-firm", "name": "Firm tofu", "grams": 400, "notes": "pressed and cubed" },
+        { "id": "peanut-butter", "name": "No-sugar peanut butter", "grams": 65 },
+        { "id": "tamari", "name": "Tamari", "grams": 30 },
+        { "id": "water", "name": "Water", "grams": 30 },
+        { "id": "turmeric", "name": "Ground turmeric", "grams": 9 },
+        { "id": "sesame-oil", "name": "Toasted sesame oil", "grams": 5 },
+        { "id": "red-pepper-flakes", "name": "Red pepper flakes", "grams": 1 },
+        { "id": "ginger", "name": "Fresh ginger", "grams": 15, "notes": "grated" },
+        { "id": "broccolini", "name": "Broccolini", "grams": 340, "notes": "chopped" },
+        { "id": "coconut-oil", "name": "Coconut oil", "grams": 15 }
+      ],
+
+      "instructions": [
+        "Sandwich the tofu between paper towels and plates. Place a heavy item on top and press for at least 30 minutes. Cut into cubes.",
+        "Combine the peanut butter, tamari, and water in a bowl.",
+        "Add the turmeric, sesame oil, red pepper flakes, and ginger. Mix well.",
+        "Steam or boil the broccolini until tender, about 5 minutes. Keep warm.",
+        "Heat the coconut oil in a large frypan over medium heat.",
+        "Add the tofu and cook for 10-15 minutes, turning occasionally, until lightly browned.",
+        "Stir in the sauce and blend well.",
+        "Transfer to serving bowls and serve with the warm broccolini."
+      ],
+
+      "per_serve": {
+        "calories": 320,
+        "protein_g": 18,
+        "fat_g": 24,
+        "carbs_g": 12,
+        "fibre_g": 4
+      },
+
+      "source": "galveston_book",
+      "source_ref": "p.189",
+
+      "created_at": "2025-12-05",
+      "updated_at": "2025-12-05",
+      "version": 1
+    },
+    {
+      "id": "lemon-chicken-capers",
+      "name": "Lemon Chicken with Capers",
+      "description": "Pan-fried chicken breast in lemon-caper sauce, served with sauteed green beans and toasted almonds.",
+
+      "meal_type": "dinner",
+      "phase": [1, 2, 3],
+      "category": "poultry",
+      "cuisine": "mediterranean",
+      "tags": ["high-protein", "elegant", "classic"],
+
+      "batch_friendly": true,
+      "batch_notes": "Chicken and beans reheat well. Sauce may need refreshing.",
+      "components": {
+        "reheatable": ["chicken", "green beans"],
+        "fresh_only": []
+      },
+      "freezer_friendly": true,
+      "good_for_lunchbox": true,
+
+      "flavour_profile": ["sour", "salty", "herby"],
+      "texture": ["soft", "crunchy"],
+      "temperature": "hot",
+
+      "difficulty": "medium",
+      "active_cooking": true,
+      "prep_time_mins": 10,
+      "cook_time_mins": 25,
+      "total_time_mins": 35,
+
+      "dietary": {
+        "dairy_free": false,
+        "gluten_free": true,
+        "nut_free": false,
+        "egg_free": true,
+        "vegetarian": false,
+        "vegan": false
+      },
+
+      "base_servings": 4,
+      "ingredients": [
+        { "id": "chicken-breast", "name": "Chicken breast", "grams": 450, "notes": "4 halves, boneless and skinless" },
+        { "id": "salt", "name": "Salt", "grams": 3 },
+        { "id": "black-pepper", "name": "Black pepper", "grams": 1 },
+        { "id": "ghee", "name": "Ghee or olive oil", "grams": 60 },
+        { "id": "lemon", "name": "Lemon", "grams": 120, "notes": "1 juiced, 1 sliced" },
+        { "id": "garlic", "name": "Garlic", "grams": 4, "notes": "1 clove, sliced" },
+        { "id": "capers", "name": "Capers", "grams": 30, "notes": "drained" },
+        { "id": "onion", "name": "Onion", "grams": 150, "notes": "1 large, sliced" },
+        { "id": "green-beans", "name": "Green beans", "grams": 600, "notes": "trimmed" },
+        { "id": "almonds", "name": "Slivered almonds", "grams": 35, "notes": "toasted" }
+      ],
+
+      "instructions": [
+        "Pat the chicken pieces dry and season with salt and pepper.",
+        "In a large frypan over medium-high heat, add 15g ghee. When shimmering, add the chicken and cook 8-10 minutes, flipping once, until cooked through. Transfer to a plate and keep warm.",
+        "Add lemon juice, 15g ghee, garlic, and capers to the frypan. Bring to a simmer.",
+        "Add the lemon slices, return chicken to the frypan, reduce heat, and simmer for 5 minutes.",
+        "In another frypan over medium heat, warm remaining 30g ghee. Add onion and beans, cook until onion is translucent and beans are fork-tender, about 3 minutes.",
+        "Toss the almonds into the beans and stir to combine.",
+        "Arrange the chicken on a serving platter with the onion and beans alongside."
+      ],
+
+      "per_serve": {
+        "calories": 380,
+        "protein_g": 35,
+        "fat_g": 22,
+        "carbs_g": 12,
+        "fibre_g": 5
+      },
+
+      "source": "galveston_book",
+      "source_ref": "p.195",
+
+      "created_at": "2025-12-05",
+      "updated_at": "2025-12-05",
+      "version": 1
+    },
+    {
+      "id": "broccoli-cheese-chicken-bake",
+      "name": "Broccoli and Cheese Chicken Bake",
+      "description": "Creamy chicken and broccoli casserole with sour cream, garlic, and melted cheddar.",
+
+      "meal_type": "dinner",
+      "phase": [1, 2, 3],
+      "category": "poultry",
+      "cuisine": "american",
+      "tags": ["comfort-food", "casserole", "family-friendly"],
+
+      "batch_friendly": true,
+      "batch_notes": "Reheats very well. Can be made ahead and baked when needed.",
+      "components": {
+        "reheatable": ["entire dish"],
+        "fresh_only": []
+      },
+      "freezer_friendly": true,
+      "good_for_lunchbox": true,
+
+      "flavour_profile": ["rich", "salty", "mild"],
+      "texture": ["soft", "creamy"],
+      "temperature": "hot",
+
+      "difficulty": "easy",
+      "active_cooking": false,
+      "prep_time_mins": 15,
+      "cook_time_mins": 10,
+      "total_time_mins": 25,
+
+      "dietary": {
+        "dairy_free": false,
+        "gluten_free": true,
+        "nut_free": true,
+        "egg_free": true,
+        "vegetarian": false,
+        "vegan": false
+      },
+
+      "base_servings": 4,
+      "ingredients": [
+        { "id": "chicken-breast", "name": "Cooked chicken breast", "grams": 450, "notes": "chopped or shredded" },
+        { "id": "broccoli", "name": "Broccoli florets", "grams": 600, "notes": "cooked until fork-tender" },
+        { "id": "olive-oil", "name": "Olive oil", "grams": 30 },
+        { "id": "sour-cream", "name": "Sour cream", "grams": 120 },
+        { "id": "cream-thickened", "name": "Thickened cream", "grams": 120 },
+        { "id": "garlic", "name": "Garlic", "grams": 4, "notes": "1 clove, minced" },
+        { "id": "basil", "name": "Fresh basil", "grams": 5, "notes": "minced" },
+        { "id": "salt", "name": "Salt", "grams": 2 },
+        { "id": "black-pepper", "name": "Black pepper", "grams": 1 },
+        { "id": "cheese-cheddar", "name": "Cheddar cheese", "grams": 115, "notes": "shredded" }
+      ],
+
+      "instructions": [
+        "Preheat the oven to 190C.",
+        "Place the chicken in a large casserole dish, add the broccoli, and toss with olive oil.",
+        "In a medium bowl, combine the sour cream, thickened cream, garlic, and basil. Season with salt and pepper.",
+        "Pour the sauce into the casserole and stir to coat the chicken and broccoli.",
+        "Sprinkle the top with the cheese.",
+        "Bake for 7-10 minutes until heated through and bubbly. Serve."
+      ],
+
+      "per_serve": {
+        "calories": 480,
+        "protein_g": 38,
+        "fat_g": 32,
+        "carbs_g": 10,
+        "fibre_g": 4
+      },
+
+      "source": "galveston_book",
+      "source_ref": "p.196",
+
+      "created_at": "2025-12-05",
+      "updated_at": "2025-12-05",
+      "version": 1
+    },
+    {
+      "id": "spaghetti-squash-turkey-bacon-spinach-goat-cheese",
+      "name": "Spaghetti Squash with Turkey, Bacon, Spinach, and Goat Cheese",
+      "description": "Roasted spaghetti squash topped with turkey mince, crispy bacon, wilted spinach, and creamy goat cheese.",
+
+      "meal_type": "dinner",
+      "phase": [1, 2, 3],
+      "category": "poultry",
+      "cuisine": "american",
+      "tags": ["low-carb", "comfort-food", "batch-cook"],
+
+      "batch_friendly": true,
+      "batch_notes": "Squash and filling can be made ahead. Reheat together.",
+      "components": {
+        "reheatable": ["squash", "turkey mixture"],
+        "fresh_only": []
+      },
+      "freezer_friendly": true,
+      "good_for_lunchbox": true,
+
+      "flavour_profile": ["umami", "salty", "rich"],
+      "texture": ["soft", "chewy"],
+      "temperature": "hot",
+
+      "difficulty": "medium",
+      "active_cooking": true,
+      "prep_time_mins": 15,
+      "cook_time_mins": 60,
+      "total_time_mins": 75,
+
+      "dietary": {
+        "dairy_free": false,
+        "gluten_free": true,
+        "nut_free": true,
+        "egg_free": true,
+        "vegetarian": false,
+        "vegan": false
+      },
+
+      "base_servings": 4,
+      "ingredients": [
+        { "id": "spaghetti-squash", "name": "Spaghetti squash", "grams": 1200, "notes": "2 medium" },
+        { "id": "olive-oil", "name": "Olive oil", "grams": 30 },
+        { "id": "salt", "name": "Salt", "grams": 3 },
+        { "id": "black-pepper", "name": "Black pepper", "grams": 1 },
+        { "id": "bacon", "name": "Bacon", "grams": 180, "notes": "6 slices" },
+        { "id": "turkey-mince", "name": "Lean turkey mince", "grams": 450 },
+        { "id": "white-wine", "name": "Dry white wine", "grams": 60 },
+        { "id": "spinach", "name": "Baby spinach", "grams": 120 },
+        { "id": "goat-cheese", "name": "Goat cheese", "grams": 115 }
+      ],
+
+      "instructions": [
+        "Preheat the oven to 200C. Line a baking tray with aluminium foil.",
+        "Cut the stem ends off the squash. Stand upright and cut in half lengthwise. Scoop out seeds.",
+        "Season flesh with olive oil, salt, and pepper. Place cut-side down on the baking tray.",
+        "Bake for 40-60 minutes until a fork goes in easily.",
+        "While squash is cooking, cook bacon in a large frypan until crisp, about 10 minutes. Set aside on paper towels.",
+        "Add turkey to the frypan and brown for 5-8 minutes. Transfer to a bowl, drain most fat leaving about 15g.",
+        "With frypan over medium heat, pour in the wine and scrape up browned bits. Cook 1 minute to reduce by half.",
+        "Add spinach, stir until wilted, about 3 minutes. Crumble in goat cheese and stir to soften, about 3 minutes.",
+        "Crumble the bacon and stir into the turkey. Add the spinach-cheese mixture and stir to blend.",
+        "When squash is cool enough to handle, use a fork to comb out the flesh into strands. Place in serving bowls.",
+        "Top each serving with the turkey, bacon, and spinach mixture."
+      ],
+
+      "per_serve": {
+        "calories": 520,
+        "protein_g": 38,
+        "fat_g": 32,
+        "carbs_g": 20,
+        "fibre_g": 4
+      },
+
+      "source": "galveston_book",
+      "source_ref": "p.199",
+
+      "created_at": "2025-12-05",
+      "updated_at": "2025-12-05",
+      "version": 1
+    },
+    {
+      "id": "meatloaf-cauliflower-mash",
+      "name": "Meatloaf with Cauliflower Mash",
+      "description": "Classic grass-fed beef meatloaf with almond flour binder, served with creamy cauliflower mash.",
+
+      "meal_type": "dinner",
+      "phase": [1, 2, 3],
+      "category": "beef",
+      "cuisine": "american",
+      "tags": ["comfort-food", "classic", "batch-cook"],
+
+      "batch_friendly": true,
+      "batch_notes": "Meatloaf slices and reheats excellently. Make ahead for weeknight dinners.",
+      "components": {
+        "reheatable": ["meatloaf", "cauliflower mash"],
+        "fresh_only": []
+      },
+      "freezer_friendly": true,
+      "good_for_lunchbox": true,
+
+      "flavour_profile": ["umami", "salty", "mild"],
+      "texture": ["soft", "creamy"],
+      "temperature": "hot",
+
+      "difficulty": "easy",
+      "active_cooking": true,
+      "prep_time_mins": 20,
+      "cook_time_mins": 60,
+      "total_time_mins": 80,
+
+      "dietary": {
+        "dairy_free": false,
+        "gluten_free": true,
+        "nut_free": false,
+        "egg_free": false,
+        "vegetarian": false,
+        "vegan": false
+      },
+
+      "base_servings": 6,
+      "ingredients": [
+        { "id": "olive-oil", "name": "Olive oil", "grams": 30 },
+        { "id": "onion", "name": "Onion", "grams": 60, "notes": "chopped" },
+        { "id": "beef-mince", "name": "Grass-fed beef mince", "grams": 680 },
+        { "id": "almond-flour", "name": "Almond flour", "grams": 100 },
+        { "id": "eggs", "name": "Eggs", "grams": 100, "notes": "2 large" },
+        { "id": "tomato-sauce", "name": "No-sugar tomato sauce", "grams": 80 },
+        { "id": "parmesan", "name": "Parmesan cheese", "grams": 60, "notes": "grated" },
+        { "id": "salt", "name": "Salt", "grams": 3 },
+        { "id": "black-pepper", "name": "Black pepper", "grams": 1 },
+        { "id": "garlic-powder", "name": "Garlic powder", "grams": 2 },
+        { "id": "cauliflower-mash", "name": "Mashed cauliflower", "grams": 450, "notes": "warmed" },
+        { "id": "butter", "name": "Butter", "grams": 85, "notes": "optional, for serving" }
+      ],
+
+      "instructions": [
+        "Preheat the oven to 180C.",
+        "Heat the olive oil in a small frypan, add the onion, and saute until translucent, about 3 minutes.",
+        "In a large bowl, combine the beef mince, sauteed onion, almond flour, eggs, tomato sauce, parmesan, salt, pepper, and garlic powder.",
+        "Shape the mixture into a firm oval loaf.",
+        "Place the loaf in a shallow baking pan or loaf tin, and bake for 1 hour.",
+        "Carefully remove the loaf from the pan, discarding the surrounding fat, and transfer to a serving platter.",
+        "Let rest for about 10 minutes, then slice for serving.",
+        "Place slices on plates with portions of mashed cauliflower. Top cauliflower with butter if desired."
+      ],
+
+      "per_serve": {
+        "calories": 480,
+        "protein_g": 32,
+        "fat_g": 36,
+        "carbs_g": 8,
+        "fibre_g": 3
+      },
+
+      "source": "galveston_book",
+      "source_ref": "p.198",
+
+      "created_at": "2025-12-05",
+      "updated_at": "2025-12-05",
+      "version": 1
+    },
+    {
+      "id": "grilled-steak-creamed-spinach-mushrooms",
+      "name": "Grilled Steak with Creamed Spinach and Mushrooms",
+      "description": "Grilled sirloin steaks topped with sauteed mushrooms, served with nutmeg-spiced creamed spinach.",
+
+      "meal_type": "dinner",
+      "phase": [1, 2, 3],
+      "category": "beef",
+      "cuisine": "american",
+      "tags": ["high-protein", "grilled", "elegant"],
+
+      "batch_friendly": false,
+      "batch_notes": "Best made fresh. Steak can be cooked ahead and sliced cold.",
+      "components": {
+        "reheatable": ["mushrooms"],
+        "fresh_only": ["steak", "creamed spinach"]
+      },
+      "freezer_friendly": false,
+      "good_for_lunchbox": false,
+
+      "flavour_profile": ["umami", "rich", "earthy"],
+      "texture": ["soft", "creamy"],
+      "temperature": "hot",
+
+      "difficulty": "medium",
+      "active_cooking": true,
+      "prep_time_mins": 10,
+      "cook_time_mins": 15,
+      "total_time_mins": 25,
+
+      "dietary": {
+        "dairy_free": false,
+        "gluten_free": true,
+        "nut_free": true,
+        "egg_free": true,
+        "vegetarian": false,
+        "vegan": false
+      },
+
+      "base_servings": 4,
+      "ingredients": [
+        { "id": "beef-sirloin", "name": "Boneless sirloin steaks", "grams": 340, "notes": "4 x 85g mini-steaks" },
+        { "id": "salt", "name": "Salt", "grams": 3 },
+        { "id": "black-pepper", "name": "Black pepper", "grams": 1 },
+        { "id": "olive-oil", "name": "Olive oil", "grams": 30 },
+        { "id": "mushroom-portobello", "name": "Portobello or button mushrooms", "grams": 300, "notes": "chopped" },
+        { "id": "spinach", "name": "Baby spinach", "grams": 120 },
+        { "id": "cream-thickened", "name": "Thickened cream", "grams": 120 },
+        { "id": "nutmeg", "name": "Ground nutmeg", "grams": 0.5 }
+      ],
+
+      "instructions": [
+        "Preheat a grill pan over medium-high heat.",
+        "Season the steaks with salt and pepper.",
+        "Place steaks in the grill pan and cook for 2-4 minutes on each side for medium-rare.",
+        "Transfer to a platter and cover to keep warm.",
+        "Add the olive oil to a medium frypan over medium-high heat. When shimmering, add the mushrooms, stirring for 3-4 minutes until lightly browned.",
+        "Transfer mushrooms to the platter with steaks and spread on top. Cover to keep warm.",
+        "Lower heat for the frypan to medium. Add the spinach and cream.",
+        "Cook, stirring, until spinach has wilted and cream has thickened slightly.",
+        "Season with salt and nutmeg.",
+        "Serve the steak and mushrooms with creamed spinach on the side."
+      ],
+
+      "per_serve": {
+        "calories": 380,
+        "protein_g": 28,
+        "fat_g": 28,
+        "carbs_g": 6,
+        "fibre_g": 2
+      },
+
+      "source": "galveston_book",
+      "source_ref": "p.200",
+
+      "created_at": "2025-12-05",
+      "updated_at": "2025-12-05",
+      "version": 1
+    },
+    {
+      "id": "slow-cooker-mushroom-stroganoff-cauliflower-rice",
+      "name": "Slow Cooker Mushroom Stroganoff with Creamy Garlic Cauliflower Rice",
+      "description": "Vegetarian slow-cooked mushroom stroganoff with paprika and yoghurt, served over garlic cauliflower rice.",
+
+      "meal_type": "dinner",
+      "phase": [1, 2, 3],
+      "category": "vegetables",
+      "cuisine": "eastern-european",
+      "tags": ["vegetarian", "slow-cooker", "comfort-food"],
+
+      "batch_friendly": true,
+      "batch_notes": "Stroganoff reheats excellently. Make cauliflower rice fresh.",
+      "components": {
+        "reheatable": ["stroganoff"],
+        "fresh_only": ["cauliflower rice"]
+      },
+      "freezer_friendly": true,
+      "good_for_lunchbox": true,
+
+      "flavour_profile": ["umami", "earthy", "rich"],
+      "texture": ["soft", "creamy"],
+      "temperature": "hot",
+
+      "difficulty": "easy",
+      "active_cooking": true,
+      "prep_time_mins": 20,
+      "cook_time_mins": 240,
+      "total_time_mins": 260,
+
+      "dietary": {
+        "dairy_free": false,
+        "gluten_free": true,
+        "nut_free": true,
+        "egg_free": true,
+        "vegetarian": true,
+        "vegan": false
+      },
+
+      "base_servings": 4,
+      "ingredients": [
+        { "id": "mushroom-button", "name": "Button mushrooms", "grams": 500, "notes": "halved or quartered" },
+        { "id": "garlic", "name": "Garlic", "grams": 32, "notes": "8 cloves, minced (divided)" },
+        { "id": "onion", "name": "Yellow onion", "grams": 150, "notes": "1 medium, thinly sliced" },
+        { "id": "vegetable-broth", "name": "Vegetable broth", "grams": 720, "notes": "divided" },
+        { "id": "paprika-smoked", "name": "Smoked paprika", "grams": 8 },
+        { "id": "greek-yoghurt", "name": "Plain full-fat Greek yoghurt", "grams": 30 },
+        { "id": "salt", "name": "Salt", "grams": 4 },
+        { "id": "black-pepper", "name": "Black pepper", "grams": 2 },
+        { "id": "parsley", "name": "Fresh parsley", "grams": 15, "notes": "chopped" },
+        { "id": "cauliflower", "name": "Cauliflower", "grams": 500, "notes": "1 medium head, cut into florets" },
+        { "id": "olive-oil", "name": "Olive oil", "grams": 45 },
+        { "id": "ghee", "name": "Ghee or butter", "grams": 60 },
+        { "id": "cream-thickened", "name": "Thickened cream", "grams": 60 }
+      ],
+
+      "instructions": [
+        "Place mushrooms, 24g garlic, onion, 480ml broth, and paprika in a slow cooker. Cook on high for 4 hours.",
+        "Stir in the yoghurt. Season with salt and pepper. Cover and keep warm.",
+        "Process cauliflower florets in a food processor until they resemble rice grains.",
+        "Heat a large saucepan over medium heat. Add olive oil, then cauliflower rice, remaining 8g garlic, 3g salt, and 1g pepper.",
+        "Bring to a boil and cook for 3 minutes, stirring gently.",
+        "Pour in remaining 240ml broth, cover, reduce heat to medium-low, and simmer for 12 minutes, stirring occasionally.",
+        "Stir in the ghee and cream, simmer another 5 minutes until creamy.",
+        "Serve the stroganoff over the creamy cauliflower rice, garnished with parsley."
+      ],
+
+      "per_serve": {
+        "calories": 380,
+        "protein_g": 12,
+        "fat_g": 30,
+        "carbs_g": 18,
+        "fibre_g": 5
+      },
+
+      "source": "galveston_book",
+      "source_ref": "p.201",
+
+      "created_at": "2025-12-05",
+      "updated_at": "2025-12-05",
+      "version": 1
+    },
+    {
+      "id": "blt-salmon-burgers",
+      "name": "BLT Salmon Burgers",
+      "description": "Salmon patties on a woven turkey bacon base with avocado-flaxseed spread, lettuce, and tomato.",
+
+      "meal_type": "dinner",
+      "phase": [1, 2, 3],
+      "category": "fish",
+      "cuisine": "american",
+      "tags": ["high-protein", "omega-3", "creative"],
+
+      "batch_friendly": true,
+      "batch_notes": "Salmon patties can be made ahead. Bacon weaves can be prepped. Assemble fresh.",
+      "components": {
+        "reheatable": ["salmon patties", "bacon weaves"],
+        "fresh_only": ["avocado spread", "salad toppings"]
+      },
+      "freezer_friendly": true,
+      "good_for_lunchbox": false,
+
+      "flavour_profile": ["salty", "rich", "sour"],
+      "texture": ["crispy", "soft"],
+      "temperature": "warm",
+
+      "difficulty": "complex",
+      "active_cooking": true,
+      "prep_time_mins": 30,
+      "cook_time_mins": 35,
+      "total_time_mins": 65,
+
+      "dietary": {
+        "dairy_free": true,
+        "gluten_free": true,
+        "nut_free": true,
+        "egg_free": true,
+        "vegetarian": false,
+        "vegan": false
+      },
+
+      "base_servings": 4,
+      "ingredients": [
+        { "id": "turkey-bacon", "name": "Turkey bacon", "grams": 240, "notes": "16 slices, halved crosswise" },
+        { "id": "salmon-fillet", "name": "Salmon fillet", "grams": 225, "notes": "poached, skin removed, cooled" },
+        { "id": "mayonnaise", "name": "Mayonnaise", "grams": 45 },
+        { "id": "salt", "name": "Salt", "grams": 2 },
+        { "id": "black-pepper", "name": "Black pepper", "grams": 1 },
+        { "id": "olive-oil", "name": "Olive oil", "grams": 30 },
+        { "id": "avocado", "name": "Avocado", "grams": 300, "notes": "2 whole, mashed" },
+        { "id": "flaxseed", "name": "Ground flaxseed", "grams": 60 },
+        { "id": "lemon", "name": "Lemon juice", "grams": 15 },
+        { "id": "chives", "name": "Fresh chives", "grams": 15, "notes": "minced" },
+        { "id": "lettuce-butter", "name": "Butter lettuce leaves", "grams": 40, "notes": "4 leaves" },
+        { "id": "tomato", "name": "Tomato", "grams": 120, "notes": "4 slices" }
+      ],
+
+      "instructions": [
+        "Preheat oven to 200C. Line a baking tray with foil and place a baking rack in it.",
+        "Create 4 bacon weaves: Arrange 3 bacon half-strips in a row. Weave 3 more strips through them. Flatten with a rolling pin and transfer to the rack. Repeat for 4 weaves.",
+        "Bake until crisp, about 25 minutes. Drain on paper towels and keep warm.",
+        "Mash the salmon in a bowl with mayonnaise until shapeable. Season with salt and pepper. Form into 4 patties.",
+        "Heat olive oil in a frypan over medium-high heat. Cook salmon patties for about 8 minutes, flipping once, until browned.",
+        "In a bowl, stir together avocado, flaxseed, lemon juice, and chives.",
+        "Place a bacon weave on each plate. Spread with avocado mixture.",
+        "Top with a salmon burger, lettuce leaf, and tomato slice."
+      ],
+
+      "per_serve": {
+        "calories": 520,
+        "protein_g": 32,
+        "fat_g": 40,
+        "carbs_g": 10,
+        "fibre_g": 7
+      },
+
+      "source": "galveston_book",
+      "source_ref": "p.193",
+
+      "created_at": "2025-12-05",
+      "updated_at": "2025-12-05",
+      "version": 1
+    },
+    {
+      "id": "baked-salmon-grilled-summer-squash",
+      "name": "Baked Salmon with Grilled Summer Squash",
+      "description": "Honey-garlic baked salmon on lemon slices, served with butter-grilled zucchini and yellow squash.",
+
+      "meal_type": "dinner",
+      "phase": [1, 2, 3],
+      "category": "fish",
+      "cuisine": "mediterranean",
+      "tags": ["omega-3", "elegant", "summer"],
+
+      "batch_friendly": false,
+      "batch_notes": "Best made fresh. Salmon can be baked ahead and served cold.",
+      "components": {
+        "reheatable": [],
+        "fresh_only": ["salmon", "squash"]
+      },
+      "freezer_friendly": false,
+      "good_for_lunchbox": true,
+
+      "flavour_profile": ["sweet", "sour", "herby"],
+      "texture": ["soft", "flaky"],
+      "temperature": "hot",
+
+      "difficulty": "medium",
+      "active_cooking": true,
+      "prep_time_mins": 15,
+      "cook_time_mins": 35,
+      "total_time_mins": 50,
+
+      "dietary": {
+        "dairy_free": false,
+        "gluten_free": true,
+        "nut_free": true,
+        "egg_free": true,
+        "vegetarian": false,
+        "vegan": false
+      },
+
+      "base_servings": 4,
+      "ingredients": [
+        { "id": "yellow-squash", "name": "Yellow squash", "grams": 200, "notes": "1 medium, sliced" },
+        { "id": "zucchini", "name": "Zucchini", "grams": 200, "notes": "1 medium, sliced" },
+        { "id": "butter", "name": "Butter", "grams": 100, "notes": "divided" },
+        { "id": "lemon", "name": "Lemon", "grams": 180, "notes": "2 lemons - 1 zested and juiced, 1 thinly sliced" },
+        { "id": "salt", "name": "Salt", "grams": 3 },
+        { "id": "black-pepper", "name": "Black pepper", "grams": 1 },
+        { "id": "cayenne", "name": "Cayenne pepper", "grams": 1, "optional": true },
+        { "id": "salmon-fillet", "name": "Salmon fillet", "grams": 1360, "notes": "1 large fillet" },
+        { "id": "honey", "name": "Honey", "grams": 20 },
+        { "id": "garlic", "name": "Garlic", "grams": 12, "notes": "3 cloves, minced" },
+        { "id": "thyme", "name": "Fresh thyme", "grams": 3, "notes": "chopped" },
+        { "id": "oregano", "name": "Dried oregano", "grams": 2 },
+        { "id": "parsley", "name": "Fresh parsley", "grams": 10, "notes": "sprigs for garnish" }
+      ],
+
+      "instructions": [
+        "Preheat an outdoor grill to medium and lightly oil the grill.",
+        "Place yellow squash and zucchini slices on separate squares of aluminium foil. Pour 15g melted butter over the slices. Sprinkle with lemon zest, juice, salt, pepper, and cayenne.",
+        "Fold and wrap the squash in foil. Place on the grill and grill until tender, about 30 minutes.",
+        "Preheat the oven to 180C. Line a baking tray with foil and spray with cooking spray.",
+        "Arrange lemon slices in an even layer in the centre of the tray. Season both sides of salmon with salt and pepper. Place on top of lemons.",
+        "Whisk together remaining 85g butter, honey, garlic, thyme, and oregano. Pour over the salmon. Fold the foil up around it.",
+        "Bake until salmon flakes easily, 15-20 minutes. Turn oven to grill and grill for 2 minutes until top is lightly browned.",
+        "Remove squash packets from grill. Transfer salmon to a serving platter.",
+        "Garnish with parsley sprigs and serve grilled squash alongside."
+      ],
+
+      "per_serve": {
+        "calories": 580,
+        "protein_g": 48,
+        "fat_g": 38,
+        "carbs_g": 12,
+        "fibre_g": 2
+      },
+
+      "source": "galveston_book",
+      "source_ref": "p.194",
+
+      "created_at": "2025-12-05",
+      "updated_at": "2025-12-05",
+      "version": 1
+    },
+    {
+      "id": "grilled-prawns-grilled-tomato-bites",
+      "name": "Grilled Prawns with Grilled Tomato Bites",
+      "description": "Italian herb-marinated grilled prawns served with parmesan-topped grilled tomatoes.",
+
+      "meal_type": "dinner",
+      "phase": [1, 2, 3],
+      "category": "shellfish",
+      "cuisine": "mediterranean",
+      "tags": ["quick", "grilled", "elegant"],
+
+      "batch_friendly": false,
+      "batch_notes": "Best made fresh. Prawns don't reheat well.",
+      "components": {
+        "reheatable": [],
+        "fresh_only": ["prawns", "tomatoes"]
+      },
+      "freezer_friendly": false,
+      "good_for_lunchbox": false,
+
+      "flavour_profile": ["herby", "sour", "salty"],
+      "texture": ["soft", "juicy"],
+      "temperature": "hot",
+
+      "difficulty": "medium",
+      "active_cooking": true,
+      "prep_time_mins": 25,
+      "cook_time_mins": 10,
+      "total_time_mins": 35,
+
+      "dietary": {
+        "dairy_free": false,
+        "gluten_free": true,
+        "nut_free": true,
+        "egg_free": true,
+        "vegetarian": false,
+        "vegan": false
+      },
+
+      "base_servings": 4,
+      "ingredients": [
+        { "id": "olive-oil", "name": "Olive oil", "grams": 110, "notes": "divided" },
+        { "id": "lemon", "name": "Lemon juice", "grams": 30, "notes": "fresh, plus wedges for serving" },
+        { "id": "salt", "name": "Salt", "grams": 5 },
+        { "id": "black-pepper", "name": "Black pepper", "grams": 1 },
+        { "id": "italian-seasoning", "name": "Italian seasoning", "grams": 3 },
+        { "id": "garlic", "name": "Garlic", "grams": 10, "notes": "minced" },
+        { "id": "prawns", "name": "Large prawns", "grams": 450, "notes": "peeled and deveined" },
+        { "id": "tomato", "name": "Small ripe tomatoes", "grams": 400, "notes": "8 small, halved" },
+        { "id": "parmesan", "name": "Parmesan cheese", "grams": 30, "notes": "grated" },
+        { "id": "parsley", "name": "Fresh parsley", "grams": 10, "notes": "chopped" }
+      ],
+
+      "instructions": [
+        "Place 80g olive oil, lemon juice, 5g salt, pepper, Italian seasoning, and garlic in a large resealable bag. Seal and shake to combine.",
+        "Place prawns in a baking dish and pour marinade over. Refrigerate for 15 minutes to 2 hours. Meanwhile, soak 4 bamboo skewers in water.",
+        "Cut tomatoes in half. Cut a small sliver from the bottom so they stand upright. Brush with remaining 30g olive oil and sprinkle with parmesan.",
+        "Preheat grill to medium hot. Preheat grill element in oven.",
+        "Thread prawns onto skewers. Grill for 2-3 minutes on each side until pink and opaque. Transfer to a platter and cover.",
+        "Place tomatoes in a baking dish under the grill element. Grill for 3 minutes until cheese is lightly toasted. Watch carefully.",
+        "Arrange tomatoes around the prawn skewers on the platter.",
+        "Sprinkle prawns with parsley and serve with lemon wedges."
+      ],
+
+      "per_serve": {
+        "calories": 380,
+        "protein_g": 26,
+        "fat_g": 28,
+        "carbs_g": 8,
+        "fibre_g": 2
+      },
+
+      "source": "galveston_book",
+      "source_ref": "p.195",
+
+      "created_at": "2025-12-05",
+      "updated_at": "2025-12-05",
+      "version": 1
+    },
+    {
+      "id": "blackened-tofu-sesame-broccoli-slaw",
+      "name": "Blackened Tofu with Sesame Broccoli Slaw",
+      "description": "Spice-rubbed crispy tofu cubes served over stir-fried broccoli slaw with sesame seeds.",
+
+      "meal_type": "dinner",
+      "phase": [1, 2, 3],
+      "category": "tofu_tempeh",
+      "cuisine": "asian",
+      "tags": ["vegan", "quick", "spicy"],
+
+      "batch_friendly": true,
+      "batch_notes": "Tofu and slaw reheat well.",
+      "components": {
+        "reheatable": ["tofu", "slaw"],
+        "fresh_only": []
+      },
+      "freezer_friendly": false,
+      "good_for_lunchbox": true,
+
+      "flavour_profile": ["spicy", "umami", "mild"],
+      "texture": ["crispy", "crunchy"],
+      "temperature": "hot",
+
+      "difficulty": "easy",
+      "active_cooking": true,
+      "prep_time_mins": 10,
+      "cook_time_mins": 15,
+      "total_time_mins": 25,
+
+      "dietary": {
+        "dairy_free": true,
+        "gluten_free": true,
+        "nut_free": true,
+        "egg_free": true,
+        "vegetarian": true,
+        "vegan": true
+      },
+
+      "base_servings": 4,
+      "ingredients": [
+        { "id": "tofu-extra-firm", "name": "Extra-firm tofu", "grams": 340, "notes": "cubed" },
+        { "id": "cajun-seasoning", "name": "Cajun or blackening seasoning", "grams": 10 },
+        { "id": "coconut-oil", "name": "Coconut oil", "grams": 60 },
+        { "id": "broccoli-slaw", "name": "Broccoli slaw", "grams": 300 },
+        { "id": "sesame-seeds", "name": "Sesame seeds", "grams": 30 }
+      ],
+
+      "instructions": [
+        "Place the tofu cubes in a medium bowl. Add the herbs and seasoning and rub to coat the cubes.",
+        "Place 30g coconut oil in a large frypan over high heat. When melted, add the tofu and saute for 3-4 minutes on each side until blackened.",
+        "Transfer to a bowl, cover, and keep warm.",
+        "Wipe out the frypan and add remaining 30g coconut oil over medium-high heat.",
+        "When melted, add the broccoli slaw and stir-fry until desired tenderness, about 2 minutes.",
+        "Spread the sauteed slaw on individual plates.",
+        "Top with the blackened tofu and sprinkle with sesame seeds."
+      ],
+
+      "per_serve": {
+        "calories": 280,
+        "protein_g": 14,
+        "fat_g": 22,
+        "carbs_g": 10,
+        "fibre_g": 4
+      },
+
+      "source": "galveston_book",
+      "source_ref": "p.202",
+
+      "created_at": "2025-12-05",
+      "updated_at": "2025-12-05",
+      "version": 1
+    },
+    {
+      "id": "bbq-tempeh-greens-cauliflower-rice",
+      "name": "BBQ Tempeh, Greens, and Cauliflower Rice",
+      "description": "Marinated BBQ tempeh triangles with sauteed kale and parmesan cauliflower rice.",
+
+      "meal_type": "dinner",
+      "phase": [2, 3],
+      "category": "tofu_tempeh",
+      "cuisine": "american",
+      "tags": ["vegan-option", "bbq", "batch-cook"],
+
+      "batch_friendly": true,
+      "batch_notes": "Tempeh can be marinated overnight. Cauliflower rice best fresh.",
+      "components": {
+        "reheatable": ["tempeh", "kale"],
+        "fresh_only": ["cauliflower rice"]
+      },
+      "freezer_friendly": false,
+      "good_for_lunchbox": true,
+
+      "flavour_profile": ["sweet", "sour", "smoky"],
+      "texture": ["chewy", "crunchy"],
+      "temperature": "hot",
+
+      "difficulty": "medium",
+      "active_cooking": true,
+      "prep_time_mins": 70,
+      "cook_time_mins": 25,
+      "total_time_mins": 95,
+
+      "dietary": {
+        "dairy_free": false,
+        "gluten_free": false,
+        "nut_free": false,
+        "egg_free": true,
+        "vegetarian": true,
+        "vegan": false
+      },
+
+      "base_servings": 4,
+      "ingredients": [
+        { "id": "bbq-sauce", "name": "Primal Kitchen BBQ sauce", "grams": 120 },
+        { "id": "orange-juice", "name": "Fresh orange juice", "grams": 120 },
+        { "id": "tamari", "name": "Tamari", "grams": 40 },
+        { "id": "vinegar-apple-cider", "name": "Apple cider vinegar", "grams": 30 },
+        { "id": "tempeh", "name": "Tempeh", "grams": 450, "notes": "2 x 225g packages" },
+        { "id": "cauliflower", "name": "Cauliflower", "grams": 450, "notes": "1 small head" },
+        { "id": "ghee", "name": "Ghee or butter", "grams": 30 },
+        { "id": "onion", "name": "Yellow onion", "grams": 75, "notes": "finely diced" },
+        { "id": "garlic-powder", "name": "Garlic powder", "grams": 4 },
+        { "id": "nutmeg", "name": "Ground nutmeg", "grams": 1 },
+        { "id": "salt", "name": "Salt", "grams": 3 },
+        { "id": "black-pepper", "name": "Black pepper", "grams": 1 },
+        { "id": "olive-oil", "name": "Olive oil", "grams": 30 },
+        { "id": "garlic", "name": "Garlic", "grams": 12, "notes": "3 cloves, minced" },
+        { "id": "kale", "name": "Fresh kale", "grams": 200, "notes": "chopped" },
+        { "id": "lemon", "name": "Lemon juice", "grams": 15 },
+        { "id": "coconut-oil", "name": "Coconut oil", "grams": 30 },
+        { "id": "parsley", "name": "Fresh flat-leaf parsley", "grams": 15, "notes": "chopped" },
+        { "id": "parmesan", "name": "Parmesan cheese", "grams": 60, "notes": "grated" },
+        { "id": "peanuts", "name": "Roasted salted peanuts", "grams": 30, "notes": "chopped", "optional": true }
+      ],
+
+      "instructions": [
+        "Combine BBQ sauce, orange juice, tamari, and vinegar in a shallow pan. Slice tempeh into triangles. Marinate for at least 1 hour, preferably overnight.",
+        "Cut cauliflower into florets. Pulse in food processor to rice texture.",
+        "Heat ghee in a large frypan over medium heat. Add onion and cook until translucent, 4 minutes.",
+        "Add cauliflower rice, garlic powder, and nutmeg. Season with salt. Saute 5-7 minutes.",
+        "In another frypan, heat olive oil. Add garlic and saute until fragrant, 1 minute. Add kale and saute 2-3 minutes until wilted. Stir in lemon juice and salt.",
+        "Heat grill pan or cast-iron frypan with coconut oil. Drain tempeh, reserving marinade.",
+        "Grill tempeh 5 minutes per side, brushing with marinade occasionally.",
+        "Stir parsley and parmesan into cauliflower rice.",
+        "Spoon cauliflower rice into bowls, add tempeh, brush with remaining marinade. Sprinkle with peanuts if using. Serve kale alongside."
+      ],
+
+      "per_serve": {
+        "calories": 520,
+        "protein_g": 28,
+        "fat_g": 32,
+        "carbs_g": 32,
+        "fibre_g": 6
+      },
+
+      "source": "galveston_book",
+      "source_ref": "p.203",
+
+      "created_at": "2025-12-05",
+      "updated_at": "2025-12-05",
+      "version": 1
+    },
+    {
+      "id": "veggie-cheese-enchiladas",
+      "name": "Veggie Cheese Enchiladas with Grain-Free Tortillas",
+      "description": "Homemade grain-free tortillas filled with spiced vegetables, eggs, spinach, and cheese, baked in enchilada sauce.",
+
+      "meal_type": "dinner",
+      "phase": [1, 2, 3],
+      "category": "eggs",
+      "cuisine": "mexican",
+      "tags": ["vegetarian", "low-carb", "comfort-food"],
+
+      "batch_friendly": true,
+      "batch_notes": "Enchiladas can be assembled ahead and baked when needed. Tortillas freeze well.",
+      "components": {
+        "reheatable": ["enchiladas"],
+        "fresh_only": []
+      },
+      "freezer_friendly": true,
+      "good_for_lunchbox": true,
+
+      "flavour_profile": ["spicy", "rich", "sour"],
+      "texture": ["soft", "chewy"],
+      "temperature": "hot",
+
+      "difficulty": "complex",
+      "active_cooking": true,
+      "prep_time_mins": 45,
+      "cook_time_mins": 45,
+      "total_time_mins": 90,
+
+      "dietary": {
+        "dairy_free": false,
+        "gluten_free": true,
+        "nut_free": false,
+        "egg_free": false,
+        "vegetarian": true,
+        "vegan": false
+      },
+
+      "base_servings": 4,
+      "ingredients": [
+        { "id": "almond-flour", "name": "Almond flour", "grams": 100 },
+        { "id": "coconut-flour", "name": "Coconut flour", "grams": 30 },
+        { "id": "xanthan-gum", "name": "Xanthan gum", "grams": 4 },
+        { "id": "baking-powder", "name": "Baking powder", "grams": 4 },
+        { "id": "salt-kosher", "name": "Kosher salt", "grams": 2 },
+        { "id": "lime", "name": "Fresh lime juice", "grams": 10 },
+        { "id": "eggs", "name": "Eggs", "grams": 200, "notes": "4 large, divided" },
+        { "id": "water", "name": "Water", "grams": 15 },
+        { "id": "tomato-sauce", "name": "No-added-sugar tomato sauce", "grams": 360 },
+        { "id": "vegetable-broth", "name": "Vegetable broth", "grams": 240 },
+        { "id": "vinegar-apple-cider", "name": "Apple cider vinegar", "grams": 5 },
+        { "id": "chilli-powder", "name": "Chilli powder", "grams": 8 },
+        { "id": "paprika-smoked", "name": "Smoked paprika", "grams": 3 },
+        { "id": "cumin", "name": "Ground cumin", "grams": 5 },
+        { "id": "onion-powder", "name": "Onion powder", "grams": 3 },
+        { "id": "garlic-powder", "name": "Garlic powder", "grams": 3 },
+        { "id": "avocado-oil", "name": "Avocado oil", "grams": 30 },
+        { "id": "onion", "name": "Onion", "grams": 50, "notes": "diced" },
+        { "id": "capsicum", "name": "Capsicum", "grams": 75, "notes": "1 small, diced" },
+        { "id": "zucchini", "name": "Zucchini", "grams": 60, "notes": "diced" },
+        { "id": "spinach", "name": "Fresh spinach", "grams": 60 },
+        { "id": "garlic-salt", "name": "Garlic salt", "grams": 3 },
+        { "id": "cheese-cheddar", "name": "Cheddar cheese", "grams": 170, "notes": "shredded" }
+      ],
+
+      "instructions": [
+        "Make tortilla dough: Combine flours, xanthan gum, baking powder, and salt in food processor. Pulse 5 seconds. Add lime juice, 1 egg, then water. When dough forms a ball, knead briefly, wrap in plastic, refrigerate 10 minutes.",
+        "Make sauce: Combine tomato sauce, broth, vinegar, 8g chilli powder, paprika, 3g cumin, onion powder, and 2g garlic powder in saucepan. Heat to near boil, reduce and simmer 15-30 minutes until thickened.",
+        "Shape tortillas: Divide dough into 8 balls. Roll each between parchment to 5-6 inches diameter. Cook in hot cast-iron frypan about 20 seconds per side.",
+        "Make filling: Heat avocado oil in saucepan. Saute onion and capsicum until softened, 3 minutes. Add zucchini, then remaining 3 eggs, stir to scramble. Add spinach, remaining chilli powder, garlic salt, onion powder, and cumin. Simmer until heated through.",
+        "Assemble: Place a tortilla flat, spoon on 1/2 cup filling and 1 1/2 tbsp cheese. Roll up and place in 33x23cm baking dish. Repeat with remaining tortillas.",
+        "Preheat oven to 180C. Pour sauce over enchiladas and sprinkle remaining cheese on top.",
+        "Bake 30 minutes until heated through and cheese is browned."
+      ],
+
+      "per_serve": {
+        "calories": 480,
+        "protein_g": 22,
+        "fat_g": 34,
+        "carbs_g": 22,
+        "fibre_g": 8
+      },
+
+      "source": "galveston_book",
+      "source_ref": "p.204",
+
+      "created_at": "2025-12-05",
+      "updated_at": "2025-12-05",
+      "version": 1
+    },
+    {
+      "id": "spicy-edamame-bowl-chilli-sauce",
+      "name": "Spicy Edamame Bowl with Creamy Chilli Sauce",
+      "description": "Stir-fried edamame with coleslaw, ginger, and sriracha, topped with creamy chilli mayo sauce.",
+
+      "meal_type": "dinner",
+      "phase": [2, 3],
+      "category": "legumes",
+      "cuisine": "asian",
+      "tags": ["vegan-option", "spicy", "quick"],
+
+      "batch_friendly": true,
+      "batch_notes": "Reheats well. Make sauce fresh.",
+      "components": {
+        "reheatable": ["edamame mixture"],
+        "fresh_only": ["chilli sauce"]
+      },
+      "freezer_friendly": false,
+      "good_for_lunchbox": true,
+
+      "flavour_profile": ["spicy", "umami", "pungent"],
+      "texture": ["crunchy", "creamy"],
+      "temperature": "hot",
+
+      "difficulty": "easy",
+      "active_cooking": true,
+      "prep_time_mins": 10,
+      "cook_time_mins": 15,
+      "total_time_mins": 25,
+
+      "dietary": {
+        "dairy_free": true,
+        "gluten_free": false,
+        "nut_free": true,
+        "egg_free": true,
+        "vegetarian": true,
+        "vegan": true
+      },
+
+      "base_servings": 4,
+      "ingredients": [
+        { "id": "sesame-oil", "name": "Toasted sesame oil", "grams": 40 },
+        { "id": "spring-onion", "name": "Spring onions", "grams": 100, "notes": "6, green and white parts sliced separately" },
+        { "id": "onion-red", "name": "Red onion", "grams": 50, "notes": "diced" },
+        { "id": "garlic", "name": "Garlic", "grams": 20, "notes": "5 cloves, minced" },
+        { "id": "edamame", "name": "Frozen edamame", "grams": 300 },
+        { "id": "ginger", "name": "Fresh ginger", "grams": 5, "notes": "grated" },
+        { "id": "sriracha", "name": "Sriracha or hot sauce", "grams": 30 },
+        { "id": "coleslaw-mix", "name": "Coleslaw mix", "grams": 400 },
+        { "id": "tamari", "name": "Tamari", "grams": 45 },
+        { "id": "vinegar-rice", "name": "Rice wine vinegar", "grams": 15 },
+        { "id": "white-pepper", "name": "Ground white pepper", "grams": 0.5 },
+        { "id": "salt", "name": "Salt", "grams": 2 },
+        { "id": "black-sesame-seeds", "name": "Black sesame seeds", "grams": 10, "notes": "for garnish" },
+        { "id": "mayonnaise-olive-oil", "name": "Olive oil mayonnaise", "grams": 60 }
+      ],
+
+      "instructions": [
+        "Heat sesame oil in a large frypan over medium heat. Add white parts of spring onions, red onion, and garlic. Saute until onion softens, about 3 minutes.",
+        "Add frozen edamame, ginger, and 15g hot sauce. Cook until edamame is heated through, about 3 minutes.",
+        "Add coleslaw mix, tamari, vinegar, white pepper, and salt. Stir well. Cook, stirring regularly, until cabbage is tender, about 5 minutes.",
+        "Make chilli sauce: Whisk together mayonnaise and remaining 15g hot sauce. Season with salt.",
+        "Spoon edamame mixture into serving bowls.",
+        "Drizzle chilli sauce over the top. Garnish with spring onion greens and black sesame seeds."
+      ],
+
+      "per_serve": {
+        "calories": 320,
+        "protein_g": 14,
+        "fat_g": 22,
+        "carbs_g": 20,
+        "fibre_g": 6
+      },
+
+      "source": "galveston_book",
+      "source_ref": "p.206",
+
+      "created_at": "2025-12-05",
+      "updated_at": "2025-12-05",
+      "version": 1
+    }
+  ]
+}

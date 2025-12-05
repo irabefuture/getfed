@@ -1,0 +1,1005 @@
+{
+  "_metadata": {
+    "description": "Lunch main recipes extracted from Galveston Diet book",
+    "source": "galveston_book",
+    "created": "2025-12-05",
+    "status": "extracted",
+    "notes": "Converted to metric, AU ingredient names. For personal use."
+  },
+
+  "recipes": [
+    {
+      "id": "chicken-blt-lettuce-wrap",
+      "name": "Chicken and BLT Lettuce Wrap",
+      "description": "Low-carb wrap with shredded chicken, turkey bacon, avocado, and ranch dressing in crisp lettuce leaves.",
+
+      "meal_type": "lunch",
+      "phase": [1, 2, 3],
+      "category": "poultry",
+      "cuisine": "american",
+      "tags": ["low-carb", "high-protein", "quick", "no-cook", "portable"],
+
+      "batch_friendly": true,
+      "batch_notes": "Chicken and bacon can be prepped ahead. Assemble wraps just before eating.",
+      "components": {
+        "reheatable": ["chicken", "turkey bacon"],
+        "fresh_only": ["lettuce wrap assembly"]
+      },
+      "freezer_friendly": false,
+      "good_for_lunchbox": true,
+
+      "flavour_profile": ["salty", "rich", "umami"],
+      "texture": ["crunchy", "creamy", "soft"],
+      "temperature": "room_temp",
+
+      "difficulty": "no_cook",
+      "active_cooking": false,
+      "prep_time_mins": 10,
+      "cook_time_mins": 0,
+      "total_time_mins": 10,
+
+      "dietary": {
+        "dairy_free": false,
+        "gluten_free": true,
+        "nut_free": true,
+        "egg_free": true,
+        "vegetarian": false,
+        "vegan": false
+      },
+
+      "base_servings": 2,
+      "ingredients": [
+        { "id": "lettuce-butter", "name": "Butter lettuce leaves", "grams": 60, "notes": "2 large leaves" },
+        { "id": "avocado", "name": "Avocado", "grams": 150, "notes": "1 whole, sliced" },
+        { "id": "chicken-breast", "name": "Rotisserie chicken breast", "grams": 170, "notes": "shredded" },
+        { "id": "tomato", "name": "Tomato", "grams": 75, "notes": "chopped" },
+        { "id": "turkey-bacon", "name": "Turkey bacon", "grams": 30, "notes": "2 slices, cooked" },
+        { "id": "ranch-dressing", "name": "Ranch dressing", "grams": 60, "notes": "Primal Kitchen or similar" },
+        { "id": "black-pepper", "name": "Black pepper", "grams": 0.5 },
+        { "id": "cheese-cheddar", "name": "Cheddar cheese", "grams": 28, "notes": "grated" }
+      ],
+
+      "instructions": [
+        "Place the lettuce leaves on a board and flatten slightly.",
+        "Layer avocado slices on each leaf.",
+        "Add shredded chicken, then tomato and turkey bacon.",
+        "Drizzle with ranch dressing.",
+        "Season with pepper and sprinkle with cheese.",
+        "Fold up the sides of the leaf and serve at once."
+      ],
+
+      "per_serve": {
+        "calories": 450,
+        "protein_g": 28,
+        "fat_g": 35,
+        "carbs_g": 8,
+        "fibre_g": 5
+      },
+
+      "source": "galveston_book",
+      "source_ref": "p.178",
+
+      "created_at": "2025-12-05",
+      "updated_at": "2025-12-05",
+      "version": 1
+    },
+    {
+      "id": "tuna-salad-side-salad",
+      "name": "Tuna Salad with Side Salad",
+      "description": "Creamy tuna salad with pecans, served over fresh mixed greens with lemon dressing.",
+
+      "meal_type": "lunch",
+      "phase": [1, 2, 3],
+      "category": "fish",
+      "cuisine": "universal",
+      "tags": ["no-cook", "high-protein", "quick", "portable"],
+
+      "batch_friendly": true,
+      "batch_notes": "Tuna salad component keeps 2-3 days refrigerated. Side salad must be fresh - dress just before serving.",
+      "components": {
+        "reheatable": [],
+        "fresh_only": ["side salad with dressing"]
+      },
+      "freezer_friendly": false,
+      "good_for_lunchbox": true,
+
+      "flavour_profile": ["sour", "rich", "light"],
+      "texture": ["creamy", "crunchy"],
+      "temperature": "cold",
+
+      "difficulty": "no_cook",
+      "active_cooking": false,
+      "prep_time_mins": 10,
+      "cook_time_mins": 0,
+      "total_time_mins": 10,
+
+      "dietary": {
+        "dairy_free": true,
+        "gluten_free": true,
+        "nut_free": false,
+        "egg_free": true,
+        "vegetarian": false,
+        "vegan": false
+      },
+
+      "base_servings": 1,
+      "ingredients": [
+        { "id": "tuna-canned", "name": "Tuna in water", "grams": 56, "notes": "drained" },
+        { "id": "onion-red", "name": "Red onion", "grams": 15, "notes": "finely chopped" },
+        { "id": "mayonnaise-avocado", "name": "Avocado oil mayonnaise", "grams": 30 },
+        { "id": "pecans", "name": "Pecans", "grams": 20, "notes": "roughly chopped" },
+        { "id": "mixed-greens", "name": "Mixed salad greens", "grams": 30 },
+        { "id": "tomato", "name": "Tomato", "grams": 75, "notes": "chopped" },
+        { "id": "carrot", "name": "Carrot", "grams": 40, "notes": "chopped" },
+        { "id": "celery", "name": "Celery", "grams": 30, "notes": "chopped" },
+        { "id": "olive-oil", "name": "Olive oil", "grams": 15 },
+        { "id": "lemon", "name": "Lemon juice", "grams": 15, "notes": "fresh" }
+      ],
+
+      "instructions": [
+        "Make the tuna salad: Empty drained tuna into a bowl.",
+        "Add red onion, mayonnaise, and pecans. Stir to blend well.",
+        "Make the side salad: Place mixed greens, tomato, carrot, and celery in a salad bowl.",
+        "Drizzle with olive oil and lemon juice, toss gently.",
+        "Top the dressed greens with tuna salad and serve."
+      ],
+
+      "per_serve": {
+        "calories": 480,
+        "protein_g": 22,
+        "fat_g": 42,
+        "carbs_g": 10,
+        "fibre_g": 4
+      },
+
+      "source": "galveston_book",
+      "source_ref": "p.179",
+
+      "created_at": "2025-12-05",
+      "updated_at": "2025-12-05",
+      "version": 1
+    },
+    {
+      "id": "tgd-cobb-salad",
+      "name": "TGD Cobb Salad",
+      "description": "Classic Cobb salad with rotisserie chicken, turkey bacon, avocado, eggs, and cherry tomatoes over cos lettuce.",
+
+      "meal_type": "lunch",
+      "phase": [1, 2, 3],
+      "category": "poultry",
+      "cuisine": "american",
+      "tags": ["high-protein", "no-cook", "classic", "filling"],
+
+      "batch_friendly": true,
+      "batch_notes": "Components can be prepped ahead. Assemble and dress just before serving.",
+      "components": {
+        "reheatable": ["chicken", "bacon"],
+        "fresh_only": ["salad assembly", "dressing"]
+      },
+      "freezer_friendly": false,
+      "good_for_lunchbox": true,
+
+      "flavour_profile": ["salty", "rich", "umami"],
+      "texture": ["crunchy", "creamy", "soft"],
+      "temperature": "cold",
+
+      "difficulty": "no_cook",
+      "active_cooking": false,
+      "prep_time_mins": 15,
+      "cook_time_mins": 0,
+      "total_time_mins": 15,
+
+      "dietary": {
+        "dairy_free": true,
+        "gluten_free": true,
+        "nut_free": true,
+        "egg_free": false,
+        "vegetarian": false,
+        "vegan": false
+      },
+
+      "base_servings": 4,
+      "ingredients": [
+        { "id": "lettuce-cos", "name": "Cos lettuce", "grams": 300, "notes": "chopped" },
+        { "id": "chicken-breast", "name": "Rotisserie chicken breast", "grams": 340, "notes": "shredded" },
+        { "id": "turkey-bacon", "name": "Turkey bacon", "grams": 180, "notes": "12 slices, cooked" },
+        { "id": "avocado", "name": "Avocado", "grams": 300, "notes": "2 whole, chopped" },
+        { "id": "eggs", "name": "Hard-boiled eggs", "grams": 400, "notes": "8 eggs, quartered" },
+        { "id": "tomato-cherry", "name": "Cherry tomatoes", "grams": 225, "notes": "halved" },
+        { "id": "ranch-dressing", "name": "Ranch dressing", "grams": 120, "notes": "Primal Kitchen" },
+        { "id": "sunflower-seeds", "name": "Sunflower seeds", "grams": 60 }
+      ],
+
+      "instructions": [
+        "In a large bowl, combine the cos lettuce with the chicken, turkey bacon, avocado, eggs, and tomatoes.",
+        "Spoon on the dressing and toss well.",
+        "Sprinkle with the sunflower seeds and serve."
+      ],
+
+      "per_serve": {
+        "calories": 520,
+        "protein_g": 38,
+        "fat_g": 38,
+        "carbs_g": 10,
+        "fibre_g": 6
+      },
+
+      "source": "galveston_book",
+      "source_ref": "p.181",
+
+      "created_at": "2025-12-05",
+      "updated_at": "2025-12-05",
+      "version": 1
+    },
+    {
+      "id": "grape-tomato-pea-salad-ricotta",
+      "name": "Grape Tomato and Pea Salad on Ricotta Spread",
+      "description": "Fresh rocket and spinach salad with sugar snap peas and tomatoes, served on creamy ricotta with basil dressing.",
+
+      "meal_type": "lunch",
+      "phase": [1, 2, 3],
+      "category": "dairy",
+      "cuisine": "mediterranean",
+      "tags": ["vegetarian", "fresh", "light", "summer"],
+
+      "batch_friendly": false,
+      "batch_notes": "Best made fresh. Ricotta spread can be made ahead.",
+      "components": {
+        "reheatable": [],
+        "fresh_only": ["salad", "dressing"]
+      },
+      "freezer_friendly": false,
+      "good_for_lunchbox": false,
+
+      "flavour_profile": ["herby", "sour", "light"],
+      "texture": ["creamy", "crunchy"],
+      "temperature": "cold",
+
+      "difficulty": "easy",
+      "active_cooking": false,
+      "prep_time_mins": 15,
+      "cook_time_mins": 0,
+      "total_time_mins": 15,
+
+      "dietary": {
+        "dairy_free": false,
+        "gluten_free": true,
+        "nut_free": true,
+        "egg_free": true,
+        "vegetarian": true,
+        "vegan": false
+      },
+
+      "base_servings": 1,
+      "ingredients": [
+        { "id": "ricotta", "name": "Full-fat ricotta", "grams": 245 },
+        { "id": "olive-oil", "name": "Olive oil", "grams": 45, "notes": "divided" },
+        { "id": "salt", "name": "Salt", "grams": 2.5 },
+        { "id": "rocket", "name": "Baby rocket", "grams": 30 },
+        { "id": "spinach", "name": "Baby spinach", "grams": 30 },
+        { "id": "sugar-snap-peas", "name": "Sugar snap peas", "grams": 75, "notes": "stemmed and halved" },
+        { "id": "tomato-grape", "name": "Grape tomatoes", "grams": 75, "notes": "halved" },
+        { "id": "vinegar-balsamic-white", "name": "White balsamic vinegar", "grams": 30 },
+        { "id": "basil", "name": "Fresh basil", "grams": 30, "notes": "chopped" },
+        { "id": "red-pepper-flakes", "name": "Red pepper flakes", "grams": 0.5, "optional": true },
+        { "id": "black-pepper", "name": "Black pepper", "grams": 0.5 }
+      ],
+
+      "instructions": [
+        "Place the ricotta, 15ml olive oil, and salt in a food processor and process until creamy. Transfer to a serving plate.",
+        "In a large bowl, toss together the rocket, spinach, sugar snap peas, and grape tomatoes.",
+        "Make the dressing: In a blender, combine the remaining olive oil, vinegar, basil, red pepper flakes, salt, and pepper until emulsified.",
+        "Pour the dressing over the greens and mix thoroughly.",
+        "Place the dressed salad atop the ricotta spread on the plate and serve."
+      ],
+
+      "per_serve": {
+        "calories": 580,
+        "protein_g": 20,
+        "fat_g": 48,
+        "carbs_g": 18,
+        "fibre_g": 4
+      },
+
+      "source": "galveston_book",
+      "source_ref": "p.182",
+
+      "created_at": "2025-12-05",
+      "updated_at": "2025-12-05",
+      "version": 1
+    },
+    {
+      "id": "chicken-taco-salad",
+      "name": "Chicken Taco Salad",
+      "description": "Spiced chicken with black beans, guacamole, sour cream, and salsa over mixed greens.",
+
+      "meal_type": "lunch",
+      "phase": [2, 3],
+      "category": "poultry",
+      "cuisine": "mexican",
+      "tags": ["high-protein", "spicy", "filling"],
+
+      "batch_friendly": true,
+      "batch_notes": "Chicken can be prepped ahead. Assemble fresh.",
+      "components": {
+        "reheatable": ["chicken"],
+        "fresh_only": ["salad greens", "guacamole"]
+      },
+      "freezer_friendly": false,
+      "good_for_lunchbox": true,
+
+      "flavour_profile": ["spicy", "sour", "rich"],
+      "texture": ["creamy", "crunchy"],
+      "temperature": "room_temp",
+
+      "difficulty": "easy",
+      "active_cooking": false,
+      "prep_time_mins": 10,
+      "cook_time_mins": 0,
+      "total_time_mins": 10,
+
+      "dietary": {
+        "dairy_free": false,
+        "gluten_free": true,
+        "nut_free": true,
+        "egg_free": true,
+        "vegetarian": false,
+        "vegan": false
+      },
+
+      "base_servings": 1,
+      "ingredients": [
+        { "id": "chicken-breast", "name": "Cooked chicken breast", "grams": 115, "notes": "chopped" },
+        { "id": "chilli-powder", "name": "Chilli powder", "grams": 1 },
+        { "id": "cumin", "name": "Ground cumin", "grams": 1 },
+        { "id": "oregano", "name": "Dried oregano", "grams": 0.5 },
+        { "id": "garlic-salt", "name": "Garlic salt", "grams": 2 },
+        { "id": "guacamole", "name": "Guacamole", "grams": 30 },
+        { "id": "sour-cream", "name": "Sour cream", "grams": 30 },
+        { "id": "salsa", "name": "Salsa fresca", "grams": 30 },
+        { "id": "black-beans", "name": "Black beans", "grams": 85, "notes": "canned, rinsed and drained" },
+        { "id": "mixed-greens", "name": "Mixed salad greens", "grams": 60 }
+      ],
+
+      "instructions": [
+        "Place the chicken in a large bowl and season with the spices and garlic salt.",
+        "Add the guacamole, sour cream, salsa, and beans, and toss well.",
+        "Place the salad greens on a dinner plate.",
+        "Top with the chicken and bean mixture and serve."
+      ],
+
+      "per_serve": {
+        "calories": 420,
+        "protein_g": 35,
+        "fat_g": 20,
+        "carbs_g": 25,
+        "fibre_g": 10
+      },
+
+      "source": "galveston_book",
+      "source_ref": "p.186",
+
+      "created_at": "2025-12-05",
+      "updated_at": "2025-12-05",
+      "version": 1
+    },
+    {
+      "id": "tuna-salad-mixed-greens",
+      "name": "Tuna Salad over Mixed Greens",
+      "description": "Simple tuna salad with mayo and pecans served over fresh mixed greens.",
+
+      "meal_type": "lunch",
+      "phase": [1, 2, 3],
+      "category": "fish",
+      "cuisine": "universal",
+      "tags": ["quick", "no-cook", "high-protein", "simple"],
+
+      "batch_friendly": true,
+      "batch_notes": "Tuna salad keeps 2-3 days refrigerated.",
+      "components": {
+        "reheatable": [],
+        "fresh_only": ["salad greens"]
+      },
+      "freezer_friendly": false,
+      "good_for_lunchbox": true,
+
+      "flavour_profile": ["mild", "rich"],
+      "texture": ["creamy", "crunchy"],
+      "temperature": "cold",
+
+      "difficulty": "no_cook",
+      "active_cooking": false,
+      "prep_time_mins": 5,
+      "cook_time_mins": 0,
+      "total_time_mins": 5,
+
+      "dietary": {
+        "dairy_free": true,
+        "gluten_free": true,
+        "nut_free": false,
+        "egg_free": true,
+        "vegetarian": false,
+        "vegan": false
+      },
+
+      "base_servings": 1,
+      "ingredients": [
+        { "id": "mixed-greens", "name": "Mixed salad greens", "grams": 60 },
+        { "id": "tuna-canned", "name": "Tuna in water", "grams": 85, "notes": "drained" },
+        { "id": "onion", "name": "Onion", "grams": 15, "notes": "minced" },
+        { "id": "mayonnaise-avocado", "name": "Avocado oil mayonnaise", "grams": 30 },
+        { "id": "pecans", "name": "Pecans", "grams": 20, "notes": "chopped" }
+      ],
+
+      "instructions": [
+        "Place the salad greens in a medium salad bowl.",
+        "Combine the tuna, onion, and mayonnaise in a small bowl.",
+        "Spoon the tuna mixture over the greens.",
+        "Top with the pecans and serve."
+      ],
+
+      "per_serve": {
+        "calories": 380,
+        "protein_g": 24,
+        "fat_g": 30,
+        "carbs_g": 5,
+        "fibre_g": 2
+      },
+
+      "source": "galveston_book",
+      "source_ref": "p.186",
+
+      "created_at": "2025-12-05",
+      "updated_at": "2025-12-05",
+      "version": 1
+    },
+    {
+      "id": "grilled-chicken-salad",
+      "name": "Grilled Chicken Salad",
+      "description": "Brined and grilled chicken breast served over crisp cos lettuce with fresh lemon.",
+
+      "meal_type": "lunch",
+      "phase": [1, 2, 3],
+      "category": "poultry",
+      "cuisine": "universal",
+      "tags": ["high-protein", "classic", "grilled"],
+
+      "batch_friendly": true,
+      "batch_notes": "Chicken can be grilled ahead and refrigerated. Salad assembled fresh.",
+      "components": {
+        "reheatable": ["grilled chicken"],
+        "fresh_only": ["lettuce"]
+      },
+      "freezer_friendly": true,
+      "good_for_lunchbox": true,
+
+      "flavour_profile": ["sour", "mild", "light"],
+      "texture": ["crunchy", "soft"],
+      "temperature": "warm",
+
+      "difficulty": "medium",
+      "active_cooking": true,
+      "prep_time_mins": 40,
+      "cook_time_mins": 20,
+      "total_time_mins": 60,
+
+      "dietary": {
+        "dairy_free": true,
+        "gluten_free": true,
+        "nut_free": true,
+        "egg_free": true,
+        "vegetarian": false,
+        "vegan": false
+      },
+
+      "base_servings": 4,
+      "ingredients": [
+        { "id": "water", "name": "Water", "grams": 960 },
+        { "id": "salt-kosher", "name": "Kosher salt", "grams": 70 },
+        { "id": "chicken-breast", "name": "Chicken breast", "grams": 450, "notes": "boneless, skinless, cut into 4 pieces" },
+        { "id": "olive-oil", "name": "Olive oil", "grams": 45, "notes": "plus more for grill" },
+        { "id": "paprika", "name": "Paprika", "grams": 3 },
+        { "id": "lettuce-cos", "name": "Cos lettuce", "grams": 200, "notes": "1 head, chopped" },
+        { "id": "lemon", "name": "Lemon juice", "grams": 30, "notes": "fresh" }
+      ],
+
+      "instructions": [
+        "Combine the water and salt in a large bowl, stirring to dissolve. Add the chicken and refrigerate for 30 minutes.",
+        "Preheat grill to high on one side and medium on the other (or use a stovetop grill pan over medium-high heat).",
+        "Pat the chicken dry. Coat with olive oil and paprika.",
+        "Brush grill grates with olive oil. Place chicken on hot side and grill until grill marks appear.",
+        "Turn chicken and move to cooler side. Continue grilling until internal temperature reaches 68C.",
+        "Transfer chicken to a platter, cover with foil, and rest for 10 minutes.",
+        "Arrange cos lettuce on a serving platter. Place chicken on top and sprinkle with lemon juice."
+      ],
+
+      "per_serve": {
+        "calories": 280,
+        "protein_g": 32,
+        "fat_g": 16,
+        "carbs_g": 3,
+        "fibre_g": 1
+      },
+
+      "source": "galveston_book",
+      "source_ref": "p.191",
+
+      "created_at": "2025-12-05",
+      "updated_at": "2025-12-05",
+      "version": 1
+    },
+    {
+      "id": "egg-vegetable-salad",
+      "name": "Egg and Vegetable Salad",
+      "description": "Mashed egg salad with mustard and olives served over fresh chopped vegetables in lettuce cups.",
+
+      "meal_type": "lunch",
+      "phase": [1, 2, 3],
+      "category": "eggs",
+      "cuisine": "universal",
+      "tags": ["vegetarian", "no-cook", "quick", "portable"],
+
+      "batch_friendly": true,
+      "batch_notes": "Egg salad keeps 2-3 days refrigerated. Assemble fresh.",
+      "components": {
+        "reheatable": [],
+        "fresh_only": ["vegetable mix", "lettuce cups"]
+      },
+      "freezer_friendly": false,
+      "good_for_lunchbox": true,
+
+      "flavour_profile": ["sour", "salty", "mild"],
+      "texture": ["creamy", "crunchy"],
+      "temperature": "cold",
+
+      "difficulty": "no_cook",
+      "active_cooking": false,
+      "prep_time_mins": 10,
+      "cook_time_mins": 0,
+      "total_time_mins": 10,
+
+      "dietary": {
+        "dairy_free": true,
+        "gluten_free": true,
+        "nut_free": true,
+        "egg_free": false,
+        "vegetarian": true,
+        "vegan": false
+      },
+
+      "base_servings": 1,
+      "ingredients": [
+        { "id": "eggs", "name": "Hard-boiled eggs", "grams": 100, "notes": "2 large, quartered" },
+        { "id": "mayonnaise-avocado", "name": "Avocado oil mayonnaise", "grams": 30 },
+        { "id": "mustard-spicy", "name": "Spicy brown mustard", "grams": 5 },
+        { "id": "vinegar-apple-cider", "name": "Apple cider vinegar", "grams": 15 },
+        { "id": "olives", "name": "Olives", "grams": 30, "notes": "sliced" },
+        { "id": "cucumber", "name": "Cucumber", "grams": 100, "notes": "chopped" },
+        { "id": "onion-red", "name": "Red onion", "grams": 15, "notes": "diced" },
+        { "id": "celery", "name": "Celery", "grams": 30, "notes": "diced" },
+        { "id": "carrot", "name": "Carrot", "grams": 50, "notes": "diced" },
+        { "id": "lettuce-butter", "name": "Butter lettuce leaves", "grams": 40, "notes": "2 large leaves" }
+      ],
+
+      "instructions": [
+        "In a medium bowl, mash the eggs with the mayonnaise, mustard, and vinegar. Blend well.",
+        "Stir in the olives.",
+        "In another bowl, combine the cucumber, onion, celery, and carrot.",
+        "Arrange the lettuce leaves on a serving plate.",
+        "Spoon on the cucumber mix, then spoon the egg salad on top.",
+        "Serve immediately."
+      ],
+
+      "per_serve": {
+        "calories": 380,
+        "protein_g": 14,
+        "fat_g": 32,
+        "carbs_g": 10,
+        "fibre_g": 3
+      },
+
+      "source": "galveston_book",
+      "source_ref": "p.188",
+
+      "created_at": "2025-12-05",
+      "updated_at": "2025-12-05",
+      "version": 1
+    },
+    {
+      "id": "vegan-protein-salad",
+      "name": "Vegan Protein Salad",
+      "description": "Marinated tempeh and baked tofu over rocket with broccoli, cucumber, avocado, and tahini dressing.",
+
+      "meal_type": "lunch",
+      "phase": [1, 2, 3],
+      "category": "tofu_tempeh",
+      "cuisine": "asian",
+      "tags": ["vegan", "high-protein", "plant-based"],
+
+      "batch_friendly": true,
+      "batch_notes": "Tempeh and tofu can be marinated and baked ahead. Salad assembled fresh.",
+      "components": {
+        "reheatable": ["tempeh", "tofu"],
+        "fresh_only": ["salad", "dressing"]
+      },
+      "freezer_friendly": false,
+      "good_for_lunchbox": true,
+
+      "flavour_profile": ["umami", "sour", "rich"],
+      "texture": ["crunchy", "chewy", "creamy"],
+      "temperature": "warm",
+
+      "difficulty": "medium",
+      "active_cooking": true,
+      "prep_time_mins": 20,
+      "cook_time_mins": 50,
+      "total_time_mins": 190,
+
+      "dietary": {
+        "dairy_free": true,
+        "gluten_free": false,
+        "nut_free": true,
+        "egg_free": true,
+        "vegetarian": true,
+        "vegan": true
+      },
+
+      "base_servings": 2,
+      "ingredients": [
+        { "id": "vinegar-balsamic", "name": "Balsamic vinegar", "grams": 30 },
+        { "id": "tamari", "name": "Tamari", "grams": 30 },
+        { "id": "maple-syrup", "name": "Pure maple syrup", "grams": 15 },
+        { "id": "garlic-powder", "name": "Garlic powder", "grams": 2 },
+        { "id": "salt", "name": "Salt", "grams": 1 },
+        { "id": "black-pepper", "name": "Black pepper", "grams": 0.5 },
+        { "id": "tempeh", "name": "Tempeh", "grams": 115, "notes": "cubed" },
+        { "id": "tofu-firm", "name": "Firm tofu", "grams": 140, "notes": "cubed" },
+        { "id": "broccoli", "name": "Broccoli", "grams": 150, "notes": "steamed and chopped" },
+        { "id": "rocket", "name": "Fresh rocket", "grams": 60 },
+        { "id": "cucumber", "name": "Cucumber", "grams": 150, "notes": "diced" },
+        { "id": "avocado", "name": "Avocado", "grams": 150, "notes": "chopped" },
+        { "id": "hemp-seeds", "name": "Hemp seeds", "grams": 30 },
+        { "id": "tahini", "name": "Tahini", "grams": 15 },
+        { "id": "olive-oil", "name": "Olive oil", "grams": 15 },
+        { "id": "lemon", "name": "Lemon juice", "grams": 15 }
+      ],
+
+      "instructions": [
+        "Mix the balsamic vinegar, half the tamari, maple syrup, half the garlic powder, salt and pepper in a shallow dish.",
+        "Add the tempeh and marinate for at least 2 hours, preferably overnight.",
+        "Preheat the oven to 200C. Spray a baking dish with cooking spray.",
+        "Transfer tempeh to baking dish and bake for 20 minutes.",
+        "Toss tofu with remaining garlic powder, tamari, salt and pepper. Bake at 200C for 30 minutes until browned.",
+        "Steam the broccoli until tender, about 5 minutes.",
+        "Place the broccoli, rocket, cucumber, and avocado in a large salad bowl.",
+        "Add the baked tempeh and tofu cubes and mix well.",
+        "Sprinkle with hemp seeds. Drizzle with tahini and olive oil, toss to coat.",
+        "Finish with a spritz of fresh lemon juice and serve."
+      ],
+
+      "per_serve": {
+        "calories": 520,
+        "protein_g": 28,
+        "fat_g": 38,
+        "carbs_g": 22,
+        "fibre_g": 8
+      },
+
+      "source": "galveston_book",
+      "source_ref": "p.181",
+
+      "created_at": "2025-12-05",
+      "updated_at": "2025-12-05",
+      "version": 1
+    },
+    {
+      "id": "portobello-pizzas",
+      "name": "Portobello Pizzas",
+      "description": "Portobello mushroom caps stuffed with sauteed tomatoes, onion, and melted cheese - a low-carb pizza alternative.",
+
+      "meal_type": "lunch",
+      "phase": [1, 2, 3],
+      "category": "vegetables",
+      "cuisine": "italian",
+      "tags": ["vegetarian", "low-carb", "quick"],
+
+      "batch_friendly": false,
+      "batch_notes": "Best made fresh. Filling can be prepped ahead.",
+      "components": {
+        "reheatable": [],
+        "fresh_only": []
+      },
+      "freezer_friendly": false,
+      "good_for_lunchbox": false,
+
+      "flavour_profile": ["umami", "herby", "salty"],
+      "texture": ["soft", "chewy"],
+      "temperature": "hot",
+
+      "difficulty": "easy",
+      "active_cooking": true,
+      "prep_time_mins": 10,
+      "cook_time_mins": 15,
+      "total_time_mins": 25,
+
+      "dietary": {
+        "dairy_free": false,
+        "gluten_free": true,
+        "nut_free": true,
+        "egg_free": true,
+        "vegetarian": true,
+        "vegan": false
+      },
+
+      "base_servings": 2,
+      "ingredients": [
+        { "id": "olive-oil", "name": "Olive oil", "grams": 30 },
+        { "id": "onion-red", "name": "Red onion", "grams": 75, "notes": "chopped" },
+        { "id": "mushroom-portobello", "name": "Portobello mushrooms", "grams": 400, "notes": "4 large, caps whole, stems chopped" },
+        { "id": "tomato-grape", "name": "Grape tomatoes", "grams": 75, "notes": "halved" },
+        { "id": "salt", "name": "Salt", "grams": 2 },
+        { "id": "black-pepper", "name": "Black pepper", "grams": 0.5 },
+        { "id": "mozzarella", "name": "Mozzarella cheese", "grams": 60, "notes": "shredded" },
+        { "id": "parmesan", "name": "Parmesan cheese", "grams": 30, "notes": "shredded" },
+        { "id": "basil", "name": "Fresh basil", "grams": 10, "notes": "julienned" }
+      ],
+
+      "instructions": [
+        "Heat the olive oil in a large frypan over medium heat.",
+        "Add the red onion and saute 3-4 minutes until lightly softened.",
+        "Add the mushroom stems and grape tomatoes, reduce heat to medium-low, and simmer for 5 minutes until tomatoes are paste-like.",
+        "Season with salt and pepper. Transfer the mixture to a small bowl.",
+        "Add the mushroom caps to the frypan and cook over medium heat for 3-4 minutes on each side.",
+        "Spread the tomato mixture in the mushroom caps, still in the frypan.",
+        "Sprinkle on the cheeses. Lower heat to medium-low, cover, and simmer until cheeses melt, about 5 minutes.",
+        "Transfer to serving plates, top with fresh basil and serve."
+      ],
+
+      "per_serve": {
+        "calories": 320,
+        "protein_g": 16,
+        "fat_g": 24,
+        "carbs_g": 12,
+        "fibre_g": 3
+      },
+
+      "source": "galveston_book",
+      "source_ref": "p.192",
+
+      "created_at": "2025-12-05",
+      "updated_at": "2025-12-05",
+      "version": 1
+    },
+    {
+      "id": "cheeseburger-lettuce-sliders",
+      "name": "Cheeseburger Lettuce Sliders",
+      "description": "Grass-fed beef patties in butter lettuce buns with cheese, mayo, tomato, avocado, and pickles.",
+
+      "meal_type": "lunch",
+      "phase": [1, 2, 3],
+      "category": "beef",
+      "cuisine": "american",
+      "tags": ["low-carb", "high-protein", "quick", "classic"],
+
+      "batch_friendly": true,
+      "batch_notes": "Patties can be made ahead and reheated. Assemble fresh.",
+      "components": {
+        "reheatable": ["beef patties"],
+        "fresh_only": ["lettuce buns", "toppings"]
+      },
+      "freezer_friendly": true,
+      "good_for_lunchbox": true,
+
+      "flavour_profile": ["umami", "salty", "rich"],
+      "texture": ["soft", "crunchy", "creamy"],
+      "temperature": "warm",
+
+      "difficulty": "easy",
+      "active_cooking": true,
+      "prep_time_mins": 10,
+      "cook_time_mins": 10,
+      "total_time_mins": 20,
+
+      "dietary": {
+        "dairy_free": false,
+        "gluten_free": true,
+        "nut_free": true,
+        "egg_free": true,
+        "vegetarian": false,
+        "vegan": false
+      },
+
+      "base_servings": 2,
+      "ingredients": [
+        { "id": "beef-mince", "name": "Grass-fed beef mince (90% lean)", "grams": 170 },
+        { "id": "salt", "name": "Salt", "grams": 2 },
+        { "id": "black-pepper", "name": "Black pepper", "grams": 0.5 },
+        { "id": "olive-oil", "name": "Olive oil", "grams": 15 },
+        { "id": "lettuce-butter", "name": "Butter lettuce leaves", "grams": 80, "notes": "4 large leaves" },
+        { "id": "cheese-cheddar", "name": "Cheddar cheese", "grams": 40, "notes": "2 slices" },
+        { "id": "mayonnaise-avocado", "name": "Avocado oil mayonnaise", "grams": 30 },
+        { "id": "tomato", "name": "Tomato", "grams": 50, "notes": "2 slices" },
+        { "id": "avocado", "name": "Avocado", "grams": 75, "notes": "sliced" },
+        { "id": "onion", "name": "Onion", "grams": 20, "notes": "2 small slices" },
+        { "id": "pickle", "name": "Dill pickle", "grams": 20, "notes": "2 slices" }
+      ],
+
+      "instructions": [
+        "Shape the beef into 4 equal patties. Season with salt and pepper.",
+        "Add the olive oil to a medium frypan over medium heat.",
+        "When oil is shimmering, add patties and cook for 4-5 minutes on one side.",
+        "Flip and continue cooking for another 4 minutes until medium-well.",
+        "Arrange 2 lettuce leaves on serving plates.",
+        "Top with patties, cheese, mayo, tomato, avocado, onion, and pickle.",
+        "Add remaining lettuce leaves to form a bun and serve."
+      ],
+
+      "per_serve": {
+        "calories": 420,
+        "protein_g": 25,
+        "fat_g": 34,
+        "carbs_g": 6,
+        "fibre_g": 4
+      },
+
+      "source": "galveston_book",
+      "source_ref": "p.193",
+
+      "created_at": "2025-12-05",
+      "updated_at": "2025-12-05",
+      "version": 1
+    },
+    {
+      "id": "roasted-tomato-bisque",
+      "name": "Roasted Tomato Bisque",
+      "description": "Creamy roasted tomato soup with cannellini beans and fresh basil.",
+
+      "meal_type": "lunch",
+      "phase": [2, 3],
+      "category": "legumes",
+      "cuisine": "italian",
+      "tags": ["vegetarian", "soup", "comfort-food", "batch-cook"],
+
+      "batch_friendly": true,
+      "batch_notes": "Freezes well. Add cream when reheating.",
+      "components": {
+        "reheatable": ["tomato base"],
+        "fresh_only": ["cream", "basil garnish"]
+      },
+      "freezer_friendly": true,
+      "good_for_lunchbox": true,
+
+      "flavour_profile": ["sour", "rich", "herby"],
+      "texture": ["smooth", "creamy"],
+      "temperature": "hot",
+
+      "difficulty": "easy",
+      "active_cooking": true,
+      "prep_time_mins": 10,
+      "cook_time_mins": 35,
+      "total_time_mins": 45,
+
+      "dietary": {
+        "dairy_free": false,
+        "gluten_free": true,
+        "nut_free": true,
+        "egg_free": true,
+        "vegetarian": true,
+        "vegan": false
+      },
+
+      "base_servings": 4,
+      "ingredients": [
+        { "id": "olive-oil", "name": "Olive oil", "grams": 60 },
+        { "id": "tomato-roma", "name": "Roma tomatoes", "grams": 600, "notes": "8 medium, halved" },
+        { "id": "garlic", "name": "Garlic", "grams": 16, "notes": "4 cloves, minced" },
+        { "id": "cannellini-beans", "name": "Cannellini beans", "grams": 425, "notes": "1 can, drained" },
+        { "id": "chicken-broth", "name": "Chicken broth", "grams": 480 },
+        { "id": "salt", "name": "Salt", "grams": 3 },
+        { "id": "black-pepper", "name": "Black pepper", "grams": 1 },
+        { "id": "cream-thickened", "name": "Thickened cream", "grams": 240 },
+        { "id": "basil", "name": "Fresh basil", "grams": 10, "notes": "julienned", "optional": true }
+      ],
+
+      "instructions": [
+        "Preheat the oven to 200C. Lightly oil a baking tray with olive oil.",
+        "Place tomato halves on the baking tray and sprinkle with garlic.",
+        "Roast for 20-25 minutes until tomatoes are soft.",
+        "Transfer tomatoes and garlic to a blender, add the beans, and process until smooth.",
+        "Pour the puree into a medium pot over medium heat. Add the broth and heat through.",
+        "Season with salt and pepper.",
+        "Stir in the cream and ladle into individual bowls.",
+        "Sprinkle with fresh basil if using and serve."
+      ],
+
+      "per_serve": {
+        "calories": 380,
+        "protein_g": 10,
+        "fat_g": 28,
+        "carbs_g": 25,
+        "fibre_g": 6
+      },
+
+      "source": "galveston_book",
+      "source_ref": "p.185",
+
+      "created_at": "2025-12-05",
+      "updated_at": "2025-12-05",
+      "version": 1
+    },
+    {
+      "id": "sirloin-spinach-blue-cheese-salad",
+      "name": "Sirloin, Spinach, and Blue Cheese Salad",
+      "description": "Grilled sirloin steak slices over fresh spinach with blue cheese and pecans.",
+
+      "meal_type": "lunch",
+      "phase": [1, 2, 3],
+      "category": "beef",
+      "cuisine": "american",
+      "tags": ["high-protein", "grilled", "quick"],
+
+      "batch_friendly": true,
+      "batch_notes": "Steak can be grilled ahead. Salad assembled fresh.",
+      "components": {
+        "reheatable": ["steak"],
+        "fresh_only": ["spinach salad"]
+      },
+      "freezer_friendly": false,
+      "good_for_lunchbox": true,
+
+      "flavour_profile": ["umami", "salty", "sour"],
+      "texture": ["soft", "crunchy"],
+      "temperature": "warm",
+
+      "difficulty": "easy",
+      "active_cooking": true,
+      "prep_time_mins": 5,
+      "cook_time_mins": 10,
+      "total_time_mins": 15,
+
+      "dietary": {
+        "dairy_free": false,
+        "gluten_free": true,
+        "nut_free": false,
+        "egg_free": true,
+        "vegetarian": false,
+        "vegan": false
+      },
+
+      "base_servings": 4,
+      "ingredients": [
+        { "id": "spinach", "name": "Fresh spinach leaves", "grams": 120 },
+        { "id": "blue-cheese", "name": "Blue cheese", "grams": 45, "notes": "crumbled" },
+        { "id": "pecans", "name": "Pecans", "grams": 30, "notes": "chopped" },
+        { "id": "olive-oil", "name": "Olive oil", "grams": 30 },
+        { "id": "lemon", "name": "Lemon juice", "grams": 15 },
+        { "id": "salt", "name": "Salt", "grams": 2 },
+        { "id": "black-pepper", "name": "Black pepper", "grams": 1 },
+        { "id": "beef-sirloin", "name": "Boneless sirloin steak", "grams": 340, "notes": "grilled and sliced" }
+      ],
+
+      "instructions": [
+        "In a large salad bowl, toss the spinach, blue cheese, and pecans.",
+        "Drizzle with olive oil and lemon juice, and toss to coat.",
+        "Season to taste with salt and pepper.",
+        "Place the salad on individual plates.",
+        "Top with the sliced steak and serve."
+      ],
+
+      "per_serve": {
+        "calories": 320,
+        "protein_g": 28,
+        "fat_g": 22,
+        "carbs_g": 3,
+        "fibre_g": 1
+      },
+
+      "source": "galveston_book",
+      "source_ref": "p.199",
+
+      "created_at": "2025-12-05",
+      "updated_at": "2025-12-05",
+      "version": 1
+    }
+  ]
+}

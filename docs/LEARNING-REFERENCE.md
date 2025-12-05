@@ -551,6 +551,66 @@ This IS the Technical Product Owner role.
 
 ---
 
+## Day 5 Session 1 (Friday 5 Dec AM) - UI Refinements
+
+### What Was Accomplished
+
+**Sidebar Restructure:**
+- Renamed "This Week" → "Planner"
+- Renamed "Settings" → "Family Plan" (moved up with Users icon)
+- Added new "Settings" at bottom with divider
+- Created placeholder AppSettingsView.jsx
+
+**Daily Targets Enhancement:**
+- Progress bars at bottom of each macro box (not full box fill)
+- Green when on track, red when over 100%
+- Name bold, calories lighter
+- Fine border around each macro box
+- Updates every 1 second via localStorage polling
+
+**Day Strip Redesign:**
+- Reduced from 14/21 days to 7 days (no scrolling)
+- Weekend days (Sat/Sun) visually differentiated with darker background
+- Replaced checkbox with "Select" bar at bottom of each card
+- Selected days: depressed look (shadow-inner, darker border)
+- Viewing day: green fill with green border
+- Generate + Commit buttons moved inline at end of row
+- Removed purple colour scheme - now uses subtle greys
+
+**Bug Fixes:**
+- Disabled Next.js dev indicator (`devIndicators: false` in next.config.mjs)
+- Fixed green background bleed under day cards (added border-t to Select button)
+
+### Key Learnings
+
+#### UI/UX Patterns
+- **Click target size matters:** Small checkboxes are frustrating; full-width "Select" bar is much better
+- **Visual states need clear hierarchy:** Viewing (green) vs Selected (depressed) vs Weekend (darker) vs Normal
+- **Depressed/inset look:** `shadow-inner` + darker border creates "pressed button" effect without colour
+- **Weekend differentiation:** Subtle background change (`bg-muted/60`) breaks up the week visually
+
+#### Next.js 15 Dev Indicator
+- New in Next.js 15 - the "N" button in bottom left
+- Disable with `devIndicators: false` in next.config.mjs (not the nested object)
+- Requires server restart to take effect
+
+#### Navigation Restructure Pattern
+- Main features in nav list
+- Settings tucked at bottom with divider
+- Common pattern in modern apps (Slack, Discord, etc.)
+
+### Files Modified
+
+| File | Changes |
+|------|--------|
+| `src/components/Sidebar.jsx` | Nav restructure, Daily Targets progress bars, Settings at bottom |
+| `src/components/WeekView.jsx` | Day strip redesign, 7 days, Select bar, inline buttons |
+| `src/components/AppSettingsView.jsx` | NEW - placeholder for app settings |
+| `src/app/page.js` | Updated routing for new nav IDs |
+| `next.config.mjs` | Disabled dev indicators |
+
+---
+
 ## End-of-Session Workflow
 
 **At end of each session, ask Claude:**
@@ -565,4 +625,4 @@ git commit -m "Day X Session Y - brief description"
 
 ---
 
-*Last updated: Thursday 4 December 2025, 3:30 PM AEDT - Day 4 Session 2*
+*Last updated: Friday 5 December 2025, End of Day 5 Session 1*

@@ -1,0 +1,1346 @@
+{
+  "_metadata": {
+    "description": "Evening snack recipes extracted from Galveston Diet book",
+    "source": "galveston_book",
+    "created": "2025-12-05",
+    "status": "extracted",
+    "notes": "Converted to metric, AU ingredient names. For personal use. Satisfying snacks for ~19:30, not too heavy before bed."
+  },
+
+  "recipes": [
+    {
+      "id": "pecans-berries-coconut",
+      "name": "Pecans with Berries and Coconut",
+      "description": "Simple mix of pecans, fresh berries, and coconut flakes - sweet and satisfying.",
+
+      "meal_type": "snack_evening",
+      "phase": [1, 2, 3],
+      "category": "nuts_seeds",
+      "cuisine": "universal",
+      "tags": ["no-cook", "quick", "antioxidant"],
+
+      "batch_friendly": false,
+      "batch_notes": "Best assembled fresh.",
+      "components": {
+        "reheatable": [],
+        "fresh_only": ["berries"]
+      },
+      "freezer_friendly": false,
+      "good_for_lunchbox": true,
+
+      "flavour_profile": ["sweet", "mild"],
+      "texture": ["crunchy", "soft"],
+      "temperature": "cold",
+
+      "difficulty": "no_cook",
+      "active_cooking": false,
+      "prep_time_mins": 2,
+      "cook_time_mins": 0,
+      "total_time_mins": 2,
+
+      "dietary": {
+        "dairy_free": true,
+        "gluten_free": true,
+        "nut_free": false,
+        "egg_free": true,
+        "vegetarian": true,
+        "vegan": true
+      },
+
+      "base_servings": 1,
+      "ingredients": [
+        { "id": "pecans", "name": "Pecans", "grams": 30 },
+        { "id": "blueberries", "name": "Fresh blueberries", "grams": 40 },
+        { "id": "strawberries", "name": "Fresh strawberries", "grams": 40 },
+        { "id": "coconut-flakes", "name": "Unsweetened coconut flakes", "grams": 15 }
+      ],
+
+      "instructions": [
+        "Place the pecans, berries, and coconut in a small bowl and enjoy."
+      ],
+
+      "per_serve": {
+        "calories": 280,
+        "protein_g": 4,
+        "fat_g": 24,
+        "carbs_g": 16,
+        "fibre_g": 6
+      },
+
+      "source": "galveston_book",
+      "source_ref": "p.215",
+
+      "created_at": "2025-12-05",
+      "updated_at": "2025-12-05",
+      "version": 1
+    },
+    {
+      "id": "pecans-dark-chocolate",
+      "name": "Pecans and Dark Chocolate",
+      "description": "Rich dark chocolate with crunchy pecans - a satisfying evening treat.",
+
+      "meal_type": "snack_evening",
+      "phase": [1, 2, 3],
+      "category": "nuts_seeds",
+      "cuisine": "universal",
+      "tags": ["no-cook", "indulgent", "quick"],
+
+      "batch_friendly": false,
+      "batch_notes": "Assemble fresh.",
+      "components": {
+        "reheatable": [],
+        "fresh_only": []
+      },
+      "freezer_friendly": false,
+      "good_for_lunchbox": true,
+
+      "flavour_profile": ["sweet", "bitter", "rich"],
+      "texture": ["crunchy"],
+      "temperature": "room_temp",
+
+      "difficulty": "no_cook",
+      "active_cooking": false,
+      "prep_time_mins": 1,
+      "cook_time_mins": 0,
+      "total_time_mins": 1,
+
+      "dietary": {
+        "dairy_free": true,
+        "gluten_free": true,
+        "nut_free": false,
+        "egg_free": true,
+        "vegetarian": true,
+        "vegan": true
+      },
+
+      "base_servings": 1,
+      "ingredients": [
+        { "id": "dark-chocolate", "name": "70%+ dark chocolate", "grams": 28, "notes": "1 piece" },
+        { "id": "pecans", "name": "Pecans", "grams": 30 }
+      ],
+
+      "instructions": [
+        "Either melt the chocolate and dip the pecans in it, or simply enjoy the chocolate and pecans together."
+      ],
+
+      "per_serve": {
+        "calories": 320,
+        "protein_g": 4,
+        "fat_g": 28,
+        "carbs_g": 16,
+        "fibre_g": 4
+      },
+
+      "source": "galveston_book",
+      "source_ref": "p.215",
+
+      "created_at": "2025-12-05",
+      "updated_at": "2025-12-05",
+      "version": 1
+    },
+    {
+      "id": "raspberries-pecans",
+      "name": "Raspberries with Pecans",
+      "description": "Fresh raspberries paired with crunchy pecans - simple and refreshing.",
+
+      "meal_type": "snack_evening",
+      "phase": [1, 2, 3],
+      "category": "fruit",
+      "cuisine": "universal",
+      "tags": ["no-cook", "quick", "light"],
+
+      "batch_friendly": false,
+      "batch_notes": "Best fresh.",
+      "components": {
+        "reheatable": [],
+        "fresh_only": ["raspberries"]
+      },
+      "freezer_friendly": false,
+      "good_for_lunchbox": true,
+
+      "flavour_profile": ["sweet", "sour"],
+      "texture": ["soft", "crunchy"],
+      "temperature": "cold",
+
+      "difficulty": "no_cook",
+      "active_cooking": false,
+      "prep_time_mins": 1,
+      "cook_time_mins": 0,
+      "total_time_mins": 1,
+
+      "dietary": {
+        "dairy_free": true,
+        "gluten_free": true,
+        "nut_free": false,
+        "egg_free": true,
+        "vegetarian": true,
+        "vegan": true
+      },
+
+      "base_servings": 1,
+      "ingredients": [
+        { "id": "raspberries", "name": "Fresh raspberries", "grams": 75 },
+        { "id": "pecans", "name": "Pecans", "grams": 30 }
+      ],
+
+      "instructions": [
+        "Place the raspberries and pecans in a small bowl and enjoy."
+      ],
+
+      "per_serve": {
+        "calories": 240,
+        "protein_g": 4,
+        "fat_g": 22,
+        "carbs_g": 12,
+        "fibre_g": 6
+      },
+
+      "source": "galveston_book",
+      "source_ref": "p.215",
+
+      "created_at": "2025-12-05",
+      "updated_at": "2025-12-05",
+      "version": 1
+    },
+    {
+      "id": "nutty-berry-bowl",
+      "name": "Nutty Berry Bowl",
+      "description": "Mixed fresh berries with slivered almonds - antioxidant-rich and naturally sweet.",
+
+      "meal_type": "snack_evening",
+      "phase": [1, 2, 3],
+      "category": "fruit",
+      "cuisine": "universal",
+      "tags": ["no-cook", "quick", "antioxidant"],
+
+      "batch_friendly": false,
+      "batch_notes": "Best fresh.",
+      "components": {
+        "reheatable": [],
+        "fresh_only": ["berries"]
+      },
+      "freezer_friendly": false,
+      "good_for_lunchbox": true,
+
+      "flavour_profile": ["sweet", "sour"],
+      "texture": ["soft", "crunchy"],
+      "temperature": "cold",
+
+      "difficulty": "no_cook",
+      "active_cooking": false,
+      "prep_time_mins": 2,
+      "cook_time_mins": 0,
+      "total_time_mins": 2,
+
+      "dietary": {
+        "dairy_free": true,
+        "gluten_free": true,
+        "nut_free": false,
+        "egg_free": true,
+        "vegetarian": true,
+        "vegan": true
+      },
+
+      "base_servings": 1,
+      "ingredients": [
+        { "id": "strawberries", "name": "Fresh strawberries", "grams": 40, "notes": "hulled and halved" },
+        { "id": "raspberries", "name": "Fresh raspberries", "grams": 40 },
+        { "id": "blackberries", "name": "Fresh blackberries", "grams": 40 },
+        { "id": "blueberries", "name": "Fresh blueberries", "grams": 40 },
+        { "id": "almonds", "name": "Slivered almonds", "grams": 20 }
+      ],
+
+      "instructions": [
+        "Place the berries and nuts in a serving bowl and enjoy."
+      ],
+
+      "per_serve": {
+        "calories": 220,
+        "protein_g": 6,
+        "fat_g": 12,
+        "carbs_g": 26,
+        "fibre_g": 10
+      },
+
+      "source": "galveston_book",
+      "source_ref": "p.215",
+
+      "created_at": "2025-12-05",
+      "updated_at": "2025-12-05",
+      "version": 1
+    },
+    {
+      "id": "tropical-berries",
+      "name": "Tropical Berries",
+      "description": "Fresh blueberries with coconut flakes - simple tropical-inspired snack.",
+
+      "meal_type": "snack_evening",
+      "phase": [1, 2, 3],
+      "category": "fruit",
+      "cuisine": "tropical",
+      "tags": ["no-cook", "quick", "simple"],
+
+      "batch_friendly": false,
+      "batch_notes": "Best fresh.",
+      "components": {
+        "reheatable": [],
+        "fresh_only": ["blueberries"]
+      },
+      "freezer_friendly": false,
+      "good_for_lunchbox": true,
+
+      "flavour_profile": ["sweet", "mild"],
+      "texture": ["soft", "chewy"],
+      "temperature": "cold",
+
+      "difficulty": "no_cook",
+      "active_cooking": false,
+      "prep_time_mins": 1,
+      "cook_time_mins": 0,
+      "total_time_mins": 1,
+
+      "dietary": {
+        "dairy_free": true,
+        "gluten_free": true,
+        "nut_free": true,
+        "egg_free": true,
+        "vegetarian": true,
+        "vegan": true
+      },
+
+      "base_servings": 1,
+      "ingredients": [
+        { "id": "blueberries", "name": "Fresh blueberries", "grams": 75 },
+        { "id": "coconut-flakes", "name": "Unsweetened coconut flakes", "grams": 15 }
+      ],
+
+      "instructions": [
+        "Place the blueberries and coconut in a serving bowl and enjoy."
+      ],
+
+      "per_serve": {
+        "calories": 120,
+        "protein_g": 2,
+        "fat_g": 6,
+        "carbs_g": 16,
+        "fibre_g": 4
+      },
+
+      "source": "galveston_book",
+      "source_ref": "p.216",
+
+      "created_at": "2025-12-05",
+      "updated_at": "2025-12-05",
+      "version": 1
+    },
+    {
+      "id": "strawberries-chia-cream",
+      "name": "Strawberries with Chia Cream",
+      "description": "Fresh strawberries drizzled with cream, chia seeds, and coconut - decadent yet healthy.",
+
+      "meal_type": "snack_evening",
+      "phase": [1, 2, 3],
+      "category": "fruit",
+      "cuisine": "universal",
+      "tags": ["no-cook", "quick", "indulgent"],
+
+      "batch_friendly": false,
+      "batch_notes": "Best assembled fresh.",
+      "components": {
+        "reheatable": [],
+        "fresh_only": ["strawberries"]
+      },
+      "freezer_friendly": false,
+      "good_for_lunchbox": false,
+
+      "flavour_profile": ["sweet", "rich"],
+      "texture": ["soft", "creamy"],
+      "temperature": "cold",
+
+      "difficulty": "no_cook",
+      "active_cooking": false,
+      "prep_time_mins": 2,
+      "cook_time_mins": 0,
+      "total_time_mins": 2,
+
+      "dietary": {
+        "dairy_free": false,
+        "gluten_free": true,
+        "nut_free": true,
+        "egg_free": true,
+        "vegetarian": true,
+        "vegan": false
+      },
+
+      "base_servings": 1,
+      "ingredients": [
+        { "id": "strawberries", "name": "Fresh strawberries", "grams": 150, "notes": "halved" },
+        { "id": "cream-thickened", "name": "Thickened cream", "grams": 30 },
+        { "id": "chia-seeds", "name": "Chia seeds", "grams": 12 },
+        { "id": "coconut-flakes", "name": "Unsweetened coconut flakes", "grams": 8 }
+      ],
+
+      "instructions": [
+        "Place the strawberries in a small bowl.",
+        "Drizzle with the cream.",
+        "Sprinkle with the chia seeds and coconut flakes."
+      ],
+
+      "per_serve": {
+        "calories": 220,
+        "protein_g": 4,
+        "fat_g": 16,
+        "carbs_g": 18,
+        "fibre_g": 8
+      },
+
+      "source": "galveston_book",
+      "source_ref": "p.216",
+
+      "created_at": "2025-12-05",
+      "updated_at": "2025-12-05",
+      "version": 1
+    },
+    {
+      "id": "pear-ricotta",
+      "name": "Pear Slices and Ricotta Cheese",
+      "description": "Fresh pear slices with creamy ricotta and a hint of cinnamon.",
+
+      "meal_type": "snack_evening",
+      "phase": [2, 3],
+      "category": "dairy",
+      "cuisine": "italian",
+      "tags": ["no-cook", "quick", "elegant"],
+
+      "batch_friendly": false,
+      "batch_notes": "Best made fresh to prevent pear browning.",
+      "components": {
+        "reheatable": [],
+        "fresh_only": ["pear"]
+      },
+      "freezer_friendly": false,
+      "good_for_lunchbox": false,
+
+      "flavour_profile": ["sweet", "mild", "spicy"],
+      "texture": ["soft", "creamy"],
+      "temperature": "cold",
+
+      "difficulty": "no_cook",
+      "active_cooking": false,
+      "prep_time_mins": 2,
+      "cook_time_mins": 0,
+      "total_time_mins": 2,
+
+      "dietary": {
+        "dairy_free": false,
+        "gluten_free": true,
+        "nut_free": true,
+        "egg_free": true,
+        "vegetarian": true,
+        "vegan": false
+      },
+
+      "base_servings": 1,
+      "ingredients": [
+        { "id": "pear", "name": "Ripe pear", "grams": 90, "notes": "half, cored and sliced" },
+        { "id": "ricotta", "name": "Whole-milk ricotta", "grams": 180 },
+        { "id": "cinnamon", "name": "Ground cinnamon", "grams": 0.5, "optional": true }
+      ],
+
+      "instructions": [
+        "Working quickly so the pear doesn't oxidise, spread the slices on a plate.",
+        "Spoon the ricotta alongside.",
+        "Sprinkle the ricotta and pears with cinnamon if using."
+      ],
+
+      "per_serve": {
+        "calories": 280,
+        "protein_g": 14,
+        "fat_g": 16,
+        "carbs_g": 20,
+        "fibre_g": 2
+      },
+
+      "source": "galveston_book",
+      "source_ref": "p.216",
+
+      "created_at": "2025-12-05",
+      "updated_at": "2025-12-05",
+      "version": 1
+    },
+    {
+      "id": "chocolate-mocha-almonds-string-cheese",
+      "name": "Chocolate Mocha Almonds with String Cheese",
+      "description": "Cocoa and coffee dusted toasted almonds paired with string cheese - sweet and savoury.",
+
+      "meal_type": "snack_evening",
+      "phase": [1, 2, 3],
+      "category": "nuts_seeds",
+      "cuisine": "universal",
+      "tags": ["make-ahead", "chocolate", "coffee"],
+
+      "batch_friendly": true,
+      "batch_notes": "Almonds store well in airtight container at room temperature.",
+      "components": {
+        "reheatable": [],
+        "fresh_only": []
+      },
+      "freezer_friendly": false,
+      "good_for_lunchbox": true,
+
+      "flavour_profile": ["sweet", "bitter", "rich"],
+      "texture": ["crunchy"],
+      "temperature": "room_temp",
+
+      "difficulty": "easy",
+      "active_cooking": true,
+      "prep_time_mins": 10,
+      "cook_time_mins": 5,
+      "total_time_mins": 15,
+
+      "dietary": {
+        "dairy_free": false,
+        "gluten_free": true,
+        "nut_free": false,
+        "egg_free": true,
+        "vegetarian": true,
+        "vegan": false
+      },
+
+      "base_servings": 6,
+      "ingredients": [
+        { "id": "almonds", "name": "Raw almonds", "grams": 140, "notes": "unsalted" },
+        { "id": "olive-oil", "name": "Olive oil", "grams": 2 },
+        { "id": "cocoa-powder", "name": "Unsweetened cocoa powder", "grams": 8 },
+        { "id": "instant-coffee", "name": "Instant coffee granules", "grams": 2 },
+        { "id": "sweetener-swerve", "name": "Swerve powdered sugar", "grams": 3 },
+        { "id": "string-cheese", "name": "String cheese", "grams": 170, "notes": "6 pieces" }
+      ],
+
+      "instructions": [
+        "In a small nonstick frypan, toast almonds over low heat, stirring every couple of minutes, until fragrant, about 3 minutes.",
+        "Add olive oil and stir to coat. Remove from heat.",
+        "Blend cocoa powder, coffee, and powdered sweetener in a blender until the coffee granules are incorporated into a powder.",
+        "Pour almonds and cocoa mixture into a medium bowl and toss to coat evenly. Shake off excess.",
+        "Spread over baking paper to cool.",
+        "Store almonds in an airtight container at room temperature.",
+        "Serve about 25g almonds with 1 string cheese per portion."
+      ],
+
+      "per_serve": {
+        "calories": 200,
+        "protein_g": 10,
+        "fat_g": 16,
+        "carbs_g": 6,
+        "fibre_g": 2
+      },
+
+      "source": "galveston_book",
+      "source_ref": "p.217",
+
+      "created_at": "2025-12-05",
+      "updated_at": "2025-12-05",
+      "version": 1
+    },
+    {
+      "id": "chia-pudding",
+      "name": "Chia Pudding",
+      "description": "Simple overnight chia pudding with coconut milk, flax seeds, pecans, and cinnamon.",
+
+      "meal_type": "snack_evening",
+      "phase": [1, 2, 3],
+      "category": "nuts_seeds",
+      "cuisine": "universal",
+      "tags": ["make-ahead", "omega-3", "overnight"],
+
+      "batch_friendly": true,
+      "batch_notes": "Perfect make-ahead snack. Keeps 3-4 days refrigerated.",
+      "components": {
+        "reheatable": [],
+        "fresh_only": []
+      },
+      "freezer_friendly": false,
+      "good_for_lunchbox": true,
+
+      "flavour_profile": ["sweet", "mild", "spicy"],
+      "texture": ["thick", "creamy"],
+      "temperature": "cold",
+
+      "difficulty": "no_cook",
+      "active_cooking": false,
+      "prep_time_mins": 5,
+      "cook_time_mins": 0,
+      "total_time_mins": 245,
+
+      "dietary": {
+        "dairy_free": true,
+        "gluten_free": true,
+        "nut_free": false,
+        "egg_free": true,
+        "vegetarian": true,
+        "vegan": true
+      },
+
+      "base_servings": 1,
+      "ingredients": [
+        { "id": "flaxseed", "name": "Flax seeds", "grams": 7 },
+        { "id": "pecans", "name": "Pecans", "grams": 20, "notes": "chopped" },
+        { "id": "cinnamon", "name": "Ground cinnamon", "grams": 1 },
+        { "id": "coconut-milk", "name": "Unsweetened coconut milk", "grams": 120 },
+        { "id": "chia-seeds", "name": "Chia seeds", "grams": 30 }
+      ],
+
+      "instructions": [
+        "In a small bowl, combine the flax seeds, pecans, and cinnamon to taste.",
+        "Add the coconut milk slowly, stirring, until the ingredients are blended.",
+        "Sprinkle with the chia seeds and stir in gently.",
+        "Cover and refrigerate 4-5 hours, or overnight, until the pudding has thickened."
+      ],
+
+      "per_serve": {
+        "calories": 340,
+        "protein_g": 8,
+        "fat_g": 28,
+        "carbs_g": 18,
+        "fibre_g": 14
+      },
+
+      "source": "galveston_book",
+      "source_ref": "p.221",
+
+      "created_at": "2025-12-05",
+      "updated_at": "2025-12-05",
+      "version": 1
+    },
+    {
+      "id": "coconut-chia-pudding-raspberries",
+      "name": "Coconut-Chia Pudding with Raspberries",
+      "description": "Creamy coconut chia pudding with pumpkin spice and fresh raspberries.",
+
+      "meal_type": "snack_evening",
+      "phase": [1, 2, 3],
+      "category": "nuts_seeds",
+      "cuisine": "universal",
+      "tags": ["make-ahead", "omega-3", "overnight"],
+
+      "batch_friendly": true,
+      "batch_notes": "Perfect make-ahead. Keeps 3-4 days refrigerated.",
+      "components": {
+        "reheatable": [],
+        "fresh_only": ["raspberries"]
+      },
+      "freezer_friendly": false,
+      "good_for_lunchbox": true,
+
+      "flavour_profile": ["sweet", "mild", "spicy"],
+      "texture": ["thick", "creamy"],
+      "temperature": "cold",
+
+      "difficulty": "no_cook",
+      "active_cooking": false,
+      "prep_time_mins": 5,
+      "cook_time_mins": 0,
+      "total_time_mins": 245,
+
+      "dietary": {
+        "dairy_free": true,
+        "gluten_free": true,
+        "nut_free": true,
+        "egg_free": true,
+        "vegetarian": true,
+        "vegan": true
+      },
+
+      "base_servings": 2,
+      "ingredients": [
+        { "id": "coconut-milk-canned", "name": "Canned unsweetened coconut milk", "grams": 400, "notes": "1 can" },
+        { "id": "vanilla", "name": "Vanilla extract", "grams": 2 },
+        { "id": "stevia", "name": "Stevia or monk fruit sweetener", "grams": 0.5, "notes": "pinch" },
+        { "id": "pumpkin-pie-spice", "name": "Pumpkin pie spice", "grams": 0.5 },
+        { "id": "chia-seeds", "name": "Chia seeds", "grams": 60 },
+        { "id": "raspberries", "name": "Fresh raspberries", "grams": 75 }
+      ],
+
+      "instructions": [
+        "Place the coconut milk, vanilla, sweetener, and pumpkin pie spice into a medium bowl and stir well.",
+        "Make sure all the coconut lumps get broken up and the liquid is smooth.",
+        "Stir in the chia seeds and mix again.",
+        "Cover the bowl and refrigerate for 4 hours or more, or until thickened.",
+        "Spoon the pudding into individual bowls and top with the raspberries."
+      ],
+
+      "per_serve": {
+        "calories": 420,
+        "protein_g": 8,
+        "fat_g": 38,
+        "carbs_g": 18,
+        "fibre_g": 12
+      },
+
+      "source": "galveston_book",
+      "source_ref": "p.221",
+
+      "created_at": "2025-12-05",
+      "updated_at": "2025-12-05",
+      "version": 1
+    },
+    {
+      "id": "coconut-walnut-chia-pudding",
+      "name": "Coconut and Walnut Chia Pudding",
+      "description": "Almond milk chia pudding topped with mixed nuts, seeds, and coconut.",
+
+      "meal_type": "snack_evening",
+      "phase": [1, 2, 3],
+      "category": "nuts_seeds",
+      "cuisine": "universal",
+      "tags": ["make-ahead", "omega-3", "overnight"],
+
+      "batch_friendly": true,
+      "batch_notes": "Perfect make-ahead. Keeps 3-4 days refrigerated.",
+      "components": {
+        "reheatable": [],
+        "fresh_only": []
+      },
+      "freezer_friendly": false,
+      "good_for_lunchbox": true,
+
+      "flavour_profile": ["sweet", "mild", "spicy"],
+      "texture": ["thick", "crunchy"],
+      "temperature": "cold",
+
+      "difficulty": "no_cook",
+      "active_cooking": false,
+      "prep_time_mins": 5,
+      "cook_time_mins": 0,
+      "total_time_mins": 125,
+
+      "dietary": {
+        "dairy_free": true,
+        "gluten_free": true,
+        "nut_free": false,
+        "egg_free": true,
+        "vegetarian": true,
+        "vegan": true
+      },
+
+      "base_servings": 4,
+      "ingredients": [
+        { "id": "almond-milk", "name": "Unsweetened almond milk", "grams": 960 },
+        { "id": "chia-seeds", "name": "Chia seeds", "grams": 48 },
+        { "id": "stevia", "name": "Stevia", "grams": 1 },
+        { "id": "cinnamon", "name": "Ground cinnamon", "grams": 1 },
+        { "id": "walnuts", "name": "Walnuts", "grams": 60, "notes": "chopped" },
+        { "id": "pecans", "name": "Pecans", "grams": 60, "notes": "chopped" },
+        { "id": "sunflower-seeds", "name": "Sunflower seeds", "grams": 30 },
+        { "id": "coconut-flakes", "name": "Unsweetened coconut flakes", "grams": 20 }
+      ],
+
+      "instructions": [
+        "In a medium bowl, combine the almond milk, chia seeds, stevia, and cinnamon.",
+        "Cover and refrigerate for 2 hours or overnight, until thickened.",
+        "When ready to serve, spoon into individual bowls.",
+        "Top each with some of the nuts, sunflower seeds, and coconut flakes."
+      ],
+
+      "per_serve": {
+        "calories": 340,
+        "protein_g": 10,
+        "fat_g": 28,
+        "carbs_g": 16,
+        "fibre_g": 10
+      },
+
+      "source": "galveston_book",
+      "source_ref": "p.222",
+
+      "created_at": "2025-12-05",
+      "updated_at": "2025-12-05",
+      "version": 1
+    },
+    {
+      "id": "peanut-butter-chocolate-chia-pudding",
+      "name": "Peanut Butter and Chocolate Chia Pudding",
+      "description": "Decadent chocolate chia pudding topped with melted peanut butter and raspberries.",
+
+      "meal_type": "snack_evening",
+      "phase": [1, 2, 3],
+      "category": "nuts_seeds",
+      "cuisine": "universal",
+      "tags": ["make-ahead", "chocolate", "indulgent"],
+
+      "batch_friendly": true,
+      "batch_notes": "Perfect make-ahead. Keeps 3-4 days refrigerated.",
+      "components": {
+        "reheatable": [],
+        "fresh_only": ["peanut butter topping", "raspberries"]
+      },
+      "freezer_friendly": false,
+      "good_for_lunchbox": true,
+
+      "flavour_profile": ["sweet", "rich", "bitter"],
+      "texture": ["thick", "creamy"],
+      "temperature": "cold",
+
+      "difficulty": "no_cook",
+      "active_cooking": false,
+      "prep_time_mins": 10,
+      "cook_time_mins": 0,
+      "total_time_mins": 190,
+
+      "dietary": {
+        "dairy_free": true,
+        "gluten_free": true,
+        "nut_free": false,
+        "egg_free": true,
+        "vegetarian": true,
+        "vegan": true
+      },
+
+      "base_servings": 2,
+      "ingredients": [
+        { "id": "cacao-powder", "name": "Cacao powder or unsweetened cocoa powder", "grams": 30 },
+        { "id": "sweetener-swerve", "name": "Swerve sweetener", "grams": 12 },
+        { "id": "cinnamon", "name": "Ground cinnamon", "grams": 1, "optional": true },
+        { "id": "salt", "name": "Salt", "grams": 0.5 },
+        { "id": "vanilla", "name": "Vanilla extract", "grams": 2 },
+        { "id": "almond-milk", "name": "Unsweetened almond milk", "grams": 360 },
+        { "id": "chia-seeds", "name": "Chia seeds", "grams": 60 },
+        { "id": "peanut-butter", "name": "No-sugar peanut butter", "grams": 32 },
+        { "id": "raspberries", "name": "Fresh raspberries", "grams": 40 }
+      ],
+
+      "instructions": [
+        "Sift the cacao powder into a small bowl. Add the sweetener, cinnamon, salt, and vanilla, then whisk well.",
+        "Add the almond milk gradually and whisk until a paste forms, then continue to whisk until smooth.",
+        "Stir in the chia seeds and whisk once more.",
+        "Cover and refrigerate for 3-5 hours or overnight, until thickened. Give it an extra stir after 30-45 minutes if possible.",
+        "When ready to eat, melt the peanut butter in a small bowl in the microwave for 20-30 seconds.",
+        "Spoon the pudding into serving bowls.",
+        "Top with a drizzle of the peanut butter and a sprinkling of raspberries."
+      ],
+
+      "per_serve": {
+        "calories": 380,
+        "protein_g": 14,
+        "fat_g": 26,
+        "carbs_g": 28,
+        "fibre_g": 16
+      },
+
+      "source": "galveston_book",
+      "source_ref": "p.222",
+
+      "created_at": "2025-12-05",
+      "updated_at": "2025-12-05",
+      "version": 1
+    },
+    {
+      "id": "chocolate-peanut-butter-yoghurt",
+      "name": "Chocolate Peanut Butter Yoghurt",
+      "description": "Greek yoghurt swirled with peanut butter, cocoa, and chia seeds - protein-rich dessert.",
+
+      "meal_type": "snack_evening",
+      "phase": [1, 2, 3],
+      "category": "dairy",
+      "cuisine": "universal",
+      "tags": ["no-cook", "quick", "high-protein"],
+
+      "batch_friendly": false,
+      "batch_notes": "Best made fresh.",
+      "components": {
+        "reheatable": [],
+        "fresh_only": ["yoghurt"]
+      },
+      "freezer_friendly": false,
+      "good_for_lunchbox": true,
+
+      "flavour_profile": ["sweet", "rich", "bitter"],
+      "texture": ["creamy"],
+      "temperature": "cold",
+
+      "difficulty": "no_cook",
+      "active_cooking": false,
+      "prep_time_mins": 2,
+      "cook_time_mins": 0,
+      "total_time_mins": 2,
+
+      "dietary": {
+        "dairy_free": false,
+        "gluten_free": true,
+        "nut_free": false,
+        "egg_free": true,
+        "vegetarian": true,
+        "vegan": false
+      },
+
+      "base_servings": 1,
+      "ingredients": [
+        { "id": "greek-yoghurt", "name": "Plain full-fat Greek yoghurt", "grams": 120 },
+        { "id": "peanut-butter", "name": "No-sugar peanut butter", "grams": 16 },
+        { "id": "cocoa-powder", "name": "Unsweetened cocoa powder", "grams": 8 },
+        { "id": "chia-seeds", "name": "Chia seeds", "grams": 24 }
+      ],
+
+      "instructions": [
+        "Place the yoghurt in a serving bowl.",
+        "Stir in the peanut butter, cocoa, and chia seeds."
+      ],
+
+      "per_serve": {
+        "calories": 340,
+        "protein_g": 18,
+        "fat_g": 22,
+        "carbs_g": 20,
+        "fibre_g": 10
+      },
+
+      "source": "galveston_book",
+      "source_ref": "p.223",
+
+      "created_at": "2025-12-05",
+      "updated_at": "2025-12-05",
+      "version": 1
+    },
+    {
+      "id": "vegan-yoghurt-parfait",
+      "name": "Vegan Yoghurt Parfait",
+      "description": "Dairy-free almond milk yoghurt with protein powder, flaxseed, blueberries, and pecans.",
+
+      "meal_type": "snack_evening",
+      "phase": [1, 2, 3],
+      "category": "dairy",
+      "cuisine": "universal",
+      "tags": ["vegan", "high-protein", "quick"],
+
+      "batch_friendly": false,
+      "batch_notes": "Best assembled fresh.",
+      "components": {
+        "reheatable": [],
+        "fresh_only": ["parfait"]
+      },
+      "freezer_friendly": false,
+      "good_for_lunchbox": true,
+
+      "flavour_profile": ["sweet", "mild"],
+      "texture": ["creamy", "crunchy"],
+      "temperature": "cold",
+
+      "difficulty": "no_cook",
+      "active_cooking": false,
+      "prep_time_mins": 3,
+      "cook_time_mins": 0,
+      "total_time_mins": 3,
+
+      "dietary": {
+        "dairy_free": true,
+        "gluten_free": true,
+        "nut_free": false,
+        "egg_free": true,
+        "vegetarian": true,
+        "vegan": true
+      },
+
+      "base_servings": 1,
+      "ingredients": [
+        { "id": "almond-milk-yoghurt", "name": "Plain unsweetened almond milk yoghurt", "grams": 120 },
+        { "id": "protein-powder-vegan", "name": "Vanilla vegan protein powder", "grams": 25, "notes": "1 scoop" },
+        { "id": "flaxseed", "name": "Ground flaxseed", "grams": 7 },
+        { "id": "blueberries", "name": "Fresh blueberries", "grams": 50 },
+        { "id": "pecans", "name": "Pecans", "grams": 30 }
+      ],
+
+      "instructions": [
+        "Combine the yoghurt, protein powder, and flaxseed in a small bowl.",
+        "Top with the berries and pecans."
+      ],
+
+      "per_serve": {
+        "calories": 340,
+        "protein_g": 22,
+        "fat_g": 22,
+        "carbs_g": 16,
+        "fibre_g": 6
+      },
+
+      "source": "galveston_book",
+      "source_ref": "p.223",
+
+      "created_at": "2025-12-05",
+      "updated_at": "2025-12-05",
+      "version": 1
+    },
+    {
+      "id": "raspberry-flax-muffin",
+      "name": "Raspberry-Flax Muffin",
+      "description": "Single-serve microwave muffin with raspberries and chocolate chips, topped with whipped cream.",
+
+      "meal_type": "snack_evening",
+      "phase": [1, 2, 3],
+      "category": "sweets",
+      "cuisine": "american",
+      "tags": ["quick", "chocolate", "single-serve"],
+
+      "batch_friendly": false,
+      "batch_notes": "Best made fresh.",
+      "components": {
+        "reheatable": [],
+        "fresh_only": ["muffin"]
+      },
+      "freezer_friendly": false,
+      "good_for_lunchbox": false,
+
+      "flavour_profile": ["sweet", "rich"],
+      "texture": ["soft", "moist"],
+      "temperature": "warm",
+
+      "difficulty": "easy",
+      "active_cooking": true,
+      "prep_time_mins": 5,
+      "cook_time_mins": 2,
+      "total_time_mins": 7,
+
+      "dietary": {
+        "dairy_free": false,
+        "gluten_free": true,
+        "nut_free": true,
+        "egg_free": false,
+        "vegetarian": true,
+        "vegan": false
+      },
+
+      "base_servings": 1,
+      "ingredients": [
+        { "id": "eggs", "name": "Egg", "grams": 50, "notes": "1 large" },
+        { "id": "coconut-oil", "name": "Coconut oil", "grams": 14, "notes": "melted" },
+        { "id": "vanilla", "name": "Vanilla extract", "grams": 2 },
+        { "id": "flaxseed", "name": "Ground flaxseed", "grams": 28 },
+        { "id": "baking-powder", "name": "Baking powder", "grams": 1 },
+        { "id": "cinnamon", "name": "Ground cinnamon", "grams": 0.5 },
+        { "id": "monk-fruit-sweetener", "name": "Monk fruit sweetener", "grams": 6 },
+        { "id": "raspberries", "name": "Fresh raspberries", "grams": 30 },
+        { "id": "chocolate-chips-sugar-free", "name": "Sugar-free dark chocolate chips", "grams": 10 },
+        { "id": "cream-whipped", "name": "Whipped thickened cream", "grams": 15 }
+      ],
+
+      "instructions": [
+        "Place the egg, coconut oil, and vanilla in a small microwave-safe bowl.",
+        "Stir well, then add the flaxseed, baking powder, cinnamon, and sweetener. Stir until well combined.",
+        "Add the raspberries and chocolate chips and mix again.",
+        "Microwave on high for 90 seconds.",
+        "Let the muffin cool slightly, then top with the whipped cream."
+      ],
+
+      "per_serve": {
+        "calories": 380,
+        "protein_g": 12,
+        "fat_g": 32,
+        "carbs_g": 14,
+        "fibre_g": 8
+      },
+
+      "source": "galveston_book",
+      "source_ref": "p.223",
+
+      "created_at": "2025-12-05",
+      "updated_at": "2025-12-05",
+      "version": 1
+    },
+    {
+      "id": "chocolate-cinnamon-apple-bites",
+      "name": "Chocolate-Cinnamon Apple Bites",
+      "description": "Rich chocolate almond butter mini muffins with apple butter and cinnamon.",
+
+      "meal_type": "snack_evening",
+      "phase": [1, 2, 3],
+      "category": "sweets",
+      "cuisine": "american",
+      "tags": ["baked", "chocolate", "batch-cook"],
+
+      "batch_friendly": true,
+      "batch_notes": "Store in airtight container. Best within 3 days.",
+      "components": {
+        "reheatable": [],
+        "fresh_only": []
+      },
+      "freezer_friendly": true,
+      "good_for_lunchbox": true,
+
+      "flavour_profile": ["sweet", "rich", "spicy"],
+      "texture": ["soft", "fudgy"],
+      "temperature": "room_temp",
+
+      "difficulty": "easy",
+      "active_cooking": true,
+      "prep_time_mins": 10,
+      "cook_time_mins": 10,
+      "total_time_mins": 20,
+
+      "dietary": {
+        "dairy_free": true,
+        "gluten_free": true,
+        "nut_free": false,
+        "egg_free": true,
+        "vegetarian": true,
+        "vegan": true
+      },
+
+      "base_servings": 6,
+      "ingredients": [
+        { "id": "almond-butter", "name": "Unsweetened almond butter", "grams": 128 },
+        { "id": "cocoa-powder", "name": "Unsweetened cocoa powder", "grams": 30 },
+        { "id": "coconut-oil", "name": "Coconut oil", "grams": 60, "notes": "melted" },
+        { "id": "apple-butter", "name": "Unsweetened apple butter", "grams": 30 },
+        { "id": "salt", "name": "Salt", "grams": 0.5 },
+        { "id": "almond-extract", "name": "Almond extract", "grams": 2 },
+        { "id": "cinnamon", "name": "Ground cinnamon", "grams": 0.5 }
+      ],
+
+      "instructions": [
+        "Preheat the oven to 160C. Grease a mini muffin tin with cooking spray.",
+        "Combine the almond butter, cocoa, coconut oil, and apple butter in a medium bowl.",
+        "Add the almond extract and cinnamon, and stir to blend.",
+        "Spoon the batter into as many cups of the muffin tin as you have batter. Fill remaining cups with water.",
+        "Bake for 10 minutes, or until a toothpick inserted in the centre comes out dry.",
+        "Pop the muffins out of the tin and serve 1 mini muffin per person."
+      ],
+
+      "per_serve": {
+        "calories": 220,
+        "protein_g": 6,
+        "fat_g": 20,
+        "carbs_g": 8,
+        "fibre_g": 3
+      },
+
+      "source": "galveston_book",
+      "source_ref": "p.224",
+
+      "created_at": "2025-12-05",
+      "updated_at": "2025-12-05",
+      "version": 1
+    },
+    {
+      "id": "chocolate-peanut-butter-mug-cake",
+      "name": "Chocolate Peanut Butter Mug Cake",
+      "description": "Single-serve microwave chocolate cake with peanut butter and chocolate chips.",
+
+      "meal_type": "snack_evening",
+      "phase": [1, 2, 3],
+      "category": "sweets",
+      "cuisine": "american",
+      "tags": ["quick", "chocolate", "single-serve", "indulgent"],
+
+      "batch_friendly": false,
+      "batch_notes": "Best made fresh.",
+      "components": {
+        "reheatable": [],
+        "fresh_only": ["mug cake"]
+      },
+      "freezer_friendly": false,
+      "good_for_lunchbox": false,
+
+      "flavour_profile": ["sweet", "rich", "bitter"],
+      "texture": ["soft", "fudgy"],
+      "temperature": "warm",
+
+      "difficulty": "easy",
+      "active_cooking": true,
+      "prep_time_mins": 3,
+      "cook_time_mins": 1,
+      "total_time_mins": 4,
+
+      "dietary": {
+        "dairy_free": false,
+        "gluten_free": true,
+        "nut_free": false,
+        "egg_free": false,
+        "vegetarian": true,
+        "vegan": false
+      },
+
+      "base_servings": 1,
+      "ingredients": [
+        { "id": "butter", "name": "Butter", "grams": 14 },
+        { "id": "eggs", "name": "Egg", "grams": 50, "notes": "1 large" },
+        { "id": "coconut-flour", "name": "Coconut flour", "grams": 10 },
+        { "id": "stevia", "name": "Stevia or monk fruit sweetener", "grams": 6 },
+        { "id": "peanut-butter", "name": "No-sugar peanut butter", "grams": 16 },
+        { "id": "cocoa-powder", "name": "Unsweetened cocoa powder", "grams": 8 },
+        { "id": "baking-powder", "name": "Baking powder", "grams": 1 },
+        { "id": "chocolate-chips-sugar-free", "name": "Sugar-free dark chocolate chips", "grams": 15 }
+      ],
+
+      "instructions": [
+        "Place the butter in a microwave-safe large mug and microwave on high for 15-30 seconds until melted.",
+        "Stir in the egg, coconut flour, sweetener, peanut butter, cocoa, and baking powder. Stir until well combined.",
+        "Add the chocolate chips and stir gently to distribute.",
+        "Microwave on high for 60 seconds.",
+        "Allow to cool slightly before serving."
+      ],
+
+      "per_serve": {
+        "calories": 420,
+        "protein_g": 16,
+        "fat_g": 34,
+        "carbs_g": 16,
+        "fibre_g": 6
+      },
+
+      "source": "galveston_book",
+      "source_ref": "p.225",
+
+      "created_at": "2025-12-05",
+      "updated_at": "2025-12-05",
+      "version": 1
+    },
+    {
+      "id": "vegan-snack-bars",
+      "name": "Vegan Snack Bars",
+      "description": "No-bake nut and seed bars with peanut butter and coconut - perfect make-ahead snack.",
+
+      "meal_type": "snack_evening",
+      "phase": [1, 2, 3],
+      "category": "nuts_seeds",
+      "cuisine": "universal",
+      "tags": ["vegan", "no-bake", "batch-cook", "make-ahead"],
+
+      "batch_friendly": true,
+      "batch_notes": "Keeps refrigerated for 1-2 weeks. Perfect meal prep.",
+      "components": {
+        "reheatable": [],
+        "fresh_only": []
+      },
+      "freezer_friendly": true,
+      "good_for_lunchbox": true,
+
+      "flavour_profile": ["sweet", "rich", "mild"],
+      "texture": ["crunchy", "chewy"],
+      "temperature": "cold",
+
+      "difficulty": "easy",
+      "active_cooking": true,
+      "prep_time_mins": 15,
+      "cook_time_mins": 5,
+      "total_time_mins": 170,
+
+      "dietary": {
+        "dairy_free": true,
+        "gluten_free": true,
+        "nut_free": false,
+        "egg_free": true,
+        "vegetarian": true,
+        "vegan": true
+      },
+
+      "base_servings": 16,
+      "ingredients": [
+        { "id": "almonds", "name": "Almonds", "grams": 60 },
+        { "id": "walnuts", "name": "Walnut halves", "grams": 60 },
+        { "id": "macadamia-nuts", "name": "Macadamia nuts", "grams": 60 },
+        { "id": "pumpkin-seeds", "name": "Pumpkin seeds", "grams": 60 },
+        { "id": "coconut-shredded", "name": "Unsweetened shredded coconut", "grams": 80 },
+        { "id": "cinnamon", "name": "Ground cinnamon", "grams": 2 },
+        { "id": "peanut-butter", "name": "No-sugar peanut butter", "grams": 128 },
+        { "id": "coconut-oil", "name": "Coconut oil", "grams": 60 },
+        { "id": "vanilla-bean-paste", "name": "Vanilla bean paste", "grams": 10 }
+      ],
+
+      "instructions": [
+        "Lightly grease a 15x25cm baking pan with cooking spray and line with baking paper.",
+        "Place the almonds, walnuts, macadamia nuts, and pumpkin seeds in a food processor. Process until coarsely chopped.",
+        "Transfer to a large bowl, then stir in the coconut and cinnamon.",
+        "Combine the peanut butter, coconut oil, and vanilla bean paste in a small saucepan. Cook, stirring, over low heat for 3-5 minutes until melted and combined.",
+        "Pour the peanut mixture into the nut mixture and stir until well combined.",
+        "Press the mixture firmly into the prepared pan, smoothing the surface with the back of a spoon.",
+        "Cover and refrigerate for 2-3 hours or until firm.",
+        "Cut into 16 bars. Figure 1 bar per serving."
+      ],
+
+      "per_serve": {
+        "calories": 220,
+        "protein_g": 6,
+        "fat_g": 20,
+        "carbs_g": 6,
+        "fibre_g": 3
+      },
+
+      "source": "galveston_book",
+      "source_ref": "p.225",
+
+      "created_at": "2025-12-05",
+      "updated_at": "2025-12-05",
+      "version": 1
+    },
+    {
+      "id": "chocolate-banana-nice-cream",
+      "name": "Chocolate Banana 'Nice' Cream",
+      "description": "Dairy-free frozen dessert made from bananas with chocolate, almond butter, and cacao nibs.",
+
+      "meal_type": "snack_evening",
+      "phase": [2, 3],
+      "category": "sweets",
+      "cuisine": "universal",
+      "tags": ["vegan", "frozen", "chocolate", "indulgent"],
+
+      "batch_friendly": true,
+      "batch_notes": "Make ahead and freeze. Thaw slightly before serving.",
+      "components": {
+        "reheatable": [],
+        "fresh_only": []
+      },
+      "freezer_friendly": true,
+      "good_for_lunchbox": false,
+
+      "flavour_profile": ["sweet", "rich", "bitter"],
+      "texture": ["smooth", "creamy", "frozen"],
+      "temperature": "cold",
+
+      "difficulty": "easy",
+      "active_cooking": false,
+      "prep_time_mins": 10,
+      "cook_time_mins": 0,
+      "total_time_mins": 250,
+
+      "dietary": {
+        "dairy_free": true,
+        "gluten_free": true,
+        "nut_free": false,
+        "egg_free": true,
+        "vegetarian": true,
+        "vegan": true
+      },
+
+      "base_servings": 2,
+      "ingredients": [
+        { "id": "banana", "name": "Ripe bananas", "grams": 240, "notes": "2 whole, peeled" },
+        { "id": "almond-butter", "name": "Unsweetened almond butter", "grams": 32 },
+        { "id": "almond-milk", "name": "Unsweetened almond milk", "grams": 60 },
+        { "id": "cocoa-powder", "name": "Unsweetened cocoa powder", "grams": 8 },
+        { "id": "cacao-nibs", "name": "Cacao nibs", "grams": 22 },
+        { "id": "chia-seeds", "name": "Chia seeds", "grams": 12 },
+        { "id": "flaxseed", "name": "Ground flaxseed", "grams": 14 }
+      ],
+
+      "instructions": [
+        "Place all of the ingredients in a food processor.",
+        "Process until smooth.",
+        "Pour into a freezer container and place in freezer to harden for several hours or overnight."
+      ],
+
+      "per_serve": {
+        "calories": 320,
+        "protein_g": 10,
+        "fat_g": 18,
+        "carbs_g": 38,
+        "fibre_g": 12
+      },
+
+      "source": "galveston_book",
+      "source_ref": "p.226",
+
+      "created_at": "2025-12-05",
+      "updated_at": "2025-12-05",
+      "version": 1
+    }
+  ]
+}

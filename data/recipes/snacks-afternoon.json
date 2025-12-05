@@ -1,0 +1,1609 @@
+{
+  "_metadata": {
+    "description": "Afternoon snack recipes extracted from Galveston Diet book",
+    "source": "galveston_book",
+    "created": "2025-12-05",
+    "status": "extracted",
+    "notes": "Converted to metric, AU ingredient names. For personal use. Light, energy-sustaining snacks for ~15:00."
+  },
+
+  "recipes": [
+    {
+      "id": "celery-almond-butter",
+      "name": "Celery Sticks with Almond Butter",
+      "description": "Classic simple snack - crisp celery filled with creamy almond butter.",
+
+      "meal_type": "snack_afternoon",
+      "phase": [1, 2, 3],
+      "category": "vegetables",
+      "cuisine": "universal",
+      "tags": ["no-cook", "quick", "simple", "portable"],
+
+      "batch_friendly": false,
+      "batch_notes": "Best made fresh.",
+      "components": {
+        "reheatable": [],
+        "fresh_only": ["celery"]
+      },
+      "freezer_friendly": false,
+      "good_for_lunchbox": true,
+
+      "flavour_profile": ["mild", "rich"],
+      "texture": ["crunchy", "creamy"],
+      "temperature": "cold",
+
+      "difficulty": "no_cook",
+      "active_cooking": false,
+      "prep_time_mins": 2,
+      "cook_time_mins": 0,
+      "total_time_mins": 2,
+
+      "dietary": {
+        "dairy_free": true,
+        "gluten_free": true,
+        "nut_free": false,
+        "egg_free": true,
+        "vegetarian": true,
+        "vegan": true
+      },
+
+      "base_servings": 1,
+      "ingredients": [
+        { "id": "almond-butter", "name": "Unsweetened almond butter", "grams": 32 },
+        { "id": "celery", "name": "Celery stalks", "grams": 100, "notes": "2 stalks, trimmed" }
+      ],
+
+      "instructions": [
+        "Spread 16g almond butter on each celery stalk."
+      ],
+
+      "per_serve": {
+        "calories": 220,
+        "protein_g": 6,
+        "fat_g": 18,
+        "carbs_g": 8,
+        "fibre_g": 4
+      },
+
+      "source": "galveston_book",
+      "source_ref": "p.207",
+
+      "created_at": "2025-12-05",
+      "updated_at": "2025-12-05",
+      "version": 1
+    },
+    {
+      "id": "carrots-celery-flaxseed-almond-butter",
+      "name": "Carrots and Celery with Flaxseed and Almond Butter",
+      "description": "Crunchy vegetables with omega-rich flaxseed almond butter dip.",
+
+      "meal_type": "snack_afternoon",
+      "phase": [1, 2, 3],
+      "category": "vegetables",
+      "cuisine": "universal",
+      "tags": ["no-cook", "omega-3", "portable"],
+
+      "batch_friendly": true,
+      "batch_notes": "Dip can be made ahead and refrigerated.",
+      "components": {
+        "reheatable": [],
+        "fresh_only": ["vegetables"]
+      },
+      "freezer_friendly": false,
+      "good_for_lunchbox": true,
+
+      "flavour_profile": ["mild", "rich", "earthy"],
+      "texture": ["crunchy", "creamy"],
+      "temperature": "cold",
+
+      "difficulty": "no_cook",
+      "active_cooking": false,
+      "prep_time_mins": 5,
+      "cook_time_mins": 0,
+      "total_time_mins": 5,
+
+      "dietary": {
+        "dairy_free": true,
+        "gluten_free": true,
+        "nut_free": false,
+        "egg_free": true,
+        "vegetarian": true,
+        "vegan": true
+      },
+
+      "base_servings": 1,
+      "ingredients": [
+        { "id": "flaxseed", "name": "Ground flaxseed", "grams": 14 },
+        { "id": "almond-butter", "name": "Unsweetened almond butter", "grams": 32 },
+        { "id": "carrots-baby", "name": "Baby carrots", "grams": 100, "notes": "about 10" },
+        { "id": "celery", "name": "Celery stalks", "grams": 60, "notes": "2 stalks, halved" }
+      ],
+
+      "instructions": [
+        "In a small bowl, mix the flaxseed with the almond butter until smooth.",
+        "Use as a dip for the carrots and celery."
+      ],
+
+      "per_serve": {
+        "calories": 320,
+        "protein_g": 10,
+        "fat_g": 24,
+        "carbs_g": 18,
+        "fibre_g": 8
+      },
+
+      "source": "galveston_book",
+      "source_ref": "p.207",
+
+      "created_at": "2025-12-05",
+      "updated_at": "2025-12-05",
+      "version": 1
+    },
+    {
+      "id": "caprese-bites",
+      "name": "Caprese Bites",
+      "description": "Cherry tomatoes, fresh basil, and mozzarella on skewers drizzled with olive oil.",
+
+      "meal_type": "snack_afternoon",
+      "phase": [1, 2, 3],
+      "category": "dairy",
+      "cuisine": "italian",
+      "tags": ["no-cook", "elegant", "portable"],
+
+      "batch_friendly": true,
+      "batch_notes": "Can be assembled ahead. Best within a few hours.",
+      "components": {
+        "reheatable": [],
+        "fresh_only": ["assembled skewers"]
+      },
+      "freezer_friendly": false,
+      "good_for_lunchbox": true,
+
+      "flavour_profile": ["mild", "herby", "rich"],
+      "texture": ["soft", "juicy"],
+      "temperature": "room_temp",
+
+      "difficulty": "no_cook",
+      "active_cooking": false,
+      "prep_time_mins": 10,
+      "cook_time_mins": 0,
+      "total_time_mins": 10,
+
+      "dietary": {
+        "dairy_free": false,
+        "gluten_free": true,
+        "nut_free": true,
+        "egg_free": true,
+        "vegetarian": true,
+        "vegan": false
+      },
+
+      "base_servings": 8,
+      "ingredients": [
+        { "id": "tomato-cherry", "name": "Cherry tomatoes", "grams": 300, "notes": "24 tomatoes" },
+        { "id": "basil", "name": "Fresh basil leaves", "grams": 24, "notes": "24 leaves" },
+        { "id": "mozzarella-balls", "name": "Fresh mozzarella balls", "grams": 225, "notes": "small balls" },
+        { "id": "olive-oil", "name": "Olive oil", "grams": 30 }
+      ],
+
+      "instructions": [
+        "Thread a tomato, then a basil leaf folded in half, and then a mozzarella ball on each small skewer.",
+        "Place the skewers on a serving platter and drizzle with olive oil.",
+        "Figure 3 skewers per person."
+      ],
+
+      "per_serve": {
+        "calories": 120,
+        "protein_g": 6,
+        "fat_g": 10,
+        "carbs_g": 4,
+        "fibre_g": 1
+      },
+
+      "source": "galveston_book",
+      "source_ref": "p.207",
+
+      "created_at": "2025-12-05",
+      "updated_at": "2025-12-05",
+      "version": 1
+    },
+    {
+      "id": "apple-clusters",
+      "name": "Apple Clusters",
+      "description": "Apple slices topped with warm almond butter, chia seeds, flaxseed, and coconut flakes.",
+
+      "meal_type": "snack_afternoon",
+      "phase": [2, 3],
+      "category": "fruit",
+      "cuisine": "universal",
+      "tags": ["quick", "sweet", "omega-3"],
+
+      "batch_friendly": false,
+      "batch_notes": "Best made fresh to prevent apple browning.",
+      "components": {
+        "reheatable": [],
+        "fresh_only": ["apple slices"]
+      },
+      "freezer_friendly": false,
+      "good_for_lunchbox": false,
+
+      "flavour_profile": ["sweet", "mild", "rich"],
+      "texture": ["crunchy", "creamy"],
+      "temperature": "room_temp",
+
+      "difficulty": "no_cook",
+      "active_cooking": false,
+      "prep_time_mins": 5,
+      "cook_time_mins": 0,
+      "total_time_mins": 5,
+
+      "dietary": {
+        "dairy_free": true,
+        "gluten_free": true,
+        "nut_free": false,
+        "egg_free": true,
+        "vegetarian": true,
+        "vegan": true
+      },
+
+      "base_servings": 1,
+      "ingredients": [
+        { "id": "apple", "name": "Apple", "grams": 150, "notes": "1 small, cored and sliced" },
+        { "id": "almond-butter", "name": "Unsweetened almond butter", "grams": 32 },
+        { "id": "chia-seeds", "name": "Chia seeds", "grams": 12 },
+        { "id": "flaxseed", "name": "Ground flaxseed", "grams": 7 },
+        { "id": "coconut-flakes", "name": "Unsweetened coconut flakes", "grams": 15 }
+      ],
+
+      "instructions": [
+        "Arrange the apple slices on a plate.",
+        "Combine the almond butter with the chia seeds and flaxseed in a microwave-safe bowl.",
+        "Microwave on high for 15-30 seconds until slightly melted.",
+        "Drizzle the almond butter mixture over the apple slices.",
+        "Top with the coconut flakes."
+      ],
+
+      "per_serve": {
+        "calories": 380,
+        "protein_g": 10,
+        "fat_g": 26,
+        "carbs_g": 30,
+        "fibre_g": 12
+      },
+
+      "source": "galveston_book",
+      "source_ref": "p.208",
+
+      "created_at": "2025-12-05",
+      "updated_at": "2025-12-05",
+      "version": 1
+    },
+    {
+      "id": "aloha-avocado",
+      "name": "Aloha Avocado",
+      "description": "Avocado halves filled with macadamia nuts and coconut flakes - tropical and satisfying.",
+
+      "meal_type": "snack_afternoon",
+      "phase": [1, 2, 3],
+      "category": "fats_oils",
+      "cuisine": "tropical",
+      "tags": ["no-cook", "quick", "high-fat"],
+
+      "batch_friendly": false,
+      "batch_notes": "Best made fresh to prevent browning.",
+      "components": {
+        "reheatable": [],
+        "fresh_only": ["avocado"]
+      },
+      "freezer_friendly": false,
+      "good_for_lunchbox": false,
+
+      "flavour_profile": ["mild", "rich", "sweet"],
+      "texture": ["creamy", "crunchy"],
+      "temperature": "room_temp",
+
+      "difficulty": "no_cook",
+      "active_cooking": false,
+      "prep_time_mins": 3,
+      "cook_time_mins": 0,
+      "total_time_mins": 3,
+
+      "dietary": {
+        "dairy_free": true,
+        "gluten_free": true,
+        "nut_free": false,
+        "egg_free": true,
+        "vegetarian": true,
+        "vegan": true
+      },
+
+      "base_servings": 4,
+      "ingredients": [
+        { "id": "avocado", "name": "Ripe avocados", "grams": 400, "notes": "2 whole" },
+        { "id": "macadamia-nuts", "name": "Macadamia nuts", "grams": 60, "notes": "halved" },
+        { "id": "coconut-flakes", "name": "Unsweetened coconut flakes", "grams": 40 }
+      ],
+
+      "instructions": [
+        "Halve the avocados and remove the pits.",
+        "Cut the halves in half again to create 4 quarters.",
+        "Fill the cavities with the macadamia nuts and coconut flakes."
+      ],
+
+      "per_serve": {
+        "calories": 280,
+        "protein_g": 4,
+        "fat_g": 28,
+        "carbs_g": 8,
+        "fibre_g": 6
+      },
+
+      "source": "galveston_book",
+      "source_ref": "p.208",
+
+      "created_at": "2025-12-05",
+      "updated_at": "2025-12-05",
+      "version": 1
+    },
+    {
+      "id": "pumpkin-spiced-walnuts",
+      "name": "Pumpkin-Spiced Walnuts",
+      "description": "Walnuts tossed with avocado oil and warm pumpkin pie spice.",
+
+      "meal_type": "snack_afternoon",
+      "phase": [1, 2, 3],
+      "category": "nuts_seeds",
+      "cuisine": "american",
+      "tags": ["no-cook", "quick", "autumn", "portable"],
+
+      "batch_friendly": true,
+      "batch_notes": "Can be made in batches and stored in airtight container.",
+      "components": {
+        "reheatable": [],
+        "fresh_only": []
+      },
+      "freezer_friendly": false,
+      "good_for_lunchbox": true,
+
+      "flavour_profile": ["sweet", "spicy", "earthy"],
+      "texture": ["crunchy"],
+      "temperature": "room_temp",
+
+      "difficulty": "no_cook",
+      "active_cooking": false,
+      "prep_time_mins": 2,
+      "cook_time_mins": 0,
+      "total_time_mins": 2,
+
+      "dietary": {
+        "dairy_free": true,
+        "gluten_free": true,
+        "nut_free": false,
+        "egg_free": true,
+        "vegetarian": true,
+        "vegan": true
+      },
+
+      "base_servings": 1,
+      "ingredients": [
+        { "id": "walnuts", "name": "Whole walnuts", "grams": 30 },
+        { "id": "avocado-oil", "name": "Avocado oil", "grams": 5 },
+        { "id": "pumpkin-pie-spice", "name": "Pumpkin pie spice", "grams": 1 }
+      ],
+
+      "instructions": [
+        "Place the walnuts in a small bowl.",
+        "Drizzle with the avocado oil, then sprinkle with the pumpkin pie spice.",
+        "Mix well and serve."
+      ],
+
+      "per_serve": {
+        "calories": 220,
+        "protein_g": 5,
+        "fat_g": 22,
+        "carbs_g": 4,
+        "fibre_g": 2
+      },
+
+      "source": "galveston_book",
+      "source_ref": "p.208",
+
+      "created_at": "2025-12-05",
+      "updated_at": "2025-12-05",
+      "version": 1
+    },
+    {
+      "id": "avocado-crisps",
+      "name": "Avocado Crisps",
+      "description": "Baked avocado and parmesan bites with Italian seasoning - crispy, savoury, satisfying.",
+
+      "meal_type": "snack_afternoon",
+      "phase": [1, 2, 3],
+      "category": "fats_oils",
+      "cuisine": "italian",
+      "tags": ["baked", "savoury", "unique"],
+
+      "batch_friendly": true,
+      "batch_notes": "Store in airtight container. Best within 2 days.",
+      "components": {
+        "reheatable": [],
+        "fresh_only": []
+      },
+      "freezer_friendly": false,
+      "good_for_lunchbox": true,
+
+      "flavour_profile": ["salty", "herby", "rich"],
+      "texture": ["crispy"],
+      "temperature": "room_temp",
+
+      "difficulty": "easy",
+      "active_cooking": true,
+      "prep_time_mins": 5,
+      "cook_time_mins": 18,
+      "total_time_mins": 23,
+
+      "dietary": {
+        "dairy_free": false,
+        "gluten_free": true,
+        "nut_free": true,
+        "egg_free": true,
+        "vegetarian": true,
+        "vegan": false
+      },
+
+      "base_servings": 1,
+      "ingredients": [
+        { "id": "avocado", "name": "Avocado", "grams": 150, "notes": "1 whole, chopped" },
+        { "id": "parmesan", "name": "Parmesan cheese", "grams": 30, "notes": "grated" },
+        { "id": "lemon", "name": "Fresh lemon juice", "grams": 5 },
+        { "id": "garlic-powder", "name": "Garlic powder", "grams": 1 },
+        { "id": "italian-seasoning", "name": "Italian seasoning", "grams": 1 }
+      ],
+
+      "instructions": [
+        "Preheat the oven to 160C. Line a baking tray with baking paper.",
+        "In a medium bowl, mash the avocado until smooth.",
+        "Add the cheese, lemon juice, garlic powder, and Italian seasoning. Mix well.",
+        "Spoon teaspoon-sized bits of the avocado mixture onto the baking tray, spacing evenly and spreading thin.",
+        "Bake for 15-18 minutes until the edges have browned."
+      ],
+
+      "per_serve": {
+        "calories": 320,
+        "protein_g": 12,
+        "fat_g": 28,
+        "carbs_g": 8,
+        "fibre_g": 6
+      },
+
+      "source": "galveston_book",
+      "source_ref": "p.209",
+
+      "created_at": "2025-12-05",
+      "updated_at": "2025-12-05",
+      "version": 1
+    },
+    {
+      "id": "cheese-and-walnuts",
+      "name": "Cheese and Walnuts",
+      "description": "Simple, satisfying combination of creamy cheese and crunchy walnuts.",
+
+      "meal_type": "snack_afternoon",
+      "phase": [1, 2, 3],
+      "category": "dairy",
+      "cuisine": "universal",
+      "tags": ["no-cook", "quick", "simple", "portable"],
+
+      "batch_friendly": false,
+      "batch_notes": "Best assembled fresh.",
+      "components": {
+        "reheatable": [],
+        "fresh_only": []
+      },
+      "freezer_friendly": false,
+      "good_for_lunchbox": true,
+
+      "flavour_profile": ["salty", "mild", "rich"],
+      "texture": ["creamy", "crunchy"],
+      "temperature": "room_temp",
+
+      "difficulty": "no_cook",
+      "active_cooking": false,
+      "prep_time_mins": 2,
+      "cook_time_mins": 0,
+      "total_time_mins": 2,
+
+      "dietary": {
+        "dairy_free": false,
+        "gluten_free": true,
+        "nut_free": false,
+        "egg_free": true,
+        "vegetarian": true,
+        "vegan": false
+      },
+
+      "base_servings": 1,
+      "ingredients": [
+        { "id": "walnuts", "name": "Walnut halves", "grams": 30 },
+        { "id": "cheese-stick", "name": "Cheese stick", "grams": 28 }
+      ],
+
+      "instructions": [
+        "Arrange the walnuts on a plate.",
+        "Add the cheese stick alongside."
+      ],
+
+      "per_serve": {
+        "calories": 280,
+        "protein_g": 12,
+        "fat_g": 26,
+        "carbs_g": 4,
+        "fibre_g": 2
+      },
+
+      "source": "galveston_book",
+      "source_ref": "p.209",
+
+      "created_at": "2025-12-05",
+      "updated_at": "2025-12-05",
+      "version": 1
+    },
+    {
+      "id": "cheesy-nuts",
+      "name": "Cheesy Nuts",
+      "description": "Babybel cheese with a handful of almonds - portable and satisfying.",
+
+      "meal_type": "snack_afternoon",
+      "phase": [1, 2, 3],
+      "category": "dairy",
+      "cuisine": "universal",
+      "tags": ["no-cook", "quick", "portable"],
+
+      "batch_friendly": false,
+      "batch_notes": "Assemble fresh.",
+      "components": {
+        "reheatable": [],
+        "fresh_only": []
+      },
+      "freezer_friendly": false,
+      "good_for_lunchbox": true,
+
+      "flavour_profile": ["salty", "mild"],
+      "texture": ["creamy", "crunchy"],
+      "temperature": "room_temp",
+
+      "difficulty": "no_cook",
+      "active_cooking": false,
+      "prep_time_mins": 1,
+      "cook_time_mins": 0,
+      "total_time_mins": 1,
+
+      "dietary": {
+        "dairy_free": false,
+        "gluten_free": true,
+        "nut_free": false,
+        "egg_free": true,
+        "vegetarian": true,
+        "vegan": false
+      },
+
+      "base_servings": 1,
+      "ingredients": [
+        { "id": "babybel", "name": "Babybel mini cheese", "grams": 20, "notes": "1 round, unwrapped" },
+        { "id": "almonds", "name": "Almonds", "grams": 30 }
+      ],
+
+      "instructions": [
+        "Arrange the cheese on a plate with the almonds."
+      ],
+
+      "per_serve": {
+        "calories": 240,
+        "protein_g": 10,
+        "fat_g": 20,
+        "carbs_g": 6,
+        "fibre_g": 2
+      },
+
+      "source": "galveston_book",
+      "source_ref": "p.209",
+
+      "created_at": "2025-12-05",
+      "updated_at": "2025-12-05",
+      "version": 1
+    },
+    {
+      "id": "everything-bagel-cucumber-bites",
+      "name": "Everything-Bagel Cucumber Bites",
+      "description": "Cucumber halves topped with creamy cheese spread and everything bagel seasoning.",
+
+      "meal_type": "snack_afternoon",
+      "phase": [1, 2, 3],
+      "category": "vegetables",
+      "cuisine": "american",
+      "tags": ["no-cook", "trendy", "low-carb"],
+
+      "batch_friendly": true,
+      "batch_notes": "Cream cheese mixture can be made ahead.",
+      "components": {
+        "reheatable": [],
+        "fresh_only": ["cucumber"]
+      },
+      "freezer_friendly": false,
+      "good_for_lunchbox": true,
+
+      "flavour_profile": ["salty", "pungent", "mild"],
+      "texture": ["crunchy", "creamy"],
+      "temperature": "cold",
+
+      "difficulty": "no_cook",
+      "active_cooking": false,
+      "prep_time_mins": 5,
+      "cook_time_mins": 0,
+      "total_time_mins": 5,
+
+      "dietary": {
+        "dairy_free": false,
+        "gluten_free": true,
+        "nut_free": true,
+        "egg_free": true,
+        "vegetarian": true,
+        "vegan": false
+      },
+
+      "base_servings": 4,
+      "ingredients": [
+        { "id": "cucumber", "name": "Medium cucumber", "grams": 200, "notes": "1 whole" },
+        { "id": "cream-cheese", "name": "Cream cheese", "grams": 115 },
+        { "id": "butter", "name": "Salted butter", "grams": 30 },
+        { "id": "greek-yoghurt", "name": "Plain full-fat Greek yoghurt", "grams": 30 },
+        { "id": "everything-bagel-seasoning", "name": "Everything bagel seasoning", "grams": 8 }
+      ],
+
+      "instructions": [
+        "Cut the cucumber in half lengthwise.",
+        "In a small bowl, combine the cream cheese, butter, and yoghurt, stirring until well blended.",
+        "Top the cucumber halves with the cream cheese mixture.",
+        "Sprinkle the halves with the seasoning.",
+        "Cut each half in half again to create 4 servings."
+      ],
+
+      "per_serve": {
+        "calories": 160,
+        "protein_g": 4,
+        "fat_g": 14,
+        "carbs_g": 4,
+        "fibre_g": 1
+      },
+
+      "source": "galveston_book",
+      "source_ref": "p.209",
+
+      "created_at": "2025-12-05",
+      "updated_at": "2025-12-05",
+      "version": 1
+    },
+    {
+      "id": "crunchy-kale-chips-pecans",
+      "name": "Crunchy Kale Chips with Pecans",
+      "description": "Crispy baked kale chips with sea salt served alongside pecans.",
+
+      "meal_type": "snack_afternoon",
+      "phase": [1, 2, 3],
+      "category": "leafy_greens",
+      "cuisine": "universal",
+      "tags": ["baked", "healthy", "crunchy"],
+
+      "batch_friendly": true,
+      "batch_notes": "Store in airtight container. Best within 2-3 days.",
+      "components": {
+        "reheatable": [],
+        "fresh_only": []
+      },
+      "freezer_friendly": false,
+      "good_for_lunchbox": true,
+
+      "flavour_profile": ["salty", "earthy"],
+      "texture": ["crispy", "crunchy"],
+      "temperature": "room_temp",
+
+      "difficulty": "easy",
+      "active_cooking": true,
+      "prep_time_mins": 5,
+      "cook_time_mins": 12,
+      "total_time_mins": 17,
+
+      "dietary": {
+        "dairy_free": true,
+        "gluten_free": true,
+        "nut_free": false,
+        "egg_free": true,
+        "vegetarian": true,
+        "vegan": true
+      },
+
+      "base_servings": 3,
+      "ingredients": [
+        { "id": "kale", "name": "Fresh kale", "grams": 200, "notes": "1 large bunch, stemmed and trimmed" },
+        { "id": "olive-oil", "name": "Olive oil", "grams": 30 },
+        { "id": "sea-salt", "name": "Sea salt", "grams": 5 },
+        { "id": "pecans", "name": "Pecans", "grams": 90, "notes": "chopped" }
+      ],
+
+      "instructions": [
+        "Preheat the oven to 180C. Lightly grease a baking tray or use a silicone mat.",
+        "Place the kale in a large zippered plastic bag. Add the olive oil, close the bag, and massage the leaves to coat well.",
+        "Spread out the kale on the baking tray, flattening the leaves.",
+        "Bake for 12 minutes until leaves are crisp.",
+        "Remove from the oven and sprinkle with sea salt.",
+        "Serve with the pecans."
+      ],
+
+      "per_serve": {
+        "calories": 260,
+        "protein_g": 6,
+        "fat_g": 24,
+        "carbs_g": 10,
+        "fibre_g": 4
+      },
+
+      "source": "galveston_book",
+      "source_ref": "p.210",
+
+      "created_at": "2025-12-05",
+      "updated_at": "2025-12-05",
+      "version": 1
+    },
+    {
+      "id": "creamy-avocado-dip",
+      "name": "Creamy Avocado Dip",
+      "description": "Smooth avocado dip with mayo, lemon, and fresh coriander.",
+
+      "meal_type": "snack_afternoon",
+      "phase": [1, 2, 3],
+      "category": "fats_oils",
+      "cuisine": "mexican",
+      "tags": ["no-cook", "quick", "dip"],
+
+      "batch_friendly": false,
+      "batch_notes": "Best made fresh to prevent browning.",
+      "components": {
+        "reheatable": [],
+        "fresh_only": ["dip"]
+      },
+      "freezer_friendly": false,
+      "good_for_lunchbox": false,
+
+      "flavour_profile": ["sour", "herby", "rich"],
+      "texture": ["smooth", "creamy"],
+      "temperature": "cold",
+
+      "difficulty": "no_cook",
+      "active_cooking": false,
+      "prep_time_mins": 5,
+      "cook_time_mins": 0,
+      "total_time_mins": 5,
+
+      "dietary": {
+        "dairy_free": true,
+        "gluten_free": true,
+        "nut_free": true,
+        "egg_free": true,
+        "vegetarian": true,
+        "vegan": true
+      },
+
+      "base_servings": 1,
+      "ingredients": [
+        { "id": "avocado", "name": "Avocado", "grams": 150, "notes": "1 whole, flesh scooped out" },
+        { "id": "mayonnaise-avocado", "name": "Avocado oil mayonnaise", "grams": 15 },
+        { "id": "lemon", "name": "Lemon juice", "grams": 45, "notes": "juice of 1 lemon" },
+        { "id": "coriander-fresh", "name": "Fresh coriander", "grams": 5, "notes": "chopped" }
+      ],
+
+      "instructions": [
+        "Combine the avocado, mayonnaise, lemon juice, and coriander in a small bowl.",
+        "Mash with a fork until smooth.",
+        "Serve with veggie sticks or seeded crackers."
+      ],
+
+      "per_serve": {
+        "calories": 320,
+        "protein_g": 4,
+        "fat_g": 30,
+        "carbs_g": 14,
+        "fibre_g": 10
+      },
+
+      "source": "galveston_book",
+      "source_ref": "p.210",
+
+      "created_at": "2025-12-05",
+      "updated_at": "2025-12-05",
+      "version": 1
+    },
+    {
+      "id": "easy-guacamole",
+      "name": "Easy Guacamole",
+      "description": "Classic guacamole with avocado, tomato, coriander, cumin, and lime.",
+
+      "meal_type": "snack_afternoon",
+      "phase": [1, 2, 3],
+      "category": "fats_oils",
+      "cuisine": "mexican",
+      "tags": ["no-cook", "classic", "dip"],
+
+      "batch_friendly": false,
+      "batch_notes": "Best made fresh. Press cling wrap directly on surface to prevent browning.",
+      "components": {
+        "reheatable": [],
+        "fresh_only": ["guacamole"]
+      },
+      "freezer_friendly": false,
+      "good_for_lunchbox": false,
+
+      "flavour_profile": ["sour", "herby", "mild"],
+      "texture": ["chunky", "creamy"],
+      "temperature": "cold",
+
+      "difficulty": "no_cook",
+      "active_cooking": false,
+      "prep_time_mins": 15,
+      "cook_time_mins": 0,
+      "total_time_mins": 15,
+
+      "dietary": {
+        "dairy_free": true,
+        "gluten_free": true,
+        "nut_free": true,
+        "egg_free": true,
+        "vegetarian": true,
+        "vegan": true
+      },
+
+      "base_servings": 8,
+      "ingredients": [
+        { "id": "onion", "name": "Onion", "grams": 40, "notes": "finely minced" },
+        { "id": "avocado", "name": "Ripe avocados", "grams": 450, "notes": "3 whole" },
+        { "id": "lime", "name": "Fresh lime or lemon juice", "grams": 30 },
+        { "id": "tomato-roma", "name": "Roma tomato", "grams": 100, "notes": "1 large, seeded and diced" },
+        { "id": "coriander-fresh", "name": "Fresh coriander", "grams": 15, "notes": "leaves and tender stems, chopped" },
+        { "id": "cumin", "name": "Ground cumin", "grams": 1 },
+        { "id": "salt", "name": "Salt", "grams": 2 }
+      ],
+
+      "instructions": [
+        "Place the onion in a small bowl, cover with warm water, and set aside to soften for 10 minutes.",
+        "Cut the avocados in half lengthwise. Use a spoon to lift out the pit, then scoop out the flesh into a medium bowl.",
+        "Add the lime juice and mash the avocado with a fork until creamy but still chunky.",
+        "Stir in the tomato, coriander, and cumin.",
+        "Drain the onion and add to the bowl along with salt to taste.",
+        "Taste and adjust seasonings. Serve with veggies for dipping."
+      ],
+
+      "per_serve": {
+        "calories": 120,
+        "protein_g": 2,
+        "fat_g": 10,
+        "carbs_g": 8,
+        "fibre_g": 4
+      },
+
+      "source": "galveston_book",
+      "source_ref": "p.211",
+
+      "created_at": "2025-12-05",
+      "updated_at": "2025-12-05",
+      "version": 1
+    },
+    {
+      "id": "herbed-white-bean-dip",
+      "name": "Herbed White Bean Dip",
+      "description": "Creamy cannellini bean dip with tahini, lemon, and fresh dill.",
+
+      "meal_type": "snack_afternoon",
+      "phase": [2, 3],
+      "category": "legumes",
+      "cuisine": "mediterranean",
+      "tags": ["no-cook", "high-fibre", "dip"],
+
+      "batch_friendly": true,
+      "batch_notes": "Keeps refrigerated for 3-4 days.",
+      "components": {
+        "reheatable": [],
+        "fresh_only": []
+      },
+      "freezer_friendly": false,
+      "good_for_lunchbox": true,
+
+      "flavour_profile": ["sour", "herby", "earthy"],
+      "texture": ["smooth", "creamy"],
+      "temperature": "cold",
+
+      "difficulty": "no_cook",
+      "active_cooking": false,
+      "prep_time_mins": 5,
+      "cook_time_mins": 0,
+      "total_time_mins": 5,
+
+      "dietary": {
+        "dairy_free": true,
+        "gluten_free": true,
+        "nut_free": true,
+        "egg_free": true,
+        "vegetarian": true,
+        "vegan": true
+      },
+
+      "base_servings": 2,
+      "ingredients": [
+        { "id": "cannellini-beans", "name": "Cooked cannellini beans", "grams": 120 },
+        { "id": "lemon", "name": "Lemon juice", "grams": 22, "notes": "half a lemon" },
+        { "id": "lemon-zest", "name": "Lemon zest", "grams": 2 },
+        { "id": "tahini", "name": "Tahini", "grams": 30 },
+        { "id": "olive-oil", "name": "Olive oil", "grams": 15 },
+        { "id": "dill", "name": "Fresh dill", "grams": 5, "notes": "chopped" },
+        { "id": "garlic", "name": "Garlic", "grams": 4, "notes": "1 clove" }
+      ],
+
+      "instructions": [
+        "Place all of the ingredients in a food processor.",
+        "Process until smooth.",
+        "Serve with veggies of your choice for dipping."
+      ],
+
+      "per_serve": {
+        "calories": 240,
+        "protein_g": 8,
+        "fat_g": 16,
+        "carbs_g": 18,
+        "fibre_g": 4
+      },
+
+      "source": "galveston_book",
+      "source_ref": "p.211",
+
+      "created_at": "2025-12-05",
+      "updated_at": "2025-12-05",
+      "version": 1
+    },
+    {
+      "id": "herbed-cottage-cheese-dip-cucumber",
+      "name": "Herbed Cottage Cheese Dip with Cucumber",
+      "description": "Light and herby cottage cheese dip with lemon and dill, served with fresh cucumber.",
+
+      "meal_type": "snack_afternoon",
+      "phase": [1, 2, 3],
+      "category": "dairy",
+      "cuisine": "universal",
+      "tags": ["no-cook", "high-protein", "light"],
+
+      "batch_friendly": true,
+      "batch_notes": "Dip keeps refrigerated for 2-3 days.",
+      "components": {
+        "reheatable": [],
+        "fresh_only": ["cucumber"]
+      },
+      "freezer_friendly": false,
+      "good_for_lunchbox": true,
+
+      "flavour_profile": ["sour", "herby", "mild"],
+      "texture": ["smooth", "crunchy"],
+      "temperature": "cold",
+
+      "difficulty": "no_cook",
+      "active_cooking": false,
+      "prep_time_mins": 5,
+      "cook_time_mins": 0,
+      "total_time_mins": 5,
+
+      "dietary": {
+        "dairy_free": false,
+        "gluten_free": true,
+        "nut_free": true,
+        "egg_free": true,
+        "vegetarian": true,
+        "vegan": false
+      },
+
+      "base_servings": 2,
+      "ingredients": [
+        { "id": "cottage-cheese", "name": "Full-fat cottage cheese", "grams": 120 },
+        { "id": "lemon", "name": "Fresh lemon juice", "grams": 15 },
+        { "id": "garlic-powder", "name": "Garlic powder", "grams": 1 },
+        { "id": "onion-powder", "name": "Onion powder", "grams": 1 },
+        { "id": "black-pepper", "name": "Black pepper", "grams": 0.5 },
+        { "id": "dill", "name": "Fresh dill", "grams": 5, "notes": "chopped" },
+        { "id": "cucumber", "name": "Small cucumber", "grams": 150, "notes": "sliced" }
+      ],
+
+      "instructions": [
+        "Place the cottage cheese, lemon juice, garlic powder, onion powder, pepper, and dill in a blender.",
+        "Process until smooth.",
+        "Spoon the dip into a small bowl.",
+        "Serve with the cucumber slices for dipping."
+      ],
+
+      "per_serve": {
+        "calories": 100,
+        "protein_g": 10,
+        "fat_g": 4,
+        "carbs_g": 6,
+        "fibre_g": 1
+      },
+
+      "source": "galveston_book",
+      "source_ref": "p.211",
+
+      "created_at": "2025-12-05",
+      "updated_at": "2025-12-05",
+      "version": 1
+    },
+    {
+      "id": "veggie-slices-italian-mayo-dip",
+      "name": "Veggie Slices with Italian Mayo Dip",
+      "description": "Assorted fresh vegetables with creamy Italian herb mayonnaise dip.",
+
+      "meal_type": "snack_afternoon",
+      "phase": [1, 2, 3],
+      "category": "vegetables",
+      "cuisine": "italian",
+      "tags": ["no-cook", "crudites", "fresh"],
+
+      "batch_friendly": true,
+      "batch_notes": "Dip keeps refrigerated. Cut vegetables day of serving.",
+      "components": {
+        "reheatable": [],
+        "fresh_only": ["vegetables"]
+      },
+      "freezer_friendly": false,
+      "good_for_lunchbox": true,
+
+      "flavour_profile": ["herby", "mild", "rich"],
+      "texture": ["crunchy", "creamy"],
+      "temperature": "cold",
+
+      "difficulty": "no_cook",
+      "active_cooking": false,
+      "prep_time_mins": 10,
+      "cook_time_mins": 0,
+      "total_time_mins": 10,
+
+      "dietary": {
+        "dairy_free": true,
+        "gluten_free": true,
+        "nut_free": true,
+        "egg_free": true,
+        "vegetarian": true,
+        "vegan": true
+      },
+
+      "base_servings": 4,
+      "ingredients": [
+        { "id": "mayonnaise-olive-oil", "name": "Olive oil mayonnaise", "grams": 240 },
+        { "id": "italian-seasoning", "name": "Italian seasoning", "grams": 5 },
+        { "id": "cucumber", "name": "Cucumbers", "grams": 400, "notes": "2 large, sliced" },
+        { "id": "carrot", "name": "Carrots", "grams": 200, "notes": "2 large, sliced" },
+        { "id": "asparagus", "name": "Asparagus", "grams": 120, "notes": "8 spears, trimmed and cut into bites" },
+        { "id": "radish", "name": "Radishes", "grams": 150, "notes": "8 radishes, halved or quartered" }
+      ],
+
+      "instructions": [
+        "In a small bowl, combine the mayonnaise and seasoning, stirring until well blended.",
+        "Arrange the cucumbers, carrots, asparagus, and radishes on platters.",
+        "Serve with the dip."
+      ],
+
+      "per_serve": {
+        "calories": 280,
+        "protein_g": 4,
+        "fat_g": 26,
+        "carbs_g": 10,
+        "fibre_g": 4
+      },
+
+      "source": "galveston_book",
+      "source_ref": "p.212",
+
+      "created_at": "2025-12-05",
+      "updated_at": "2025-12-05",
+      "version": 1
+    },
+    {
+      "id": "marinated-olives-chickpeas-vegetables",
+      "name": "Marinated Olives, Chickpeas, and Vegetables with Thyme and Dill",
+      "description": "Mediterranean-style marinated vegetables, olives, and chickpeas with fresh herbs.",
+
+      "meal_type": "snack_afternoon",
+      "phase": [2, 3],
+      "category": "legumes",
+      "cuisine": "mediterranean",
+      "tags": ["make-ahead", "mediterranean", "appetizer"],
+
+      "batch_friendly": true,
+      "batch_notes": "Flavours improve after marinating. Keeps 3-4 days refrigerated.",
+      "components": {
+        "reheatable": [],
+        "fresh_only": []
+      },
+      "freezer_friendly": false,
+      "good_for_lunchbox": true,
+
+      "flavour_profile": ["sour", "herby", "salty"],
+      "texture": ["crunchy", "soft"],
+      "temperature": "cold",
+
+      "difficulty": "no_cook",
+      "active_cooking": false,
+      "prep_time_mins": 10,
+      "cook_time_mins": 0,
+      "total_time_mins": 25,
+
+      "dietary": {
+        "dairy_free": true,
+        "gluten_free": true,
+        "nut_free": true,
+        "egg_free": true,
+        "vegetarian": true,
+        "vegan": true
+      },
+
+      "base_servings": 4,
+      "ingredients": [
+        { "id": "cucumber", "name": "Cucumbers", "grams": 400, "notes": "2 large, sliced" },
+        { "id": "carrot", "name": "Carrots", "grams": 150, "notes": "2 medium, sliced" },
+        { "id": "chickpeas", "name": "Chickpeas", "grams": 400, "notes": "1 can, rinsed and drained" },
+        { "id": "olives", "name": "Olives", "grams": 200, "notes": "mixed varieties" },
+        { "id": "vinegar-red-wine", "name": "Red wine vinegar", "grams": 120 },
+        { "id": "thyme", "name": "Fresh thyme leaves", "grams": 8 },
+        { "id": "dill", "name": "Fresh dill", "grams": 8 }
+      ],
+
+      "instructions": [
+        "In a large bowl, combine the cucumbers, carrots, chickpeas, and olives.",
+        "Pour in the vinegar and add the herbs.",
+        "Stir well to combine the flavours.",
+        "Cover and refrigerate for 15 minutes until ready to serve."
+      ],
+
+      "per_serve": {
+        "calories": 220,
+        "protein_g": 8,
+        "fat_g": 10,
+        "carbs_g": 26,
+        "fibre_g": 6
+      },
+
+      "source": "galveston_book",
+      "source_ref": "p.212",
+
+      "created_at": "2025-12-05",
+      "updated_at": "2025-12-05",
+      "version": 1
+    },
+    {
+      "id": "cucumber-tomato-feta-salad",
+      "name": "Cucumber, Tomato, and Feta Salad",
+      "description": "Simple Greek-style salad with cucumber, cherry tomatoes, red onion, and feta.",
+
+      "meal_type": "snack_afternoon",
+      "phase": [1, 2, 3],
+      "category": "vegetables",
+      "cuisine": "greek",
+      "tags": ["no-cook", "fresh", "quick"],
+
+      "batch_friendly": false,
+      "batch_notes": "Best made fresh.",
+      "components": {
+        "reheatable": [],
+        "fresh_only": ["salad"]
+      },
+      "freezer_friendly": false,
+      "good_for_lunchbox": true,
+
+      "flavour_profile": ["sour", "salty", "light"],
+      "texture": ["crunchy", "creamy"],
+      "temperature": "cold",
+
+      "difficulty": "no_cook",
+      "active_cooking": false,
+      "prep_time_mins": 10,
+      "cook_time_mins": 0,
+      "total_time_mins": 10,
+
+      "dietary": {
+        "dairy_free": false,
+        "gluten_free": true,
+        "nut_free": true,
+        "egg_free": true,
+        "vegetarian": true,
+        "vegan": false
+      },
+
+      "base_servings": 1,
+      "ingredients": [
+        { "id": "cucumber", "name": "Medium cucumber", "grams": 150, "notes": "sliced" },
+        { "id": "tomato-cherry", "name": "Cherry tomatoes", "grams": 150, "notes": "halved" },
+        { "id": "onion-red", "name": "Red onion", "grams": 30, "notes": "diced" },
+        { "id": "garlic", "name": "Garlic", "grams": 4, "notes": "1 clove, minced" },
+        { "id": "olive-oil", "name": "Olive oil", "grams": 15 },
+        { "id": "vinegar-red-wine", "name": "Red wine vinegar", "grams": 15 },
+        { "id": "feta", "name": "Feta cheese", "grams": 30, "notes": "crumbled" }
+      ],
+
+      "instructions": [
+        "Place the cucumber, tomatoes, onion, and garlic in a small salad bowl.",
+        "Drizzle with the olive oil and vinegar, and toss to dress the veggies.",
+        "Scatter the feta on top."
+      ],
+
+      "per_serve": {
+        "calories": 280,
+        "protein_g": 8,
+        "fat_g": 22,
+        "carbs_g": 14,
+        "fibre_g": 4
+      },
+
+      "source": "galveston_book",
+      "source_ref": "p.213",
+
+      "created_at": "2025-12-05",
+      "updated_at": "2025-12-05",
+      "version": 1
+    },
+    {
+      "id": "turkey-mayo-lettuce-wraps",
+      "name": "Turkey and Mayo Lettuce Wraps",
+      "description": "Deli turkey and Swiss cheese wrapped in lettuce with flaxseed mayo dressing.",
+
+      "meal_type": "snack_afternoon",
+      "phase": [1, 2, 3],
+      "category": "poultry",
+      "cuisine": "universal",
+      "tags": ["no-cook", "high-protein", "low-carb"],
+
+      "batch_friendly": false,
+      "batch_notes": "Best assembled fresh.",
+      "components": {
+        "reheatable": [],
+        "fresh_only": ["wraps"]
+      },
+      "freezer_friendly": false,
+      "good_for_lunchbox": true,
+
+      "flavour_profile": ["mild", "rich", "sour"],
+      "texture": ["soft", "crunchy"],
+      "temperature": "cold",
+
+      "difficulty": "no_cook",
+      "active_cooking": false,
+      "prep_time_mins": 5,
+      "cook_time_mins": 0,
+      "total_time_mins": 5,
+
+      "dietary": {
+        "dairy_free": false,
+        "gluten_free": true,
+        "nut_free": true,
+        "egg_free": true,
+        "vegetarian": false,
+        "vegan": false
+      },
+
+      "base_servings": 1,
+      "ingredients": [
+        { "id": "mayonnaise-olive-oil", "name": "Olive oil mayonnaise", "grams": 15 },
+        { "id": "vinegar-red-wine", "name": "Red wine vinegar", "grams": 15 },
+        { "id": "flaxseed", "name": "Ground flaxseed", "grams": 7 },
+        { "id": "lettuce-butter", "name": "Large lettuce leaves", "grams": 40, "notes": "2 leaves" },
+        { "id": "turkey-deli", "name": "Deli turkey slices", "grams": 60 },
+        { "id": "cheese-swiss", "name": "Swiss cheese", "grams": 20, "notes": "1 slice" }
+      ],
+
+      "instructions": [
+        "Combine the mayonnaise, vinegar, and flaxseed in a small bowl.",
+        "Lay the lettuce leaves on a flat surface.",
+        "Top each with some of the mayo mixture, then layer on the turkey and cheese.",
+        "Fold up and transfer to a serving plate."
+      ],
+
+      "per_serve": {
+        "calories": 280,
+        "protein_g": 20,
+        "fat_g": 20,
+        "carbs_g": 4,
+        "fibre_g": 2
+      },
+
+      "source": "galveston_book",
+      "source_ref": "p.213",
+
+      "created_at": "2025-12-05",
+      "updated_at": "2025-12-05",
+      "version": 1
+    },
+    {
+      "id": "hard-boiled-egg-avocado",
+      "name": "Hard-Boiled Egg with Avocado",
+      "description": "Simple, satisfying combination of protein-rich eggs and creamy avocado.",
+
+      "meal_type": "snack_afternoon",
+      "phase": [1, 2, 3],
+      "category": "eggs",
+      "cuisine": "universal",
+      "tags": ["no-cook", "quick", "simple", "high-protein"],
+
+      "batch_friendly": true,
+      "batch_notes": "Hard-boil eggs ahead. Slice avocado fresh.",
+      "components": {
+        "reheatable": [],
+        "fresh_only": ["avocado"]
+      },
+      "freezer_friendly": false,
+      "good_for_lunchbox": true,
+
+      "flavour_profile": ["mild", "rich"],
+      "texture": ["soft", "creamy"],
+      "temperature": "cold",
+
+      "difficulty": "no_cook",
+      "active_cooking": false,
+      "prep_time_mins": 2,
+      "cook_time_mins": 0,
+      "total_time_mins": 2,
+
+      "dietary": {
+        "dairy_free": true,
+        "gluten_free": true,
+        "nut_free": true,
+        "egg_free": false,
+        "vegetarian": true,
+        "vegan": false
+      },
+
+      "base_servings": 1,
+      "ingredients": [
+        { "id": "eggs", "name": "Hard-boiled egg", "grams": 50, "notes": "1 large, shelled and halved" },
+        { "id": "avocado", "name": "Avocado", "grams": 75, "notes": "half, sliced" }
+      ],
+
+      "instructions": [
+        "Place the egg halves on a serving plate.",
+        "Arrange the avocado slices alongside."
+      ],
+
+      "per_serve": {
+        "calories": 200,
+        "protein_g": 8,
+        "fat_g": 16,
+        "carbs_g": 6,
+        "fibre_g": 4
+      },
+
+      "source": "galveston_book",
+      "source_ref": "p.213",
+
+      "created_at": "2025-12-05",
+      "updated_at": "2025-12-05",
+      "version": 1
+    },
+    {
+      "id": "deviled-eggs",
+      "name": "Deviled Eggs",
+      "description": "Classic deviled eggs with avocado mayo, chia seeds, and turmeric, served with capsicum strips.",
+
+      "meal_type": "snack_afternoon",
+      "phase": [1, 2, 3],
+      "category": "eggs",
+      "cuisine": "american",
+      "tags": ["classic", "high-protein", "make-ahead"],
+
+      "batch_friendly": true,
+      "batch_notes": "Can be made ahead. Best within 2 days.",
+      "components": {
+        "reheatable": [],
+        "fresh_only": []
+      },
+      "freezer_friendly": false,
+      "good_for_lunchbox": true,
+
+      "flavour_profile": ["mild", "rich", "earthy"],
+      "texture": ["soft", "creamy"],
+      "temperature": "cold",
+
+      "difficulty": "no_cook",
+      "active_cooking": false,
+      "prep_time_mins": 10,
+      "cook_time_mins": 0,
+      "total_time_mins": 10,
+
+      "dietary": {
+        "dairy_free": true,
+        "gluten_free": true,
+        "nut_free": true,
+        "egg_free": false,
+        "vegetarian": true,
+        "vegan": false
+      },
+
+      "base_servings": 1,
+      "ingredients": [
+        { "id": "eggs", "name": "Hard-boiled eggs", "grams": 100, "notes": "2 large" },
+        { "id": "mayonnaise-avocado", "name": "Avocado oil mayonnaise", "grams": 15 },
+        { "id": "chia-seeds", "name": "Chia seeds", "grams": 12 },
+        { "id": "turmeric", "name": "Ground turmeric", "grams": 0.5 },
+        { "id": "capsicum-green", "name": "Green capsicum", "grams": 100, "notes": "1 whole, sliced" }
+      ],
+
+      "instructions": [
+        "Peel the eggs, cut each in half, and gently remove the yolks.",
+        "Combine the yolks, mayonnaise, chia seeds, and turmeric in a small bowl.",
+        "Spoon a little of the mayonnaise mixture into each egg white.",
+        "Place the stuffed eggs on a plate and accompany with the capsicum strips."
+      ],
+
+      "per_serve": {
+        "calories": 280,
+        "protein_g": 16,
+        "fat_g": 20,
+        "carbs_g": 10,
+        "fibre_g": 6
+      },
+
+      "source": "galveston_book",
+      "source_ref": "p.214",
+
+      "created_at": "2025-12-05",
+      "updated_at": "2025-12-05",
+      "version": 1
+    },
+    {
+      "id": "naked-turkey-roll-ups",
+      "name": "Naked Turkey Roll-Ups",
+      "description": "Deli turkey and Swiss cheese with spicy mustard - no bread needed.",
+
+      "meal_type": "snack_afternoon",
+      "phase": [1, 2, 3],
+      "category": "poultry",
+      "cuisine": "universal",
+      "tags": ["no-cook", "quick", "portable", "keto"],
+
+      "batch_friendly": false,
+      "batch_notes": "Best assembled fresh.",
+      "components": {
+        "reheatable": [],
+        "fresh_only": []
+      },
+      "freezer_friendly": false,
+      "good_for_lunchbox": true,
+
+      "flavour_profile": ["mild", "spicy", "salty"],
+      "texture": ["soft"],
+      "temperature": "cold",
+
+      "difficulty": "no_cook",
+      "active_cooking": false,
+      "prep_time_mins": 2,
+      "cook_time_mins": 0,
+      "total_time_mins": 2,
+
+      "dietary": {
+        "dairy_free": false,
+        "gluten_free": true,
+        "nut_free": true,
+        "egg_free": true,
+        "vegetarian": false,
+        "vegan": false
+      },
+
+      "base_servings": 1,
+      "ingredients": [
+        { "id": "turkey-deli", "name": "Deli turkey slices", "grams": 60 },
+        { "id": "cheese-swiss", "name": "Swiss cheese slices", "grams": 60 },
+        { "id": "mustard-spicy", "name": "Spicy brown mustard", "grams": 15 }
+      ],
+
+      "instructions": [
+        "Lay the turkey slices on a flat surface.",
+        "Top with the cheese slices.",
+        "Spread the mustard on top, then roll up."
+      ],
+
+      "per_serve": {
+        "calories": 240,
+        "protein_g": 22,
+        "fat_g": 16,
+        "carbs_g": 2,
+        "fibre_g": 0
+      },
+
+      "source": "galveston_book",
+      "source_ref": "p.214",
+
+      "created_at": "2025-12-05",
+      "updated_at": "2025-12-05",
+      "version": 1
+    },
+    {
+      "id": "edamame-mash-salad",
+      "name": "Edamame Mash Salad",
+      "description": "Protein-rich edamame mash with fresh herbs served over spinach and red cabbage.",
+
+      "meal_type": "snack_afternoon",
+      "phase": [2, 3],
+      "category": "legumes",
+      "cuisine": "asian-fusion",
+      "tags": ["vegan", "high-protein", "fresh"],
+
+      "batch_friendly": true,
+      "batch_notes": "Mash keeps refrigerated for 2-3 days. Assemble salads fresh.",
+      "components": {
+        "reheatable": [],
+        "fresh_only": ["spinach", "cabbage"]
+      },
+      "freezer_friendly": false,
+      "good_for_lunchbox": true,
+
+      "flavour_profile": ["herby", "sour", "light"],
+      "texture": ["smooth", "crunchy"],
+      "temperature": "cold",
+
+      "difficulty": "easy",
+      "active_cooking": true,
+      "prep_time_mins": 15,
+      "cook_time_mins": 5,
+      "total_time_mins": 20,
+
+      "dietary": {
+        "dairy_free": true,
+        "gluten_free": true,
+        "nut_free": true,
+        "egg_free": true,
+        "vegetarian": true,
+        "vegan": true
+      },
+
+      "base_servings": 4,
+      "ingredients": [
+        { "id": "edamame", "name": "Frozen edamame", "grams": 225 },
+        { "id": "water", "name": "Boiling water", "grams": 480 },
+        { "id": "garlic", "name": "Garlic", "grams": 8, "notes": "2 cloves" },
+        { "id": "lime", "name": "Lime juice", "grams": 15 },
+        { "id": "mayonnaise-avocado", "name": "Avocado oil mayonnaise", "grams": 40 },
+        { "id": "coriander-fresh", "name": "Fresh coriander", "grams": 8, "notes": "minced" },
+        { "id": "mint", "name": "Fresh mint", "grams": 5, "notes": "minced" },
+        { "id": "dill", "name": "Fresh dill", "grams": 5, "notes": "minced" },
+        { "id": "mustard", "name": "Stone-ground mustard", "grams": 3 },
+        { "id": "salt", "name": "Salt", "grams": 1 },
+        { "id": "black-pepper", "name": "Black pepper", "grams": 0.5 },
+        { "id": "spinach", "name": "Fresh spinach", "grams": 120 },
+        { "id": "cabbage-red", "name": "Red cabbage", "grams": 60, "notes": "shredded" }
+      ],
+
+      "instructions": [
+        "Put the edamame in a large bowl and pour the boiling water over it.",
+        "Place a plate or lid on the bowl and let steam for 5 minutes. Drain and rinse until cool.",
+        "Place the edamame, garlic, lime juice, mayonnaise, herbs, mustard, salt, and pepper in a food processor.",
+        "Process just until blended but still has some texture. Refrigerate until ready to serve.",
+        "Divide the spinach and cabbage evenly among 4 serving plates.",
+        "Top with the edamame mash and serve."
+      ],
+
+      "per_serve": {
+        "calories": 180,
+        "protein_g": 10,
+        "fat_g": 12,
+        "carbs_g": 10,
+        "fibre_g": 4
+      },
+
+      "source": "galveston_book",
+      "source_ref": "p.214",
+
+      "created_at": "2025-12-05",
+      "updated_at": "2025-12-05",
+      "version": 1
+    }
+  ]
+}

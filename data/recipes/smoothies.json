@@ -1,0 +1,580 @@
+{
+  "_metadata": {
+    "description": "Smoothie recipes extracted from Galveston Diet book",
+    "source": "galveston_book",
+    "created": "2025-12-05",
+    "status": "extracted",
+    "notes": "Converted to metric, AU ingredient names. For personal use. Smoothies can work as breakfast or snacks."
+  },
+
+  "recipes": [
+    {
+      "id": "chocolate-strawberry-smoothie",
+      "name": "Chocolate Strawberry Smoothie",
+      "description": "Rich chocolate smoothie with kale, strawberries, and almond butter - a nutrient-packed breakfast or snack.",
+
+      "meal_type": "breakfast",
+      "phase": [1, 2, 3],
+      "category": "smoothie",
+      "cuisine": "universal",
+      "tags": ["quick", "chocolate", "nutrient-dense", "portable"],
+
+      "batch_friendly": false,
+      "batch_notes": "Best made fresh.",
+      "components": {
+        "reheatable": [],
+        "fresh_only": ["smoothie"]
+      },
+      "freezer_friendly": false,
+      "good_for_lunchbox": false,
+
+      "flavour_profile": ["sweet", "rich", "earthy"],
+      "texture": ["smooth", "creamy"],
+      "temperature": "cold",
+
+      "difficulty": "no_cook",
+      "active_cooking": false,
+      "prep_time_mins": 5,
+      "cook_time_mins": 0,
+      "total_time_mins": 5,
+
+      "dietary": {
+        "dairy_free": true,
+        "gluten_free": true,
+        "nut_free": false,
+        "egg_free": true,
+        "vegetarian": true,
+        "vegan": true
+      },
+
+      "base_servings": 1,
+      "ingredients": [
+        { "id": "protein-powder", "name": "Protein powder", "grams": 30, "notes": "1 scoop" },
+        { "id": "kale", "name": "Fresh kale", "grams": 30, "notes": "chopped" },
+        { "id": "strawberries", "name": "Fresh strawberries", "grams": 75, "notes": "sliced" },
+        { "id": "flaxseed", "name": "Ground flaxseed", "grams": 7 },
+        { "id": "almond-butter", "name": "Unsweetened almond butter", "grams": 16 },
+        { "id": "cocoa-powder", "name": "Unsweetened cocoa powder", "grams": 8 },
+        { "id": "coconut-milk", "name": "Coconut milk", "grams": 120 },
+        { "id": "chia-seeds", "name": "Chia seeds", "grams": 24 },
+        { "id": "ice", "name": "Ice cubes", "grams": 60, "optional": true }
+      ],
+
+      "instructions": [
+        "Place all the ingredients in a blender.",
+        "Blend until smooth.",
+        "Note: Can be made vegan depending on the protein powder used."
+      ],
+
+      "per_serve": {
+        "calories": 420,
+        "protein_g": 28,
+        "fat_g": 26,
+        "carbs_g": 22,
+        "fibre_g": 14
+      },
+
+      "source": "galveston_book",
+      "source_ref": "p.173",
+
+      "created_at": "2025-12-05",
+      "updated_at": "2025-12-05",
+      "version": 1
+    },
+    {
+      "id": "blueberry-pie-smoothie",
+      "name": "Blueberry Pie Smoothie",
+      "description": "Creamy smoothie with collagen, blueberries, spinach, and almond butter with a hint of nutmeg.",
+
+      "meal_type": "breakfast",
+      "phase": [1, 2, 3],
+      "category": "smoothie",
+      "cuisine": "universal",
+      "tags": ["collagen", "antioxidant", "quick"],
+
+      "batch_friendly": false,
+      "batch_notes": "Best made fresh.",
+      "components": {
+        "reheatable": [],
+        "fresh_only": ["smoothie"]
+      },
+      "freezer_friendly": false,
+      "good_for_lunchbox": false,
+
+      "flavour_profile": ["sweet", "mild", "earthy"],
+      "texture": ["smooth", "creamy"],
+      "temperature": "cold",
+
+      "difficulty": "no_cook",
+      "active_cooking": false,
+      "prep_time_mins": 5,
+      "cook_time_mins": 0,
+      "total_time_mins": 5,
+
+      "dietary": {
+        "dairy_free": true,
+        "gluten_free": true,
+        "nut_free": false,
+        "egg_free": true,
+        "vegetarian": false,
+        "vegan": false
+      },
+
+      "base_servings": 1,
+      "ingredients": [
+        { "id": "collagen-powder", "name": "Collagen powder", "grams": 20, "notes": "2 scoops" },
+        { "id": "mct-powder", "name": "MCT powder or coconut oil", "grams": 10, "notes": "1 scoop" },
+        { "id": "spinach", "name": "Fresh spinach", "grams": 30, "notes": "chopped" },
+        { "id": "blueberries", "name": "Fresh blueberries", "grams": 75 },
+        { "id": "chia-seeds", "name": "Chia seeds", "grams": 24 },
+        { "id": "flaxseed", "name": "Flax seeds", "grams": 14 },
+        { "id": "almond-butter", "name": "Unsweetened almond butter", "grams": 16 },
+        { "id": "almond-extract", "name": "Almond extract", "grams": 2 },
+        { "id": "nutmeg", "name": "Grated nutmeg", "grams": 0.5, "optional": true }
+      ],
+
+      "instructions": [
+        "Combine the powders, spinach, blueberries, seeds, and almond butter in a blender.",
+        "Puree until smooth.",
+        "Add the almond extract and nutmeg, pulse once more until smooth."
+      ],
+
+      "per_serve": {
+        "calories": 380,
+        "protein_g": 22,
+        "fat_g": 24,
+        "carbs_g": 20,
+        "fibre_g": 12
+      },
+
+      "source": "galveston_book",
+      "source_ref": "p.218",
+
+      "created_at": "2025-12-05",
+      "updated_at": "2025-12-05",
+      "version": 1
+    },
+    {
+      "id": "mixed-berry-smoothie",
+      "name": "Mixed Berry Smoothie",
+      "description": "Refreshing smoothie with strawberries, blackberries, raspberries, Greek yoghurt, and spinach.",
+
+      "meal_type": "breakfast",
+      "phase": [1, 2, 3],
+      "category": "smoothie",
+      "cuisine": "universal",
+      "tags": ["antioxidant", "quick", "berry"],
+
+      "batch_friendly": false,
+      "batch_notes": "Best made fresh.",
+      "components": {
+        "reheatable": [],
+        "fresh_only": ["smoothie"]
+      },
+      "freezer_friendly": false,
+      "good_for_lunchbox": false,
+
+      "flavour_profile": ["sweet", "sour", "light"],
+      "texture": ["smooth", "creamy"],
+      "temperature": "cold",
+
+      "difficulty": "no_cook",
+      "active_cooking": false,
+      "prep_time_mins": 5,
+      "cook_time_mins": 0,
+      "total_time_mins": 5,
+
+      "dietary": {
+        "dairy_free": false,
+        "gluten_free": true,
+        "nut_free": true,
+        "egg_free": true,
+        "vegetarian": true,
+        "vegan": false
+      },
+
+      "base_servings": 1,
+      "ingredients": [
+        { "id": "strawberries", "name": "Fresh strawberries", "grams": 40, "notes": "halved" },
+        { "id": "blackberries", "name": "Fresh blackberries", "grams": 40 },
+        { "id": "raspberries", "name": "Fresh raspberries", "grams": 40 },
+        { "id": "greek-yoghurt", "name": "Plain full-fat Greek yoghurt", "grams": 60 },
+        { "id": "spinach", "name": "Baby spinach", "grams": 30 },
+        { "id": "chia-seeds", "name": "Chia seeds", "grams": 12 },
+        { "id": "flaxseed", "name": "Ground flaxseed", "grams": 7 },
+        { "id": "ice", "name": "Ice cubes", "grams": 60 }
+      ],
+
+      "instructions": [
+        "Place the berries, yoghurt, spinach, chia seeds, and flaxseed in a blender.",
+        "Add a couple of ice cubes.",
+        "Blend until smooth, adding a little water to thin to desired consistency if needed."
+      ],
+
+      "per_serve": {
+        "calories": 280,
+        "protein_g": 12,
+        "fat_g": 14,
+        "carbs_g": 28,
+        "fibre_g": 14
+      },
+
+      "source": "galveston_book",
+      "source_ref": "p.218",
+
+      "created_at": "2025-12-05",
+      "updated_at": "2025-12-05",
+      "version": 1
+    },
+    {
+      "id": "raspberry-almond-smoothie",
+      "name": "Raspberry Almond Smoothie",
+      "description": "Simple raspberry smoothie with Greek yoghurt, kale, and almond butter.",
+
+      "meal_type": "breakfast",
+      "phase": [1, 2, 3],
+      "category": "smoothie",
+      "cuisine": "universal",
+      "tags": ["quick", "simple", "high-protein"],
+
+      "batch_friendly": false,
+      "batch_notes": "Best made fresh.",
+      "components": {
+        "reheatable": [],
+        "fresh_only": ["smoothie"]
+      },
+      "freezer_friendly": false,
+      "good_for_lunchbox": false,
+
+      "flavour_profile": ["sweet", "sour", "mild"],
+      "texture": ["smooth", "creamy"],
+      "temperature": "cold",
+
+      "difficulty": "no_cook",
+      "active_cooking": false,
+      "prep_time_mins": 5,
+      "cook_time_mins": 0,
+      "total_time_mins": 5,
+
+      "dietary": {
+        "dairy_free": false,
+        "gluten_free": true,
+        "nut_free": false,
+        "egg_free": true,
+        "vegetarian": true,
+        "vegan": false
+      },
+
+      "base_servings": 1,
+      "ingredients": [
+        { "id": "greek-yoghurt", "name": "Plain full-fat Greek yoghurt", "grams": 120 },
+        { "id": "kale", "name": "Fresh kale", "grams": 15, "notes": "chopped" },
+        { "id": "raspberries", "name": "Fresh raspberries", "grams": 40 },
+        { "id": "almond-butter", "name": "Unsweetened almond butter", "grams": 16 },
+        { "id": "chia-seeds", "name": "Chia seeds", "grams": 12 }
+      ],
+
+      "instructions": [
+        "Place all of the ingredients in a blender.",
+        "Process until smooth."
+      ],
+
+      "per_serve": {
+        "calories": 320,
+        "protein_g": 18,
+        "fat_g": 20,
+        "carbs_g": 18,
+        "fibre_g": 8
+      },
+
+      "source": "galveston_book",
+      "source_ref": "p.219",
+
+      "created_at": "2025-12-05",
+      "updated_at": "2025-12-05",
+      "version": 1
+    },
+    {
+      "id": "peanut-butter-cup-smoothie",
+      "name": "Peanut Butter Cup Smoothie",
+      "description": "Decadent chocolate peanut butter smoothie with Greek yoghurt - tastes like dessert.",
+
+      "meal_type": "breakfast",
+      "phase": [1, 2, 3],
+      "category": "smoothie",
+      "cuisine": "universal",
+      "tags": ["chocolate", "indulgent", "high-protein"],
+
+      "batch_friendly": false,
+      "batch_notes": "Best made fresh.",
+      "components": {
+        "reheatable": [],
+        "fresh_only": ["smoothie"]
+      },
+      "freezer_friendly": false,
+      "good_for_lunchbox": false,
+
+      "flavour_profile": ["sweet", "rich", "earthy"],
+      "texture": ["smooth", "creamy"],
+      "temperature": "cold",
+
+      "difficulty": "no_cook",
+      "active_cooking": false,
+      "prep_time_mins": 5,
+      "cook_time_mins": 0,
+      "total_time_mins": 5,
+
+      "dietary": {
+        "dairy_free": false,
+        "gluten_free": true,
+        "nut_free": false,
+        "egg_free": true,
+        "vegetarian": true,
+        "vegan": false
+      },
+
+      "base_servings": 1,
+      "ingredients": [
+        { "id": "greek-yoghurt", "name": "Plain full-fat Greek yoghurt", "grams": 60 },
+        { "id": "cocoa-powder", "name": "Unsweetened cocoa powder", "grams": 16 },
+        { "id": "peanut-butter", "name": "No-sugar peanut butter", "grams": 32 },
+        { "id": "flaxseed", "name": "Ground flaxseed", "grams": 7 },
+        { "id": "vanilla", "name": "Vanilla extract", "grams": 2 },
+        { "id": "ice", "name": "Ice cubes", "grams": 60, "optional": true }
+      ],
+
+      "instructions": [
+        "Place the yoghurt, cocoa, peanut butter, flaxseed, and vanilla in a blender.",
+        "Add ice cubes if desired.",
+        "Process until smooth."
+      ],
+
+      "per_serve": {
+        "calories": 380,
+        "protein_g": 18,
+        "fat_g": 28,
+        "carbs_g": 16,
+        "fibre_g": 6
+      },
+
+      "source": "galveston_book",
+      "source_ref": "p.219",
+
+      "created_at": "2025-12-05",
+      "updated_at": "2025-12-05",
+      "version": 1
+    },
+    {
+      "id": "peanut-butter-mocha-smoothie",
+      "name": "Peanut Butter-Mocha Smoothie",
+      "description": "Coffee-lovers dream - espresso with chocolate, peanut butter, and banana.",
+
+      "meal_type": "breakfast",
+      "phase": [2, 3],
+      "category": "smoothie",
+      "cuisine": "universal",
+      "tags": ["coffee", "chocolate", "energising"],
+
+      "batch_friendly": false,
+      "batch_notes": "Best made fresh.",
+      "components": {
+        "reheatable": [],
+        "fresh_only": ["smoothie"]
+      },
+      "freezer_friendly": false,
+      "good_for_lunchbox": false,
+
+      "flavour_profile": ["sweet", "bitter", "rich"],
+      "texture": ["smooth", "creamy"],
+      "temperature": "cold",
+
+      "difficulty": "no_cook",
+      "active_cooking": false,
+      "prep_time_mins": 5,
+      "cook_time_mins": 0,
+      "total_time_mins": 5,
+
+      "dietary": {
+        "dairy_free": true,
+        "gluten_free": true,
+        "nut_free": false,
+        "egg_free": true,
+        "vegetarian": true,
+        "vegan": true
+      },
+
+      "base_servings": 1,
+      "ingredients": [
+        { "id": "almond-milk", "name": "Unsweetened almond milk", "grams": 120 },
+        { "id": "chia-seeds", "name": "Chia seeds", "grams": 24 },
+        { "id": "flaxseed", "name": "Ground flaxseed", "grams": 14 },
+        { "id": "cocoa-powder", "name": "Unsweetened cocoa powder", "grams": 4 },
+        { "id": "peanut-butter", "name": "No-sugar peanut butter", "grams": 32 },
+        { "id": "vanilla", "name": "Vanilla extract", "grams": 1 },
+        { "id": "banana", "name": "Ripe banana", "grams": 60, "notes": "half, preferably frozen" },
+        { "id": "espresso", "name": "Fresh espresso", "grams": 30, "notes": "1 shot" },
+        { "id": "ice", "name": "Crushed ice", "grams": 80 },
+        { "id": "salt", "name": "Salt", "grams": 0.5 }
+      ],
+
+      "instructions": [
+        "Place the almond milk, chia seeds, flaxseed, cocoa, peanut butter, vanilla, banana, espresso, and ice in a blender.",
+        "Process until smooth.",
+        "Taste and season with salt."
+      ],
+
+      "per_serve": {
+        "calories": 420,
+        "protein_g": 14,
+        "fat_g": 28,
+        "carbs_g": 32,
+        "fibre_g": 14
+      },
+
+      "source": "galveston_book",
+      "source_ref": "p.219",
+
+      "created_at": "2025-12-05",
+      "updated_at": "2025-12-05",
+      "version": 1
+    },
+    {
+      "id": "green-almond-butter-smoothie",
+      "name": "Green Almond Butter Smoothie",
+      "description": "Vegan green smoothie with protein powder, blueberries, and almond butter.",
+
+      "meal_type": "breakfast",
+      "phase": [1, 2, 3],
+      "category": "smoothie",
+      "cuisine": "universal",
+      "tags": ["vegan", "green", "high-protein"],
+
+      "batch_friendly": false,
+      "batch_notes": "Best made fresh.",
+      "components": {
+        "reheatable": [],
+        "fresh_only": ["smoothie"]
+      },
+      "freezer_friendly": false,
+      "good_for_lunchbox": false,
+
+      "flavour_profile": ["sweet", "mild", "earthy"],
+      "texture": ["smooth", "creamy"],
+      "temperature": "cold",
+
+      "difficulty": "no_cook",
+      "active_cooking": false,
+      "prep_time_mins": 5,
+      "cook_time_mins": 0,
+      "total_time_mins": 5,
+
+      "dietary": {
+        "dairy_free": true,
+        "gluten_free": true,
+        "nut_free": false,
+        "egg_free": true,
+        "vegetarian": true,
+        "vegan": true
+      },
+
+      "base_servings": 1,
+      "ingredients": [
+        { "id": "protein-powder-vegan", "name": "Vegan protein powder", "grams": 30, "notes": "1 scoop" },
+        { "id": "almond-milk", "name": "Almond milk", "grams": 240 },
+        { "id": "blueberries", "name": "Fresh blueberries", "grams": 75 },
+        { "id": "almond-butter", "name": "Almond butter", "grams": 32 },
+        { "id": "flaxseed", "name": "Ground flaxseed", "grams": 14 }
+      ],
+
+      "instructions": [
+        "Place all of the ingredients in a blender.",
+        "Process until smooth."
+      ],
+
+      "per_serve": {
+        "calories": 420,
+        "protein_g": 26,
+        "fat_g": 24,
+        "carbs_g": 28,
+        "fibre_g": 10
+      },
+
+      "source": "galveston_book",
+      "source_ref": "p.220",
+
+      "created_at": "2025-12-05",
+      "updated_at": "2025-12-05",
+      "version": 1
+    },
+    {
+      "id": "vegan-cinnamon-roll-smoothie",
+      "name": "Vegan Cinnamon Roll Smoothie",
+      "description": "Creamy cinnamon-spiced smoothie with coconut protein and almond milk yoghurt - tastes like dessert.",
+
+      "meal_type": "breakfast",
+      "phase": [1, 2, 3],
+      "category": "smoothie",
+      "cuisine": "universal",
+      "tags": ["vegan", "cinnamon", "indulgent"],
+
+      "batch_friendly": false,
+      "batch_notes": "Best made fresh.",
+      "components": {
+        "reheatable": [],
+        "fresh_only": ["smoothie"]
+      },
+      "freezer_friendly": false,
+      "good_for_lunchbox": false,
+
+      "flavour_profile": ["sweet", "spicy", "rich"],
+      "texture": ["smooth", "creamy"],
+      "temperature": "cold",
+
+      "difficulty": "no_cook",
+      "active_cooking": false,
+      "prep_time_mins": 5,
+      "cook_time_mins": 0,
+      "total_time_mins": 5,
+
+      "dietary": {
+        "dairy_free": true,
+        "gluten_free": true,
+        "nut_free": false,
+        "egg_free": true,
+        "vegetarian": true,
+        "vegan": true
+      },
+
+      "base_servings": 1,
+      "ingredients": [
+        { "id": "protein-powder-coconut", "name": "Coconut protein powder", "grams": 40, "notes": "2 scoops" },
+        { "id": "cinnamon", "name": "Ground cinnamon", "grams": 2 },
+        { "id": "vanilla", "name": "Vanilla extract", "grams": 2 },
+        { "id": "flaxseed", "name": "Ground flax seeds", "grams": 14 },
+        { "id": "almond-milk-yoghurt", "name": "Unsweetened almond milk yoghurt", "grams": 180 },
+        { "id": "almond-milk", "name": "Unsweetened almond milk", "grams": 240 },
+        { "id": "ice", "name": "Ice cubes", "grams": 120 }
+      ],
+
+      "instructions": [
+        "Place all ingredients into a blender.",
+        "Pulse until smooth."
+      ],
+
+      "per_serve": {
+        "calories": 340,
+        "protein_g": 24,
+        "fat_g": 16,
+        "carbs_g": 24,
+        "fibre_g": 8
+      },
+
+      "source": "galveston_book",
+      "source_ref": "p.220",
+
+      "created_at": "2025-12-05",
+      "updated_at": "2025-12-05",
+      "version": 1
+    }
+  ]
+}
