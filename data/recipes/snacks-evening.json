@@ -470,8 +470,8 @@
     },
     {
       "id": "chocolate-mocha-almonds-string-cheese",
-      "name": "Chocolate Mocha Almonds with String Cheese",
-      "description": "Cocoa and coffee dusted toasted almonds paired with string cheese - sweet and savoury.",
+      "name": "Chocolate Mocha Almonds with Cheese Sticks",
+      "description": "Cocoa and coffee dusted toasted almonds paired with cheese sticks - sweet and savoury.",
 
       "meal_type": "snack_evening",
       "phase": [1, 2, 3],
@@ -514,7 +514,7 @@
         { "id": "cocoa-powder", "name": "Unsweetened cocoa powder", "grams": 8 },
         { "id": "instant-coffee", "name": "Instant coffee granules", "grams": 2 },
         { "id": "sweetener-swerve", "name": "Swerve powdered sugar", "grams": 3 },
-        { "id": "string-cheese", "name": "String cheese", "grams": 170, "notes": "6 pieces" }
+        { "id": "cheese-sticks", "name": "Cheese sticks", "grams": 170, "notes": "6 pieces" }
       ],
 
       "instructions": [
@@ -524,7 +524,7 @@
         "Pour almonds and cocoa mixture into a medium bowl and toss to coat evenly. Shake off excess.",
         "Spread over baking paper to cool.",
         "Store almonds in an airtight container at room temperature.",
-        "Serve about 25g almonds with 1 string cheese per portion."
+        "Serve about 25g almonds with 1 cheese stick per portion."
       ],
 
       "per_serve": {
@@ -725,7 +725,7 @@
 
       "base_servings": 4,
       "ingredients": [
-        { "id": "almond-milk", "name": "Unsweetened almond milk", "grams": 120 },
+        { "id": "almond-milk", "name": "Unsweetened almond milk", "grams": 960 },
         { "id": "chia-seeds", "name": "Chia seeds", "grams": 48 },
         { "id": "stevia", "name": "Stevia", "grams": 1 },
         { "id": "cinnamon", "name": "Ground cinnamon", "grams": 1 },

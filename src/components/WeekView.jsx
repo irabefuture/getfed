@@ -346,7 +346,10 @@ export default function WeekView() {
       `
       
       recipe.ingredients?.forEach(ing => {
-        const scaledGrams = householdTotal > 1 ? Math.round(ing.grams * householdTotal) : ing.grams
+        // Divide by base_servings first (recipe amounts are for base_servings), then multiply by household needs
+        const baseServings = recipe.base_servings || 1
+        const perServeGrams = (ing.grams || 0) / baseServings
+        const scaledGrams = householdTotal > 1 ? Math.round(perServeGrams * householdTotal) : Math.round(perServeGrams)
         html += `<li><span class="amount">${scaledGrams}g</span><span>${ing.name}${ing.notes ? ` (${ing.notes})` : ''}</span></li>`
       })
       
@@ -894,9 +897,12 @@ function MealSlotCard({ slot, recipe, onSwap, onClear, isSwapping, members, isHo
             </h4>
             <ul className="text-sm space-y-1">
               {recipe.ingredients?.map((ing, i) => {
+                // Divide by base_servings first (recipe amounts are for base_servings), then multiply by household needs
+                const baseServings = recipe.base_servings || 1
+                const perServeGrams = (ing.grams || 0) / baseServings
                 const scaledGrams = isHouseholdMode && householdPortions.total > 1
-                  ? Math.round(ing.grams * householdPortions.total)
-                  : ing.grams
+                  ? Math.round(perServeGrams * householdPortions.total)
+                  : Math.round(perServeGrams)
                 return (
                   <li key={i} className="flex gap-2">
                     <span className="text-muted-foreground w-12">{scaledGrams}g</span>

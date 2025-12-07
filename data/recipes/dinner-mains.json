@@ -445,7 +445,7 @@
         { "id": "garlic", "name": "Garlic", "grams": 4, "notes": "1 clove, sliced" },
         { "id": "capers", "name": "Capers", "grams": 30, "notes": "drained" },
         { "id": "onion", "name": "Onion", "grams": 150, "notes": "1 large, sliced" },
-        { "id": "green-beans", "name": "Green beans", "grams": 100, "notes": "trimmed" },
+        { "id": "green-beans", "name": "Green beans", "grams": 600, "notes": "trimmed" },
         { "id": "almonds", "name": "Slivered almonds", "grams": 35, "notes": "toasted" }
       ],
 
@@ -592,7 +592,7 @@
 
       "base_servings": 4,
       "ingredients": [
-        { "id": "spaghetti-squash", "name": "Spaghetti squash", "grams": 150, "notes": "cooked strands" },
+        { "id": "spaghetti-squash", "name": "Spaghetti squash", "grams": 1200, "notes": "2 medium" },
         { "id": "olive-oil", "name": "Olive oil", "grams": 30 },
         { "id": "salt", "name": "Salt", "grams": 3 },
         { "id": "black-pepper", "name": "Black pepper", "grams": 1 },
@@ -836,7 +836,7 @@
         { "id": "mushroom-button", "name": "Button mushrooms", "grams": 500, "notes": "halved or quartered" },
         { "id": "garlic", "name": "Garlic", "grams": 32, "notes": "8 cloves, minced (divided)" },
         { "id": "onion", "name": "Yellow onion", "grams": 150, "notes": "1 medium, thinly sliced" },
-        { "id": "vegetable-broth", "name": "Vegetable broth", "grams": 120, "notes": "divided" },
+        { "id": "vegetable-broth", "name": "Vegetable broth", "grams": 720, "notes": "divided" },
         { "id": "paprika-smoked", "name": "Smoked paprika", "grams": 8 },
         { "id": "greek-yoghurt", "name": "Plain full-fat Greek yoghurt", "grams": 30 },
         { "id": "salt", "name": "Salt", "grams": 4 },
@@ -877,7 +877,7 @@
     {
       "id": "blt-salmon-burgers",
       "name": "BLT Salmon Burgers",
-      "description": "Salmon patties on a woven turkey bacon base with avocado-flaxseed spread, lettuce, and tomato.",
+      "description": "Salmon patties on a woven bacon base with avocado-flaxseed spread, lettuce, and tomato.",
 
       "meal_type": "dinner",
       "phase": [1, 2, 3],
@@ -915,7 +915,7 @@
 
       "base_servings": 4,
       "ingredients": [
-        { "id": "turkey-bacon", "name": "Turkey bacon", "grams": 240, "notes": "16 slices, halved crosswise" },
+        { "id": "bacon", "name": "Bacon rashers", "grams": 240, "notes": "16 slices, halved crosswise" },
         { "id": "salmon-fillet", "name": "Salmon fillet", "grams": 225, "notes": "poached, skin removed, cooled" },
         { "id": "mayonnaise", "name": "Mayonnaise", "grams": 45 },
         { "id": "salt", "name": "Salt", "grams": 2 },
@@ -999,11 +999,11 @@
         { "id": "yellow-squash", "name": "Yellow squash", "grams": 200, "notes": "1 medium, sliced" },
         { "id": "zucchini", "name": "Zucchini", "grams": 200, "notes": "1 medium, sliced" },
         { "id": "butter", "name": "Butter", "grams": 100, "notes": "divided" },
-        { "id": "lemon", "name": "Lemon", "grams": 60, "notes": "zested and juiced, plus slices" },
+        { "id": "lemon", "name": "Lemon", "grams": 180, "notes": "2 lemons - 1 zested and juiced, 1 thinly sliced" },
         { "id": "salt", "name": "Salt", "grams": 3 },
         { "id": "black-pepper", "name": "Black pepper", "grams": 1 },
         { "id": "cayenne", "name": "Cayenne pepper", "grams": 1, "optional": true },
-        { "id": "salmon-fillet", "name": "Salmon fillet", "grams": 170, "notes": "per serve" },
+        { "id": "salmon-fillet", "name": "Salmon fillet", "grams": 600, "notes": "4 fillets" },
         { "id": "honey", "name": "Honey", "grams": 20 },
         { "id": "garlic", "name": "Garlic", "grams": 12, "notes": "3 cloves, minced" },
         { "id": "thyme", "name": "Fresh thyme", "grams": 3, "notes": "chopped" },
@@ -1231,7 +1231,7 @@
 
       "base_servings": 4,
       "ingredients": [
-        { "id": "bbq-sauce", "name": "Primal Kitchen BBQ sauce", "grams": 120 },
+        { "id": "bbq-sauce", "name": "BBQ sauce", "grams": 120 },
         { "id": "orange-juice", "name": "Fresh orange juice", "grams": 120 },
         { "id": "tamari", "name": "Tamari", "grams": 40 },
         { "id": "vinegar-apple-cider", "name": "Apple cider vinegar", "grams": 30 },
@@ -1325,7 +1325,7 @@
         { "id": "coconut-flour", "name": "Coconut flour", "grams": 30 },
         { "id": "xanthan-gum", "name": "Xanthan gum", "grams": 4 },
         { "id": "baking-powder", "name": "Baking powder", "grams": 4 },
-        { "id": "salt-kosher", "name": "Kosher salt", "grams": 2 },
+        { "id": "salt-cooking", "name": "Cooking salt", "grams": 2 },
         { "id": "lime", "name": "Fresh lime juice", "grams": 10 },
         { "id": "eggs", "name": "Eggs", "grams": 200, "notes": "4 large, divided" },
         { "id": "water", "name": "Water", "grams": 15 },
@@ -1351,7 +1351,7 @@
         "Make sauce: Combine tomato sauce, broth, vinegar, 8g chilli powder, paprika, 3g cumin, onion powder, and 2g garlic powder in saucepan. Heat to near boil, reduce and simmer 15-30 minutes until thickened.",
         "Shape tortillas: Divide dough into 8 balls. Roll each between parchment to 5-6 inches diameter. Cook in hot cast-iron frypan about 20 seconds per side.",
         "Make filling: Heat avocado oil in saucepan. Saute onion and capsicum until softened, 3 minutes. Add zucchini, then remaining 3 eggs, stir to scramble. Add spinach, remaining chilli powder, garlic salt, onion powder, and cumin. Simmer until heated through.",
-        "Assemble: Place a tortilla flat, spoon on 1/2 cup filling and 1 1/2 tbsp cheese. Roll up and place in 33x23cm baking dish. Repeat with remaining tortillas.",
+        "Assemble: Place a tortilla flat, spoon on 120g filling and 20g cheese. Roll up and place in 33x23cm baking dish. Repeat with remaining tortillas.",
         "Preheat oven to 180C. Pour sauce over enchiladas and sprinkle remaining cheese on top.",
         "Bake 30 minutes until heated through and cheese is browned."
       ],

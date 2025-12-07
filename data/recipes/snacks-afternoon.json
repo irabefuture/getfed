@@ -1080,7 +1080,7 @@
 
       "base_servings": 4,
       "ingredients": [
-        { "id": "mayonnaise-olive-oil", "name": "Olive oil mayonnaise", "grams": 30 },
+        { "id": "mayonnaise-olive-oil", "name": "Olive oil mayonnaise", "grams": 240 },
         { "id": "italian-seasoning", "name": "Italian seasoning", "grams": 5 },
         { "id": "cucumber", "name": "Cucumbers", "grams": 400, "notes": "2 large, sliced" },
         { "id": "carrot", "name": "Carrots", "grams": 200, "notes": "2 large, sliced" },

@@ -38,25 +38,40 @@ const CATEGORY_MAP = {
 
 const PANTRY_STAPLES = ['salt', 'pepper', 'black pepper', 'olive oil', 'water', 'ice']
 
+// AU-friendly unit conversions
 const UNIT_HINTS = {
   'egg': (g) => `~${Math.ceil(g / 50)} eggs`,
-  'avocado': (g) => `~${Math.ceil(g / 150)} whole`,
-  'capsicum': (g) => `~${Math.ceil(g / 150)} medium`,
+  'avocado': (g) => `~${Math.ceil(g / 170)} whole`,           // AU avocados ~170g
+  'capsicum': (g) => `~${Math.ceil(g / 180)} medium`,         // AU capsicums ~180g
   'tomato': (g) => `~${Math.ceil(g / 150)} medium`,
+  'cherry tomato': (g) => `~${Math.ceil(g / 250)} punnets`,   // 250g punnet standard
+  'grape tomato': (g) => `~${Math.ceil(g / 250)} punnets`,    // 250g punnet standard
   'onion': (g) => `~${Math.ceil(g / 150)} medium`,
-  'cucumber': (g) => `~${Math.ceil(g / 200)} whole`,
-  'lemon': (g) => `~${Math.ceil(g / 60)} whole`,
-  'lime': (g) => `~${Math.ceil(g / 45)} whole`,
+  'cucumber': (g) => `~${Math.ceil(g / 300)} whole`,          // Lebanese ~150g, telegraph ~300g
+  'lemon': (g) => `~${Math.ceil(g / 80)} whole`,              // AU lemons ~80g
+  'lime': (g) => `~${Math.ceil(g / 50)} whole`,               // AU limes ~50g
   'garlic': (g) => `~${Math.ceil(g / 5)} cloves`,
-  'chicken breast': (g) => `~${Math.ceil(g / 200)} breasts`,
+  'chicken breast': (g) => `~${Math.ceil(g / 180)} breasts`,  // AU chicken breast ~180g
   'salmon': (g) => `~${Math.ceil(g / 180)} fillets`,
   'banana': (g) => `~${Math.ceil(g / 120)} whole`,
+  'broccoli': (g) => `~${Math.ceil(g / 400)} heads`,          // Medium broccoli head ~400g
+  'cauliflower': (g) => `~${Math.ceil(g / 600)} heads`,       // Medium cauliflower ~600g
+  'zucchini': (g) => `~${Math.ceil(g / 200)} medium`,
+  'carrot': (g) => `~${Math.ceil(g / 80)} medium`,
+  'celery': (g) => `~${Math.ceil(g / 40)} stalks`,
+  'mushroom': (g) => `~${Math.ceil(g / 250)} punnets`,        // 250g punnet standard
+  'asparagus': (g) => `~${Math.ceil(g / 180)} bunches`,       // Standard bunch ~180g
+  'kale': (g) => `~${Math.ceil(g / 200)} bunches`,
+  'spinach': (g) => `~${Math.ceil(g / 120)} bags`,            // 120g bag standard
+  'rocket': (g) => `~${Math.ceil(g / 120)} bags`,             // 120g bag standard
+  'cos lettuce': (g) => `~${Math.ceil(g / 350)} heads`,
+  'butter lettuce': (g) => `~${Math.ceil(g / 200)} heads`,
 }
 
 function normalizeIngredientName(name) {
   let n = name.toLowerCase().trim().replace(/\s*\(.*\)\s*/g, '').replace(/,.*$/, '').trim()
   n = n.replace(/ies$/, 'y').replace(/ves$/, 'f').replace(/oes$/, 'o').replace(/es$/, '').replace(/s$/, '')
-  
+
   const variations = {
     'hard boiled egg': 'egg', 'hard-boiled egg': 'egg', 'boiled egg': 'egg', 'poached egg': 'egg',
     'baby spinach': 'spinach', 'fresh spinach': 'spinach',
@@ -80,19 +95,25 @@ function isStaple(name) {
 
 function getHint(name, grams) {
   const n = name.toLowerCase()
-  for (const [k, fn] of Object.entries(UNIT_HINTS)) { if (n.includes(k)) return fn(grams) }
+  // Check longer/more specific matches first
+  const sortedHints = Object.entries(UNIT_HINTS).sort((a, b) => b[0].length - a[0].length)
+  for (const [k, fn] of sortedHints) {
+    if (n.includes(k)) return fn(grams)
+  }
   return null
 }
 
 /**
- * Generate shopping list from meal plan
+ * Generate shopping list from meal plan with detailed breakdown
  * @param {Object} meals - Meals keyed by date, then by meal type
  * @param {Array} dateKeys - Array of date keys to include
  * @param {number|Array} servingsOrMembers - Either a simple multiplier OR array of household members
- * @returns {Object} Grouped shopping list by category
+ * @param {boolean} includeBreakdown - If true, include sources breakdown for each ingredient
+ * @returns {Object} Grouped shopping list by category (with optional breakdown)
  */
-export function generateShoppingList(meals, dateKeys, servingsOrMembers = 1) {
+export function generateShoppingList(meals, dateKeys, servingsOrMembers = 1, includeBreakdown = false) {
   const map = {}
+  const debugLog = []
 
   // Determine if we're in household mode (array of members) or simple mode (number)
   const isHouseholdMode = Array.isArray(servingsOrMembers)
@@ -112,33 +133,77 @@ export function generateShoppingList(meals, dateKeys, servingsOrMembers = 1) {
         multiplier = calculateHouseholdServings(members, recipe, mealType)
       }
 
+      const baseServings = recipe.base_servings || 1
+
       recipe.ingredients.forEach(ing => {
         if (isStaple(ing.name)) return
         const key = normalizeIngredientName(ing.name)
-        const g = (ing.grams || 0) * multiplier
+        // Divide by base_servings first (recipe amounts are for base_servings), then multiply by household needs
+        const perServeGrams = (ing.grams || 0) / baseServings
+        const scaledGrams = perServeGrams * multiplier
+
+        // Debug log entry
+        debugLog.push({
+          ingredient: ing.name,
+          key,
+          date: dk,
+          recipe: recipe.name,
+          mealType,
+          recipeGrams: ing.grams,
+          baseServings,
+          perServeGrams: Math.round(perServeGrams * 10) / 10,
+          multiplier: Math.round(multiplier * 100) / 100,
+          scaledGrams: Math.round(scaledGrams * 10) / 10
+        })
 
         if (map[key]) {
-          map[key].grams += g
+          map[key].grams += scaledGrams
           if (!map[key].names.includes(ing.name)) {
             map[key].names.push(ing.name)
           }
+          // Track sources for breakdown
+          map[key].sources.push({
+            date: dk,
+            recipe: recipe.name,
+            mealType,
+            grams: Math.round(scaledGrams)
+          })
         } else {
           map[key] = {
             names: [ing.name],
-            grams: g,
-            category: getCategory(ing.name)
+            grams: scaledGrams,
+            category: getCategory(ing.name),
+            sources: [{
+              date: dk,
+              recipe: recipe.name,
+              mealType,
+              grams: Math.round(scaledGrams)
+            }]
           }
         }
       })
     })
   })
 
-  const items = Object.entries(map).map(([k, v]) => ({
-    name: v.names.sort((a, b) => a.length - b.length)[0],
-    grams: Math.round(v.grams),
-    category: v.category,
-    hint: getHint(k, v.grams)
-  }))
+  // Log debug info to console
+  if (debugLog.length > 0) {
+    console.group('🛒 Shopping List Generation Debug')
+    console.table(debugLog)
+    console.groupEnd()
+  }
+
+  const items = Object.entries(map).map(([k, v]) => {
+    const item = {
+      name: v.names.sort((a, b) => a.length - b.length)[0],
+      grams: Math.round(v.grams),
+      category: v.category,
+      hint: getHint(k, v.grams)
+    }
+    if (includeBreakdown) {
+      item.sources = v.sources
+    }
+    return item
+  })
 
   const grouped = { produce: [], meat: [], seafood: [], dairy: [], pantry: [], other: [] }
   items.forEach(i => {
@@ -152,6 +217,17 @@ export function generateShoppingList(meals, dateKeys, servingsOrMembers = 1) {
   })
 
   return grouped
+}
+
+/**
+ * Generate shopping list with full breakdown of ingredient sources
+ * @param {Object} meals - Meals keyed by date
+ * @param {Array} dateKeys - Date keys to include
+ * @param {number|Array} servingsOrMembers - Multiplier or household members
+ * @returns {Object} Grouped shopping list with sources breakdown
+ */
+export function generateShoppingListWithBreakdown(meals, dateKeys, servingsOrMembers = 1) {
+  return generateShoppingList(meals, dateKeys, servingsOrMembers, true)
 }
 
 /**
@@ -199,4 +275,34 @@ export function clearShoppingList(userId) {
   } catch (e) {
     return false
   }
+}
+
+/**
+ * Print ingredient breakdown to console for debugging
+ * @param {Object} shoppingList - Shopping list with sources (from generateShoppingListWithBreakdown)
+ */
+export function printIngredientBreakdown(shoppingList) {
+  console.group('📋 Ingredient Breakdown by Recipe/Day')
+
+  Object.entries(shoppingList).forEach(([category, items]) => {
+    if (items.length === 0) return
+
+    console.group(`📦 ${CATEGORY_LABELS[category] || category}`)
+    items.forEach(item => {
+      if (!item.sources) {
+        console.log(`${item.name}: ${item.grams}g ${item.hint || ''}`)
+        return
+      }
+
+      console.group(`${item.name}: ${item.grams}g ${item.hint || ''}`)
+      item.sources.forEach(src => {
+        const dateLabel = new Date(src.date).toLocaleDateString('en-AU', { weekday: 'short', day: 'numeric', month: 'short' })
+        console.log(`  └─ ${dateLabel} | ${src.mealType} | ${src.recipe}: ${src.grams}g`)
+      })
+      console.groupEnd()
+    })
+    console.groupEnd()
+  })
+
+  console.groupEnd()
 }

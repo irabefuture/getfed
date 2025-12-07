@@ -5,12 +5,34 @@
     "meal_type": "lunch",
     "issues": [
       {
+        "ingredient": "Bacon rashers",
+        "current": 180,
+        "expected": "20-60g",
+        "typical": 30,
+        "severity": "MEDIUM",
+        "suggestedFix": 30
+      },
+      {
         "ingredient": "Hard-boiled eggs",
         "current": 400,
         "expected": "50-150g",
         "typical": 100,
         "severity": "MEDIUM",
         "suggestedFix": 100
+      }
+    ]
+  },
+  {
+    "id": "grilled-chicken-salad",
+    "name": "Grilled Chicken Salad",
+    "meal_type": "lunch",
+    "issues": [
+      {
+        "ingredient": "Water",
+        "current": 960,
+        "expected": "<500g per serve",
+        "severity": "HIGH",
+        "suggestedFix": 96
       }
     ]
   },
@@ -45,6 +67,20 @@
     ]
   },
   {
+    "id": "lemon-chicken-capers",
+    "name": "Lemon Chicken with Capers",
+    "meal_type": "dinner",
+    "issues": [
+      {
+        "ingredient": "Green beans",
+        "current": 600,
+        "expected": "<500g per serve",
+        "severity": "HIGH",
+        "suggestedFix": 60
+      }
+    ]
+  },
+  {
     "id": "broccoli-cheese-chicken-bake",
     "name": "Broccoli and Cheese Chicken Bake",
     "meal_type": "dinner",
@@ -64,6 +100,14 @@
     "name": "Spaghetti Squash with Turkey, Bacon, Spinach, and Goat Cheese",
     "meal_type": "dinner",
     "issues": [
+      {
+        "ingredient": "Spaghetti squash",
+        "current": 1200,
+        "expected": "80-200g",
+        "typical": 120,
+        "severity": "HIGH",
+        "suggestedFix": 120
+      },
       {
         "ingredient": "Bacon",
         "current": 180,
@@ -93,6 +137,58 @@
         "expected": "100-300g",
         "typical": 150,
         "severity": "MEDIUM",
+        "suggestedFix": 150
+      }
+    ]
+  },
+  {
+    "id": "slow-cooker-mushroom-stroganoff-cauliflower-rice",
+    "name": "Slow Cooker Mushroom Stroganoff with Creamy Garlic Cauliflower Rice",
+    "meal_type": "dinner",
+    "issues": [
+      {
+        "ingredient": "Vegetable broth",
+        "current": 720,
+        "expected": "<500g per serve",
+        "severity": "HIGH",
+        "suggestedFix": 72
+      }
+    ]
+  },
+  {
+    "id": "blt-salmon-burgers",
+    "name": "BLT Salmon Burgers",
+    "meal_type": "dinner",
+    "issues": [
+      {
+        "ingredient": "Bacon rashers",
+        "current": 240,
+        "expected": "20-60g",
+        "typical": 30,
+        "severity": "HIGH",
+        "suggestedFix": 30
+      }
+    ]
+  },
+  {
+    "id": "baked-salmon-grilled-summer-squash",
+    "name": "Baked Salmon with Grilled Summer Squash",
+    "meal_type": "dinner",
+    "issues": [
+      {
+        "ingredient": "Lemon",
+        "current": 180,
+        "expected": "30-80g",
+        "typical": 50,
+        "severity": "MEDIUM",
+        "suggestedFix": 50
+      },
+      {
+        "ingredient": "Salmon fillet",
+        "current": 1360,
+        "expected": "100-250g",
+        "typical": 150,
+        "severity": "HIGH",
         "suggestedFix": 150
       }
     ]
@@ -178,6 +274,14 @@
     "meal_type": "snack_afternoon",
     "issues": [
       {
+        "ingredient": "Olive oil mayonnaise",
+        "current": 240,
+        "expected": "10-45g",
+        "typical": 20,
+        "severity": "HIGH",
+        "suggestedFix": 20
+      },
+      {
         "ingredient": "Cucumbers",
         "current": 400,
         "expected": "50-150g",
@@ -204,16 +308,30 @@
   },
   {
     "id": "chocolate-mocha-almonds-string-cheese",
-    "name": "Chocolate Mocha Almonds with String Cheese",
+    "name": "Chocolate Mocha Almonds with Cheese Sticks",
     "meal_type": "snack_evening",
     "issues": [
       {
-        "ingredient": "String cheese",
+        "ingredient": "Cheese sticks",
         "current": 170,
         "expected": "20-80g",
         "typical": 40,
         "severity": "MEDIUM",
         "suggestedFix": 40
+      }
+    ]
+  },
+  {
+    "id": "coconut-walnut-chia-pudding",
+    "name": "Coconut and Walnut Chia Pudding",
+    "meal_type": "snack_evening",
+    "issues": [
+      {
+        "ingredient": "Unsweetened almond milk",
+        "current": 960,
+        "expected": "<500g per serve",
+        "severity": "HIGH",
+        "suggestedFix": 96
       }
     ]
   },
