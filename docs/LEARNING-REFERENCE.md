@@ -626,3 +626,139 @@ git commit -m "Day X Session Y - brief description"
 ---
 
 *Last updated: Friday 5 December 2025, End of Day 5 Session 1*
+
+---
+
+## Day 7 - Sunday 7 December 2025
+
+### Critical Bug Fixed: Ingredient Scaling
+
+**The Problem:**
+Shopping list showed absurd amounts:
+- 18 avocados for 2 days
+- 31 eggs for 2 days  
+- 1097g salmon for 1 dinner
+
+**Root Cause:**
+Recipe JSONs store TOTAL ingredient amounts for `base_servings`. For example:
+- TGD Cobb Salad: `base_servings: 4`, avocado: `300g`
+- This means 300g total for 4 people = 75g per serve
+
+But the code was treating 300g AS the per-serve amount, then multiplying by household portions.
+
+**The Fix:**
+Consistent formula applied in 3 locations:
+```javascript
+scaledGrams = (ingredient.grams / recipe.base_servings) * householdMultiplier
+```
+
+**Locations:**
+1. `src/lib/shoppingList.js` - Shopping list generation
+2. `src/components/WeekView.jsx` - MealSlotCard ingredient display
+3. `src/components/WeekView.jsx` - handlePrintDayRecipes() function
+
+**Key Insight:**
+We initially "fixed" the recipe data (reduced salmon from 1360g to 170g), then later fixed the code to divide by base_servings. This was a DOUBLE fix, making portions too small. Had to revert the data fixes once code was correct.
+
+---
+
+### AU Terminology & Data Quality
+
+**US → AU Replacements:**
+| US Term | AU Term |
+|---------|---------|  
+| Ranch dressing | Whole egg mayonnaise |
+| Turkey bacon | Bacon rashers |
+| String cheese | Cheese sticks |
+| Primal Kitchen BBQ sauce | BBQ sauce |
+| Kosher salt | Cooking salt |
+
+**Conversion Helpers Fixed:**
+- Cherry tomatoes → "punnets" (not "medium")
+- Avocado size → 170g (AU average, was 150g)
+
+---
+
+### New Features Added
+
+**Recipe Swap with Search & Filter:**
+- Text search box filters by recipe name/description
+- Category pills: fish, poultry, eggs, vegetarian, etc.
+- Shows all alternatives (removed 6-recipe limit)
+- Filters reset when changing meal slot
+
+**Print Recipes:**
+- Button next to date header: "🖨️ Print Recipes"
+- Opens new window with all day's recipes
+- Includes scaled ingredients for household
+- Shows portion percentages per family member
+- Print-optimized CSS
+
+**Debug Logging:**
+- Shopping list now logs ingredient breakdown to console
+- Shows which recipe contributed each ingredient amount
+- Useful for tracing calculation issues
+
+---
+
+### Validation Script Created
+
+`scripts/validate-serving-sizes.js`
+
+Scans all 90 recipes against AU serving size standards:
+- CRITICAL: >2x maximum expected
+- HIGH: >1.5x maximum  
+- WARNING: >maximum
+- LOW: <0.5x minimum
+
+Outputs table and JSON fix file for review.
+
+**Standards defined for:**
+- Proteins (salmon, chicken, beef, bacon, eggs, tofu)
+- Vegetables (leafy, cruciferous, other)
+- Dairy (cheese, butter, cream, yoghurt)
+- Fats & oils
+- Condiments & sauces
+- Nuts & seeds
+- Aromatics & herbs
+- Fruits
+
+---
+
+### Key Learnings
+
+1. **Data vs Code bugs:** When fixing calculation issues, be clear whether the bug is in source data or calculation logic. Fixing both creates double-fix.
+
+2. **base_servings is critical:** Recipe ingredients are totals for the batch. Always divide by base_servings before scaling.
+
+3. **Validation scripts save time:** Systematic scans catch issues faster than manual testing.
+
+4. **AU terminology matters:** US brand names (Primal Kitchen) and terms (turkey bacon, ranch) mean nothing to Australian users.
+
+5. **Debug logging helps:** When calculations seem wrong, add logging to trace exactly where each number comes from.
+
+---
+
+### Files Created/Modified Day 7
+
+| File | Changes |
+|------|--------|
+| `src/lib/shoppingList.js` | Fixed scaling, added debug logging, AU conversions |
+| `src/components/WeekView.jsx` | Fixed scaling, added search/filter, print recipes |
+| `scripts/validate-serving-sizes.js` | NEW - ingredient validation script |
+| `scripts/serving-size-fixes.json` | NEW - validation output |
+| `data/recipes/*.json` | AU terminology fixes |
+
+---
+
+### Remaining Before Ship (Dec 10)
+
+1. Mobile responsiveness check
+2. Edge case testing (empty states, errors)
+3. Performance check
+4. Final UI polish
+5. Deploy to production
+
+---
+
+*Last updated: Sunday 7 December 2025, 3:30 PM AEDT - Day 7 Complete*
