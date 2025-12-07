@@ -543,8 +543,8 @@ export default function WeekView() {
                     </div>
                     
                     {alternatives.length > 0 ? (
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
-                        {alternatives.slice(0, 6).map(alt => (
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-2 max-h-64 overflow-y-auto">
+                        {alternatives.map(alt => (
                           <button
                             key={alt.id}
                             onClick={() => handleSwapMeal(slot.id, alt)}
