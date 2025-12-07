@@ -102,6 +102,8 @@ export default function WeekView() {
   }, [])
   
   const [swappingSlot, setSwappingSlot] = useState(null)
+  const [alternativeSearch, setAlternativeSearch] = useState('')
+  const [alternativeCategory, setAlternativeCategory] = useState('all')
   const [justCommitted, setJustCommitted] = useState(false)
   const [committedHash, setCommittedHash] = useState(null)
   const [isGenerating, setIsGenerating] = useState(false)
@@ -292,6 +294,39 @@ export default function WeekView() {
       sameDayRecipeIds
     )
   }, [swappingSlot, dayMeals])
+  
+  // Filter alternatives by search and category
+  const filteredAlternatives = useMemo(() => {
+    let filtered = alternatives
+    
+    // Text search
+    if (alternativeSearch.trim()) {
+      const search = alternativeSearch.toLowerCase()
+      filtered = filtered.filter(r => 
+        r.name.toLowerCase().includes(search) ||
+        r.description?.toLowerCase().includes(search)
+      )
+    }
+    
+    // Category filter
+    if (alternativeCategory !== 'all') {
+      filtered = filtered.filter(r => r.category === alternativeCategory)
+    }
+    
+    return filtered
+  }, [alternatives, alternativeSearch, alternativeCategory])
+  
+  // Get unique categories from alternatives
+  const availableCategories = useMemo(() => {
+    const cats = new Set(alternatives.map(r => r.category).filter(Boolean))
+    return ['all', ...Array.from(cats).sort()]
+  }, [alternatives])
+  
+  // Reset filters when slot changes
+  useEffect(() => {
+    setAlternativeSearch('')
+    setAlternativeCategory('all')
+  }, [swappingSlot])
   
   // Count meals planned in selected days
   const selectedMealCount = useMemo(() => {
@@ -542,9 +577,35 @@ export default function WeekView() {
                       </button>
                     </div>
                     
-                    {alternatives.length > 0 ? (
+                    {/* Search and filters */}
+                    <div className="mb-3 space-y-2">
+                      <input
+                        type="text"
+                        placeholder="Search recipes..."
+                        value={alternativeSearch}
+                        onChange={(e) => setAlternativeSearch(e.target.value)}
+                        className="w-full px-3 py-1.5 text-sm border rounded-md bg-background"
+                      />
+                      <div className="flex flex-wrap gap-1">
+                        {availableCategories.map(cat => (
+                          <button
+                            key={cat}
+                            onClick={() => setAlternativeCategory(cat)}
+                            className={`px-2 py-0.5 text-xs rounded-full border transition-colors ${
+                              alternativeCategory === cat
+                                ? 'bg-primary text-primary-foreground border-primary'
+                                : 'bg-background hover:bg-muted border-border'
+                            }`}
+                          >
+                            {cat === 'all' ? 'All' : cat.replace('_', ' ')}
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+                    
+                    {filteredAlternatives.length > 0 ? (
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-2 max-h-64 overflow-y-auto">
-                        {alternatives.map(alt => (
+                        {filteredAlternatives.map(alt => (
                           <button
                             key={alt.id}
                             onClick={() => handleSwapMeal(slot.id, alt)}
@@ -553,10 +614,15 @@ export default function WeekView() {
                             <div className="font-medium text-sm">{alt.name}</div>
                             <div className="text-xs text-muted-foreground mt-1">
                               {alt.per_serve?.calories} cal · {alt.total_time_mins} min
+                              {alt.category && <span className="ml-1">· {alt.category.replace('_', ' ')}</span>}
                             </div>
                           </button>
                         ))}
                       </div>
+                    ) : alternativeSearch || alternativeCategory !== 'all' ? (
+                      <p className="text-sm text-muted-foreground">
+                        No matches. Try different search or filter.
+                      </p>
                     ) : (
                       <p className="text-sm text-muted-foreground">
                         No alternatives available. Try generating new meals.
