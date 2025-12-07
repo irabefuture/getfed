@@ -1,7 +1,7 @@
 # Adaptive Meal Builder - Project Status
 
-**Last Updated:** 5 December 2025, 3:00 PM AEDT
-**Ship Date:** 10 December 2025
+**Last Updated:** 7 December 2025, 3:30 PM AEDT
+**Ship Date:** 10 December 2025 (Friday)
 
 ---
 
@@ -9,26 +9,63 @@
 
 | What | Status |
 |------|--------|
-| **Current Phase** | Household Model Complete |
-| **Next Action** | Run Supabase migration, test household features |
+| **Current Phase** | Core Features Complete - Polish & Testing |
+| **Next Action** | Mobile responsiveness check, final polish |
 | **Blocker** | None |
-| **Schedule** | On track |
+| **Schedule** | On track for Friday ship |
 
 ---
 
-## Architecture Pivot (Day 4)
+## Day 7 Summary (7 December 2025)
 
-**Before:** AI generates recipes on-demand via Claude API
-- Slow (10-50 seconds)
-- Error-prone (JSON parsing failures)
-- No quality control
-- Snacks = Meals (wrong)
+### Critical Bug Fixed: Ingredient Scaling
+**Problem:** Shopping list showed absurd amounts (18 avocados, 31 eggs, 1097g salmon)
 
-**After:** Pre-made recipe library with smart selection
-- Instant (database query)
-- Guaranteed quality (Ian-curated)
-- Proper meal type tagging
-- Phase-aware, batch-aware, preference-aware
+**Root Cause:** Recipe ingredients are TOTAL amounts for `base_servings`, but code treated them as per-serve.
+
+**Fix:** Applied consistent formula across 3 locations:
+```javascript
+scaledGrams = (ingredient.grams / recipe.base_servings) * householdMultiplier
+```
+
+**Locations fixed:**
+- `src/lib/shoppingList.js` - Shopping list generation
+- `src/components/WeekView.jsx` - Ingredient display
+- `src/components/WeekView.jsx` - Print recipes function
+
+### AU Terminology Complete
+All recipe JSONs updated:
+| US Term | AU Term |
+|---------|---------|
+| Ranch dressing | Whole egg mayonnaise |
+| Turkey bacon | Bacon rashers |
+| String cheese | Cheese sticks |
+| Primal Kitchen BBQ sauce | BBQ sauce |
+| Kosher salt | Cooking salt |
+
+### New Features Added
+- **Recipe Swap Filter:** Search box + category pills (fish, poultry, eggs, etc.)
+- **Print Recipes:** Button on each day to print all recipes with scaled ingredients
+- **Debug Logging:** Shopping list shows ingredient source breakdown in console
+- **Serving Size Validator:** Script to catch data entry errors
+
+### AU Conversion Helpers Fixed
+- Cherry tomatoes → "punnets" (not "medium")
+- Avocado size → 170g (AU average)
+- Added conversions for: broccoli, cauliflower, zucchini, carrot, etc.
+
+### Data Quality
+- Created `scripts/validate-serving-sizes.js` for ongoing validation
+- Fixed basil in Grape Tomato Salad: 30g → 10g
+- All CRITICAL/HIGH issues resolved
+
+### Validation Passed
+Sunday + Monday combined shopping list verified:
+- ✅ Avocado: 556g (~4 whole)
+- ✅ Hard-boiled eggs: 464g (~10 eggs)
+- ✅ Cherry tomatoes: 332g (~2 punnets)
+- ✅ Salmon: 484g (~3 fillets)
+- ✅ All amounts match meal plan exactly
 
 ---
 
@@ -40,80 +77,30 @@
 | Supabase connection | ✅ Complete |
 | Vercel deployment | ✅ Complete |
 | 171 ingredients database | ✅ Complete |
-| Ingredient browser with search/filter | ✅ Complete |
-| Project specification | ✅ Complete |
-| Database schema (7 tables) | ✅ Complete |
-| User profiles (Ian + Rhonda) | ✅ Complete |
-| UserContext (React state) | ✅ Complete |
-| Nutrition calculations (BMR/TDEE) | ✅ Complete |
-| Claude API integration | ✅ Complete (kept for future use) |
-| Sidebar component (new nav) | ✅ Complete |
-| WeekView component | ✅ Complete (needs recipe library) |
-| **Recipe Schema** | ✅ Complete |
-| **US→AU Mappings** | ✅ Complete |
-| **Sample Recipes (8)** | ✅ Complete |
-| **Full Recipe Extraction** | ✅ Complete (90 recipes) |
-| **Smart Planner API** | ✅ Complete (AI-powered selection) |
-| **Smart Planner Library** | ✅ Complete (generateSmartDay/Week) |
-| **Household Model** | ✅ Complete (multi-person support) |
-| **Settings Page** | ✅ Complete (household management) |
-| Recipes page UI | 🔜 Next |
-| Shopping list generation | ✅ Complete (household aggregation) |
-
----
-
-## New File Structure
-
-```
-adaptive-meal-builder/
-├── data/
-│   ├── ingredients.json              ← 171 Galveston ingredients
-│   ├── schemas/
-│   │   └── RECIPE-SCHEMA.md          ← Full recipe structure
-│   ├── mappings/
-│   │   ├── us-to-au-ingredients.json ← Ingredient name mapping
-│   │   └── imperial-to-metric.json   ← Unit conversions
-│   ├── recipes-reference/            ← Sample recipes for reference
-│   │   ├── snacks-sample.json        ← 5 sample snacks
-│   │   └── mains-sample.json         ← 3 sample mains
-│   └── recipes/                      ← Full recipe library (90 recipes)
-│       ├── lunch-mains.json          ← 13 lunch recipes
-│       ├── dinner-mains.json         ← 18 dinner recipes
-│       ├── breakfast.json            ← 9 breakfast recipes
-│       ├── smoothies.json            ← 8 smoothie recipes
-│       ├── snacks-afternoon.json     ← 22 afternoon snacks
-│       └── snacks-evening.json       ← 20 evening snacks
-├── docs/
-│   ├── galveston-guide/
-│   │   └── galveston-diet-book.md    ← Full book content
-│   ├── PROJECT-SPEC.md
-│   ├── LEARNING-REFERENCE.md
-│   └── COMPONENT-STRUCTURE.md
-└── src/
-    └── ... (app code)
-```
-
----
-
-## Revised Build Phases
-
-1. ✅ **Foundation** (Days 1-2) - Project setup, ingredients, deployment
-2. ✅ **Core Infrastructure** (Day 3) - Schema, users, API, UI components
-3. ✅ **Recipe Architecture** (Day 4) - Schema design, mappings, samples
-4. ✅ **Recipe Library** (Day 5 AM) - Full extraction from book (90 recipes)
-5. ✅ **Smart Planner API** (Day 5 AM) - AI-powered meal selection
-6. ✅ **Household Model** (Day 5 PM) - Multi-person meal planning
-7. 🔜 **Recipes UI** (Day 6) - Browse, filter, favourites
-8. ⏳ **Polish & Ship** (Day 7-10) - Testing, fixes, deploy
+| Recipe library (90 recipes) | ✅ Complete |
+| Smart Planner (AI meal selection) | ✅ Complete |
+| Household model (Ian + Rhonda) | ✅ Complete |
+| WeekView with day selection | ✅ Complete |
+| Recipe swap with search/filter | ✅ Complete |
+| Print Recipes | ✅ Complete |
+| Shopping list generation | ✅ Complete |
+| Shopping list with household scaling | ✅ Complete |
+| AU terminology | ✅ Complete |
+| AU conversion helpers | ✅ Complete |
+| Ingredient scaling (base_servings) | ✅ Complete |
+| Settings page | ✅ Complete |
+| Recipes browser | ✅ Complete |
+| Mobile responsiveness | 🔜 To test |
+| Final polish | 🔜 Remaining |
 
 ---
 
 ## User Profiles
 
-| User | Calories | Phase 1 Macros |
-|------|----------|----------------|
-| Ian | 2,300/day | 115g P / 179g F / 58g C |
-| Rhonda | 1,850/day | 93g P / 144g F / 46g C |
+| User | Calories | Phase 1 Macros | Portion % |
+|------|----------|----------------|-----------|
+| Ian | 2,300/day | 115g P / 179g F / 58g C | 55% |
+| Rhonda | 1,850/day | 93g P / 144g F / 46g C | 45% |
 
 ---
 
@@ -134,90 +121,40 @@ Open: http://localhost:3000
 
 ---
 
-## Key Documents
+## Key Files
 
-| Document | Purpose |
-|----------|---------|
+| File | Purpose |
+|------|---------|
 | `docs/PROJECT-SPEC.md` | Complete specification |
 | `docs/LEARNING-REFERENCE.md` | Concepts, commands, daily progress |
-| `data/schemas/RECIPE-SCHEMA.md` | Recipe structure definition |
 | `PROJECT-STATUS.md` | This file - quick status |
+| `scripts/validate-serving-sizes.js` | Data quality validator |
+| `scripts/serving-size-fixes.json` | Validation results |
 
 ---
 
-## Smart Planner API (Day 5)
+## Remaining Before Ship (Dec 10)
 
-**New files created:**
-- `src/app/api/generate-smart-meals/route.js` - AI endpoint
-- `src/lib/smartPlanner.js` - Client library
+1. **Mobile responsiveness check** - Test on phone/tablet
+2. **Edge case testing** - Empty states, error handling
+3. **Performance check** - Load times, API response
+4. **Final UI polish** - Spacing, typography, colours
+5. **Deploy to production** - Vercel push
 
-**Features:**
-- Claude Sonnet for cost efficiency (<$0.05/week)
-- Phase-aware macro targeting (Phase 1/2/3)
-- Dietary restriction filtering (dairy-free, gluten-free, etc.)
-- Protein variety rotation (no consecutive repeats)
-- Batch-friendly and lunchbox-friendly preferences
-- Sends minimal recipe data (ID + name + macros) to reduce tokens
+---
 
-**API endpoint:** `POST /api/generate-smart-meals`
-```json
-{
-  "recipes": [...],
-  "phase": "phase1",
-  "dailyCalories": 2300,
-  "dailyProtein": 115,
-  "dailyFat": 179,
-  "dailyCarbs": 58,
-  "daysToGenerate": 7,
-  "dietary": { "dairyFree": false },
-  "preferences": { "batchFriendly": true }
-}
+## Git Log (Day 7)
+
+```
+dc9abda Day 7: Fix ingredient scaling, AU terminology, and data validation
+5aa3665 Add Print Recipes button for daily meal plan
+68c47e3 Add search and category filter to recipe swap panel
+17add28 Show all recipe alternatives in swap panel
+5552ab4 Fix HIGH priority recipe ingredient amounts
+25dc54e Add household ingredient scaling
+5b547c7 Fix swap alternatives - only exclude same-day recipes
 ```
 
-**Library functions:**
-- `generateSmartDay(user, targets, preferences, excludeIds)`
-- `generateSmartWeek(user, targets, preferences)`
-- `calculateDayTotals(dayMeals)`
-- `checkMacroCompliance(totals, targets)`
-
 ---
 
-## Household Model (Day 5 PM)
-
-**Problem Solved:** Ian and Rhonda share meals but have different calorie needs.
-
-**Solution:**
-- **households** table: Groups members who share meal plans
-- **household_members** table: Individual profiles with nutrition targets
-- Portion calculations per member based on their daily calorie needs
-- Shopping list aggregates all members' portions
-
-**New/Updated Files:**
-- `supabase/schema.sql` - Added households, household_members tables, migration function
-- `src/context/HouseholdContext.js` - Member management, portion calculations
-- `src/context/UserContext.js` - Integrated household support
-- `src/lib/smartPlanner.js` - Added `generateSmartWeekForHousehold()`, `calculateMemberPortion()`
-- `src/lib/shoppingList.js` - Updated to accept member array for aggregation
-- `src/components/WeekView.jsx` - Member selector, household-aware totals
-- `src/components/SettingsView.jsx` - Household management UI
-
-**How Portions Work:**
-- Recipe has 450 cal/serve base
-- Ian needs 2300 cal/day, lunch = 35% = 805 cal → portion = 805/450 = 1.79x
-- Rhonda needs 1850 cal/day, lunch = 35% = 648 cal → portion = 648/450 = 1.44x
-- Shopping multiplier = 1.79 + 1.44 = 3.23 servings to buy
-
-**Migration Steps:**
-1. Run new schema in Supabase SQL Editor
-2. Create household for existing user via Settings page
-3. Add Rhonda as household member
-
-**Meal Distribution (intermittent fasting 16:8):**
-- Lunch: 35% of daily calories
-- Afternoon Snack: 10%
-- Dinner: 45%
-- Evening Snack: 10%
-
----
-
-*Last updated: 5 December 2025, 3:00 PM AEDT - Day 5 Household Model Complete*
+*Last updated: 7 December 2025, 3:30 PM AEDT - Day 7 Complete*
