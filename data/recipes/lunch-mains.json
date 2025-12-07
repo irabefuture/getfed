@@ -494,7 +494,7 @@
 
       "base_servings": 4,
       "ingredients": [
-        { "id": "water", "name": "Water", "grams": 960 },
+        { "id": "water", "name": "Water", "grams": 120 },
         { "id": "salt-kosher", "name": "Kosher salt", "grams": 70 },
         { "id": "chicken-breast", "name": "Chicken breast", "grams": 450, "notes": "boneless, skinless, cut into 4 pieces" },
         { "id": "olive-oil", "name": "Olive oil", "grams": 45, "notes": "plus more for grill" },

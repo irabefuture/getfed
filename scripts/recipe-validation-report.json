@@ -1,0 +1,250 @@
+[
+  {
+    "id": "tgd-cobb-salad",
+    "name": "TGD Cobb Salad",
+    "meal_type": "lunch",
+    "issues": [
+      {
+        "ingredient": "Hard-boiled eggs",
+        "current": 400,
+        "expected": "50-150g",
+        "typical": 100,
+        "severity": "MEDIUM",
+        "suggestedFix": 100
+      }
+    ]
+  },
+  {
+    "id": "roasted-tomato-bisque",
+    "name": "Roasted Tomato Bisque",
+    "meal_type": "lunch",
+    "issues": [
+      {
+        "ingredient": "Roma tomatoes",
+        "current": 600,
+        "expected": "50-200g",
+        "typical": 100,
+        "severity": "MEDIUM",
+        "suggestedFix": 100
+      }
+    ]
+  },
+  {
+    "id": "capsicum-stuffed-turkey-cauliflower-rice",
+    "name": "Capsicum Stuffed with Turkey and Cauliflower Rice",
+    "meal_type": "dinner",
+    "issues": [
+      {
+        "ingredient": "Cheddar cheese",
+        "current": 230,
+        "expected": "20-80g",
+        "typical": 40,
+        "severity": "MEDIUM",
+        "suggestedFix": 40
+      }
+    ]
+  },
+  {
+    "id": "broccoli-cheese-chicken-bake",
+    "name": "Broccoli and Cheese Chicken Bake",
+    "meal_type": "dinner",
+    "issues": [
+      {
+        "ingredient": "Broccoli florets",
+        "current": 600,
+        "expected": "80-200g",
+        "typical": 100,
+        "severity": "MEDIUM",
+        "suggestedFix": 100
+      }
+    ]
+  },
+  {
+    "id": "spaghetti-squash-turkey-bacon-spinach-goat-cheese",
+    "name": "Spaghetti Squash with Turkey, Bacon, Spinach, and Goat Cheese",
+    "meal_type": "dinner",
+    "issues": [
+      {
+        "ingredient": "Bacon",
+        "current": 180,
+        "expected": "20-60g",
+        "typical": 30,
+        "severity": "MEDIUM",
+        "suggestedFix": 30
+      },
+      {
+        "ingredient": "Lean turkey mince",
+        "current": 450,
+        "expected": "80-200g",
+        "typical": 120,
+        "severity": "MEDIUM",
+        "suggestedFix": 120
+      }
+    ]
+  },
+  {
+    "id": "meatloaf-cauliflower-mash",
+    "name": "Meatloaf with Cauliflower Mash",
+    "meal_type": "dinner",
+    "issues": [
+      {
+        "ingredient": "Grass-fed beef mince",
+        "current": 680,
+        "expected": "100-300g",
+        "typical": 150,
+        "severity": "MEDIUM",
+        "suggestedFix": 150
+      }
+    ]
+  },
+  {
+    "id": "grilled-prawns-grilled-tomato-bites",
+    "name": "Grilled Prawns with Grilled Tomato Bites",
+    "meal_type": "dinner",
+    "issues": [
+      {
+        "ingredient": "Olive oil",
+        "current": 110,
+        "expected": "10-45g",
+        "typical": 20,
+        "severity": "MEDIUM",
+        "suggestedFix": 20
+      }
+    ]
+  },
+  {
+    "id": "bbq-tempeh-greens-cauliflower-rice",
+    "name": "BBQ Tempeh, Greens, and Cauliflower Rice",
+    "meal_type": "dinner",
+    "issues": [
+      {
+        "ingredient": "Tempeh",
+        "current": 450,
+        "expected": "80-150g",
+        "typical": 100,
+        "severity": "MEDIUM",
+        "suggestedFix": 100
+      }
+    ]
+  },
+  {
+    "id": "veggie-cheese-enchiladas",
+    "name": "Veggie Cheese Enchiladas with Grain-Free Tortillas",
+    "meal_type": "dinner",
+    "issues": [
+      {
+        "ingredient": "Cheddar cheese",
+        "current": 170,
+        "expected": "20-80g",
+        "typical": 40,
+        "severity": "MEDIUM",
+        "suggestedFix": 40
+      }
+    ]
+  },
+  {
+    "id": "caprese-bites",
+    "name": "Caprese Bites",
+    "meal_type": "snack_afternoon",
+    "issues": [
+      {
+        "ingredient": "Fresh mozzarella balls",
+        "current": 225,
+        "expected": "30-100g",
+        "typical": 60,
+        "severity": "MEDIUM",
+        "suggestedFix": 60
+      }
+    ]
+  },
+  {
+    "id": "easy-guacamole",
+    "name": "Easy Guacamole",
+    "meal_type": "snack_afternoon",
+    "issues": [
+      {
+        "ingredient": "Ripe avocados",
+        "current": 450,
+        "expected": "50-200g",
+        "typical": 100,
+        "severity": "MEDIUM",
+        "suggestedFix": 100
+      }
+    ]
+  },
+  {
+    "id": "veggie-slices-italian-mayo-dip",
+    "name": "Veggie Slices with Italian Mayo Dip",
+    "meal_type": "snack_afternoon",
+    "issues": [
+      {
+        "ingredient": "Cucumbers",
+        "current": 400,
+        "expected": "50-150g",
+        "typical": 80,
+        "severity": "MEDIUM",
+        "suggestedFix": 80
+      }
+    ]
+  },
+  {
+    "id": "marinated-olives-chickpeas-vegetables",
+    "name": "Marinated Olives, Chickpeas, and Vegetables with Thyme and Dill",
+    "meal_type": "snack_afternoon",
+    "issues": [
+      {
+        "ingredient": "Cucumbers",
+        "current": 400,
+        "expected": "50-150g",
+        "typical": 80,
+        "severity": "MEDIUM",
+        "suggestedFix": 80
+      }
+    ]
+  },
+  {
+    "id": "chocolate-mocha-almonds-string-cheese",
+    "name": "Chocolate Mocha Almonds with String Cheese",
+    "meal_type": "snack_evening",
+    "issues": [
+      {
+        "ingredient": "String cheese",
+        "current": 170,
+        "expected": "20-80g",
+        "typical": 40,
+        "severity": "MEDIUM",
+        "suggestedFix": 40
+      }
+    ]
+  },
+  {
+    "id": "chocolate-cinnamon-apple-bites",
+    "name": "Chocolate-Cinnamon Apple Bites",
+    "meal_type": "snack_evening",
+    "issues": [
+      {
+        "ingredient": "Unsweetened almond butter",
+        "current": 128,
+        "expected": "10-50g",
+        "typical": 20,
+        "severity": "MEDIUM",
+        "suggestedFix": 20
+      }
+    ]
+  },
+  {
+    "id": "vegan-snack-bars",
+    "name": "Vegan Snack Bars",
+    "meal_type": "snack_evening",
+    "issues": [
+      {
+        "ingredient": "No-sugar peanut butter",
+        "current": 128,
+        "expected": "10-50g",
+        "typical": 20,
+        "severity": "MEDIUM",
+        "suggestedFix": 20
+      }
+    ]
+  }
+]

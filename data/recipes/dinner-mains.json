@@ -445,7 +445,7 @@
         { "id": "garlic", "name": "Garlic", "grams": 4, "notes": "1 clove, sliced" },
         { "id": "capers", "name": "Capers", "grams": 30, "notes": "drained" },
         { "id": "onion", "name": "Onion", "grams": 150, "notes": "1 large, sliced" },
-        { "id": "green-beans", "name": "Green beans", "grams": 600, "notes": "trimmed" },
+        { "id": "green-beans", "name": "Green beans", "grams": 100, "notes": "trimmed" },
         { "id": "almonds", "name": "Slivered almonds", "grams": 35, "notes": "toasted" }
       ],
 
@@ -592,7 +592,7 @@
 
       "base_servings": 4,
       "ingredients": [
-        { "id": "spaghetti-squash", "name": "Spaghetti squash", "grams": 1200, "notes": "2 medium" },
+        { "id": "spaghetti-squash", "name": "Spaghetti squash", "grams": 150, "notes": "cooked strands" },
         { "id": "olive-oil", "name": "Olive oil", "grams": 30 },
         { "id": "salt", "name": "Salt", "grams": 3 },
         { "id": "black-pepper", "name": "Black pepper", "grams": 1 },
@@ -836,7 +836,7 @@
         { "id": "mushroom-button", "name": "Button mushrooms", "grams": 500, "notes": "halved or quartered" },
         { "id": "garlic", "name": "Garlic", "grams": 32, "notes": "8 cloves, minced (divided)" },
         { "id": "onion", "name": "Yellow onion", "grams": 150, "notes": "1 medium, thinly sliced" },
-        { "id": "vegetable-broth", "name": "Vegetable broth", "grams": 720, "notes": "divided" },
+        { "id": "vegetable-broth", "name": "Vegetable broth", "grams": 120, "notes": "divided" },
         { "id": "paprika-smoked", "name": "Smoked paprika", "grams": 8 },
         { "id": "greek-yoghurt", "name": "Plain full-fat Greek yoghurt", "grams": 30 },
         { "id": "salt", "name": "Salt", "grams": 4 },
@@ -999,11 +999,11 @@
         { "id": "yellow-squash", "name": "Yellow squash", "grams": 200, "notes": "1 medium, sliced" },
         { "id": "zucchini", "name": "Zucchini", "grams": 200, "notes": "1 medium, sliced" },
         { "id": "butter", "name": "Butter", "grams": 100, "notes": "divided" },
-        { "id": "lemon", "name": "Lemon", "grams": 180, "notes": "2 lemons - 1 zested and juiced, 1 thinly sliced" },
+        { "id": "lemon", "name": "Lemon", "grams": 60, "notes": "zested and juiced, plus slices" },
         { "id": "salt", "name": "Salt", "grams": 3 },
         { "id": "black-pepper", "name": "Black pepper", "grams": 1 },
         { "id": "cayenne", "name": "Cayenne pepper", "grams": 1, "optional": true },
-        { "id": "salmon-fillet", "name": "Salmon fillet", "grams": 1360, "notes": "1 large fillet" },
+        { "id": "salmon-fillet", "name": "Salmon fillet", "grams": 170, "notes": "per serve" },
         { "id": "honey", "name": "Honey", "grams": 20 },
         { "id": "garlic", "name": "Garlic", "grams": 12, "notes": "3 cloves, minced" },
         { "id": "thyme", "name": "Fresh thyme", "grams": 3, "notes": "chopped" },

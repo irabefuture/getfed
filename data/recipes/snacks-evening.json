@@ -725,7 +725,7 @@
 
       "base_servings": 4,
       "ingredients": [
-        { "id": "almond-milk", "name": "Unsweetened almond milk", "grams": 960 },
+        { "id": "almond-milk", "name": "Unsweetened almond milk", "grams": 120 },
         { "id": "chia-seeds", "name": "Chia seeds", "grams": 48 },
         { "id": "stevia", "name": "Stevia", "grams": 1 },
         { "id": "cinnamon", "name": "Ground cinnamon", "grams": 1 },
