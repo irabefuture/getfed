@@ -1,0 +1,75 @@
+{
+  "generated": "2025-12-07T04:10:54.048Z",
+  "description": "Recipe ingredient fixes requiring review. Edit action/notes and run apply script.",
+  "summary": {
+    "critical": 1,
+    "high": 3,
+    "total": 4
+  },
+  "fixes": [
+    {
+      "file": "lunch-mains.json",
+      "recipe_id": "grape-tomato-pea-salad-ricotta",
+      "recipe_name": "Grape Tomato and Pea Salad on Ricotta Spread",
+      "ingredient_id": "ricotta",
+      "ingredient_name": "Full-fat ricotta",
+      "current_total_grams": 245,
+      "current_per_serve": 245,
+      "base_servings": 1,
+      "expected_range": "40-100g per serve",
+      "severity": "CRITICAL",
+      "suggested_total_grams": 100,
+      "suggested_per_serve": 100,
+      "action": "REVIEW",
+      "notes": ""
+    },
+    {
+      "file": "breakfast.json",
+      "recipe_id": "breakfast-salad",
+      "recipe_name": "Breakfast Salad",
+      "ingredient_id": "lettuce-cos",
+      "ingredient_name": "Cos lettuce",
+      "current_total_grams": 200,
+      "current_per_serve": 100,
+      "base_servings": 2,
+      "expected_range": "30-60g per serve",
+      "severity": "HIGH",
+      "suggested_total_grams": 120,
+      "suggested_per_serve": 60,
+      "action": "REVIEW",
+      "notes": ""
+    },
+    {
+      "file": "lunch-mains.json",
+      "recipe_id": "portobello-pizzas",
+      "recipe_name": "Portobello Pizzas",
+      "ingredient_id": "mushroom-portobello",
+      "ingredient_name": "Portobello mushrooms",
+      "current_total_grams": 400,
+      "current_per_serve": 200,
+      "base_servings": 2,
+      "expected_range": "50-120g per serve",
+      "severity": "HIGH",
+      "suggested_total_grams": 240,
+      "suggested_per_serve": 120,
+      "action": "REVIEW",
+      "notes": ""
+    },
+    {
+      "file": "snacks-evening.json",
+      "recipe_id": "pear-ricotta",
+      "recipe_name": "Pear Slices and Ricotta Cheese",
+      "ingredient_id": "ricotta",
+      "ingredient_name": "Whole-milk ricotta",
+      "current_total_grams": 180,
+      "current_per_serve": 180,
+      "base_servings": 1,
+      "expected_range": "40-100g per serve",
+      "severity": "HIGH",
+      "suggested_total_grams": 100,
+      "suggested_per_serve": 100,
+      "action": "REVIEW",
+      "notes": ""
+    }
+  ]
+}

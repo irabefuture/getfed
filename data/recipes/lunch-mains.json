@@ -11,7 +11,7 @@
     {
       "id": "chicken-blt-lettuce-wrap",
       "name": "Chicken and BLT Lettuce Wrap",
-      "description": "Low-carb wrap with shredded chicken, turkey bacon, avocado, and ranch dressing in crisp lettuce leaves.",
+      "description": "Low-carb wrap with shredded chicken, bacon, avocado, and whole egg mayonnaise in crisp lettuce leaves.",
 
       "meal_type": "lunch",
       "phase": [1, 2, 3],
@@ -22,7 +22,7 @@
       "batch_friendly": true,
       "batch_notes": "Chicken and bacon can be prepped ahead. Assemble wraps just before eating.",
       "components": {
-        "reheatable": ["chicken", "turkey bacon"],
+        "reheatable": ["chicken", "bacon"],
         "fresh_only": ["lettuce wrap assembly"]
       },
       "freezer_friendly": false,
@@ -53,8 +53,8 @@
         { "id": "avocado", "name": "Avocado", "grams": 150, "notes": "1 whole, sliced" },
         { "id": "chicken-breast", "name": "Rotisserie chicken breast", "grams": 170, "notes": "shredded" },
         { "id": "tomato", "name": "Tomato", "grams": 75, "notes": "chopped" },
-        { "id": "turkey-bacon", "name": "Turkey bacon", "grams": 30, "notes": "2 slices, cooked" },
-        { "id": "ranch-dressing", "name": "Ranch dressing", "grams": 60, "notes": "Primal Kitchen or similar" },
+        { "id": "bacon", "name": "Bacon rashers", "grams": 30, "notes": "2 slices, cooked" },
+        { "id": "mayonnaise", "name": "Whole egg mayonnaise", "grams": 60 },
         { "id": "black-pepper", "name": "Black pepper", "grams": 0.5 },
         { "id": "cheese-cheddar", "name": "Cheddar cheese", "grams": 28, "notes": "grated" }
       ],
@@ -62,8 +62,8 @@
       "instructions": [
         "Place the lettuce leaves on a board and flatten slightly.",
         "Layer avocado slices on each leaf.",
-        "Add shredded chicken, then tomato and turkey bacon.",
-        "Drizzle with ranch dressing.",
+        "Add shredded chicken, then tomato and bacon.",
+        "Drizzle with mayonnaise.",
         "Season with pepper and sprinkle with cheese.",
         "Fold up the sides of the leaf and serve at once."
       ],
@@ -162,7 +162,7 @@
     {
       "id": "tgd-cobb-salad",
       "name": "TGD Cobb Salad",
-      "description": "Classic Cobb salad with rotisserie chicken, turkey bacon, avocado, eggs, and cherry tomatoes over cos lettuce.",
+      "description": "Classic Cobb salad with rotisserie chicken, bacon, avocado, eggs, and cherry tomatoes over cos lettuce.",
 
       "meal_type": "lunch",
       "phase": [1, 2, 3],
@@ -202,16 +202,16 @@
       "ingredients": [
         { "id": "lettuce-cos", "name": "Cos lettuce", "grams": 300, "notes": "chopped" },
         { "id": "chicken-breast", "name": "Rotisserie chicken breast", "grams": 340, "notes": "shredded" },
-        { "id": "turkey-bacon", "name": "Turkey bacon", "grams": 180, "notes": "12 slices, cooked" },
+        { "id": "bacon", "name": "Bacon rashers", "grams": 180, "notes": "12 slices, cooked" },
         { "id": "avocado", "name": "Avocado", "grams": 300, "notes": "2 whole, chopped" },
         { "id": "eggs", "name": "Hard-boiled eggs", "grams": 400, "notes": "8 eggs, quartered" },
         { "id": "tomato-cherry", "name": "Cherry tomatoes", "grams": 225, "notes": "halved" },
-        { "id": "ranch-dressing", "name": "Ranch dressing", "grams": 120, "notes": "Primal Kitchen" },
+        { "id": "mayonnaise", "name": "Whole egg mayonnaise", "grams": 120 },
         { "id": "sunflower-seeds", "name": "Sunflower seeds", "grams": 60 }
       ],
 
       "instructions": [
-        "In a large bowl, combine the cos lettuce with the chicken, turkey bacon, avocado, eggs, and tomatoes.",
+        "In a large bowl, combine the cos lettuce with the chicken, bacon, avocado, eggs, and tomatoes.",
         "Spoon on the dressing and toss well.",
         "Sprinkle with the sunflower seeds and serve."
       ],
@@ -280,7 +280,7 @@
         { "id": "sugar-snap-peas", "name": "Sugar snap peas", "grams": 75, "notes": "stemmed and halved" },
         { "id": "tomato-grape", "name": "Grape tomatoes", "grams": 75, "notes": "halved" },
         { "id": "vinegar-balsamic-white", "name": "White balsamic vinegar", "grams": 30 },
-        { "id": "basil", "name": "Fresh basil", "grams": 30, "notes": "chopped" },
+        { "id": "basil", "name": "Fresh basil", "grams": 10, "notes": "chopped" },
         { "id": "red-pepper-flakes", "name": "Red pepper flakes", "grams": 0.5, "optional": true },
         { "id": "black-pepper", "name": "Black pepper", "grams": 0.5 }
       ],
@@ -494,8 +494,8 @@
 
       "base_servings": 4,
       "ingredients": [
-        { "id": "water", "name": "Water", "grams": 120 },
-        { "id": "salt-kosher", "name": "Kosher salt", "grams": 70 },
+        { "id": "water", "name": "Water", "grams": 960 },
+        { "id": "salt-cooking", "name": "Cooking salt", "grams": 70 },
         { "id": "chicken-breast", "name": "Chicken breast", "grams": 450, "notes": "boneless, skinless, cut into 4 pieces" },
         { "id": "olive-oil", "name": "Olive oil", "grams": 45, "notes": "plus more for grill" },
         { "id": "paprika", "name": "Paprika", "grams": 3 },
