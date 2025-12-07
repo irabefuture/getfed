@@ -280,6 +280,106 @@ export default function WeekView() {
     setSwappingSlot(null)
   }
   
+  // Print day's recipes
+  const handlePrintDayRecipes = () => {
+    const dateLabel = formatDayHeader(selectedDate)
+    
+    // Build print content
+    let html = `
+      <!DOCTYPE html>
+      <html>
+      <head>
+        <title>Meal Plan - ${dateLabel}</title>
+        <style>
+          body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 800px; margin: 0 auto; padding: 20px; }
+          h1 { font-size: 24px; margin-bottom: 8px; }
+          .subtitle { color: #666; margin-bottom: 24px; }
+          .recipe { margin-bottom: 32px; page-break-inside: avoid; }
+          .recipe-header { border-bottom: 2px solid #333; padding-bottom: 8px; margin-bottom: 12px; }
+          .recipe-title { font-size: 18px; font-weight: 600; margin: 0; }
+          .recipe-meta { font-size: 12px; color: #666; margin-top: 4px; }
+          .section-title { font-size: 14px; font-weight: 600; margin: 16px 0 8px 0; }
+          .ingredients { list-style: none; padding: 0; }
+          .ingredients li { padding: 4px 0; display: flex; gap: 12px; }
+          .ingredients .amount { color: #666; min-width: 60px; }
+          .instructions { padding-left: 20px; }
+          .instructions li { padding: 4px 0; }
+          .portions { font-size: 12px; color: #666; margin-top: 8px; padding-top: 8px; border-top: 1px solid #eee; }
+          .batch-note { font-size: 12px; color: #666; font-style: italic; margin-top: 8px; }
+          @media print { .recipe { page-break-inside: avoid; } }
+        </style>
+      </head>
+      <body>
+        <h1>${dateLabel}</h1>
+        <div class="subtitle">Meal Plan${isHouseholdMode && members.length > 0 ? ` for ${members.map(m => m.name).join(' & ')}` : ''}</div>
+    `
+    
+    MEAL_SLOTS.forEach(slot => {
+      const recipe = dayMeals[slot.id]
+      if (!recipe) return
+      
+      // Calculate household portions
+      let householdTotal = 1
+      let portionBreakdown = []
+      
+      if (isHouseholdMode && members && members.length > 0) {
+        const portions = members.map(member => {
+          const portion = calculateMemberPortion(member, recipe, slot.id)
+          return { name: member.name, portion }
+        })
+        householdTotal = portions.reduce((sum, p) => sum + p.portion, 0)
+        portionBreakdown = portions.map(p => ({
+          name: p.name,
+          percentage: Math.round((p.portion / householdTotal) * 100)
+        }))
+      }
+      
+      html += `
+        <div class="recipe">
+          <div class="recipe-header">
+            <h2 class="recipe-title">${slot.icon} ${slot.label}: ${recipe.name}</h2>
+            <div class="recipe-meta">${slot.time} · ${recipe.total_time_mins || '?'} min · ${recipe.per_serve?.calories || '?'} cal</div>
+          </div>
+          
+          <div class="section-title">Ingredients${householdTotal > 1 ? ` (serves ${members.length})` : ''}</div>
+          <ul class="ingredients">
+      `
+      
+      recipe.ingredients?.forEach(ing => {
+        const scaledGrams = householdTotal > 1 ? Math.round(ing.grams * householdTotal) : ing.grams
+        html += `<li><span class="amount">${scaledGrams}g</span><span>${ing.name}${ing.notes ? ` (${ing.notes})` : ''}</span></li>`
+      })
+      
+      html += `</ul>`
+      
+      if (portionBreakdown.length > 0) {
+        html += `<div class="portions"><strong>Portions:</strong> ${portionBreakdown.map(p => `${p.name}: ${p.percentage}%`).join(' · ')}</div>`
+      }
+      
+      html += `<div class="section-title">Method</div><ol class="instructions">`
+      
+      recipe.instructions?.forEach(step => {
+        html += `<li>${step}</li>`
+      })
+      
+      html += `</ol>`
+      
+      if (recipe.batch_notes) {
+        html += `<div class="batch-note">💡 ${recipe.batch_notes}</div>`
+      }
+      
+      html += `</div>`
+    })
+    
+    html += `</body></html>`
+    
+    // Open print window
+    const printWindow = window.open('', '_blank')
+    printWindow.document.write(html)
+    printWindow.document.close()
+    printWindow.print()
+  }
+  
   // Get alternatives for current swap
   // Only exclude recipes used on the SAME day (not entire week - too restrictive for swapping)
   const alternatives = useMemo(() => {
@@ -544,7 +644,17 @@ export default function WeekView() {
       
       {/* Day Detail */}
       <div>
-        <h2 className="text-lg font-semibold mb-4">{formatDayHeader(selectedDate)}</h2>
+        <div className="flex items-center justify-between mb-4">
+          <h2 className="text-lg font-semibold">{formatDayHeader(selectedDate)}</h2>
+          {Object.keys(dayMeals).length > 0 && (
+            <button
+              onClick={() => handlePrintDayRecipes()}
+              className="text-sm text-primary hover:underline flex items-center gap-1"
+            >
+              🖨️ Print Recipes
+            </button>
+          )}
+        </div>
         
         {/* Meal Slots */}
         <div className="space-y-4">
