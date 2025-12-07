@@ -138,22 +138,33 @@ export async function POST(request) {
     // Phase info
     const phaseInfo = PHASE_TARGETS[phase] || PHASE_TARGETS.phase1
 
+    // Calculate explicit calorie targets per meal slot
+    const mealTargets = {
+      lunch: Math.round(dailyCalories * 0.35),
+      snack_afternoon: Math.round(dailyCalories * 0.10),
+      dinner: Math.round(dailyCalories * 0.45),
+      snack_evening: Math.round(dailyCalories * 0.10),
+    }
+
     const systemPrompt = `You are a meal planning AI for the Galveston Diet. Select recipes from the provided library to create balanced meal plans.
 
 PHASE: ${phase} (${phaseInfo.description})
 Target macro ratios: ${Math.round(phaseInfo.fat * 100)}% fat, ${Math.round(phaseInfo.protein * 100)}% protein, ${Math.round(phaseInfo.carbs * 100)}% carbs
 
-DAILY TARGETS:
-- Calories: ${dailyCalories}
+DAILY TARGETS (MUST hit within 10%):
+- Total Calories: ${dailyCalories} cal/day
 - Protein: ${dailyProtein}g
 - Fat: ${dailyFat}g
 - Carbs: ${dailyCarbs}g
 
-MEAL STRUCTURE (intermittent fasting - eating window):
-- Lunch: Main meal, ~35% of daily calories
-- Afternoon Snack: Light, ~10% of daily calories
-- Dinner: Main meal, ~45% of daily calories
-- Evening Snack: Light, satisfying, ~10% of daily calories
+MEAL CALORIE TARGETS (select recipes that add up to these):
+- Lunch: ${mealTargets.lunch} cal (main meal - select higher calorie options)
+- Afternoon Snack: ${mealTargets.snack_afternoon} cal
+- Dinner: ${mealTargets.dinner} cal (largest meal - select highest calorie dinner options)
+- Evening Snack: ${mealTargets.snack_evening} cal
+- TOTAL: ${dailyCalories} cal
+
+CRITICAL: The sum of selected meals MUST be between ${Math.round(dailyCalories * 0.9)} and ${Math.round(dailyCalories * 1.1)} calories. If a single recipe doesn't hit the target for a slot, that's OK - but the DAILY TOTAL must be close to ${dailyCalories} cal. Select larger/higher-calorie recipes for main meals.
 
 CRITICAL RULES:
 1. ONLY select recipe IDs from the provided list

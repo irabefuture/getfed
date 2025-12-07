@@ -4,8 +4,8 @@ import { useState, useEffect } from 'react'
 import { useUser } from '@/context/UserContext'
 import { Button } from '@/components/ui/button'
 import { Checkbox } from '@/components/ui/checkbox'
-import { loadShoppingList, updateCheckedItems, CATEGORY_LABELS } from '@/lib/shoppingList'
-import { Printer, ShoppingCart, AlertCircle } from 'lucide-react'
+import { loadShoppingList, updateCheckedItems, clearShoppingList, CATEGORY_LABELS } from '@/lib/shoppingList'
+import { Printer, ShoppingCart, AlertCircle, Trash2 } from 'lucide-react'
 
 export default function ShoppingListView() {
   const { user } = useUser()
@@ -57,6 +57,17 @@ export default function ShoppingListView() {
     window.print()
   }
   
+  // Handle clear
+  const handleClear = () => {
+    if (confirm('Clear shopping list? This cannot be undone.')) {
+      if (user) {
+        clearShoppingList(user.id)
+        setListData(null)
+        setCheckedItems([])
+      }
+    }
+  }
+  
   // No list committed yet
   if (!listData) {
     return (
@@ -91,10 +102,16 @@ export default function ShoppingListView() {
           </p>
         </div>
         
-        <Button variant="outline" size="sm" onClick={handlePrint} className="print:hidden shrink-0">
-          <Printer className="h-4 w-4 md:mr-2" />
-          <span className="hidden md:inline">Print</span>
-        </Button>
+        <div className="flex gap-2 print:hidden">
+          <Button variant="outline" size="sm" onClick={handlePrint} className="shrink-0">
+            <Printer className="h-4 w-4 md:mr-2" />
+            <span className="hidden md:inline">Print</span>
+          </Button>
+          <Button variant="outline" size="sm" onClick={handleClear} className="shrink-0 text-destructive hover:text-destructive">
+            <Trash2 className="h-4 w-4 md:mr-2" />
+            <span className="hidden md:inline">Clear</span>
+          </Button>
+        </div>
       </div>
       
       {/* Committed timestamp */}

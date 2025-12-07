@@ -62,7 +62,18 @@ export default function WeekView() {
   const scrollContainerRef = useRef(null)
   
   // State - initialize with defaults, hydrate in useEffect to avoid SSR mismatch
-  const [selectedDate, setSelectedDate] = useState(today)
+  const [selectedDate, setSelectedDateState] = useState(today)
+  
+  // Wrapper to also dispatch event when date changes
+  const setSelectedDate = (date) => {
+    setSelectedDateState(date)
+    // Notify sidebar of date change
+    if (typeof window !== 'undefined') {
+      window.dispatchEvent(new CustomEvent('planner-date-changed', { 
+        detail: { date: toISODate(date) } 
+      }))
+    }
+  }
   const [meals, setMeals] = useState({})
   const [isHydrated, setIsHydrated] = useState(false)
   const [selectedForGeneration, setSelectedForGeneration] = useState([]) // Date keys selected for Smart Generate
@@ -222,9 +233,10 @@ export default function WeekView() {
 
       // Apply generated meals only to selected days
       const newMeals = { ...meals }
+      const planKeys = Object.keys(result.weekPlan)
       selectedForGeneration.forEach((dateKey, index) => {
         // Use modulo in case we have more selected days than generated
-        const planIndex = index % result.weekPlan.length
+        const planIndex = index % planKeys.length
         if (result.weekPlan[planIndex]?.meals) {
           newMeals[dateKey] = result.weekPlan[planIndex].meals
         }
@@ -509,6 +521,8 @@ export default function WeekView() {
                   onSwap={() => setSwappingSlot(isSwapping ? null : slot.id)}
                   onClear={() => handleClearSlot(slot.id)}
                   isSwapping={isSwapping}
+                  members={members}
+                  isHouseholdMode={isHouseholdMode}
                 />
                 
                 {/* Alternatives Panel */}
@@ -588,8 +602,31 @@ export default function WeekView() {
 }
 
 // Sub-component: Meal slot card
-function MealSlotCard({ slot, recipe, onSwap, onClear, isSwapping }) {
+function MealSlotCard({ slot, recipe, onSwap, onClear, isSwapping, members, isHouseholdMode }) {
   const [isExpanded, setIsExpanded] = useState(false)
+  
+  // Calculate household portions for ingredient scaling
+  // Must be before any early returns to satisfy Rules of Hooks
+  const householdPortions = useMemo(() => {
+    if (!isHouseholdMode || !members || members.length === 0 || !recipe) {
+      return { total: 1, breakdown: [] }
+    }
+    
+    const portions = members.map(member => {
+      const portion = calculateMemberPortion(member, recipe, slot.id)
+      return { name: member.name, portion, isPrimary: member.is_primary }
+    })
+    
+    const total = portions.reduce((sum, p) => sum + p.portion, 0)
+    
+    // Calculate percentages
+    const breakdown = portions.map(p => ({
+      ...p,
+      percentage: Math.round((p.portion / total) * 100)
+    }))
+    
+    return { total, breakdown }
+  }, [isHouseholdMode, members, recipe, slot.id])
   
   if (!recipe) {
     return (
@@ -667,16 +704,43 @@ function MealSlotCard({ slot, recipe, onSwap, onClear, isSwapping }) {
         <div className="p-4 bg-muted/30 border-t space-y-4">
           {/* Ingredients */}
           <div>
-            <h4 className="text-sm font-medium mb-2">Ingredients</h4>
+            <h4 className="text-sm font-medium mb-2">
+              Ingredients
+              {isHouseholdMode && householdPortions.breakdown.length > 0 && (
+                <span className="font-normal text-muted-foreground ml-2">
+                  (serves {householdPortions.breakdown.length})
+                </span>
+              )}
+            </h4>
             <ul className="text-sm space-y-1">
-              {recipe.ingredients?.map((ing, i) => (
-                <li key={i} className="flex gap-2">
-                  <span className="text-muted-foreground w-12">{ing.grams}g</span>
-                  <span>{ing.name}</span>
-                  {ing.notes && <span className="text-muted-foreground">({ing.notes})</span>}
-                </li>
-              ))}
+              {recipe.ingredients?.map((ing, i) => {
+                const scaledGrams = isHouseholdMode && householdPortions.total > 1
+                  ? Math.round(ing.grams * householdPortions.total)
+                  : ing.grams
+                return (
+                  <li key={i} className="flex gap-2">
+                    <span className="text-muted-foreground w-12">{scaledGrams}g</span>
+                    <span>{ing.name}</span>
+                    {ing.notes && <span className="text-muted-foreground">({ing.notes})</span>}
+                  </li>
+                )
+              })}
             </ul>
+            
+            {/* Portion guidance for household */}
+            {isHouseholdMode && householdPortions.breakdown.length > 0 && (
+              <div className="mt-3 pt-3 border-t border-border/50">
+                <p className="text-xs text-muted-foreground">
+                  <span className="font-medium">Portions:</span>{' '}
+                  {householdPortions.breakdown.map((p, i) => (
+                    <span key={p.name}>
+                      {i > 0 && ' · '}
+                      {p.name}: {p.percentage}%
+                    </span>
+                  ))}
+                </p>
+              </div>
+            )}
           </div>
           
           {/* Instructions */}

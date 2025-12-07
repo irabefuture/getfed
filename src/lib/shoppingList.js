@@ -191,3 +191,12 @@ export function updateCheckedItems(userId, checkedItems) {
     if (s) { const d = JSON.parse(s); d.checkedItems = checkedItems; localStorage.setItem(`shopping-list-${userId}`, JSON.stringify(d)) }
   } catch (e) {}
 }
+
+export function clearShoppingList(userId) {
+  try {
+    localStorage.removeItem(`shopping-list-${userId}`)
+    return true
+  } catch (e) {
+    return false
+  }
+}

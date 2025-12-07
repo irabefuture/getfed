@@ -28,6 +28,7 @@ export function DesktopSidebar({ activeView = 'planner', onNavigate }) {
   const { loading, members, isHouseholdMode, user } = useUser()
   const [expandedMembers, setExpandedMembers] = useState({})
   const [dayMeals, setDayMeals] = useState({})
+  const [selectedDate, setSelectedDate] = useState(() => toISODate(new Date()))
 
   // Sort members: primary first
   const sortedMembers = [...(members || [])].sort((a, b) => {
@@ -36,19 +37,28 @@ export function DesktopSidebar({ activeView = 'planner', onNavigate }) {
     return 0
   })
 
-  // Load current day's meals from localStorage
+  // Listen for date changes from WeekView
+  useEffect(() => {
+    const handleDateChange = (e) => {
+      setSelectedDate(e.detail.date)
+    }
+    
+    window.addEventListener('planner-date-changed', handleDateChange)
+    return () => window.removeEventListener('planner-date-changed', handleDateChange)
+  }, [])
+
+  // Load selected day's meals from localStorage
   useEffect(() => {
     if (!user) return
 
     const loadMeals = () => {
       const storageKey = `meal-plan-${user.id}`
-      const today = toISODate(new Date())
       
       try {
         const saved = localStorage.getItem(storageKey)
         if (saved) {
           const allMeals = JSON.parse(saved)
-          setDayMeals(allMeals[today] || {})
+          setDayMeals(allMeals[selectedDate] || {})
         } else {
           setDayMeals({})
         }
@@ -76,7 +86,7 @@ export function DesktopSidebar({ activeView = 'planner', onNavigate }) {
       window.removeEventListener('storage', handleStorageChange)
       clearInterval(interval)
     }
-  }, [user?.id])
+  }, [user?.id, selectedDate])
 
   const toggleMember = (memberId) => {
     setExpandedMembers(prev => ({
