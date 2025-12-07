@@ -279,15 +279,19 @@ export default function WeekView() {
   }
   
   // Get alternatives for current swap
+  // Only exclude recipes used on the SAME day (not entire week - too restrictive for swapping)
   const alternatives = useMemo(() => {
     if (!swappingSlot) return []
     const currentRecipe = dayMeals[swappingSlot]
+    const sameDayRecipeIds = Object.values(dayMeals)
+      .filter(r => r?.id)
+      .map(r => r.id)
     return getAlternativesForSlot(
       swappingSlot, 
       currentRecipe?.id, 
-      usedRecipeIds
+      sameDayRecipeIds
     )
-  }, [swappingSlot, dayMeals, usedRecipeIds])
+  }, [swappingSlot, dayMeals])
   
   // Count meals planned in selected days
   const selectedMealCount = useMemo(() => {
