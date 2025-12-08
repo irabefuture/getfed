@@ -4,6 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Clock, Users, Plus, RefreshCw, ChevronDown, ChevronUp } from 'lucide-react'
 import { useState } from 'react'
+import { formatIngredientSimple } from '@/lib/ingredientFormat'
 
 export default function MealCard({ meal, onAdd, onRegenerate, isAdded = false }) {
   const [showDetails, setShowDetails] = useState(false)
@@ -76,7 +77,7 @@ export default function MealCard({ meal, onAdd, onRegenerate, isAdded = false })
               <ul className="list-disc list-inside space-y-0.5">
                 {meal.ingredients?.map((ing, i) => (
                   <li key={i}>
-                    {ing.name} ({ing.grams}g)
+                    {formatIngredientSimple(ing.name, ing.grams)}
                   </li>
                 ))}
               </ul>

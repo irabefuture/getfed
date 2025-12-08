@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import { useUser } from '@/context/UserContext'
 import { calculateNutritionTargets } from '@/lib/nutrition'
+import { formatIngredientSimple } from '@/lib/ingredientFormat'
 
 export default function MealGeneratorTest() {
   const { currentUser } = useUser()
@@ -94,7 +95,7 @@ export default function MealGeneratorTest() {
                     <p className="font-medium">Ingredients:</p>
                     <ul className="list-disc pl-4">
                       {meal.ingredients?.map((ing, i) => (
-                        <li key={i}>{ing.name}: {ing.grams}g</li>
+                        <li key={i}>{formatIngredientSimple(ing.name, ing.grams)}</li>
                       ))}
                     </ul>
                     <p className="font-medium mt-2">Instructions:</p>

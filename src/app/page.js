@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { UserProvider } from '@/context/UserContext'
-import { DesktopSidebar, MobileBottomNav, MobileHeader } from '@/components/Sidebar'
+import { DesktopSidebar, MobileBottomNav } from '@/components/Sidebar'
 import WeekView from '@/components/WeekView'
 import RecipesView from '@/components/RecipesView'
 import ShoppingListView from '@/components/ShoppingListView'
@@ -17,12 +17,9 @@ export default function Home() {
       <div className="min-h-screen bg-background">
         {/* Desktop Sidebar */}
         <DesktopSidebar activeView={activeView} onNavigate={setActiveView} />
-        
-        {/* Mobile Header */}
-        <MobileHeader />
-        
-        {/* Main Content */}
-        <main className="md:ml-64 min-h-screen pt-14 pb-20 md:pt-0 md:pb-0">
+
+        {/* Main Content - no top padding on mobile since header is removed */}
+        <main className="md:ml-64 min-h-screen pb-20 md:pb-0">
           {activeView === 'planner' && <WeekView />}
           {activeView === 'recipes' && <RecipesView />}
           {activeView === 'shopping' && <ShoppingListView />}

@@ -1,12 +1,12 @@
 'use client'
 
-import { useState, useEffect, useMemo } from 'react'
+import { useState, useEffect, useMemo, useRef } from 'react'
 import { useUser } from '@/context/UserContext'
 import { calculateMemberDayTotals } from '@/lib/smartPlanner'
 import { toISODate } from '@/lib/dates'
-import { 
-  CalendarDays, 
-  ShoppingCart,
+import {
+  CalendarDays,
+  ListChecks,
   Settings,
   Book,
   Users,
@@ -15,9 +15,9 @@ import {
 } from 'lucide-react'
 
 const NAV_ITEMS = [
-  { id: 'planner', icon: CalendarDays, label: 'Planner', shortLabel: 'Plan' },
+  { id: 'planner', icon: CalendarDays, label: 'Meal Planner', shortLabel: 'Planner' },
   { id: 'recipes', icon: Book, label: 'Recipes', shortLabel: 'Recipes' },
-  { id: 'shopping', icon: ShoppingCart, label: 'Shopping List', shortLabel: 'Shop' },
+  { id: 'shopping', icon: ListChecks, label: 'Shopping List', shortLabel: 'Shopping' },
   { id: 'family', icon: Users, label: 'Family Plan', shortLabel: 'Family' },
 ]
 
@@ -306,12 +306,13 @@ function MacroBox({ label, current, target, unit = '' }) {
 }
 
 /**
- * Mobile Bottom Navigation - hidden on desktop
+ * Mobile Bottom Navigation - standard always-visible bottom nav
+ * Planner | Recipes | Shopping | Family | Settings
  */
 export function MobileBottomNav({ activeView = 'planner', onNavigate }) {
   // Add settings to mobile nav items
   const mobileNavItems = [...NAV_ITEMS, { id: 'settings', icon: Settings, label: 'Settings', shortLabel: 'Settings' }]
-  
+
   return (
     <nav className="md:hidden fixed bottom-0 left-0 right-0 bg-card border-t z-50 safe-area-bottom">
       <div className="flex justify-around items-center h-16">
@@ -321,10 +322,8 @@ export function MobileBottomNav({ activeView = 'planner', onNavigate }) {
             <button
               key={item.id}
               onClick={() => onNavigate?.(item.id)}
-              className={`flex flex-col items-center justify-center h-full px-3 min-w-[64px] ${
-                isActive 
-                  ? 'text-primary' 
-                  : 'text-muted-foreground'
+              className={`flex flex-col items-center justify-center h-full px-3 min-w-[56px] ${
+                isActive ? 'text-primary' : 'text-muted-foreground'
               }`}
             >
               <item.icon className={`h-5 w-5 ${isActive ? 'stroke-[2.5]' : ''}`} />

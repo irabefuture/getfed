@@ -195,3 +195,159 @@
     min-height: 44px;
   }
 }
+
+/* Generate button progress fill animation */
+@keyframes progressFill {
+  0% {
+    width: 0%;
+  }
+  100% {
+    width: 100%;
+  }
+}
+
+/*
+ * Mobile Typography System
+ * Based on Apple HIG and Material Design 3 (December 2025)
+ * Responsive design: works on any viewport 320px-430px+
+ * Base: 1rem (16px) for body text (accessibility standard)
+ * All sizes use relative units (rem/em) for scalability
+ */
+
+/* Typography scale - mobile first, responsive */
+@media (max-width: 48rem) { /* 768px */
+  /* Root font size for mobile - slightly larger for touch */
+  :root {
+    font-size: 16px;
+  }
+
+  /* Display/Hero - rarely used, large impact */
+  .text-display {
+    font-size: clamp(2rem, 5vw, 2.5rem);
+    line-height: 1.1;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+
+  /* H1 - Page titles */
+  h1, .text-h1 {
+    font-size: clamp(1.5rem, 4vw, 1.875rem);
+    line-height: 1.2;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+
+  /* H2 - Section titles */
+  h2, .text-h2 {
+    font-size: clamp(1.25rem, 3.5vw, 1.5rem);
+    line-height: 1.25;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+
+  /* H3 - Subsection titles, card titles */
+  h3, .text-h3 {
+    font-size: clamp(1.0625rem, 3vw, 1.25rem);
+    line-height: 1.3;
+    font-weight: 600;
+  }
+
+  /* H4 - Component headers */
+  h4, .text-h4 {
+    font-size: 1rem;
+    line-height: 1.4;
+    font-weight: 600;
+  }
+
+  /* H5 - Small headers, labels */
+  h5, .text-h5 {
+    font-size: 0.9375rem;
+    line-height: 1.4;
+    font-weight: 600;
+  }
+
+  /* H6 - Micro headers, overlines */
+  h6, .text-h6 {
+    font-size: 0.8125rem;
+    line-height: 1.5;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  /* Body text - primary reading content */
+  body, .text-body, p {
+    font-size: 1rem;
+    line-height: 1.5;
+    font-weight: 400;
+  }
+
+  /* Body large - emphasis paragraphs */
+  .text-body-lg {
+    font-size: 1.125rem;
+    line-height: 1.5;
+    font-weight: 400;
+  }
+
+  /* Body small - secondary content */
+  .text-body-sm {
+    font-size: 0.9375rem;
+    line-height: 1.5;
+    font-weight: 400;
+  }
+
+  /* Caption - metadata, timestamps */
+  .text-caption {
+    font-size: 0.875rem;
+    line-height: 1.4;
+    font-weight: 400;
+  }
+
+  /* Overline - labels above content */
+  .text-overline {
+    font-size: 0.75rem;
+    line-height: 1.5;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  /* Label - form labels, button text */
+  .text-label {
+    font-size: 0.9375rem;
+    line-height: 1.4;
+    font-weight: 500;
+  }
+
+  /* Override Tailwind text sizes for mobile readability */
+  .text-sm {
+    font-size: 0.9375rem !important;
+  }
+
+  .text-xs {
+    font-size: 0.875rem !important;
+  }
+
+  /* Better line heights for readability */
+  .leading-snug {
+    line-height: 1.4 !important;
+  }
+
+  .leading-tight {
+    line-height: 1.3 !important;
+  }
+}
+
+/* Small mobile devices (320px - 375px) */
+@media (max-width: 23.4375rem) { /* 375px */
+  :root {
+    font-size: 15px;
+  }
+}
+
+/* Larger mobile devices (390px+) */
+@media (min-width: 24.375rem) and (max-width: 48rem) { /* 390px - 768px */
+  :root {
+    font-size: 16px;
+  }
+}

@@ -1,16 +1,77 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useMemo } from 'react'
 import { useUser } from '@/context/UserContext'
 import { Button } from '@/components/ui/button'
 import { Checkbox } from '@/components/ui/checkbox'
-import { loadShoppingList, updateCheckedItems, clearShoppingList, CATEGORY_LABELS } from '@/lib/shoppingList'
-import { Printer, ShoppingCart, AlertCircle, Trash2 } from 'lucide-react'
+import {
+  loadShoppingList,
+  updateCheckedItems,
+  clearShoppingList,
+  CATEGORY_LABELS,
+  generateShoppingList,
+  saveShoppingList,
+  generateMealPlanHash
+} from '@/lib/shoppingList'
+import { getDatesFromStart, formatDateRange, toISODate } from '@/lib/dates'
+import { calculateMemberPortion } from '@/lib/smartPlanner'
+import { Printer, ShoppingCart, AlertCircle, Trash2, RefreshCw, Check, Loader2 } from 'lucide-react'
 
 export default function ShoppingListView() {
-  const { user } = useUser()
+  const { user, members, isHouseholdMode } = useUser()
   const [listData, setListData] = useState(null)
   const [checkedItems, setCheckedItems] = useState([])
+  const [isUpdating, setIsUpdating] = useState(false)
+  const [justUpdated, setJustUpdated] = useState(false)
+  const [meals, setMeals] = useState({})
+
+  // Generate dates for current week
+  const today = useMemo(() => {
+    const d = new Date()
+    d.setHours(0, 0, 0, 0)
+    return d
+  }, [])
+
+  const allDates = useMemo(() => getDatesFromStart(today, 7), [today])
+  const weekDateKeys = useMemo(() => allDates.map(d => toISODate(d)), [allDates])
+
+  // Load meals from localStorage
+  useEffect(() => {
+    if (user) {
+      try {
+        const storageKey = `meal-plan-${user.id}`
+        const saved = localStorage.getItem(storageKey)
+        if (saved) {
+          setMeals(JSON.parse(saved))
+        }
+      } catch (e) {
+        console.error('Failed to load meals:', e)
+      }
+    }
+  }, [user?.id])
+
+  // Count meals in current week
+  const totalWeekMeals = useMemo(() => {
+    let count = 0
+    weekDateKeys.forEach(dateKey => {
+      count += Object.keys(meals[dateKey] || {}).length
+    })
+    return count
+  }, [weekDateKeys, meals])
+
+  // Calculate current meal plan hash
+  const currentMealHash = useMemo(() => {
+    return generateMealPlanHash(meals, weekDateKeys)
+  }, [meals, weekDateKeys])
+
+  // Check if shopping list needs update
+  const isListStale = listData?.mealPlanHash && currentMealHash !== listData.mealPlanHash
+
+  // Get week date range for display
+  const weekDateRange = useMemo(() => {
+    if (allDates.length === 0) return null
+    return { first: allDates[0], last: allDates[allDates.length - 1] }
+  }, [allDates])
   
   // Load shopping list on mount and when user changes
   useEffect(() => {
@@ -67,22 +128,73 @@ export default function ShoppingListView() {
       }
     }
   }
+
+  // Handle update from meal plan
+  const handleUpdateFromMealPlan = () => {
+    if (!user || totalWeekMeals === 0) return
+
+    setIsUpdating(true)
+
+    try {
+      const shoppingList = isHouseholdMode && members.length > 0
+        ? generateShoppingList(meals, weekDateKeys, members)
+        : generateShoppingList(meals, weekDateKeys, 1)
+
+      const weekLabel = weekDateRange
+        ? formatDateRange(weekDateRange.first, weekDateRange.last)
+        : 'This week'
+      const hash = generateMealPlanHash(meals, weekDateKeys)
+
+      saveShoppingList(user.id, shoppingList, weekLabel, hash)
+
+      // Reload the list data
+      const saved = loadShoppingList(user.id)
+      if (saved) {
+        setListData(saved)
+        setCheckedItems(saved.checkedItems || [])
+      }
+
+      setJustUpdated(true)
+      setTimeout(() => setJustUpdated(false), 2000)
+    } catch (e) {
+      console.error('Failed to update shopping list:', e)
+    } finally {
+      setIsUpdating(false)
+    }
+  }
   
   // No list committed yet
   if (!listData) {
     return (
       <div className="flex-1 p-4 md:p-6">
         <h1 className="text-xl md:text-2xl font-bold mb-4">Shopping List</h1>
-        
+
+        {/* Add from meal plan button */}
+        {totalWeekMeals > 0 && (
+          <div className="mb-4">
+            <Button
+              onClick={handleUpdateFromMealPlan}
+              disabled={isUpdating}
+              className="w-full md:w-auto"
+            >
+              {isUpdating ? (
+                <Loader2 className="h-4 w-4 animate-spin mr-2" />
+              ) : (
+                <ShoppingCart className="h-4 w-4 mr-2" />
+              )}
+              Add this week's meals ({totalWeekMeals} meals)
+            </Button>
+          </div>
+        )}
+
         <div className="bg-muted/30 rounded-lg p-6 md:p-8 text-center">
           <ShoppingCart className="h-10 md:h-12 w-10 md:w-12 mx-auto text-muted-foreground mb-4" />
           <h2 className="text-base md:text-lg font-medium mb-2">No shopping list yet</h2>
           <p className="text-sm text-muted-foreground mb-4">
-            Plan your week, then commit your list when ready.
+            {totalWeekMeals > 0
+              ? 'Tap the button above to create your shopping list from this week\'s meals.'
+              : 'Plan your week first, then come back to create your shopping list.'}
           </p>
-          <Button variant="outline" size="sm">
-            Go to Weekly Planner
-          </Button>
         </div>
       </div>
     )
@@ -90,7 +202,7 @@ export default function ShoppingListView() {
   
   const { total, checked } = getTotalCounts()
   const categories = ['produce', 'meat', 'seafood', 'dairy', 'pantry', 'other']
-  
+
   return (
     <div className="flex-1 p-4 md:p-6">
       {/* Header */}
@@ -101,7 +213,7 @@ export default function ShoppingListView() {
             {listData.weekLabel} · {checked}/{total} items
           </p>
         </div>
-        
+
         <div className="flex gap-2 print:hidden">
           <Button variant="outline" size="sm" onClick={handlePrint} className="shrink-0">
             <Printer className="h-4 w-4 md:mr-2" />
@@ -113,7 +225,35 @@ export default function ShoppingListView() {
           </Button>
         </div>
       </div>
-      
+
+      {/* Update from Meal Plan button */}
+      {totalWeekMeals > 0 && (
+        <div className="mb-4 print:hidden">
+          <Button
+            onClick={handleUpdateFromMealPlan}
+            disabled={isUpdating}
+            variant={justUpdated ? "default" : isListStale ? "default" : "outline"}
+            className={`w-full md:w-auto ${
+              justUpdated ? "bg-green-600 hover:bg-green-600" : isListStale ? "bg-amber-500 hover:bg-amber-600" : ""
+            }`}
+          >
+            {isUpdating ? (
+              <Loader2 className="h-4 w-4 animate-spin mr-2" />
+            ) : justUpdated ? (
+              <Check className="h-4 w-4 mr-2" />
+            ) : (
+              <RefreshCw className="h-4 w-4 mr-2" />
+            )}
+            {justUpdated ? 'Updated!' : isListStale ? 'Update from meal plan' : 'Refresh from meal plan'}
+          </Button>
+          {isListStale && (
+            <p className="text-xs text-amber-600 mt-1.5">
+              Your meal plan has changed since this list was created.
+            </p>
+          )}
+        </div>
+      )}
+
       {/* Committed timestamp */}
       <div className="text-xs text-muted-foreground mb-4 print:hidden">
         Committed: {new Date(listData.committedAt).toLocaleString('en-AU', {

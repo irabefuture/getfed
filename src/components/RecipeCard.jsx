@@ -13,6 +13,7 @@ import {
   Heart,
 } from 'lucide-react'
 import { formatMealType, formatCategory } from '@/lib/recipes'
+import { formatIngredient } from '@/lib/ingredientFormat'
 
 /**
  * RecipeCard - Browse/discovery focused recipe display
@@ -116,13 +117,16 @@ export default function RecipeCard({ recipe, onFavourite, isFavourite = false })
             <div>
               <span className="font-medium block mb-1">Ingredients:</span>
               <ul className="list-disc list-inside space-y-0.5">
-                {recipe.ingredients?.map((ing, i) => (
-                  <li key={i}>
-                    {ing.name} ({ing.grams}g)
-                    {ing.notes && <span className="text-muted-foreground"> - {ing.notes}</span>}
-                    {ing.optional && <span className="text-muted-foreground"> (optional)</span>}
-                  </li>
-                ))}
+                {recipe.ingredients?.map((ing, i) => {
+                  const formatted = formatIngredient(ing)
+                  return (
+                    <li key={i}>
+                      {formatted.display}
+                      {formatted.notes && <span className="text-muted-foreground"> - {formatted.notes}</span>}
+                      {formatted.optional && <span className="text-muted-foreground"> (optional)</span>}
+                    </li>
+                  )
+                })}
               </ul>
             </div>
             

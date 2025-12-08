@@ -1,7 +1,7 @@
 # Adaptive Meal Builder - Project Status
 
 **Last Updated:** 7 December 2025, 3:30 PM AEDT
-**Ship Date:** 10 December 2025 (Friday)
+**Ship Date:** 12 December 2025 (Friday)
 
 ---
 
