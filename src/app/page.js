@@ -14,19 +14,19 @@ export default function Home() {
 
   return (
     <UserProvider>
-      <div className="min-h-screen bg-background">
+      <div className="h-screen bg-background overflow-hidden md:overflow-auto md:min-h-screen">
         {/* Desktop Sidebar */}
         <DesktopSidebar activeView={activeView} onNavigate={setActiveView} />
 
-        {/* Main Content - no top padding on mobile since header is removed */}
-        <main className="md:ml-64 min-h-screen pb-20 md:pb-0">
+        {/* Main Content - fixed on mobile to prevent scroll */}
+        <main className="md:ml-64 h-full md:min-h-screen pb-16 md:pb-0 overflow-hidden md:overflow-auto">
           {activeView === 'planner' && <WeekView />}
           {activeView === 'recipes' && <RecipesView />}
           {activeView === 'shopping' && <ShoppingListView />}
           {activeView === 'family' && <SettingsView />}
           {activeView === 'settings' && <AppSettingsView />}
         </main>
-        
+
         {/* Mobile Bottom Nav */}
         <MobileBottomNav activeView={activeView} onNavigate={setActiveView} />
       </div>

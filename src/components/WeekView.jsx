@@ -25,6 +25,24 @@ import { RefreshCw, X, Clock, ShoppingCart, Check, AlertCircle, Sparkles, Loader
 import { toAustralianName, formatQuantity } from '@/lib/ingredientFormat'
 import RecipeOverlay from '@/components/RecipeOverlay'
 
+// Helper to sanitize text (remove IP addresses and URLs from any string)
+const sanitizeText = (text) => {
+  if (!text) return ''
+  return text
+    // Remove IP addresses (e.g., 192.168.20.10)
+    .replace(/\b\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}\b/g, '')
+    // Remove URLs
+    .replace(/https?:\/\/[^\s]+/g, '')
+    // Remove localhost references
+    .replace(/localhost:\d+/gi, '')
+    // Clean up any double spaces
+    .replace(/\s{2,}/g, ' ')
+    .trim()
+}
+
+// Alias for backward compatibility
+const sanitizeDescription = sanitizeText
+
 // Meal slots for the day (16:8 fasting window: 12:00-20:00)
 const MEAL_SLOTS = [
   { id: 'lunch', label: 'Lunch', icon: '🥗', time: '12:00' },
@@ -702,7 +720,10 @@ export default function WeekView() {
       )}
 
       {/* ===== MOBILE LAYOUT ===== */}
-      <div className="md:hidden flex flex-col h-screen overflow-hidden">
+      <div
+        className="md:hidden flex flex-col h-full overflow-hidden"
+        style={{ overscrollBehavior: 'none' }}
+      >
         {/* 1. HEADER BAR - Fixed at top, green background */}
         <div className="bg-primary text-primary-foreground safe-area-top flex-shrink-0">
           <div className="flex items-center justify-between h-11 px-4">
@@ -811,6 +832,7 @@ export default function WeekView() {
               return (
                 <div key={slot.id} className="flex-1 min-h-0">
                   <MealSlotCard
+                    key={`${slot.id}-${selectedDateKey}`}
                     slot={slot}
                     recipe={recipe}
                     onSwap={() => setSwappingSlot(isSwapping ? null : slot.id)}
@@ -825,6 +847,20 @@ export default function WeekView() {
             })}
           </div>
         </div>
+
+        {/* Mobile Recipe Picker Sheet - full screen when swapping */}
+        {swappingSlot && (
+          <RecipePickerSheet
+            swappingSlot={swappingSlot}
+            dayMeals={dayMeals}
+            MEAL_SLOTS={MEAL_SLOTS}
+            alternativeSearch={alternativeSearch}
+            setAlternativeSearch={setAlternativeSearch}
+            filteredAlternatives={filteredAlternatives}
+            handleSwapMeal={handleSwapMeal}
+            setSwappingSlot={setSwappingSlot}
+          />
+        )}
 
         {/* Bottom nav spacer */}
         <div className="h-16 flex-shrink-0" />
@@ -931,7 +967,7 @@ export default function WeekView() {
               const isSwapping = swappingSlot === slot.id
 
               return (
-                <div key={slot.id}>
+                <div key={`${slot.id}-${selectedDateKey}`}>
                   <MealSlotCard
                     slot={slot}
                     recipe={recipe}
@@ -996,15 +1032,133 @@ export default function WeekView() {
   )
 }
 
+// Sub-component: Recipe Picker Sheet (mobile full-screen)
+function RecipePickerSheet({
+  swappingSlot,
+  dayMeals,
+  MEAL_SLOTS,
+  alternativeSearch,
+  setAlternativeSearch,
+  filteredAlternatives,
+  handleSwapMeal,
+  setSwappingSlot,
+}) {
+  const inputRef = useRef(null)
+  const hasBlurredOnMount = useRef(false)
+
+  // Blur the input only once on initial mount to prevent auto-focus
+  useEffect(() => {
+    if (inputRef.current && !hasBlurredOnMount.current) {
+      inputRef.current.blur()
+      hasBlurredOnMount.current = true
+    }
+  }, [])
+
+  // Reset the flag when sheet closes (for next time it opens)
+  useEffect(() => {
+    return () => {
+      hasBlurredOnMount.current = false
+    }
+  }, [])
+
+  return (
+    <div
+      className="md:hidden fixed inset-0 z-50 bg-card flex flex-col"
+      style={{ touchAction: 'none' }}
+    >
+      {/* Header - fixed at top */}
+      <div className="flex-shrink-0 safe-area-top bg-primary text-primary-foreground">
+        <div className="flex items-center justify-between px-4 h-14">
+          <button
+            onClick={() => setSwappingSlot(null)}
+            className="p-2 -ml-2 rounded-full active:bg-white/10"
+          >
+            <X className="h-5 w-5" />
+          </button>
+          <h3 className="font-semibold text-base">
+            {dayMeals[swappingSlot] ? 'Swap' : 'Add'} {MEAL_SLOTS.find(s => s.id === swappingSlot)?.label}
+          </h3>
+          <div className="w-9" /> {/* Spacer for centering */}
+        </div>
+      </div>
+
+      {/* Search - fixed below header */}
+      <div className="flex-shrink-0 px-4 py-3 border-b bg-card">
+        <input
+          ref={inputRef}
+          type="text"
+          inputMode="search"
+          enterKeyHint="search"
+          autoComplete="off"
+          autoCorrect="off"
+          autoCapitalize="off"
+          spellCheck="false"
+          placeholder="Search recipes..."
+          value={alternativeSearch}
+          onChange={(e) => setAlternativeSearch(e.target.value)}
+          className="w-full px-3 py-2.5 text-base border rounded-lg bg-background"
+        />
+        <p className="text-xs text-muted-foreground mt-2">
+          {filteredAlternatives.length} recipes available
+        </p>
+      </div>
+
+      {/* Recipe list - scrollable, takes remaining space */}
+      <div
+        className="flex-1 overflow-y-auto px-4 py-2 space-y-2"
+        style={{ overscrollBehavior: 'contain' }}
+      >
+        {filteredAlternatives.length > 0 ? (
+          filteredAlternatives.map(alt => (
+            <button
+              key={alt.id}
+              onClick={() => handleSwapMeal(swappingSlot, alt)}
+              className="w-full text-left p-3 bg-muted/30 border rounded-lg active:bg-muted transition-colors"
+            >
+              <div className="font-medium text-sm">{sanitizeText(alt.name)}</div>
+              <div className="text-xs text-muted-foreground mt-0.5">
+                {alt.per_serve?.calories} cal · {alt.per_serve?.protein_g}P · {alt.total_time_mins} min
+              </div>
+              {alt.description && sanitizeText(alt.description) && (
+                <div className="text-xs text-muted-foreground/70 mt-1 line-clamp-1">
+                  {sanitizeText(alt.description)}
+                </div>
+              )}
+            </button>
+          ))
+        ) : (
+          <div className="text-center py-8 text-muted-foreground">
+            <p className="text-sm">No recipes found</p>
+            <p className="text-xs mt-1">Try a different search term</p>
+          </div>
+        )}
+      </div>
+
+      {/* Safe area for bottom */}
+      <div className="h-4 flex-shrink-0 safe-area-bottom" />
+    </div>
+  )
+}
+
 // Sub-component: Meal slot card
 function MealSlotCard({ slot, recipe, onSwap, onClear, isSwapping, members, isHouseholdMode, compact = false }) {
   // ALL HOOKS MUST BE AT THE TOP - before any conditional returns
   const [isOverlayOpen, setIsOverlayOpen] = useState(false)
-  const [swipeOffset, setSwipeOffset] = useState(0)
+  const [swipeOffset, setSwipeOffset] = useState(0) // Positive = swipe left (Swap), Negative = swipe right (Recipe)
+  const [swipeDirection, setSwipeDirection] = useState(null) // 'left' | 'right' | null
+  const [isRevealed, setIsRevealed] = useState(false) // Gmail-style: stays revealed until dismissed
+  const [revealedDirection, setRevealedDirection] = useState(null) // Which direction is revealed
   const [isSwiping, setIsSwiping] = useState(false)
   const touchStartX = useRef(0)
   const touchStartY = useRef(0)
   const lastTapTime = useRef(0)
+  const isHorizontalSwipe = useRef(false)
+  const cardRef = useRef(null)
+
+  // Gmail-style swipe thresholds
+  const REVEAL_THRESHOLD = 60  // Swipe this far to reveal button
+  const ACTION_THRESHOLD = 140 // Swipe this far to trigger action immediately
+  const REVEALED_POSITION = 80 // Where card sits when revealed
 
   // Calculate household portions for ingredient scaling
   const householdPortions = useMemo(() => {
@@ -1027,70 +1181,249 @@ function MealSlotCard({ slot, recipe, onSwap, onClear, isSwapping, members, isHo
     return { total, breakdown }
   }, [isHouseholdMode, members, recipe, slot.id])
 
-  // Double-tap to open recipe overlay
-  const handleDoubleTap = useCallback((e) => {
-    // Don't open if tapping on interactive elements
-    const isInteractive = e.target.closest('button, a, [role="button"]')
-    if (isInteractive) return
-
-    const now = Date.now()
-    const timeSinceLastTap = now - lastTapTime.current
-
-    if (timeSinceLastTap < 300 && timeSinceLastTap > 0) {
-      // Double tap detected - open overlay
-      setIsOverlayOpen(true)
-      lastTapTime.current = 0
-    } else {
-      lastTapTime.current = now
+  // Haptic feedback helper
+  const triggerHaptic = useCallback(() => {
+    if (typeof navigator !== 'undefined' && navigator.vibrate) {
+      navigator.vibrate(10)
     }
   }, [])
 
-  // Swipe handlers - swipe LEFT to reveal Swap/Delete actions
+  // Reset swipe state
+  const resetSwipe = useCallback(() => {
+    setSwipeOffset(0)
+    setSwipeDirection(null)
+    setIsRevealed(false)
+    setRevealedDirection(null)
+    lastTapTime.current = 0
+  }, [])
+
+  // Trigger swap action (swipe left) with haptic
+  const triggerSwapAction = useCallback(() => {
+    triggerHaptic()
+    onSwap()
+    resetSwipe()
+  }, [onSwap, triggerHaptic, resetSwipe])
+
+  // Trigger recipe action (swipe right) with haptic
+  const triggerRecipeAction = useCallback(() => {
+    triggerHaptic()
+    setIsOverlayOpen(true)
+    resetSwipe()
+  }, [triggerHaptic, resetSwipe])
+
+  // Handle tap outside to dismiss revealed state
+  const handleCardClick = useCallback((e) => {
+    if (isRevealed) {
+      // If revealed and tapping the card (not the button), dismiss
+      resetSwipe()
+      return
+    }
+    // No double-tap anymore - use swipe-right for recipe
+  }, [isRevealed, resetSwipe])
+
+  // Swipe handlers - Gmail-style two-stage, bidirectional
   const handleTouchStart = useCallback((e) => {
     touchStartX.current = e.touches[0].clientX
     touchStartY.current = e.touches[0].clientY
+    isHorizontalSwipe.current = false
     setIsSwiping(true)
-    setSwipeOffset(0)
   }, [])
 
   const handleTouchMove = useCallback((e) => {
     if (!isSwiping) return
     const currentX = e.touches[0].clientX
     const currentY = e.touches[0].clientY
-    const diffX = touchStartX.current - currentX // Positive = swipe left
+    const diffX = touchStartX.current - currentX // Positive = swipe left, Negative = swipe right
     const diffY = Math.abs(currentY - touchStartY.current)
 
-    // Only track horizontal swipe if more horizontal than vertical (and moved at least 10px)
-    if (Math.abs(diffX) > 10 && Math.abs(diffX) > diffY) {
-      setSwipeOffset(Math.max(0, Math.min(diffX, 100))) // Clamp 0-100
+    // Determine swipe direction on first significant movement
+    if (!isHorizontalSwipe.current && (Math.abs(diffX) > 10 || diffY > 10)) {
+      isHorizontalSwipe.current = Math.abs(diffX) > diffY
     }
-  }, [isSwiping])
+
+    // Only track horizontal swipe
+    if (isHorizontalSwipe.current) {
+      // Determine current swipe direction
+      const currentDirection = diffX > 0 ? 'left' : 'right'
+
+      // If we're revealed in one direction and swiping the other way, reset first
+      if (isRevealed && revealedDirection && currentDirection !== revealedDirection) {
+        // Allow swiping back to closed from revealed position
+        const baseOffset = revealedDirection === 'left' ? REVEALED_POSITION : -REVEALED_POSITION
+        const newOffset = baseOffset + diffX
+
+        // If swiping back toward center, allow it
+        if ((revealedDirection === 'left' && newOffset < REVEALED_POSITION) ||
+            (revealedDirection === 'right' && newOffset > -REVEALED_POSITION)) {
+          setSwipeOffset(newOffset)
+          // Check if we crossed zero - switch directions
+          if ((revealedDirection === 'left' && newOffset < 0) ||
+              (revealedDirection === 'right' && newOffset > 0)) {
+            setSwipeDirection(currentDirection)
+          }
+          return
+        }
+      }
+
+      // Normal swipe from neutral or continuing in same direction
+      if (!isRevealed) {
+        setSwipeDirection(currentDirection)
+        // For empty cards, only allow swipe left (no recipe to view)
+        if (!recipe && currentDirection === 'right') {
+          return
+        }
+        // Clamp to max swipe distance in either direction
+        const clampedOffset = Math.max(-180, Math.min(diffX, 180))
+        setSwipeOffset(clampedOffset)
+      } else if (revealedDirection === currentDirection) {
+        // Continuing in same direction from revealed position
+        const baseOffset = revealedDirection === 'left' ? REVEALED_POSITION : -REVEALED_POSITION
+        const newOffset = baseOffset + diffX
+        if (revealedDirection === 'left') {
+          setSwipeOffset(Math.max(0, Math.min(newOffset, 180)))
+        } else {
+          setSwipeOffset(Math.min(0, Math.max(newOffset, -180)))
+        }
+      }
+    }
+  }, [isSwiping, isRevealed, revealedDirection, recipe])
 
   const handleTouchEnd = useCallback(() => {
-    // Swipe LEFT reveals actions, but snap to either 0 or 80px
-    if (swipeOffset > 40) {
-      setSwipeOffset(80) // Show actions
-    } else {
-      setSwipeOffset(0) // Hide actions
-    }
     setIsSwiping(false)
-  }, [swipeOffset])
+    isHorizontalSwipe.current = false
+
+    const absOffset = Math.abs(swipeOffset)
+    const direction = swipeOffset > 0 ? 'left' : 'right'
+
+    // Stage 2: Past action threshold - trigger immediately
+    if (absOffset >= ACTION_THRESHOLD) {
+      if (direction === 'left') {
+        triggerSwapAction()
+      } else if (recipe) {
+        triggerRecipeAction()
+      } else {
+        resetSwipe()
+      }
+      return
+    }
+
+    // Stage 1: Past reveal threshold - snap to revealed position
+    if (absOffset >= REVEAL_THRESHOLD) {
+      // Only reveal recipe button if there's a recipe
+      if (direction === 'right' && !recipe) {
+        resetSwipe()
+        return
+      }
+      setSwipeOffset(direction === 'left' ? REVEALED_POSITION : -REVEALED_POSITION)
+      setIsRevealed(true)
+      setRevealedDirection(direction)
+      return
+    }
+
+    // Below threshold - snap back to closed
+    resetSwipe()
+  }, [swipeOffset, recipe, triggerSwapAction, triggerRecipeAction, resetSwipe])
+
+  // Handle touch cancel
+  const handleTouchCancel = useCallback(() => {
+    setIsSwiping(false)
+    isHorizontalSwipe.current = false
+    // Snap to either revealed or closed based on current state
+    if (isRevealed && revealedDirection) {
+      setSwipeOffset(revealedDirection === 'left' ? REVEALED_POSITION : -REVEALED_POSITION)
+    } else {
+      resetSwipe()
+    }
+  }, [isRevealed, revealedDirection, resetSwipe])
 
   // Handle rating
   const handleRate = (rating) => {
     console.log('Recipe rated:', rating, recipe.id)
   }
 
+  // Visual states for swipe-left (Swap/Add - green, right side)
+  const swipeLeftOffset = Math.max(0, swipeOffset)
+  const isNearSwapAction = swipeLeftOffset >= ACTION_THRESHOLD - 20
+  const showSwapButton = swipeLeftOffset > 30 || (isRevealed && revealedDirection === 'left')
+
+  // Visual states for swipe-right (Recipe - yellow, left side)
+  const swipeRightOffset = Math.abs(Math.min(0, swipeOffset))
+  const isNearRecipeAction = swipeRightOffset >= ACTION_THRESHOLD - 20
+  const showRecipeButton = swipeRightOffset > 30 || (isRevealed && revealedDirection === 'right')
+
   // Early return for empty slot - AFTER all hooks
   if (!recipe) {
+    // COMPACT MODE (mobile) - swipeable empty card with Gmail-style reveal (only swipe-left for Add)
+    if (compact) {
+      return (
+        <div className="relative overflow-hidden rounded-lg h-full">
+          {/* Add button behind the card (right side, green) */}
+          <div
+            className={`absolute right-0 top-0 bottom-0 flex items-center justify-center transition-colors ${
+              isNearSwapAction ? 'bg-primary' : 'bg-primary/80'
+            }`}
+            style={{ width: swipeLeftOffset }}
+          >
+            {showSwapButton && (
+              <button
+                onClick={triggerSwapAction}
+                className="w-full h-full flex items-center justify-center"
+              >
+                <span className={`text-primary-foreground text-sm font-semibold ${
+                  isNearSwapAction ? 'scale-110' : ''
+                } transition-transform`}>
+                  {isNearSwapAction ? '+ Add' : 'Add'}
+                </span>
+              </button>
+            )}
+          </div>
+
+          {/* Main card content - slides based on swipe direction */}
+          <div
+            ref={cardRef}
+            className="bg-card border rounded-lg h-full"
+            style={{
+              touchAction: 'pan-y',
+              transform: `translateX(${-swipeLeftOffset}px)`,
+              transition: isSwiping ? 'none' : 'transform 0.2s ease-out',
+            }}
+            onTouchStart={handleTouchStart}
+            onTouchMove={handleTouchMove}
+            onTouchEnd={handleTouchEnd}
+            onTouchCancel={handleTouchCancel}
+            onClick={handleCardClick}
+          >
+            <div className="p-2 h-full flex flex-col justify-center">
+              {/* Line 1: Icon + LUNCH + 12:00 */}
+              <div className="flex items-center gap-1 text-[11px] text-muted-foreground">
+                <span className="text-sm">{slot.icon}</span>
+                <span className="uppercase font-semibold tracking-wide">{slot.label}</span>
+                <span className="text-muted-foreground/50">·</span>
+                <span>{slot.time}</span>
+              </div>
+              {/* Line 2: Empty state message */}
+              <h3 className="text-sm font-medium leading-tight text-muted-foreground/60">
+                No meal planned
+              </h3>
+              {/* Line 3: Hint */}
+              <p className="text-[11px] text-muted-foreground/40 leading-tight">
+                {isRevealed ? 'Tap Add or swipe more' : 'Swipe left to add'}
+              </p>
+            </div>
+          </div>
+        </div>
+      )
+    }
+
+    // DESKTOP MODE - simple empty state
     return (
-      <div className={`border border-dashed rounded-lg flex items-center justify-between ${compact ? 'p-2.5' : 'p-4'}`}>
+      <div className="border border-dashed rounded-lg flex items-center justify-between p-4">
         <div className="flex items-center gap-2 text-muted-foreground">
-          <span className={compact ? 'text-base' : 'text-xl'}>{slot.icon}</span>
-          <span className={compact ? 'text-sm uppercase font-medium' : 'text-base'}>{slot.label}</span>
+          <span className="text-xl">{slot.icon}</span>
+          <span className="text-base">{slot.label}</span>
           <span className="text-xs text-muted-foreground/60">· {slot.time}</span>
         </div>
-        <Button variant="ghost" size="sm" onClick={onSwap} className={compact ? 'h-7 text-xs' : ''}>
+        <Button variant="ghost" size="sm" onClick={onSwap}>
           Add
         </Button>
       </div>
@@ -1099,39 +1432,73 @@ function MealSlotCard({ slot, recipe, onSwap, onClear, isSwapping, members, isHo
 
   const macros = recipe.per_serve || {}
 
-  // COMPACT MODE (mobile) - compact card with description
-  // Double-tap to open recipe, swipe left to reveal Swap/Delete
+  // COMPACT MODE (mobile) - compact card with bidirectional Gmail-style swipe
+  // Swipe left → Swap (green), Swipe right → Recipe (yellow)
   if (compact) {
+    // Calculate card transform based on bidirectional swipe
+    const cardTransform = swipeOffset > 0
+      ? -swipeLeftOffset  // Swiping left - card moves left
+      : swipeRightOffset  // Swiping right - card moves right
+
     return (
       <>
         <div className="relative overflow-hidden rounded-lg h-full">
-          {/* Action buttons behind the card (revealed on swipe) */}
-          <div className="absolute right-0 top-0 bottom-0 flex items-stretch">
-            <button
-              onClick={() => { onSwap(); setSwipeOffset(0); }}
-              className="w-10 bg-primary text-primary-foreground flex items-center justify-center text-xs font-medium"
-            >
-              Swap
-            </button>
-            <button
-              onClick={() => { onClear(); setSwipeOffset(0); }}
-              className="w-10 bg-destructive text-white flex items-center justify-center text-xs font-medium"
-            >
-              Del
-            </button>
+          {/* Recipe button behind the card (LEFT side, yellow) - swipe right reveals */}
+          <div
+            className={`absolute left-0 top-0 bottom-0 flex items-center justify-center transition-colors ${
+              isNearRecipeAction ? 'bg-amber-500' : 'bg-amber-400'
+            }`}
+            style={{ width: swipeRightOffset }}
+          >
+            {showRecipeButton && (
+              <button
+                onClick={triggerRecipeAction}
+                className="w-full h-full flex items-center justify-center"
+              >
+                <span className={`text-white text-sm font-semibold flex items-center gap-1 ${
+                  isNearRecipeAction ? 'scale-110' : ''
+                } transition-transform`}>
+                  {isNearRecipeAction ? '📖 View' : 'Recipe'}
+                </span>
+              </button>
+            )}
           </div>
 
-          {/* Main card content - slides left to reveal actions */}
+          {/* Swap button behind the card (RIGHT side, green) - swipe left reveals */}
           <div
-            className={`bg-card border rounded-lg h-full transition-transform ${isSwapping ? 'border-primary border-2' : ''}`}
+            className={`absolute right-0 top-0 bottom-0 flex items-center justify-center transition-colors ${
+              isNearSwapAction ? 'bg-primary' : 'bg-primary/80'
+            }`}
+            style={{ width: swipeLeftOffset }}
+          >
+            {showSwapButton && (
+              <button
+                onClick={triggerSwapAction}
+                className="w-full h-full flex items-center justify-center"
+              >
+                <span className={`text-primary-foreground text-sm font-semibold ${
+                  isNearSwapAction ? 'scale-110' : ''
+                } transition-transform`}>
+                  {isNearSwapAction ? '↻ Swap' : 'Swap'}
+                </span>
+              </button>
+            )}
+          </div>
+
+          {/* Main card content - slides based on swipe direction */}
+          <div
+            ref={cardRef}
+            className={`bg-card border rounded-lg h-full ${isSwapping ? 'border-primary border-2' : ''}`}
             style={{
-              transform: `translateX(${-swipeOffset}px)`,
+              touchAction: 'pan-y',
+              transform: `translateX(${cardTransform}px)`,
               transition: isSwiping ? 'none' : 'transform 0.2s ease-out',
             }}
             onTouchStart={handleTouchStart}
             onTouchMove={handleTouchMove}
             onTouchEnd={handleTouchEnd}
-            onClick={handleDoubleTap}
+            onTouchCancel={handleTouchCancel}
+            onClick={handleCardClick}
           >
             <div className="p-2 h-full flex flex-col justify-center">
               {/* Line 1: Icon + LUNCH + 12:00 + 10 min */}
@@ -1149,12 +1516,12 @@ function MealSlotCard({ slot, recipe, onSwap, onClear, isSwapping, members, isHo
               </div>
               {/* Line 2: Meal title */}
               <h3 className="text-sm font-medium leading-tight line-clamp-1">
-                {recipe.name}
+                {sanitizeText(recipe.name)}
               </h3>
               {/* Line 3: Description (single line with ellipsis) */}
-              {recipe.description && (
+              {recipe.description && sanitizeDescription(recipe.description) && (
                 <p className="text-[11px] text-muted-foreground leading-tight line-clamp-1">
-                  {recipe.description}
+                  {sanitizeDescription(recipe.description)}
                 </p>
               )}
             </div>
@@ -1200,13 +1567,15 @@ function MealSlotCard({ slot, recipe, onSwap, onClear, isSwapping, members, isHo
 
             {/* Recipe title */}
             <h3 className="text-base font-medium leading-tight">
-              {recipe.name}
+              {sanitizeText(recipe.name)}
             </h3>
 
             {/* Description */}
-            <p className="text-sm text-muted-foreground mt-1 leading-relaxed">
-              {recipe.description}
-            </p>
+            {recipe.description && sanitizeDescription(recipe.description) && (
+              <p className="text-sm text-muted-foreground mt-1 leading-relaxed">
+                {sanitizeDescription(recipe.description)}
+              </p>
+            )}
 
             {/* Macros */}
             <div className="flex gap-3 mt-2 text-xs text-muted-foreground">
