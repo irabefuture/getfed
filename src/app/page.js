@@ -9,6 +9,7 @@ import ShoppingListView from '@/components/ShoppingListView'
 import SettingsView from '@/components/SettingsView'
 import AppSettingsView from '@/components/AppSettingsView'
 import OnboardingModal from '@/components/OnboardingModal'
+import PasswordGate from '@/components/PasswordGate'
 
 const ONBOARDING_KEY = 'hasSeenOnboarding'
 
@@ -44,31 +45,33 @@ export default function Home() {
   }
 
   return (
-    <UserProvider>
-      <div className="h-screen bg-background overflow-hidden md:overflow-auto md:min-h-screen">
-        {/* Desktop Sidebar */}
-        <DesktopSidebar activeView={activeView} onNavigate={setActiveView} />
+    <PasswordGate>
+      <UserProvider>
+        <div className="h-screen bg-background overflow-hidden md:overflow-auto md:min-h-screen">
+          {/* Desktop Sidebar */}
+          <DesktopSidebar activeView={activeView} onNavigate={setActiveView} />
 
-        {/* Main Content - fixed on mobile to prevent scroll */}
-        <main className="md:ml-64 h-full md:min-h-screen pb-16 md:pb-0 overflow-hidden md:overflow-auto">
-          {activeView === 'planner' && <WeekView />}
-          {activeView === 'shopping' && <ShoppingListView />}
-          {activeView === 'discover' && <DiscoverView />}
-          {activeView === 'family' && <SettingsView />}
-          {activeView === 'settings' && <AppSettingsView />}
-        </main>
+          {/* Main Content - fixed on mobile to prevent scroll */}
+          <main className="md:ml-64 h-full md:min-h-screen pb-16 md:pb-0 overflow-hidden md:overflow-auto">
+            {activeView === 'planner' && <WeekView />}
+            {activeView === 'shopping' && <ShoppingListView />}
+            {activeView === 'discover' && <DiscoverView />}
+            {activeView === 'family' && <SettingsView />}
+            {activeView === 'settings' && <AppSettingsView />}
+          </main>
 
-        {/* Mobile Bottom Nav */}
-        <MobileBottomNav activeView={activeView} onNavigate={setActiveView} />
+          {/* Mobile Bottom Nav */}
+          <MobileBottomNav activeView={activeView} onNavigate={setActiveView} />
 
-        {/* Onboarding Modal */}
-        {showOnboarding && (
-          <OnboardingModal
-            onClose={handleCloseOnboarding}
-            isReplay={isOnboardingReplay}
-          />
-        )}
-      </div>
-    </UserProvider>
+          {/* Onboarding Modal */}
+          {showOnboarding && (
+            <OnboardingModal
+              onClose={handleCloseOnboarding}
+              isReplay={isOnboardingReplay}
+            />
+          )}
+        </div>
+      </UserProvider>
+    </PasswordGate>
   )
 }

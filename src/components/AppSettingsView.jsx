@@ -1,7 +1,8 @@
 'use client'
 
-import { Settings, HelpCircle } from 'lucide-react'
+import { Settings, HelpCircle, LogOut } from 'lucide-react'
 import { Button } from '@/components/ui/button'
+import { clearAuth } from '@/components/PasswordGate'
 
 /**
  * App Settings View - placeholder for future app-level settings
@@ -10,6 +11,10 @@ import { Button } from '@/components/ui/button'
 export default function AppSettingsView() {
   const handleShowIntro = () => {
     window.dispatchEvent(new CustomEvent('replay-onboarding'))
+  }
+
+  const handleSignOut = () => {
+    clearAuth()
   }
 
   return (
@@ -23,9 +28,13 @@ export default function AppSettingsView() {
         {/* Account Section */}
         <section className="p-6 border rounded-lg bg-muted/30">
           <h2 className="text-lg font-semibold mb-2">Account</h2>
-          <p className="text-muted-foreground text-sm">
-            Account settings and preferences coming soon.
+          <p className="text-muted-foreground text-sm mb-3">
+            Sign out to return to the password screen.
           </p>
+          <Button variant="outline" size="sm" onClick={handleSignOut}>
+            <LogOut className="h-4 w-4 mr-2" />
+            Sign out
+          </Button>
         </section>
 
         {/* Display Section */}
