@@ -16,7 +16,7 @@ import {
 import { getDatesFromStart, formatDateRange, toISODate } from '@/lib/dates'
 import { fetchMealPlan } from '@/lib/mealPlanService'
 import { calculateMemberPortion } from '@/lib/smartPlanner'
-import { Printer, ShoppingCart, AlertCircle, Trash2, RefreshCw, Check, Loader2, X, ChevronDown, ChevronUp } from 'lucide-react'
+import { Printer, ShoppingCart, AlertCircle, Trash2, RefreshCw, Check, Loader2, X, ChevronDown, ChevronUp, Clipboard } from 'lucide-react'
 
 export default function ShoppingListView() {
   const { user, members, isHouseholdMode, household } = useUser()
@@ -30,6 +30,7 @@ export default function ShoppingListView() {
   const [showDaySelector, setShowDaySelector] = useState(false)
   const [selectedDays, setSelectedDays] = useState([])
   const [expandedItems, setExpandedItems] = useState([])
+  const [showCopiedToast, setShowCopiedToast] = useState(false)
 
   // Generate dates for current week
   const today = useMemo(() => {
@@ -339,6 +340,59 @@ export default function ShoppingListView() {
     }
   }
   
+  // Handle copy for iOS Reminders
+  const handleCopyForReminders = async () => {
+    if (!listData?.list) return
+
+    const categories = ['produce', 'meat', 'seafood', 'dairy', 'pantry', 'other']
+    const sections = []
+
+    categories.forEach(category => {
+      const items = listData.list[category] || []
+      if (items.length === 0) return
+
+      // Build item lines for this category
+      const itemLines = items.map(item => {
+        // Format: "Item name - quantity"
+        const qty = item.hint || `${item.grams}g`
+        return `${item.name} - ${qty}`
+      })
+
+      // Add category header and items
+      sections.push({
+        header: CATEGORY_LABELS[category],
+        items: itemLines
+      })
+    })
+
+    // Build final text with category headers and blank lines between groups
+    const textParts = []
+    sections.forEach((section, idx) => {
+      if (idx > 0) textParts.push('') // Blank line between categories
+      textParts.push(section.header)
+      textParts.push(...section.items)
+    })
+
+    const text = textParts.join('\n')
+
+    try {
+      await navigator.clipboard.writeText(text)
+      setShowCopiedToast(true)
+      setTimeout(() => setShowCopiedToast(false), 2000)
+    } catch (err) {
+      console.error('Failed to copy:', err)
+      // Fallback for older browsers
+      const textarea = document.createElement('textarea')
+      textarea.value = text
+      document.body.appendChild(textarea)
+      textarea.select()
+      document.execCommand('copy')
+      document.body.removeChild(textarea)
+      setShowCopiedToast(true)
+      setTimeout(() => setShowCopiedToast(false), 2000)
+    }
+  }
+
   // Handle clear
   const handleClear = () => {
     if (confirm('Clear shopping list? This cannot be undone.')) {
@@ -514,6 +568,10 @@ export default function ShoppingListView() {
           </div>
 
           <div className="flex gap-2 print:hidden">
+            <Button variant="outline" size="sm" onClick={handleCopyForReminders} className="shrink-0">
+              <Clipboard className="h-4 w-4 md:mr-2" />
+              <span className="hidden md:inline">Copy</span>
+            </Button>
             <Button variant="outline" size="sm" onClick={handlePrint} className="shrink-0">
               <Printer className="h-4 w-4 md:mr-2" />
               <span className="hidden md:inline">Print</span>
@@ -706,6 +764,14 @@ export default function ShoppingListView() {
           onConfirm={handleConfirmDaySelection}
           isUpdating={isUpdating}
         />
+      )}
+
+      {/* Copied to clipboard toast */}
+      {showCopiedToast && (
+        <div className="fixed bottom-24 left-1/2 -translate-x-1/2 z-50 bg-foreground text-background px-4 py-2 rounded-lg shadow-lg text-sm font-medium flex items-center gap-2 animate-in fade-in slide-in-from-bottom-4 duration-200">
+          <Check className="h-4 w-4" />
+          Copied to clipboard
+        </div>
       )}
     </div>
   )
