@@ -15,6 +15,17 @@ const geistMono = Geist_Mono({
 export const metadata = {
   title: "Getfed",
   description: "Plan meals, get fed",
+  manifest: "/manifest.json",
+  themeColor: "#16a34a",
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "default",
+    title: "Getfed",
+  },
+  icons: {
+    icon: "/icons/icon.svg",
+    apple: "/icons/icon.svg",
+  },
 };
 
 export default function RootLayout({ children }) {
