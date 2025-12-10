@@ -1,6 +1,7 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { UserProvider } from "@/context/UserContext";
+import AppErrorBoundary from "@/components/AppErrorBoundary";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -16,7 +17,6 @@ export const metadata = {
   title: "Getfed",
   description: "Plan meals, get fed",
   manifest: "/manifest.json",
-  themeColor: "#16a34a",
   appleWebApp: {
     capable: true,
     statusBarStyle: "default",
@@ -28,6 +28,11 @@ export const metadata = {
   },
 };
 
+// Separate viewport export for themeColor (Next.js 16 requirement)
+export const viewport = {
+  themeColor: "#16a34a",
+};
+
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
@@ -35,7 +40,9 @@ export default function RootLayout({ children }) {
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <UserProvider>
-          {children}
+          <AppErrorBoundary>
+            {children}
+          </AppErrorBoundary>
         </UserProvider>
       </body>
     </html>

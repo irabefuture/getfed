@@ -1,6 +1,9 @@
 /**
  * Meal Plan Service - Supabase persistence for meal plans
  * Handles CRUD operations for planned_meals table
+ *
+ * IMPORTANT: Stores complete recipe objects in recipe_json column
+ * to preserve all fields needed by components (base_servings, per_serve, etc.)
  */
 
 import { supabase } from './supabase'
@@ -35,21 +38,32 @@ export async function fetchMealPlan(householdId, startDate, endDate) {
         meals[dateKey] = {}
       }
 
-      // Transform row to app meal format
-      meals[dateKey][row.meal_type] = {
-        id: row.recipe_id || row.id,
-        name: row.name,
-        prepTime: row.prep_time_mins,
-        cookTime: row.cook_time_mins,
-        serves: row.cooking_serves,
-        ingredients: row.ingredients_json || [],
-        macros: {
-          protein: row.protein_g,
-          fat: row.fat_g,
-          carbs: row.carbs_g,
-          calories: row.calories
-        },
-        instructions: row.instructions
+      // FIXED: Use recipe_json if available (preserves full recipe structure)
+      // Fall back to reconstructing from individual columns for backward compatibility
+      if (row.recipe_json) {
+        meals[dateKey][row.meal_type] = row.recipe_json
+      } else {
+        // Legacy fallback: reconstruct from individual columns
+        // This handles data saved before the recipe_json column was added
+        meals[dateKey][row.meal_type] = {
+          id: row.recipe_id || row.id,
+          name: row.name,
+          description: row.description || '',
+          prep_time_mins: row.prep_time_mins,
+          cook_time_mins: row.cook_time_mins,
+          total_time_mins: (row.prep_time_mins || 0) + (row.cook_time_mins || 0),
+          base_servings: row.cooking_serves || 2,
+          ingredients: row.ingredients_json || [],
+          per_serve: {
+            calories: row.calories || 0,
+            protein_g: row.protein_g || 0,
+            fat_g: row.fat_g || 0,
+            carbs_g: row.carbs_g || 0
+          },
+          instructions: row.instructions ?
+            (Array.isArray(row.instructions) ? row.instructions : [row.instructions]) : [],
+          batch_notes: row.batch_notes || ''
+        }
       }
 
       // Track excluded meals
@@ -66,30 +80,47 @@ export async function fetchMealPlan(householdId, startDate, endDate) {
 }
 
 /**
+ * Extract flat fields from recipe for database columns (for indexing/queries)
+ * @param {Object} meal - Recipe object
+ * @returns {Object} Flat fields for database columns
+ */
+function extractMealFields(meal) {
+  return {
+    recipe_id: meal.id || null,
+    name: meal.name || 'Unnamed meal',
+    description: meal.description || null,
+    prep_time_mins: meal.prep_time_mins || meal.prepTime || null,
+    cook_time_mins: meal.cook_time_mins || meal.cookTime || null,
+    cooking_serves: meal.base_servings || meal.serves || 2,
+    ingredients_json: meal.ingredients || [],
+    protein_g: meal.per_serve?.protein_g || meal.macros?.protein || 0,
+    fat_g: meal.per_serve?.fat_g || meal.macros?.fat || 0,
+    carbs_g: meal.per_serve?.carbs_g || meal.macros?.carbs || 0,
+    calories: meal.per_serve?.calories || meal.macros?.calories || 0,
+    instructions: meal.instructions || null,
+    batch_notes: meal.batch_notes || null
+  }
+}
+
+/**
  * Save a single meal (upsert)
  * @param {string} householdId - Household UUID
  * @param {string} date - ISO date string (YYYY-MM-DD)
  * @param {string} slotId - Meal slot (lunch, dinner, etc.)
- * @param {Object} meal - Meal data
+ * @param {Object} meal - Meal data (complete recipe object)
  * @returns {Promise<{success: boolean, error: Error|null}>}
  */
 export async function saveMeal(householdId, date, slotId, meal) {
   try {
+    const flatFields = extractMealFields(meal)
+
     const row = {
       household_id: householdId,
       date: date,
       meal_type: slotId,
-      recipe_id: meal.id || null,
-      name: meal.name,
-      prep_time_mins: meal.prepTime || null,
-      cook_time_mins: meal.cookTime || null,
-      cooking_serves: meal.serves || 2,
-      ingredients_json: meal.ingredients || [],
-      protein_g: meal.macros?.protein || 0,
-      fat_g: meal.macros?.fat || 0,
-      carbs_g: meal.macros?.carbs || 0,
-      calories: meal.macros?.calories || 0,
-      instructions: meal.instructions || null,
+      ...flatFields,
+      // CRITICAL: Store complete recipe object to preserve all fields
+      recipe_json: meal,
       excluded: false,
       status: 'planned',
       source: 'ai_generated'
@@ -120,25 +151,21 @@ export async function saveMeal(householdId, date, slotId, meal) {
  */
 export async function saveDayMeals(householdId, date, dayMeals) {
   try {
-    const rows = Object.entries(dayMeals).map(([slotId, meal]) => ({
-      household_id: householdId,
-      date: date,
-      meal_type: slotId,
-      recipe_id: meal.id || null,
-      name: meal.name,
-      prep_time_mins: meal.prepTime || null,
-      cook_time_mins: meal.cookTime || null,
-      cooking_serves: meal.serves || 2,
-      ingredients_json: meal.ingredients || [],
-      protein_g: meal.macros?.protein || 0,
-      fat_g: meal.macros?.fat || 0,
-      carbs_g: meal.macros?.carbs || 0,
-      calories: meal.macros?.calories || 0,
-      instructions: meal.instructions || null,
-      excluded: false,
-      status: 'planned',
-      source: 'ai_generated'
-    }))
+    const rows = Object.entries(dayMeals).map(([slotId, meal]) => {
+      const flatFields = extractMealFields(meal)
+
+      return {
+        household_id: householdId,
+        date: date,
+        meal_type: slotId,
+        ...flatFields,
+        // CRITICAL: Store complete recipe object to preserve all fields
+        recipe_json: meal,
+        excluded: false,
+        status: 'planned',
+        source: 'ai_generated'
+      }
+    })
 
     if (rows.length === 0) return { success: true, error: null }
 
@@ -220,7 +247,7 @@ export async function fetchMealsForShopping(householdId, startDate, endDate) {
   try {
     const { data, error } = await supabase
       .from('planned_meals')
-      .select('date, meal_type, name, ingredients_json, cooking_serves')
+      .select('date, meal_type, name, ingredients_json, cooking_serves, recipe_json')
       .eq('household_id', householdId)
       .eq('excluded', false)
       .gte('date', startDate)
@@ -236,10 +263,16 @@ export async function fetchMealsForShopping(householdId, startDate, endDate) {
       if (!meals[dateKey]) {
         meals[dateKey] = {}
       }
-      meals[dateKey][row.meal_type] = {
-        name: row.name,
-        ingredients: row.ingredients_json || [],
-        serves: row.cooking_serves
+
+      // FIXED: Use recipe_json if available, otherwise reconstruct
+      if (row.recipe_json) {
+        meals[dateKey][row.meal_type] = row.recipe_json
+      } else {
+        meals[dateKey][row.meal_type] = {
+          name: row.name,
+          ingredients: row.ingredients_json || [],
+          base_servings: row.cooking_serves || 2
+        }
       }
     })
 
