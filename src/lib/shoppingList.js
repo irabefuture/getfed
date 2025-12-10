@@ -21,6 +21,7 @@ const CATEGORY_MAP = {
   'cabbage': 'produce', 'lemon': 'produce', 'lime': 'produce',
   'blueberries': 'produce', 'strawberries': 'produce', 'raspberries': 'produce',
   'apple': 'produce', 'banana': 'produce', 'orange': 'produce',
+  'squash': 'produce', 'pumpkin': 'produce', 'sweet potato': 'produce',
   'chicken': 'meat', 'beef': 'meat', 'lamb': 'meat', 'pork': 'meat',
   'turkey': 'meat', 'bacon': 'meat', 'mince': 'meat',
   'salmon': 'seafood', 'tuna': 'seafood', 'prawns': 'seafood',
@@ -276,7 +277,7 @@ export function generateMealPlanHash(meals, dateKeys, excludedMeals = []) {
   return ids.sort().join('|') + exclusionStr
 }
 
-export const CATEGORY_LABELS = { produce: 'Produce', meat: 'Meat', seafood: 'Seafood', dairy: 'Dairy & Eggs', pantry: 'Pantry', other: 'Other' }
+export const CATEGORY_LABELS = { produce: 'Fruit & Veg', meat: 'Meat', seafood: 'Seafood', dairy: 'Dairy & Eggs', pantry: 'Pantry', other: 'Other' }
 
 export function saveShoppingList(userId, list, weekLabel, mealPlanHash) {
   localStorage.setItem(`shopping-list-${userId}`, JSON.stringify({ list, weekLabel, mealPlanHash, committedAt: new Date().toISOString(), checkedItems: [] }))
