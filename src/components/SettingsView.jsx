@@ -101,7 +101,7 @@ export default function SettingsView() {
 
       if (updateError) throw updateError
 
-      setSuccess('Family Plan created! You can now add family members.')
+      setSuccess('Users set up! You can now add more users.')
       refreshHousehold()
 
     } catch (err) {
@@ -126,7 +126,7 @@ export default function SettingsView() {
 
       if (error) throw error
 
-      setSuccess('Family Plan name updated!')
+      setSuccess('Name updated!')
       setEditingHouseholdName(false)
       refreshHousehold()
 
@@ -163,7 +163,7 @@ export default function SettingsView() {
 
       if (error) throw error
 
-      setSuccess(`${newMember.name} added to family!`)
+      setSuccess(`${newMember.name} added!`)
       setShowAddMember(false)
       setNewMember({
         name: '',
@@ -219,7 +219,7 @@ export default function SettingsView() {
 
   // Handle removing a member
   const handleRemoveMember = async (memberId, memberName) => {
-    if (!confirm(`Remove ${memberName} from family?`)) return
+    if (!confirm(`Remove ${memberName}?`)) return
 
     setSaving(true)
     setError(null)
@@ -232,7 +232,7 @@ export default function SettingsView() {
 
       if (error) throw error
 
-      setSuccess(`${memberName} removed from family.`)
+      setSuccess(`${memberName} removed.`)
       refreshHousehold()
 
     } catch (err) {
@@ -249,8 +249,8 @@ export default function SettingsView() {
   }
 
   return (
-    <div className="flex-1 p-4 md:p-6 max-w-3xl">
-      <h1 className="text-xl md:text-2xl font-bold mb-6">Settings</h1>
+    <div className="flex-1 p-4 md:p-6 max-w-3xl h-full overflow-y-auto pb-24">
+      <h1 className="text-xl md:text-2xl font-bold mb-6">Users</h1>
 
       {/* Success/Error Messages */}
       {success && (
@@ -266,76 +266,21 @@ export default function SettingsView() {
         </div>
       )}
 
-      {/* Family Plan Section */}
+      {/* Users Section */}
       <section className="mb-8">
-        <h2 className="text-lg font-semibold mb-4 flex items-center gap-2">
-          <Users className="h-5 w-5" />
-          Family Plan
-        </h2>
-
         {!isHouseholdMode ? (
           <div className="p-6 border rounded-lg bg-muted/30">
             <p className="text-muted-foreground mb-4">
-              Create a Family Plan to share meal plans with family members.
-              Each person can have their own nutrition targets while sharing the same recipes.
+              Set up users to share meal plans. Each person can have their own nutrition targets while sharing the same recipes.
             </p>
             <Button onClick={handleCreateHousehold} disabled={saving}>
-              {saving ? 'Creating...' : 'Create Family Plan'}
+              {saving ? 'Creating...' : 'Get Started'}
             </Button>
           </div>
         ) : (
           <div className="space-y-4">
             <div className="p-4 border rounded-lg bg-card">
-              <div className="flex items-center justify-between mb-4">
-                <div>
-                  {editingHouseholdName ? (
-                    <div className="flex items-center gap-2">
-                      <input
-                        type="text"
-                        value={householdName}
-                        onChange={e => setHouseholdName(e.target.value)}
-                        className="p-1.5 border rounded bg-background text-sm"
-                        placeholder="Family Plan name"
-                        autoFocus
-                      />
-                      <Button size="sm" onClick={handleRenameHousehold} disabled={saving}>
-                        Save
-                      </Button>
-                      <Button size="sm" variant="ghost" onClick={() => setEditingHouseholdName(false)}>
-                        Cancel
-                      </Button>
-                    </div>
-                  ) : (
-                    <>
-                      <h3 className="font-medium">
-                        {household?.name || 'Our Family'}
-                        <button
-                          onClick={() => {
-                            setHouseholdName(household?.name || '')
-                            setEditingHouseholdName(true)
-                          }}
-                          className="ml-2 text-xs text-primary hover:underline"
-                        >
-                          rename
-                        </button>
-                      </h3>
-                      <p className="text-sm text-muted-foreground">
-                        {members.length} member{members.length !== 1 ? 's' : ''}
-                      </p>
-                    </>
-                  )}
-                </div>
-                <Button
-                  variant="outline"
-                  size="sm"
-                  onClick={() => setShowAddMember(true)}
-                >
-                  <Plus className="h-4 w-4 mr-1" />
-                  Add Member
-                </Button>
-              </div>
-
-              {/* Member List */}
+              {/* User List */}
               <div className="space-y-3">
                 {members.map(member => {
                   const targets = member.targets || calculateMemberTargets(member)
@@ -381,18 +326,32 @@ export default function SettingsView() {
                   )
                 })}
               </div>
+
+              {/* Add User Button - below user list */}
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => setShowAddMember(true)}
+                className="mt-4 w-full"
+              >
+                <Plus className="h-4 w-4 mr-1" />
+                Add User
+              </Button>
             </div>
           </div>
         )}
       </section>
 
-      {/* Add Member Form */}
+      {/* Add User Form */}
       {showAddMember && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50">
-          <div className="bg-card border rounded-lg p-6 max-w-md w-full max-h-[90vh] overflow-y-auto">
-            <h3 className="text-lg font-semibold mb-4">Add Family Member</h3>
+          <div
+            className="bg-card border rounded-lg p-6 max-w-md w-full max-h-[80vh] overflow-y-auto overflow-x-hidden mb-20 md:mb-0"
+            style={{ overscrollBehavior: 'contain' }}
+          >
+            <h3 className="text-lg font-semibold mb-4">Add User</h3>
 
-            <div className="space-y-4">
+            <div className="space-y-4 pb-4">
               <div>
                 <label className="text-sm font-medium">Name</label>
                 <input
@@ -530,7 +489,7 @@ export default function SettingsView() {
                 onClick={handleAddMember}
                 disabled={saving || !newMember.name || !newMember.current_weight_kg}
               >
-                {saving ? 'Adding...' : 'Add Member'}
+                {saving ? 'Adding...' : 'Add User'}
               </Button>
             </div>
           </div>
@@ -583,10 +542,13 @@ function MemberEditModal({ member, onClose, onSave, saving }) {
 
   return (
     <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50">
-      <div className="bg-card border rounded-lg p-6 max-w-md w-full max-h-[90vh] overflow-y-auto">
+      <div
+        className="bg-card border rounded-lg p-6 max-w-md w-full max-h-[80vh] overflow-y-auto overflow-x-hidden mb-20 md:mb-0"
+        style={{ overscrollBehavior: 'contain' }}
+      >
         <h3 className="text-lg font-semibold mb-4">Edit {member.name}</h3>
 
-        <div className="space-y-4">
+        <div className="space-y-4 pb-4">
           <div className="grid grid-cols-2 gap-4">
             <div>
               <label className="text-sm font-medium">Current Weight (kg)</label>

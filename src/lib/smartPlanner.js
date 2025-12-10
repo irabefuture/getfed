@@ -15,6 +15,7 @@
 
 import { getAllRecipes, getRecipeById } from './recipes'
 import { MEAL_DISTRIBUTION, calculateMemberTargets } from '@/context/HouseholdContext'
+import { getDislikedRecipeIds } from './recipeRatings'
 
 /**
  * Generate a smart day of meals using AI
@@ -88,13 +89,22 @@ export async function generateSmartDay(user, targets, preferences = {}, excludeI
 
 /**
  * Generate a smart week of meals using AI
- * @param {Object} user - User object with current_phase, etc.
+ * @param {Object} user - User object with current_phase, id, etc.
  * @param {Object} targets - { dailyCalories, protein, fat, carbs }
  * @param {Object} preferences - Dietary and meal preferences
  * @returns {Promise<Object>} Week plan with recipe objects
  */
 export async function generateSmartWeek(user, targets, preferences = {}) {
   const recipes = getAllRecipes()
+
+  // Fetch user's disliked recipes to exclude from generation
+  const dislikedIds = user?.id ? await getDislikedRecipeIds(user.id) : []
+
+  // Combine explicit excludeIds with disliked recipes
+  const allExcludeIds = [...new Set([
+    ...(preferences.excludeIds || []),
+    ...dislikedIds,
+  ])]
 
   const response = await fetch('/api/generate-smart-meals', {
     method: 'POST',
@@ -117,7 +127,7 @@ export async function generateSmartWeek(user, targets, preferences = {}) {
         batchFriendly: preferences.batchFriendly || false,
         lunchboxFriendly: preferences.lunchboxFriendly || false,
       },
-      excludeIds: preferences.excludeIds || [],
+      excludeIds: allExcludeIds,
       recentProteins: preferences.recentProteins || [],
     }),
   })
@@ -286,14 +296,24 @@ export function getUsedRecipeIds(weekPlan) {
  *
  * @param {Array} members - Array of household member objects
  * @param {Object} preferences - Shared preferences
+ * @param {string} userId - User ID for fetching disliked recipes
  * @returns {Promise<Object>} Week plan with recipe objects
  */
-export async function generateSmartWeekForHousehold(members, preferences = {}) {
+export async function generateSmartWeekForHousehold(members, preferences = {}, userId = null) {
   if (!members || members.length === 0) {
     throw new Error('No household members provided')
   }
 
   const recipes = getAllRecipes()
+
+  // Fetch user's disliked recipes to exclude from generation
+  const dislikedIds = userId ? await getDislikedRecipeIds(userId) : []
+
+  // Combine explicit excludeIds with disliked recipes
+  const allExcludeIds = [...new Set([
+    ...(preferences.excludeIds || []),
+    ...dislikedIds,
+  ])]
 
   // Get most restrictive phase (lowest number = strictest)
   const householdPhase = Math.min(...members.map(m => m.current_phase || 1))
@@ -328,7 +348,7 @@ export async function generateSmartWeekForHousehold(members, preferences = {}) {
         batchFriendly: preferences.batchFriendly || false,
         lunchboxFriendly: preferences.lunchboxFriendly || false,
       },
-      excludeIds: preferences.excludeIds || [],
+      excludeIds: allExcludeIds,
       recentProteins: preferences.recentProteins || [],
     }),
   })

@@ -1,6 +1,6 @@
 # Adaptive Meal Builder - Project Status
 
-**Last Updated:** 8 December 2025, 5:30 PM AEDT
+**Last Updated:** 10 December 2025
 **Ship Date:** 12 December 2025 (Friday)
 
 ---
@@ -9,105 +9,69 @@
 
 | What | Status |
 |------|--------|
-| **Current Phase** | Mobile UX Complete - PWA Testing Next |
-| **Next Action** | PWA view testing, final polish |
+| **Current Phase** | Ready for User Testing |
+| **Next Action** | Rhonda user testing |
 | **Blocker** | None |
 | **Schedule** | On track for Friday ship |
 
 ---
 
-## Day 8 Summary (8 December 2025) - Mobile UX Overhaul
+## Day 10 Summary (10 December 2025) - Mobile Review Complete
 
-### Session Summary
-- Completed mobile responsiveness testing
-- Implemented compact meal cards (all 4 visible on screen)
-- New layout: Header with AI icon + Print | Day strip | Date | 4 meals | Bottom nav
-- Auto-plan flow with Generate modal (Generate Day / Fill Empty Days / Cancel)
-- Recipe overlay with double-tap open/close
-- Swipe left on meal cards for Swap/Delete actions
-- Day strip moved to top, horizontally scrollable
-- Fixed ingredient scaling and AU terminology
-- Button labels updated (Plan AI → Generate, Commit → Add to List)
-- Moved "Add to List" to Shopping tab (pending implementation)
-- Bottom nav restored (removed experimental hide/pull-up)
-- Multiple batch fixes for typography, spacing, gestures
+### Status: Ready for User Testing
 
-### Mobile Layout (Final)
-```
-┌─────────────────────────────────┐
-│ ✨  Meal Planner  🖨️           │  ← Green header, AI left, Print right
-├─────────────────────────────────┤
-│ [Sun][Mon][Tue][Wed][Thu]...    │  ← Day strip, horizontally scrollable
-├─────────────────────────────────┤
-│ Sunday 8 December               │  ← Date header
-├─────────────────────────────────┤
-│ 🥗 LUNCH · 12:00 · 15m          │
-│ Mediterranean Salmon Bowl       │  ← Compact card (double-tap = recipe)
-│ Fresh salmon with quinoa...     │  ← Single line description
-├─────────────────────────────────┤
-│ 🍎 AFTERNOON SNACK · 15:00      │
-│ Greek Yogurt Parfait            │
-│ Creamy yogurt with berries...   │
-├─────────────────────────────────┤
-│ 🍽️ DINNER · 18:00 · 25m         │
-│ Herb-Crusted Chicken            │
-│ Tender chicken with herbs...    │
-├─────────────────────────────────┤
-│ 🫐 EVENING SNACK · 19:30        │
-│ Cheese & Cucumber Bites         │
-│ Light and refreshing...         │
-├─────────────────────────────────┤
-│ Planner | Recipes | Shop | Fam  │  ← Bottom nav (always visible)
-└─────────────────────────────────┘
-```
+Mobile UX polish complete. App is feature-complete for MVP.
 
-### Gestures
-- **Double-tap meal card** → Opens full-screen recipe overlay
-- **Double-tap recipe overlay** → Closes it
-- **Swipe left on meal card** → Reveals Swap/Delete buttons
-- **Tap X in recipe header** → Also closes overlay
+### Completed Today
 
-### Key Technical Changes
-1. **Fixed layout** - `h-screen overflow-hidden` with flexbox
-2. **Day strip at top** - Part of fixed header section
-3. **Cards share vertical space** - `flex-1 min-h-0` for equal distribution
-4. **Recipe overlay z-200** - True full-screen modal over everything
-5. **Wake lock** - Screen stays on during cooking mode
+**Meal Exclusion Feature**
+- Long-press meal cards to exclude from shopping list
+- Visual indicator (dashed border, muted background)
+- Toast notification on toggle
+- Exclusions persist in localStorage
+- Shopping list hash includes exclusions (triggers "needs update")
 
-### Current State
-- Core mobile UX working
-- Testing in PWA (Add to Home Screen) view pending
-- Will refine spacing/sizing based on PWA full-screen testing
+**Print Functionality**
+- Fixed print close button sizing (viewport meta tag was missing)
+- Consistent button styling between WeekView and ShoppingListView
+- Print window works correctly on mobile
 
----
+**Shopping List Sync**
+- Hash now includes excluded meals
+- Correct "stale" detection when exclusions change
+- Three button states: "List up to date" / "Update from meal plan" / "Updated!"
+- Day selector shows correct meal count (respects exclusions)
 
-## Day 7 Summary (7 December 2025)
+**Onboarding Modal**
+- 4-page intro with visual highlights
+- Fake UI elements showing gestures (day strip, meal card, nav bar)
+- Pulse animation on first day after completion
+- "Replay app guide" button in Settings
 
-### Critical Bug Fixed: Ingredient Scaling
-**Problem:** Shopping list showed absurd amounts (18 avocados, 31 eggs, 1097g salmon)
+**Navigation & Labels**
+- Renamed "Family" to "Users" throughout
+- Fixed nav order in onboarding to match actual app
 
-**Root Cause:** Recipe ingredients are TOTAL amounts for `base_servings`, but code treated them as per-serve.
+**Scroll & Modal Fixes**
+- Fixed Users and Settings page mobile scroll
+- Modal content anchored (no loose movement)
+- Added overflow-x-hidden and overscroll-behavior: contain
 
-**Fix:** Applied consistent formula across 3 locations:
-```javascript
-scaledGrams = (ingredient.grams / recipe.base_servings) * householdMultiplier
-```
+**iOS Compatibility**
+- Prevented text selection hijacking long-press
+- WebkitTouchCallout and WebkitUserSelect: none
 
-### AU Terminology Complete
-All recipe JSONs updated:
-| US Term | AU Term |
-|---------|---------|
-| Ranch dressing | Whole egg mayonnaise |
-| Turkey bacon | Bacon rashers |
-| String cheese | Cheese sticks |
-| Primal Kitchen BBQ sauce | BBQ sauce |
-| Kosher salt | Cooking salt |
+### Ready for Friday Ship
 
-### New Features Added
-- **Recipe Swap Filter:** Search box + category pills (fish, poultry, eggs, etc.)
-- **Print Recipes:** Button on each day to print all recipes with scaled ingredients
-- **Debug Logging:** Shopping list shows ingredient source breakdown in console
-- **Serving Size Validator:** Script to catch data entry errors
+- App is feature-complete for MVP
+- Rhonda user testing next
+- Final QA pass needed
+
+### Remaining Before Ship
+
+1. User testing feedback (Rhonda)
+2. Any critical bugs from testing
+3. Final commit and deploy to Vercel
 
 ---
 
@@ -136,20 +100,11 @@ All recipe JSONs updated:
 | Double-tap recipe overlay | ✅ Complete |
 | Swipe-to-reveal actions | ✅ Complete |
 | Generate modal (Day/Fill Empty) | ✅ Complete |
-| PWA testing | 🔜 To test |
-| Final polish | 🔜 Remaining |
-
----
-
-## Remaining Before Ship (Friday 12 Dec)
-
-1. **PWA view testing** - Add to Home Screen on iPhone
-2. **Spacing/sizing adjustments** - Based on PWA full-screen testing
-3. **Shopping tab "Add from meal plan"** - Move commit action to Shopping tab
-4. **Edge case testing** - Empty states, error handling
-5. **Rhonda user testing** - Real-world feedback
-6. **Final polish** - Any remaining UI refinements
-7. **Deploy to production** - Vercel push
+| Meal exclusion from shopping | ✅ Complete |
+| Onboarding modal | ✅ Complete |
+| Shopping list sync states | ✅ Complete |
+| PWA testing | ✅ Complete |
+| Final polish | ✅ Complete |
 
 ---
 
@@ -188,16 +143,10 @@ Open: http://localhost:3000
 | `PROJECT-STATUS.md` | This file - quick status |
 | `src/components/WeekView.jsx` | Main planner component |
 | `src/components/RecipeOverlay.jsx` | Full-screen recipe modal |
+| `src/components/ShoppingListView.jsx` | Shopping list with sync states |
+| `src/components/OnboardingModal.jsx` | First-visit onboarding |
 | `src/components/Sidebar.jsx` | Navigation components |
 
 ---
 
-## Git Log (Day 8)
-
-```
-bfe4790 Day 8: Mobile UX overhaul - compact layout, auto-plan flow, recipe overlay, navigation improvements
-```
-
----
-
-*Last updated: 8 December 2025, 5:30 PM AEDT - Day 8 Complete*
+*Last updated: 10 December 2025 - Ready for User Testing*

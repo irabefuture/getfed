@@ -333,6 +333,28 @@ INSERT INTO household_members (
 */
 
 -- ============================================
+-- 13. RECIPE RATINGS TABLE (NEW)
+-- User ratings for recipes (liked/disliked)
+-- Used to personalise future meal suggestions
+-- ============================================
+
+CREATE TABLE IF NOT EXISTS recipe_ratings (
+    id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
+    user_id uuid NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+    recipe_id text NOT NULL,
+    rating text NOT NULL CHECK (rating IN ('liked', 'disliked')),
+    created_at timestamp with time zone DEFAULT now(),
+    updated_at timestamp with time zone DEFAULT now(),
+    UNIQUE(user_id, recipe_id)
+);
+
+COMMENT ON TABLE recipe_ratings IS 'User ratings for recipes - disliked recipes are excluded from future suggestions';
+COMMENT ON COLUMN recipe_ratings.rating IS 'liked = show more often, disliked = never suggest again';
+
+CREATE INDEX IF NOT EXISTS idx_recipe_ratings_user ON recipe_ratings(user_id);
+CREATE INDEX IF NOT EXISTS idx_recipe_ratings_user_rating ON recipe_ratings(user_id, rating);
+
+-- ============================================
 -- DONE!
 -- Schema now supports household meal planning
 -- ============================================

@@ -1,8 +1,10 @@
 'use client'
 
 import { useState, useEffect, useRef } from 'react'
-import { X, ThumbsUp, ThumbsDown, Printer, Clock } from 'lucide-react'
+import { X, ThumbsUp, ThumbsDown, Printer, Clock, Check, ArrowLeft } from 'lucide-react'
 import { toAustralianName, formatQuantity } from '@/lib/ingredientFormat'
+import { getRecipeRating, setRecipeRating, clearRecipeRating } from '@/lib/recipeRatings'
+import { useUser } from '@/context/UserContext'
 
 // Helper to sanitize text (remove IP addresses and URLs)
 const sanitizeText = (text) => {
@@ -33,15 +35,22 @@ export default function RecipeOverlay({
   isHouseholdMode,
   onSwap,
   onClear,
+  // New props for picker preview mode
+  mode = 'view', // 'view' (from planner) or 'preview' (from picker)
+  onSelect, // Called when user selects recipe in preview mode
 }) {
   const [isClosing, setIsClosing] = useState(false)
   const [swipeOffset, setSwipeOffset] = useState(0)
+  const [currentRating, setCurrentRating] = useState(null) // 'liked' | 'disliked' | null
+  const [isRatingLoading, setIsRatingLoading] = useState(false)
   const overlayRef = useRef(null)
   const scrollRef = useRef(null)
   const wakeLockRef = useRef(null)
   const touchStartY = useRef(0)
   const touchStartScrollTop = useRef(0)
   const isSwipingDown = useRef(false)
+
+  const { user } = useUser()
 
   // Swipe dismiss thresholds
   const DISMISS_THRESHOLD = 100
@@ -73,6 +82,64 @@ export default function RecipeOverlay({
       setSwipeOffset(0)
       isSwipingDown.current = false
     }
+  }, [isOpen])
+
+  // Fetch existing rating when overlay opens
+  useEffect(() => {
+    if (isOpen && recipe?.id && user?.id) {
+      setCurrentRating(null) // Reset while loading
+      getRecipeRating(user.id, recipe.id).then(rating => {
+        setCurrentRating(rating)
+      })
+    } else if (!isOpen) {
+      setCurrentRating(null) // Reset when closed
+    }
+  }, [isOpen, recipe?.id, user?.id])
+
+  // Handle rating button press (toggle on/off)
+  const handleRating = async (ratingType) => {
+    if (!user?.id || !recipe?.id || isRatingLoading) return
+
+    const clickedRating = ratingType === 'up' ? 'liked' : 'disliked'
+
+    setIsRatingLoading(true)
+
+    // If clicking the same rating, clear it (toggle off)
+    if (currentRating === clickedRating) {
+      const success = await clearRecipeRating(user.id, recipe.id)
+      if (success) {
+        setCurrentRating(null)
+      }
+    } else {
+      // Set new rating
+      const success = await setRecipeRating(user.id, recipe.id, clickedRating)
+      if (success) {
+        setCurrentRating(clickedRating)
+        onRate?.(ratingType) // Call original handler if provided
+      }
+    }
+
+    setIsRatingLoading(false)
+  }
+
+  // Force re-layout when window regains focus (fixes iOS Safari print return bug)
+  useEffect(() => {
+    if (!isOpen) return
+
+    const handleFocus = () => {
+      // Force a re-layout by toggling a minimal style change
+      if (scrollRef.current) {
+        const scrollTop = scrollRef.current.scrollTop
+        scrollRef.current.style.overflow = 'hidden'
+        // Force reflow
+        void scrollRef.current.offsetHeight
+        scrollRef.current.style.overflow = ''
+        scrollRef.current.scrollTop = scrollTop
+      }
+    }
+
+    window.addEventListener('focus', handleFocus)
+    return () => window.removeEventListener('focus', handleFocus)
   }, [isOpen])
 
   // Handle touch start for swipe-down dismiss
@@ -123,9 +190,159 @@ export default function RecipeOverlay({
     }, 200)
   }
 
-  // Handle print
+  // Handle print - generate dedicated print window with recipe content
   const handlePrint = () => {
-    window.print()
+    if (!recipe) return
+
+    // Calculate scaled ingredients
+    const baseServings = recipe.base_servings || 1
+    const householdTotal = isHouseholdMode && householdPortions?.total > 1
+      ? householdPortions.total
+      : 1
+
+    // Build ingredient list HTML
+    const ingredientsHtml = recipe.ingredients?.map(ing => {
+      const perServeGrams = (ing.grams || 0) / baseServings
+      const scaledGrams = perServeGrams * householdTotal
+      const auName = toAustralianName(ing.name)
+      const qty = formatQuantity(scaledGrams, ing.name)
+      return `<li><span class="amount">${qty}</span><span>${auName}${ing.notes ? ` (${ing.notes})` : ''}</span></li>`
+    }).join('') || ''
+
+    // Build method steps HTML
+    const methodHtml = recipe.instructions?.map((step, i) =>
+      `<li>${step}</li>`
+    ).join('') || ''
+
+    // Build portions info if household mode
+    const portionsHtml = isHouseholdMode && householdPortions?.breakdown?.length > 0
+      ? `<div class="portions"><strong>Portions:</strong> ${householdPortions.breakdown.map(p => `${p.name}: ${p.percentage}%`).join(' · ')}</div>`
+      : ''
+
+    const macros = recipe.per_serve || {}
+
+    const html = `
+      <!DOCTYPE html>
+      <html>
+      <head>
+        <title>${sanitizeText(recipe.name)}</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <style>
+          * { box-sizing: border-box; }
+          body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            line-height: 1.5;
+            color: #333;
+          }
+          h1 {
+            font-size: 22px;
+            margin: 0 0 8px 0;
+            line-height: 1.2;
+          }
+          .meta {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 16px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid #ddd;
+          }
+          .meal-type {
+            font-size: 12px;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 4px;
+          }
+          h2 {
+            font-size: 16px;
+            margin: 20px 0 10px 0;
+            color: #222;
+          }
+          .ingredients {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+          }
+          .ingredients li {
+            padding: 6px 0;
+            display: flex;
+            gap: 12px;
+            border-bottom: 1px solid #f0f0f0;
+          }
+          .ingredients .amount {
+            color: #666;
+            min-width: 70px;
+            flex-shrink: 0;
+          }
+          .method {
+            padding-left: 20px;
+            margin: 0;
+          }
+          .method li {
+            padding: 8px 0;
+            line-height: 1.6;
+          }
+          .portions {
+            font-size: 13px;
+            color: #666;
+            margin-top: 12px;
+            padding: 10px;
+            background: #f8f8f8;
+            border-radius: 6px;
+          }
+          .batch-note {
+            font-size: 13px;
+            color: #8B6914;
+            background: #FFF8E7;
+            padding: 10px;
+            border-radius: 6px;
+            margin-top: 16px;
+          }
+          @media print {
+            body { padding: 0; }
+          }
+        </style>
+      </head>
+      <body>
+        <div class="meal-type">${slot?.icon || ''} ${slot?.label || ''} · ${slot?.time || ''}</div>
+        <h1>${sanitizeText(recipe.name)}</h1>
+        <div class="meta">
+          ${recipe.total_time_mins ? `${recipe.total_time_mins} min · ` : ''}${macros.calories || '?'} cal · ${macros.protein_g || '?'}g protein · ${macros.fat_g || '?'}g fat · ${macros.carbs_g || '?'}g carbs
+        </div>
+
+        <h2>Ingredients${householdTotal > 1 ? ` (serves ${householdPortions?.breakdown?.length || householdTotal})` : ''}</h2>
+        <ul class="ingredients">
+          ${ingredientsHtml}
+        </ul>
+        ${portionsHtml}
+
+        <h2>Method</h2>
+        <ol class="method">
+          ${methodHtml}
+        </ol>
+
+        ${recipe.batch_notes ? `<div class="batch-note">💡 ${recipe.batch_notes}</div>` : ''}
+      </body>
+      </html>
+    `
+
+    // Open print window and trigger print
+    const printWindow = window.open('', '_blank')
+    if (printWindow) {
+      printWindow.document.write(html)
+      printWindow.document.close()
+      // Small delay to ensure content is rendered before printing
+      setTimeout(() => {
+        printWindow.print()
+        // On iOS, close the print window after a delay to return cleanly
+        setTimeout(() => {
+          printWindow.close()
+        }, 500)
+      }, 100)
+    }
   }
 
   // Close button handler
@@ -221,7 +438,7 @@ export default function RecipeOverlay({
       {/* Scrollable recipe content */}
       <div
         ref={scrollRef}
-        className="flex-1 overflow-y-auto overscroll-contain"
+        className="flex-1 min-h-0 overflow-y-auto overscroll-contain"
         style={{ WebkitOverflowScrolling: 'touch' }}
       >
         <div className="px-4 py-4 space-y-5 pb-32">
@@ -297,34 +514,79 @@ export default function RecipeOverlay({
 
           {/* Rating */}
           <div className="pt-3 border-t">
-            <p className="text-xs text-muted-foreground mb-2">How was this recipe?</p>
+            <p className="text-xs text-muted-foreground mb-2">
+              {currentRating ? 'Your rating:' : 'Rate this recipe'}
+            </p>
             <div className="flex gap-3">
               <button
-                onClick={() => onRate?.('up')}
-                className="flex items-center gap-1.5 px-3 py-1.5 rounded-full border text-sm hover:bg-green-50 hover:border-green-300 transition-colors"
+                onClick={() => handleRating('up')}
+                disabled={isRatingLoading}
+                className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full border text-sm transition-colors ${
+                  currentRating === 'liked'
+                    ? 'bg-green-500 border-green-500 text-white'
+                    : currentRating === 'disliked'
+                      ? 'opacity-40 border-gray-200'
+                      : 'hover:bg-green-50 hover:border-green-300'
+                }`}
               >
-                <ThumbsUp className="h-4 w-4 text-green-600" />
+                <ThumbsUp className={`h-4 w-4 ${currentRating === 'liked' ? 'text-white' : 'text-green-600'}`} />
                 <span>Good</span>
               </button>
               <button
-                onClick={() => onRate?.('down')}
-                className="flex items-center gap-1.5 px-3 py-1.5 rounded-full border text-sm hover:bg-red-50 hover:border-red-300 transition-colors"
+                onClick={() => handleRating('down')}
+                disabled={isRatingLoading}
+                className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full border text-sm transition-colors ${
+                  currentRating === 'disliked'
+                    ? 'bg-red-500 border-red-500 text-white'
+                    : currentRating === 'liked'
+                      ? 'opacity-40 border-gray-200'
+                      : 'hover:bg-red-50 hover:border-red-300'
+                }`}
               >
-                <ThumbsDown className="h-4 w-4 text-red-600" />
+                <ThumbsDown className={`h-4 w-4 ${currentRating === 'disliked' ? 'text-white' : 'text-red-600'}`} />
                 <span>Not for me</span>
               </button>
             </div>
+            {currentRating === 'disliked' && (
+              <p className="text-xs text-muted-foreground mt-2">
+                This recipe won't be suggested again
+              </p>
+            )}
           </div>
 
-          {/* Close button - full width for easy tap */}
+          {/* Footer buttons - context-aware */}
           <div className="pt-4">
-            <button
-              onClick={handleCloseButton}
-              className="w-full flex items-center justify-center gap-2 py-3 px-4 rounded-lg border border-gray-300 text-muted-foreground hover:bg-muted/50 transition-colors"
-            >
-              <X className="h-4 w-4" />
-              <span>Close</span>
-            </button>
+            {mode === 'preview' ? (
+              // Preview mode (from picker): Back + Add This
+              <div className="flex gap-3">
+                <button
+                  onClick={handleCloseButton}
+                  className="flex-1 flex items-center justify-center gap-2 py-3 px-4 rounded-lg border border-gray-300 text-muted-foreground hover:bg-muted/50 transition-colors"
+                >
+                  <ArrowLeft className="h-4 w-4" />
+                  <span>Back</span>
+                </button>
+                <button
+                  onClick={() => {
+                    onSelect?.(recipe)
+                    triggerClose()
+                  }}
+                  className="flex-1 flex items-center justify-center gap-2 py-3 px-4 rounded-lg bg-primary text-primary-foreground hover:bg-primary/90 transition-colors font-medium"
+                >
+                  <Check className="h-4 w-4" />
+                  <span>Add This</span>
+                </button>
+              </div>
+            ) : (
+              // View mode (from planner): Single Close button
+              <button
+                onClick={handleCloseButton}
+                className="w-full flex items-center justify-center gap-2 py-3 px-4 rounded-lg border border-gray-300 text-muted-foreground hover:bg-muted/50 transition-colors"
+              >
+                <X className="h-4 w-4" />
+                <span>Close</span>
+              </button>
+            )}
           </div>
         </div>
       </div>

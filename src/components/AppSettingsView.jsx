@@ -1,14 +1,19 @@
 'use client'
 
-import { Settings } from 'lucide-react'
+import { Settings, HelpCircle } from 'lucide-react'
+import { Button } from '@/components/ui/button'
 
 /**
  * App Settings View - placeholder for future app-level settings
  * (account, preferences, display options, etc.)
  */
 export default function AppSettingsView() {
+  const handleShowIntro = () => {
+    window.dispatchEvent(new CustomEvent('replay-onboarding'))
+  }
+
   return (
-    <div className="flex-1 p-4 md:p-6 max-w-3xl">
+    <div className="flex-1 p-4 md:p-6 max-w-3xl h-full overflow-y-auto pb-24">
       <h1 className="text-xl md:text-2xl font-bold mb-6 flex items-center gap-2">
         <Settings className="h-6 w-6" />
         Settings
@@ -29,6 +34,18 @@ export default function AppSettingsView() {
           <p className="text-muted-foreground text-sm">
             Theme, language, and display preferences coming soon.
           </p>
+        </section>
+
+        {/* Help Section */}
+        <section className="p-6 border rounded-lg bg-muted/30">
+          <h2 className="text-lg font-semibold mb-2">Help</h2>
+          <p className="text-muted-foreground text-sm mb-3">
+            Need a refresher on how to use the app?
+          </p>
+          <Button variant="outline" size="sm" onClick={handleShowIntro}>
+            <HelpCircle className="h-4 w-4 mr-2" />
+            Replay app guide
+          </Button>
         </section>
 
         {/* About Section */}

@@ -241,13 +241,15 @@ export function generateHouseholdShoppingList(meals, dateKeys, members) {
   return generateShoppingList(meals, dateKeys, members)
 }
 
-export function generateMealPlanHash(meals, dateKeys) {
+export function generateMealPlanHash(meals, dateKeys, excludedMeals = []) {
   const ids = []
   dateKeys.forEach(dk => {
     const day = meals[dk] || {}
     Object.keys(day).sort().forEach(slot => { if (day[slot]?.id) ids.push(`${dk}:${slot}:${day[slot].id}`) })
   })
-  return ids.sort().join('|')
+  // Include excluded meals in hash so exclusion changes trigger update
+  const exclusionStr = excludedMeals.length > 0 ? `|excluded:${[...excludedMeals].sort().join(',')}` : ''
+  return ids.sort().join('|') + exclusionStr
 }
 
 export const CATEGORY_LABELS = { produce: 'Produce', meat: 'Meat', seafood: 'Seafood', dairy: 'Dairy & Eggs', pantry: 'Pantry', other: 'Other' }

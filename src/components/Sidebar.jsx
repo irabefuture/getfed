@@ -8,7 +8,7 @@ import {
   CalendarDays,
   ListChecks,
   Settings,
-  Book,
+  Sparkles,
   Users,
   ChevronDown,
   ChevronRight,
@@ -16,9 +16,9 @@ import {
 
 const NAV_ITEMS = [
   { id: 'planner', icon: CalendarDays, label: 'Meal Planner', shortLabel: 'Planner' },
-  { id: 'recipes', icon: Book, label: 'Recipes', shortLabel: 'Recipes' },
   { id: 'shopping', icon: ListChecks, label: 'Shopping List', shortLabel: 'Shopping' },
-  { id: 'family', icon: Users, label: 'Family Plan', shortLabel: 'Family' },
+  { id: 'discover', icon: Sparkles, label: 'Discover', shortLabel: 'Discover' },
+  { id: 'family', icon: Users, label: 'Users', shortLabel: 'Users' },
 ]
 
 /**
