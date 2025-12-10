@@ -11,6 +11,8 @@ import AppSettingsView from '@/components/AppSettingsView'
 import OnboardingModal from '@/components/OnboardingModal'
 import PasswordGate from '@/components/PasswordGate'
 import DeviceGate from '@/components/DeviceGate'
+import ErrorToast from '@/components/ErrorToast'
+import { initializeErrorCapture } from '@/lib/errorLogger'
 
 const ONBOARDING_KEY = 'hasSeenOnboarding'
 
@@ -19,8 +21,11 @@ export default function Home() {
   const [showOnboarding, setShowOnboarding] = useState(false)
   const [isOnboardingReplay, setIsOnboardingReplay] = useState(false)
 
-  // Check for first visit on mount
+  // Initialize error capture and check for first visit on mount
   useEffect(() => {
+    // Initialize global error handlers for debug mode
+    initializeErrorCapture()
+
     const hasSeenOnboarding = localStorage.getItem(ONBOARDING_KEY)
     if (!hasSeenOnboarding) {
       setShowOnboarding(true)
@@ -72,6 +77,9 @@ export default function Home() {
               isReplay={isOnboardingReplay}
             />
           )}
+
+          {/* Debug Error Toast - visible with ?debug=true */}
+          <ErrorToast />
         </div>
         </UserProvider>
       </DeviceGate>

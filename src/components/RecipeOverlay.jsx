@@ -5,6 +5,7 @@ import { X, ThumbsUp, ThumbsDown, Printer, Clock, Check, ArrowLeft } from 'lucid
 import { toAustralianName, formatQuantity } from '@/lib/ingredientFormat'
 import { getRecipeRating, setRecipeRating, clearRecipeRating } from '@/lib/recipeRatings'
 import { useUser } from '@/context/UserContext'
+import { logDebug, logError } from '@/lib/errorLogger'
 
 // Helper to sanitize text (remove IP addresses and URLs)
 const sanitizeText = (text) => {
@@ -43,12 +44,14 @@ export default function RecipeOverlay({
   const [swipeOffset, setSwipeOffset] = useState(0)
   const [currentRating, setCurrentRating] = useState(null) // 'liked' | 'disliked' | null
   const [isRatingLoading, setIsRatingLoading] = useState(false)
+  // FIXED: Use state instead of ref for isSwipingDown since it affects render output
+  // This fixes the ESLint react-hooks/refs error: "Cannot access ref value during render"
+  const [isSwipingDown, setIsSwipingDown] = useState(false)
   const overlayRef = useRef(null)
   const scrollRef = useRef(null)
   const wakeLockRef = useRef(null)
   const touchStartY = useRef(0)
   const touchStartScrollTop = useRef(0)
-  const isSwipingDown = useRef(false)
 
   const { user } = useUser()
 
@@ -80,21 +83,41 @@ export default function RecipeOverlay({
   useEffect(() => {
     if (!isOpen) {
       setSwipeOffset(0)
-      isSwipingDown.current = false
+      setIsSwipingDown(false)
     }
   }, [isOpen])
 
   // Fetch existing rating when overlay opens
   useEffect(() => {
     if (isOpen && recipe?.id && user?.id) {
+      // Debug logging for overlay open
+      logDebug('RecipeOverlay:open', {
+        recipeId: recipe.id,
+        recipeName: recipe.name,
+        userId: user.id,
+        slot: slot?.label,
+        mode,
+        isHouseholdMode,
+        householdPortions: householdPortions?.total || 1,
+        macros: recipe.per_serve
+      })
+
       setCurrentRating(null) // Reset while loading
       getRecipeRating(user.id, recipe.id).then(rating => {
+        logDebug('RecipeOverlay:existingRating', {
+          recipeId: recipe.id,
+          rating
+        })
         setCurrentRating(rating)
+      }).catch(err => {
+        logError('api', `RecipeOverlay:fetchRating failed: ${err.message}`, {
+          context: { recipeId: recipe.id, userId: user.id }
+        })
       })
     } else if (!isOpen) {
       setCurrentRating(null) // Reset when closed
     }
-  }, [isOpen, recipe?.id, user?.id])
+  }, [isOpen, recipe?.id, user?.id, recipe?.name, recipe?.per_serve, slot?.label, mode, isHouseholdMode, householdPortions?.total])
 
   // Handle rating button press (toggle on/off)
   const handleRating = async (ratingType) => {
@@ -102,21 +125,39 @@ export default function RecipeOverlay({
 
     const clickedRating = ratingType === 'up' ? 'liked' : 'disliked'
 
+    logDebug('RecipeOverlay:ratingAttempt', {
+      recipeId: recipe.id,
+      recipeName: recipe.name,
+      ratingType,
+      clickedRating,
+      currentRating,
+      willClear: currentRating === clickedRating
+    })
+
     setIsRatingLoading(true)
 
-    // If clicking the same rating, clear it (toggle off)
-    if (currentRating === clickedRating) {
-      const success = await clearRecipeRating(user.id, recipe.id)
-      if (success) {
-        setCurrentRating(null)
+    try {
+      // If clicking the same rating, clear it (toggle off)
+      if (currentRating === clickedRating) {
+        const success = await clearRecipeRating(user.id, recipe.id)
+        logDebug('RecipeOverlay:ratingCleared', { success, recipeId: recipe.id })
+        if (success) {
+          setCurrentRating(null)
+        }
+      } else {
+        // Set new rating
+        const success = await setRecipeRating(user.id, recipe.id, clickedRating)
+        logDebug('RecipeOverlay:ratingSet', { success, recipeId: recipe.id, rating: clickedRating })
+        if (success) {
+          setCurrentRating(clickedRating)
+          onRate?.(ratingType) // Call original handler if provided
+        }
       }
-    } else {
-      // Set new rating
-      const success = await setRecipeRating(user.id, recipe.id, clickedRating)
-      if (success) {
-        setCurrentRating(clickedRating)
-        onRate?.(ratingType) // Call original handler if provided
-      }
+    } catch (err) {
+      logError('api', `RecipeOverlay:handleRating failed: ${err.message}`, {
+        stack: err.stack,
+        context: { recipeId: recipe.id, userId: user.id, ratingType }
+      })
     }
 
     setIsRatingLoading(false)
@@ -146,7 +187,7 @@ export default function RecipeOverlay({
   const handleTouchStart = (e) => {
     touchStartY.current = e.touches[0].clientY
     touchStartScrollTop.current = scrollRef.current?.scrollTop || 0
-    isSwipingDown.current = false
+    setIsSwipingDown(false)
   }
 
   // Handle touch move for swipe-down dismiss
@@ -160,7 +201,7 @@ export default function RecipeOverlay({
     // 2. User is swiping down (deltaY > 0)
     // 3. We started at or near the top
     if (touchStartScrollTop.current <= 5 && deltaY > 0 && scrollTop <= 0) {
-      isSwipingDown.current = true
+      setIsSwipingDown(true)
       // Apply resistance to the swipe
       const resistance = 0.5
       setSwipeOffset(Math.max(0, deltaY * resistance))
@@ -170,14 +211,14 @@ export default function RecipeOverlay({
 
   // Handle touch end for swipe-down dismiss
   const handleTouchEnd = () => {
-    if (isSwipingDown.current && swipeOffset >= DISMISS_THRESHOLD) {
+    if (isSwipingDown && swipeOffset >= DISMISS_THRESHOLD) {
       // Trigger close
       triggerClose()
     } else {
       // Snap back
       setSwipeOffset(0)
     }
-    isSwipingDown.current = false
+    setIsSwipingDown(false)
   }
 
   // Animate close
@@ -365,7 +406,8 @@ export default function RecipeOverlay({
       className="fixed inset-0 z-[200] md:hidden bg-white flex flex-col"
       style={{
         transform: `translateY(${translateY})`,
-        transition: isSwipingDown.current ? 'none' : 'transform 0.2s ease-out',
+        // FIXED: Now using state instead of ref, safe to access during render
+        transition: isSwipingDown ? 'none' : 'transform 0.2s ease-out',
         opacity,
       }}
       onTouchStart={handleTouchStart}

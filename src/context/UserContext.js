@@ -4,6 +4,7 @@ import { createContext, useContext, useState, useEffect, useMemo } from 'react'
 import { supabase } from '@/lib/supabase'
 import { calculateNutritionTargets } from '@/lib/nutrition'
 import { calculateMemberTargets } from './HouseholdContext'
+import { logSupabase, logDebug, logError } from '@/lib/errorLogger'
 
 // 1. Create the Context
 const UserContext = createContext()
@@ -22,13 +23,27 @@ export function UserProvider({ children }) {
   // Fetch users from Supabase when component mounts
   useEffect(() => {
     async function fetchUsers() {
-      const { data, error } = await supabase
+      logDebug('UserContext:fetchUsers', { action: 'start' })
+
+      const result = await supabase
         .from('users')
         .select('*')
 
+      // Log the Supabase response
+      logSupabase('fetchUsers', result)
+
+      const { data, error } = result
+
       if (error) {
-        console.error('Error fetching users:', error)
+        logError('supabase', `fetchUsers failed: ${error.message}`, {
+          context: { code: error.code, details: error.details }
+        })
       } else {
+        logDebug('UserContext:fetchUsers', {
+          action: 'success',
+          userCount: data?.length || 0,
+          firstUserId: data?.[0]?.id
+        })
         setUsers(data)
         // Auto-select first user if none selected
         if (data.length > 0) {
@@ -49,25 +64,33 @@ export function UserProvider({ children }) {
 
   // Fetch household and members
   async function fetchHousehold(householdId) {
+    logDebug('UserContext:fetchHousehold', { householdId, action: 'start' })
+
     try {
       // Fetch household
-      const { data: householdData, error: householdError } = await supabase
+      const householdResult = await supabase
         .from('households')
         .select('*')
         .eq('id', householdId)
         .single()
 
+      logSupabase('fetchHousehold', householdResult, { householdId })
+
+      const { data: householdData, error: householdError } = householdResult
       if (householdError) throw householdError
 
       setHousehold(householdData)
 
       // Fetch members
-      const { data: memberData, error: membersError } = await supabase
+      const membersResult = await supabase
         .from('household_members')
         .select('*')
         .eq('household_id', householdId)
         .order('is_primary', { ascending: false })
 
+      logSupabase('fetchHouseholdMembers', membersResult, { householdId })
+
+      const { data: memberData, error: membersError } = membersResult
       if (membersError) throw membersError
 
       // Add calculated targets to each member
@@ -76,6 +99,13 @@ export function UserProvider({ children }) {
         targets: calculateMemberTargets(m),
       }))
 
+      logDebug('UserContext:fetchHousehold', {
+        action: 'success',
+        householdName: householdData?.name,
+        memberCount: membersWithTargets.length,
+        members: membersWithTargets.map(m => ({ name: m.name, phase: m.current_phase }))
+      })
+
       setMembers(membersWithTargets)
 
       // Set primary member as active
@@ -83,7 +113,10 @@ export function UserProvider({ children }) {
       setActiveMember(primary || membersWithTargets[0] || null)
 
     } catch (err) {
-      console.error('Error fetching household:', err)
+      logError('supabase', `fetchHousehold failed: ${err.message}`, {
+        stack: err.stack,
+        context: { householdId }
+      })
     }
   }
 

@@ -8,6 +8,7 @@
  */
 
 import { calculateHouseholdServings } from './smartPlanner'
+import { logDebug, logError } from './errorLogger'
 
 const CATEGORY_MAP = {
   'capsicum': 'produce', 'tomato': 'produce', 'cucumber': 'produce',
@@ -120,6 +121,17 @@ export function generateShoppingList(meals, dateKeys, servingsOrMembers = 1, inc
   const members = isHouseholdMode ? servingsOrMembers : null
   const simpleMultiplier = isHouseholdMode ? 1 : servingsOrMembers
 
+  // Debug log inputs
+  logDebug('ShoppingList:generate', {
+    dateCount: dateKeys.length,
+    dateRange: dateKeys.length > 0 ? `${dateKeys[0]} to ${dateKeys[dateKeys.length - 1]}` : 'none',
+    isHouseholdMode,
+    memberCount: members?.length || 0,
+    simpleMultiplier,
+    mealCount: dateKeys.reduce((acc, dk) => acc + Object.keys(meals[dk] || {}).length, 0),
+    includeBreakdown
+  })
+
   dateKeys.forEach(dk => {
     const day = meals[dk] || {}
 
@@ -185,11 +197,23 @@ export function generateShoppingList(meals, dateKeys, servingsOrMembers = 1, inc
     })
   })
 
-  // Log debug info to console
+  // Log debug info to console and error logger
   if (debugLog.length > 0) {
     console.group('🛒 Shopping List Generation Debug')
     console.table(debugLog)
     console.groupEnd()
+
+    // Also log summary to error logger for mobile debugging
+    logDebug('ShoppingList:calculation', {
+      ingredientCount: debugLog.length,
+      uniqueIngredients: Object.keys(map).length,
+      totalGrams: Math.round(Object.values(map).reduce((acc, v) => acc + v.grams, 0)),
+      sampleCalculations: debugLog.slice(0, 5).map(d => ({
+        ingredient: d.ingredient,
+        recipe: d.recipe,
+        scaled: `${d.perServeGrams}g × ${d.multiplier} = ${d.scaledGrams}g`
+      }))
+    })
   }
 
   const items = Object.entries(map).map(([k, v]) => {
