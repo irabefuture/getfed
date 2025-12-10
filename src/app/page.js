@@ -10,6 +10,7 @@ import SettingsView from '@/components/SettingsView'
 import AppSettingsView from '@/components/AppSettingsView'
 import OnboardingModal from '@/components/OnboardingModal'
 import PasswordGate from '@/components/PasswordGate'
+import DeviceGate from '@/components/DeviceGate'
 
 const ONBOARDING_KEY = 'hasSeenOnboarding'
 
@@ -46,7 +47,8 @@ export default function Home() {
 
   return (
     <PasswordGate>
-      <UserProvider>
+      <DeviceGate>
+        <UserProvider>
         <div className="h-screen bg-background overflow-hidden md:overflow-auto md:min-h-screen">
           {/* Desktop Sidebar */}
           <DesktopSidebar activeView={activeView} onNavigate={setActiveView} />
@@ -71,7 +73,8 @@ export default function Home() {
             />
           )}
         </div>
-      </UserProvider>
+        </UserProvider>
+      </DeviceGate>
     </PasswordGate>
   )
 }
