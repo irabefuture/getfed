@@ -46,7 +46,7 @@ export default function OnboardingModal({ onClose, isReplay = false }) {
               <Sparkles className="h-8 w-8 text-primary" />
             </div>
           </div>
-          <h2 className="text-xl font-semibold text-center mb-3">Welcome to Adaptive Meal Builder</h2>
+          <h2 className="text-xl font-semibold text-center mb-3">Welcome to Getfed</h2>
           <p className="text-muted-foreground text-sm text-center mb-6">
             Your weekly meals, tailored to your nutrition targets.
           </p>

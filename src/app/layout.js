@@ -13,8 +13,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
-  title: "Adaptive Meal Builder",
-  description: "Weekly meal planning for Galveston Diet",
+  title: "Getfed",
+  description: "Plan meals, get fed",
 };
 
 export default function RootLayout({ children }) {

@@ -52,7 +52,7 @@ export default function AppSettingsView() {
         <section className="p-6 border rounded-lg bg-muted/30">
           <h2 className="text-lg font-semibold mb-2">About</h2>
           <div className="text-sm text-muted-foreground space-y-1">
-            <p><span className="font-medium">Adaptive Meal Builder</span></p>
+            <p><span className="font-medium">Getfed</span></p>
             <p>Version 0.1.0 (Beta)</p>
             <p>Built with Next.js, Supabase, and Claude AI</p>
           </div>
