@@ -11,6 +11,7 @@ import { calculateHouseholdServings } from './smartPlanner'
 import { logDebug, logError } from './errorLogger'
 
 const CATEGORY_MAP = {
+  // Produce
   'capsicum': 'produce', 'tomato': 'produce', 'cucumber': 'produce',
   'spinach': 'produce', 'kale': 'produce', 'lettuce': 'produce',
   'rocket': 'produce', 'avocado': 'produce', 'onion': 'produce',
@@ -22,20 +23,34 @@ const CATEGORY_MAP = {
   'blueberries': 'produce', 'strawberries': 'produce', 'raspberries': 'produce',
   'apple': 'produce', 'banana': 'produce', 'orange': 'produce',
   'squash': 'produce', 'pumpkin': 'produce', 'sweet potato': 'produce',
+  'greens': 'produce', 'coleslaw': 'produce', 'edamame': 'produce',
+  // Meat
   'chicken': 'meat', 'beef': 'meat', 'lamb': 'meat', 'pork': 'meat',
   'turkey': 'meat', 'bacon': 'meat', 'mince': 'meat',
+  'sirloin': 'meat', 'steak': 'meat',
+  // Seafood
   'salmon': 'seafood', 'tuna': 'seafood', 'prawns': 'seafood',
   'fish': 'seafood', 'cod': 'seafood', 'barramundi': 'seafood',
+  // Dairy
   'eggs': 'dairy', 'egg': 'dairy', 'milk': 'dairy', 'cream': 'dairy',
   'cheese': 'dairy', 'feta': 'dairy', 'parmesan': 'dairy', 'cheddar': 'dairy',
   'mozzarella': 'dairy', 'yoghurt': 'dairy', 'yogurt': 'dairy',
   'butter': 'dairy', 'cottage': 'dairy', 'ricotta': 'dairy',
+  // Pantry - nuts & seeds
   'almond': 'pantry', 'walnut': 'pantry', 'pecan': 'pantry',
   'macadamia': 'pantry', 'cashew': 'pantry', 'coconut': 'pantry',
   'chia': 'pantry', 'flax': 'pantry', 'hemp': 'pantry',
+  'sesame': 'pantry', 'sunflower': 'pantry',
+  // Pantry - condiments & sauces
   'vinegar': 'pantry', 'mustard': 'pantry', 'mayonnaise': 'pantry',
   'stock': 'pantry', 'broth': 'pantry', 'sauce': 'pantry',
+  'tahini': 'pantry', 'tamari': 'pantry',
+  // Pantry - spices
+  'cinnamon': 'pantry', 'cumin': 'pantry', 'paprika': 'pantry',
+  'nutmeg': 'pantry', 'seasoning': 'pantry',
+  // Pantry - protein & other
   'flour': 'pantry', 'collagen': 'pantry', 'protein powder': 'pantry',
+  'tofu': 'pantry', 'tempeh': 'pantry', 'chocolate': 'pantry',
 }
 
 const PANTRY_STAPLES = ['salt', 'pepper', 'black pepper', 'olive oil', 'water', 'ice']
@@ -43,19 +58,19 @@ const PANTRY_STAPLES = ['salt', 'pepper', 'black pepper', 'olive oil', 'water', 
 // AU-friendly unit conversions
 const UNIT_HINTS = {
   'egg': (g) => `~${Math.ceil(g / 50)} eggs`,
-  'avocado': (g) => `~${Math.ceil(g / 170)} whole`,           // AU avocados ~170g
+  'avocado': (g) => `~${Math.ceil(g / 170)}`,                 // AU avocados ~170g
   'capsicum': (g) => `~${Math.ceil(g / 180)} medium`,         // AU capsicums ~180g
   'tomato': (g) => `~${Math.ceil(g / 150)} medium`,
   'cherry tomato': (g) => `~${Math.ceil(g / 250)} punnets`,   // 250g punnet standard
   'grape tomato': (g) => `~${Math.ceil(g / 250)} punnets`,    // 250g punnet standard
   'onion': (g) => `~${Math.ceil(g / 150)} medium`,
-  'cucumber': (g) => `~${Math.ceil(g / 300)} whole`,          // Lebanese ~150g, telegraph ~300g
-  'lemon': (g) => `~${Math.ceil(g / 80)} whole`,              // AU lemons ~80g
-  'lime': (g) => `~${Math.ceil(g / 50)} whole`,               // AU limes ~50g
+  'cucumber': (g) => `~${Math.ceil(g / 300)}`,                // Lebanese ~150g, telegraph ~300g
+  'lemon': (g) => `~${Math.ceil(g / 80)}`,                    // AU lemons ~80g
+  'lime': (g) => `~${Math.ceil(g / 50)}`,                     // AU limes ~50g
   'garlic': (g) => `~${Math.ceil(g / 5)} cloves`,
   'chicken breast': (g) => `~${Math.ceil(g / 180)} breasts`,  // AU chicken breast ~180g
   'salmon': (g) => `~${Math.ceil(g / 180)} fillets`,
-  'banana': (g) => `~${Math.ceil(g / 120)} whole`,
+  'banana': (g) => `~${Math.ceil(g / 120)}`,
   'broccoli': (g) => `~${Math.ceil(g / 400)} heads`,          // Medium broccoli head ~400g
   'cauliflower': (g) => `~${Math.ceil(g / 600)} heads`,       // Medium cauliflower ~600g
   'zucchini': (g) => `~${Math.ceil(g / 200)} medium`,
@@ -69,6 +84,10 @@ const UNIT_HINTS = {
   'cos lettuce': (g) => `~${Math.ceil(g / 350)} heads`,
   'butter lettuce': (g) => `~${Math.ceil(g / 200)} heads`,
 }
+
+// Ingredients that should NOT get unit hints even if they contain hint keywords
+// e.g., "whole egg mayonnaise" contains "egg" but shouldn't show "~2 eggs"
+const HINT_EXCLUSIONS = ['mayonnaise', 'mayo', 'aioli', 'oil', 'powder', 'extract', 'juice', 'zest']
 
 function normalizeIngredientName(name) {
   let n = name.toLowerCase().trim().replace(/\s*\(.*\)\s*/g, '').replace(/,.*$/, '').trim()
@@ -97,6 +116,20 @@ function isStaple(name) {
 
 function getHint(name, grams) {
   const n = name.toLowerCase()
+
+  // Skip hints for compound/processed ingredients
+  if (HINT_EXCLUSIONS.some(excl => n.includes(excl))) {
+    return null
+  }
+
+  // For very small amounts (spices), show friendly units
+  if (grams <= 5) {
+    return '~1 tsp'
+  }
+  if (grams <= 10) {
+    return '~2 tsp'
+  }
+
   // Check longer/more specific matches first
   const sortedHints = Object.entries(UNIT_HINTS).sort((a, b) => b[0].length - a[0].length)
   for (const [k, fn] of sortedHints) {
