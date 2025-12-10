@@ -172,14 +172,18 @@ export default function WeekView() {
   const [generationError, setGenerationError] = useState(null)
   const [showGenerateModal, setShowGenerateModal] = useState(false)
   const [excludedMeals, setExcludedMeals] = useState([]) // Array of "dateKey-slotId" strings
-  const [showFirstDayPulse, setShowFirstDayPulse] = useState(false)
+  const [userDismissedPulse, setUserDismissedPulse] = useState(false)
 
-  // Listen for onboarding completion to show pulse animation
+  // Show pulse on Today button when no meals exist and user hasn't dismissed it
+  // This helps new users or users after clearing know where to start
+  const showFirstDayPulse = totalWeekMeals === 0 && !isInitialLoading && !isGenerating && !userDismissedPulse
+
+  // Listen for onboarding completion (keep for backwards compatibility)
   useEffect(() => {
     const handleOnboardingComplete = () => {
-      setShowFirstDayPulse(true)
-      // Stop pulsing after 3 seconds
-      setTimeout(() => setShowFirstDayPulse(false), 3000)
+      // Pulse will show automatically via showFirstDayPulse computed value
+      // Just reset the dismissed state in case user goes through onboarding again
+      setUserDismissedPulse(false)
     }
     window.addEventListener('onboarding-complete', handleOnboardingComplete)
     return () => window.removeEventListener('onboarding-complete', handleOnboardingComplete)
@@ -1155,6 +1159,10 @@ export default function WeekView() {
                   } else {
                     setSelectedDate(date)
                     setSwappingSlot(null)
+                    // Dismiss pulse when user taps Today button
+                    if (isToday && showFirstDayPulse) {
+                      setUserDismissedPulse(true)
+                    }
                   }
                 }
 
@@ -1225,7 +1233,7 @@ export default function WeekView() {
                     onMouseUp={handleTouchEnd}
                     onMouseLeave={handleTouchEnd}
                     style={{ WebkitUserSelect: 'none', userSelect: 'none' }}
-                    className={`relative flex-shrink-0 w-[calc((100%-20px)/5)] min-w-[50px] rounded-lg py-1 px-1 text-center snap-start transition-all select-none ${getButtonStyle()} ${shouldPulse ? 'animate-pulse ring-2 ring-primary ring-offset-2' : ''}`}
+                    className={`relative flex-shrink-0 w-[calc((100%-20px)/5)] min-w-[50px] rounded-lg py-1 px-1 text-center snap-start transition-all select-none ${getButtonStyle()} ${shouldPulse ? 'animate-today-pulse ring-2 ring-primary ring-offset-2' : ''}`}
                   >
                     {/* Clear mode checkmark badge */}
                     {clearSelectionMode && isSelectedForClearing && (
