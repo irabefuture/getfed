@@ -10,8 +10,12 @@
 import { calculateHouseholdServings } from './smartPlanner'
 import { logDebug, logError } from './errorLogger'
 
+// Category mappings - ORDER MATTERS for multi-word matches
+// More specific terms (e.g., "garlic powder") must come before generic ones ("garlic")
 const CATEGORY_MAP = {
-  // Produce
+  // Pantry - powders (must match BEFORE fresh produce versions)
+  'garlic powder': 'pantry', 'onion powder': 'pantry',
+  // Produce - vegetables
   'capsicum': 'produce', 'tomato': 'produce', 'cucumber': 'produce',
   'spinach': 'produce', 'kale': 'produce', 'lettuce': 'produce',
   'rocket': 'produce', 'avocado': 'produce', 'onion': 'produce',
@@ -19,11 +23,17 @@ const CATEGORY_MAP = {
   'celery': 'produce', 'broccoli': 'produce', 'cauliflower': 'produce',
   'zucchini': 'produce', 'eggplant': 'produce', 'mushroom': 'produce',
   'asparagus': 'produce', 'beans': 'produce', 'peas': 'produce',
-  'cabbage': 'produce', 'lemon': 'produce', 'lime': 'produce',
+  'cabbage': 'produce', 'squash': 'produce', 'pumpkin': 'produce',
+  'sweet potato': 'produce', 'greens': 'produce', 'coleslaw': 'produce',
+  'edamame': 'produce',
+  // Produce - fruit
+  'lemon': 'produce', 'lime': 'produce',
   'blueberries': 'produce', 'strawberries': 'produce', 'raspberries': 'produce',
   'apple': 'produce', 'banana': 'produce', 'orange': 'produce',
-  'squash': 'produce', 'pumpkin': 'produce', 'sweet potato': 'produce',
-  'greens': 'produce', 'coleslaw': 'produce', 'edamame': 'produce',
+  // Produce - fresh herbs
+  'basil': 'produce', 'parsley': 'produce', 'thyme': 'produce',
+  'chives': 'produce', 'coriander': 'produce', 'dill': 'produce',
+  'mint': 'produce', 'rosemary': 'produce', 'oregano': 'produce',
   // Meat
   'chicken': 'meat', 'beef': 'meat', 'lamb': 'meat', 'pork': 'meat',
   'turkey': 'meat', 'bacon': 'meat', 'mince': 'meat',
@@ -44,13 +54,22 @@ const CATEGORY_MAP = {
   // Pantry - condiments & sauces
   'vinegar': 'pantry', 'mustard': 'pantry', 'mayonnaise': 'pantry',
   'stock': 'pantry', 'broth': 'pantry', 'sauce': 'pantry',
-  'tahini': 'pantry', 'tamari': 'pantry',
+  'tahini': 'pantry', 'tamari': 'pantry', 'pickle': 'pantry',
   // Pantry - spices
   'cinnamon': 'pantry', 'cumin': 'pantry', 'paprika': 'pantry',
-  'nutmeg': 'pantry', 'seasoning': 'pantry',
+  'nutmeg': 'pantry', 'seasoning': 'pantry', 'chilli': 'pantry',
+  'turmeric': 'pantry',
+  // Pantry - baking
+  'baking powder': 'pantry', 'baking soda': 'pantry',
+  'cacao': 'pantry', 'cocoa': 'pantry', 'vanilla': 'pantry',
+  'xanthan': 'pantry', 'flour': 'pantry',
+  // Pantry - sweeteners
+  'honey': 'pantry', 'maple': 'pantry', 'monk fruit': 'pantry',
+  'stevia': 'pantry', 'swerve': 'pantry', 'erythritol': 'pantry',
   // Pantry - protein & other
-  'flour': 'pantry', 'collagen': 'pantry', 'protein powder': 'pantry',
+  'collagen': 'pantry', 'protein powder': 'pantry',
   'tofu': 'pantry', 'tempeh': 'pantry', 'chocolate': 'pantry',
+  'coffee': 'pantry', 'wine': 'pantry',
 }
 
 const PANTRY_STAPLES = ['salt', 'pepper', 'black pepper', 'olive oil', 'water', 'ice']
@@ -87,7 +106,8 @@ const UNIT_HINTS = {
 
 // Ingredients that should NOT get unit hints even if they contain hint keywords
 // e.g., "whole egg mayonnaise" contains "egg" but shouldn't show "~2 eggs"
-const HINT_EXCLUSIONS = ['mayonnaise', 'mayo', 'aioli', 'oil', 'powder', 'extract', 'juice', 'zest']
+// e.g., "no-sugar tomato sauce" contains "tomato" but shouldn't show "~3 medium"
+const HINT_EXCLUSIONS = ['mayonnaise', 'mayo', 'aioli', 'oil', 'powder', 'extract', 'juice', 'zest', 'sauce']
 
 function normalizeIngredientName(name) {
   let n = name.toLowerCase().trim().replace(/\s*\(.*\)\s*/g, '').replace(/,.*$/, '').trim()
@@ -105,7 +125,11 @@ function normalizeIngredientName(name) {
 
 function getCategory(name) {
   const n = name.toLowerCase()
-  for (const [k, v] of Object.entries(CATEGORY_MAP)) { if (n.includes(k)) return v }
+  // Sort by key length (longest first) so "garlic powder" matches before "garlic"
+  const sortedEntries = Object.entries(CATEGORY_MAP).sort((a, b) => b[0].length - a[0].length)
+  for (const [k, v] of sortedEntries) {
+    if (n.includes(k)) return v
+  }
   return 'other'
 }
 
