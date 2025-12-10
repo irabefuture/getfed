@@ -57,7 +57,7 @@ export default function DeviceGate({ children }) {
           {/* QR Code placeholder - using a simple text URL for now */}
           <div className="p-6 bg-muted/30 rounded-xl border">
             <p className="text-sm text-muted-foreground mb-2">Scan or visit:</p>
-            <p className="font-mono text-lg font-medium">getfed.vercel.app</p>
+            <p className="font-mono text-lg font-medium">getfed.app</p>
           </div>
 
           <p className="text-xs text-muted-foreground mt-6">
