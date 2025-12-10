@@ -21,6 +21,7 @@ import {
   formatPortion
 } from '@/lib/smartPlanner'
 import { generateShoppingList, saveShoppingList, loadShoppingList, generateMealPlanHash, clearShoppingList } from '@/lib/shoppingList'
+import { fetchMealPlan, saveDayMeals, setMealExclusion, deleteMeal } from '@/lib/mealPlanService'
 import { RefreshCw, X, Clock, ShoppingCart, Check, AlertCircle, Sparkles, Loader2, Printer, ListPlus, Trash2 } from 'lucide-react'
 import { toAustralianName, formatQuantity } from '@/lib/ingredientFormat'
 import RecipeOverlay from '@/components/RecipeOverlay'
@@ -76,8 +77,11 @@ export default function WeekView() {
   // Generate dates starting from today
   const allDates = useMemo(() => getDatesFromStart(today, VISIBLE_DAYS), [today])
 
-  // LocalStorage key for this user's meals
+  // LocalStorage key for this user's meals (used as offline cache)
   const storageKey = user ? `meal-plan-${user.id}` : 'meal-plan-guest'
+
+  // Household ID for Supabase queries
+  const householdId = household?.id
 
   // Refs for scrolling and auto-generation tracking
   const scrollContainerRef = useRef(null)
@@ -105,24 +109,59 @@ export default function WeekView() {
   const [isHydrated, setIsHydrated] = useState(false)
   const [isInitialLoading, setIsInitialLoading] = useState(true) // For initial auto-generation loading state
 
-  // Hydrate from localStorage after mount (avoids SSR mismatch)
+  // Hydrate from Supabase (or localStorage fallback) after mount
   useEffect(() => {
     setSelectedDate(today)
 
-    // Load meals from localStorage
-    if (storageKey) {
-      try {
-        const saved = localStorage.getItem(storageKey)
-        if (saved) {
-          setMeals(JSON.parse(saved))
+    async function loadMeals() {
+      // If we have a household, try Supabase first
+      if (householdId) {
+        const startDate = toISODate(allDates[0])
+        const endDate = toISODate(allDates[allDates.length - 1])
+
+        const { meals: supabaseMeals, excludedMeals: supabaseExcluded, error } = await fetchMealPlan(
+          householdId,
+          startDate,
+          endDate
+        )
+
+        if (!error && Object.keys(supabaseMeals).length > 0) {
+          // Got data from Supabase
+          setMeals(supabaseMeals)
+          setExcludedMeals(supabaseExcluded)
+          // Update localStorage cache
+          try {
+            localStorage.setItem(storageKey, JSON.stringify(supabaseMeals))
+            localStorage.setItem(`excluded-meals-${user?.id}`, JSON.stringify(supabaseExcluded))
+          } catch (e) {
+            console.error('Failed to cache meals to localStorage:', e)
+          }
+          setIsHydrated(true)
+          return
         }
-      } catch (e) {
-        console.error('Failed to load meals from localStorage:', e)
       }
+
+      // Fall back to localStorage
+      if (storageKey) {
+        try {
+          const saved = localStorage.getItem(storageKey)
+          if (saved) {
+            setMeals(JSON.parse(saved))
+          }
+          const savedExcluded = localStorage.getItem(`excluded-meals-${user?.id}`)
+          if (savedExcluded) {
+            setExcludedMeals(JSON.parse(savedExcluded))
+          }
+        } catch (e) {
+          console.error('Failed to load meals from localStorage:', e)
+        }
+      }
+
+      setIsHydrated(true)
     }
 
-    setIsHydrated(true)
-  }, [])
+    loadMeals()
+  }, [householdId])
   
   const [swappingSlot, setSwappingSlot] = useState(null)
   const [alternativeSearch, setAlternativeSearch] = useState('')
@@ -156,9 +195,11 @@ export default function WeekView() {
     }
   }, [user?.id])
   
-  // Save to localStorage whenever meals change
-  const saveMeals = (newMeals) => {
+  // Save to Supabase and localStorage cache
+  const saveMeals = useCallback(async (newMeals, changedDateKeys = null) => {
     setMeals(newMeals)
+
+    // Always save to localStorage (offline cache)
     if (typeof window !== 'undefined') {
       try {
         localStorage.setItem(storageKey, JSON.stringify(newMeals))
@@ -166,42 +207,51 @@ export default function WeekView() {
         console.error('Failed to save meals to localStorage:', e)
       }
     }
-  }
-  
-  // Reload from localStorage when user changes
-  useEffect(() => {
-    if (isHydrated && user) {
-      try {
-        const saved = localStorage.getItem(storageKey)
-        setMeals(saved ? JSON.parse(saved) : {})
-        // Load excluded meals
-        const excludedKey = `excluded-meals-${user.id}`
-        const savedExcluded = localStorage.getItem(excludedKey)
-        setExcludedMeals(savedExcluded ? JSON.parse(savedExcluded) : [])
-      } catch (e) {
-        console.error('Failed to reload meals:', e)
-      }
-    }
-  }, [user?.id, isHydrated, storageKey])
 
-  // Toggle meal exclusion from shopping list
-  const toggleMealExclusion = useCallback((dateKey, slotId) => {
-    const key = `${dateKey}-${slotId}`
-    setExcludedMeals(prev => {
-      const newExcluded = prev.includes(key)
-        ? prev.filter(k => k !== key)
-        : [...prev, key]
-      // Persist to localStorage
-      if (user) {
-        try {
-          localStorage.setItem(`excluded-meals-${user.id}`, JSON.stringify(newExcluded))
-        } catch (e) {
-          console.error('Failed to save excluded meals:', e)
+    // Save to Supabase if we have a household
+    if (householdId) {
+      // If changedDateKeys provided, only save those days; otherwise save all days with meals
+      const datesToSave = changedDateKeys || Object.keys(newMeals).filter(dk => Object.keys(newMeals[dk] || {}).length > 0)
+
+      for (const dateKey of datesToSave) {
+        const dayMeals = newMeals[dateKey]
+        if (dayMeals && Object.keys(dayMeals).length > 0) {
+          const { error } = await saveDayMeals(householdId, dateKey, dayMeals)
+          if (error) {
+            console.error(`Failed to save meals for ${dateKey} to Supabase:`, error)
+          }
         }
       }
-      return newExcluded
-    })
-  }, [user])
+    }
+  }, [householdId, storageKey])
+
+  // Toggle meal exclusion from shopping list
+  const toggleMealExclusion = useCallback(async (dateKey, slotId) => {
+    const key = `${dateKey}-${slotId}`
+    const isCurrentlyExcluded = excludedMeals.includes(key)
+    const newExcluded = isCurrentlyExcluded
+      ? excludedMeals.filter(k => k !== key)
+      : [...excludedMeals, key]
+
+    setExcludedMeals(newExcluded)
+
+    // Persist to localStorage
+    if (user) {
+      try {
+        localStorage.setItem(`excluded-meals-${user.id}`, JSON.stringify(newExcluded))
+      } catch (e) {
+        console.error('Failed to save excluded meals:', e)
+      }
+    }
+
+    // Persist to Supabase
+    if (householdId) {
+      const { error } = await setMealExclusion(householdId, dateKey, slotId, !isCurrentlyExcluded)
+      if (error) {
+        console.error('Failed to save exclusion to Supabase:', error)
+      }
+    }
+  }, [user, householdId, excludedMeals])
 
   // Check if a meal is excluded
   const isMealExcluded = useCallback((dateKey, slotId) => {
@@ -368,13 +418,25 @@ export default function WeekView() {
   }, [])
 
   // Clear all selected days
-  const handleClearSelectedDays = useCallback(() => {
+  const handleClearSelectedDays = useCallback(async () => {
     if (selectedForClearing.length === 0) return
     const newMeals = { ...meals }
+
+    // Delete from Supabase first
+    if (householdId) {
+      for (const dateKey of selectedForClearing) {
+        const dayMeals = meals[dateKey] || {}
+        for (const slotId of Object.keys(dayMeals)) {
+          await deleteMeal(householdId, dateKey, slotId)
+        }
+      }
+    }
+
+    // Then update local state
     selectedForClearing.forEach(dateKey => {
       delete newMeals[dateKey]
     })
-    saveMeals(newMeals)
+    saveMeals(newMeals, selectedForClearing)
 
     // Also clear shopping list if checkbox was checked
     if (alsoClearShoppingList && user) {
@@ -383,7 +445,7 @@ export default function WeekView() {
     }
 
     exitClearSelectionMode()
-  }, [meals, selectedForClearing, saveMeals, exitClearSelectionMode, alsoClearShoppingList, user])
+  }, [meals, selectedForClearing, saveMeals, exitClearSelectionMode, alsoClearShoppingList, user, householdId])
 
   // Count total meals in selected days for clearing
   const selectedClearMealCount = useMemo(() => {
@@ -592,19 +654,27 @@ export default function WeekView() {
         ...meals[selectedDateKey],
         [slotId]: newRecipe
       }
-    })
+    }, [selectedDateKey])
     setSwappingSlot(null)
   }
   
   // Clear a slot
-  const handleClearSlot = (slotId) => {
+  const handleClearSlot = async (slotId) => {
     const newDayMeals = { ...meals[selectedDateKey] }
     delete newDayMeals[slotId]
     saveMeals({
       ...meals,
       [selectedDateKey]: newDayMeals
-    })
+    }, [selectedDateKey])
     setSwappingSlot(null)
+
+    // Delete from Supabase
+    if (householdId) {
+      const { error } = await deleteMeal(householdId, selectedDateKey, slotId)
+      if (error) {
+        console.error('Failed to delete meal from Supabase:', error)
+      }
+    }
   }
   
   // Print day's recipes

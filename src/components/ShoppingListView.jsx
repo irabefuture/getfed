@@ -14,11 +14,13 @@ import {
   generateMealPlanHash
 } from '@/lib/shoppingList'
 import { getDatesFromStart, formatDateRange, toISODate } from '@/lib/dates'
+import { fetchMealPlan } from '@/lib/mealPlanService'
 import { calculateMemberPortion } from '@/lib/smartPlanner'
 import { Printer, ShoppingCart, AlertCircle, Trash2, RefreshCw, Check, Loader2, X, ChevronDown, ChevronUp } from 'lucide-react'
 
 export default function ShoppingListView() {
-  const { user, members, isHouseholdMode } = useUser()
+  const { user, members, isHouseholdMode, household } = useUser()
+  const householdId = household?.id
   const [listData, setListData] = useState(null)
   const [checkedItems, setCheckedItems] = useState([])
   const [isUpdating, setIsUpdating] = useState(false)
@@ -39,9 +41,30 @@ export default function ShoppingListView() {
   const allDates = useMemo(() => getDatesFromStart(today, 7), [today])
   const weekDateKeys = useMemo(() => allDates.map(d => toISODate(d)), [allDates])
 
-  // Load meals and excluded meals from localStorage
+  // Load meals and excluded meals from Supabase (or localStorage fallback)
   useEffect(() => {
-    if (user) {
+    async function loadMeals() {
+      if (!user) return
+
+      // If we have a household, try Supabase first
+      if (householdId && weekDateKeys.length > 0) {
+        const startDate = weekDateKeys[0]
+        const endDate = weekDateKeys[weekDateKeys.length - 1]
+
+        const { meals: supabaseMeals, excludedMeals: supabaseExcluded, error } = await fetchMealPlan(
+          householdId,
+          startDate,
+          endDate
+        )
+
+        if (!error && Object.keys(supabaseMeals).length > 0) {
+          setMeals(supabaseMeals)
+          setExcludedMeals(supabaseExcluded)
+          return
+        }
+      }
+
+      // Fall back to localStorage
       try {
         const storageKey = `meal-plan-${user.id}`
         const saved = localStorage.getItem(storageKey)
@@ -58,7 +81,9 @@ export default function ShoppingListView() {
         console.error('Failed to load meals:', e)
       }
     }
-  }, [user?.id])
+
+    loadMeals()
+  }, [user?.id, householdId, weekDateKeys])
 
   // Count meals in current week
   const totalWeekMeals = useMemo(() => {
