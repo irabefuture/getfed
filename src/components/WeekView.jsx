@@ -1108,6 +1108,14 @@ export default function WeekView() {
             )}
           </div>
 
+          {/* Start here hint - shows when no meals exist */}
+          {showFirstDayPulse && !clearSelectionMode && !generateSelectionMode && (
+            <div className="flex items-center justify-center gap-1 py-1 bg-primary/10 text-primary text-xs font-medium">
+              <span>Start here</span>
+              <span className="animate-bounce-down">↓</span>
+            </div>
+          )}
+
           {/* 2. DAY STRIP - Below header, horizontally scrollable - NEVER moves */}
           <div className={`border-b px-2 py-1.5 transition-colors ${
             clearSelectionMode
@@ -1270,7 +1278,11 @@ export default function WeekView() {
                           />
                         ))
                       ) : isToday && !isViewing && !clearSelectionMode && !generateSelectionMode ? (
-                        <span className="text-[7px] text-primary font-bold">TODAY</span>
+                        shouldPulse ? (
+                          <span className="text-[7px] text-primary font-bold">TAP</span>
+                        ) : (
+                          <span className="text-[7px] text-primary font-bold">TODAY</span>
+                        )
                       ) : null}
                     </div>
                   </button>
