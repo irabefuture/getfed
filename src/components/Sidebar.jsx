@@ -119,10 +119,7 @@ export function DesktopSidebar({ activeView = 'planner', onNavigate }) {
     <aside className="hidden md:flex w-64 h-screen bg-card border-r flex-col fixed left-0 top-0">
       {/* Logo */}
       <div className="p-4 border-b bg-primary">
-        <div className="flex items-center gap-2 text-white">
-          <span className="text-2xl">🥗</span>
-          <span className="font-bold text-lg">GetFed</span>
-        </div>
+        <span className="font-bold text-xl text-white tracking-tight">GetFed</span>
       </div>
       
       {/* Navigation */}
@@ -315,9 +312,8 @@ export function MobileBottomNav({ activeView = 'planner', onNavigate }) {
 
   return (
     <nav className="md:hidden fixed bottom-0 left-0 right-0 z-50">
-      {/* Curved top edge */}
-      <div className="bg-primary rounded-t-2xl safe-area-bottom shadow-lg">
-        <div className="flex justify-around items-center h-16">
+      <div className="bg-primary shadow-lg">
+        <div className="flex justify-around items-center h-14">
           {mobileNavItems.map((item) => {
             const isActive = activeView === item.id
             return (
@@ -325,7 +321,7 @@ export function MobileBottomNav({ activeView = 'planner', onNavigate }) {
                 key={item.id}
                 onClick={() => onNavigate?.(item.id)}
                 className={`flex flex-col items-center justify-center h-full px-3 min-w-[56px] transition-opacity ${
-                  isActive ? 'text-white' : 'text-white/60'
+                  isActive ? 'text-white' : 'text-white/70'
                 }`}
               >
                 <item.icon className={`h-5 w-5 ${isActive ? 'stroke-[2.5]' : ''}`} />
@@ -336,6 +332,8 @@ export function MobileBottomNav({ activeView = 'planner', onNavigate }) {
             )
           })}
         </div>
+        {/* Safe area spacer - separate from nav content */}
+        <div className="bg-primary" style={{ paddingBottom: 'env(safe-area-inset-bottom)' }} />
       </div>
     </nav>
   )
@@ -343,30 +341,24 @@ export function MobileBottomNav({ activeView = 'planner', onNavigate }) {
 
 /**
  * Mobile App Header - consistent green header across all pages
- * Shows "GetFed" branding with curved bottom edge
+ * Clean "GetFed" text branding, flat edges
  */
-export function MobileAppHeader({ title, rightAction }) {
+export function MobileAppHeader({ rightAction }) {
   return (
-    <header className="md:hidden bg-primary text-white safe-area-top">
-      <div className="flex items-center justify-between h-12 px-4">
+    <header className="md:hidden bg-primary text-white">
+      {/* Safe area spacer at top */}
+      <div style={{ paddingTop: 'env(safe-area-inset-top)' }} />
+      <div className="flex items-center justify-between h-11 px-4">
         {/* Left spacer for balance */}
         <div className="w-8" />
 
-        {/* Center: App name */}
-        <div className="flex items-center gap-2">
-          <span className="text-lg">🥗</span>
-          <span className="font-bold text-lg tracking-tight">GetFed</span>
-        </div>
+        {/* Center: App name - clean text only */}
+        <span className="font-bold text-xl tracking-tight">GetFed</span>
 
         {/* Right: Optional action button */}
         <div className="w-8 flex justify-end">
           {rightAction}
         </div>
-      </div>
-
-      {/* Curved bottom edge */}
-      <div className="h-3 bg-primary">
-        <div className="h-full bg-background rounded-t-2xl" />
       </div>
     </header>
   )

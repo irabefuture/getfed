@@ -61,8 +61,8 @@
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.20 0 0);
   
-  /* Primary - Vibrant green (MyNetDiary style) */
-  --primary: oklch(0.55 0.16 145);         /* Bright, saturated green */
+  /* Primary - Fresh modern green (#4ade80 inspired) */
+  --primary: oklch(0.72 0.17 150);         /* Lighter, fresh green */
   --primary-foreground: oklch(1 0 0);      /* White text on green */
   
   /* Secondary - Light gray */

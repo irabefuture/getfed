@@ -928,13 +928,10 @@ export default function WeekView() {
     return (
       <div className="flex-1 flex flex-col">
         {/* Mobile Header - GetFed branding */}
-        <div className="md:hidden bg-primary text-white safe-area-top">
-          <div className="flex items-center justify-center h-12 px-4 gap-2">
-            <span className="text-lg">🥗</span>
-            <span className="font-bold text-lg tracking-tight">GetFed</span>
-          </div>
-          <div className="h-3 bg-primary">
-            <div className="h-full bg-background rounded-t-2xl" />
+        <div className="md:hidden bg-primary text-white">
+          <div style={{ paddingTop: 'env(safe-area-inset-top)' }} />
+          <div className="flex items-center justify-center h-11 px-4">
+            <span className="font-bold text-xl tracking-tight">GetFed</span>
           </div>
         </div>
 
@@ -1058,15 +1055,17 @@ export default function WeekView() {
         className="md:hidden flex flex-col h-full overflow-hidden"
         style={{ overscrollBehavior: 'none' }}
       >
-        {/* 1. HEADER BAR - GetFed branding with curved bottom */}
-        <div className={`safe-area-top flex-shrink-0 transition-colors ${
+        {/* 1. HEADER BAR - GetFed branding, flat edges */}
+        <div className={`flex-shrink-0 transition-colors ${
           clearSelectionMode
             ? 'bg-orange-500 text-white'
             : generateSelectionMode
               ? 'bg-primary text-white'
               : 'bg-primary text-white'
         }`}>
-          <div className="flex items-center justify-between h-12 px-4">
+          {/* Safe area spacer */}
+          <div style={{ paddingTop: 'env(safe-area-inset-top)' }} />
+          <div className="flex items-center justify-between h-11 px-4">
             {clearSelectionMode ? (
               <>
                 {/* Clear mode header */}
@@ -1097,14 +1096,9 @@ export default function WeekView() {
               </>
             ) : (
               <>
-                {/* Normal header - GetFed branding */}
-                {/* Left: Empty spacer for balance */}
+                {/* Normal header - GetFed text only */}
                 <div className="w-8" />
-                {/* Center: App name with emoji */}
-                <div className="flex items-center gap-2">
-                  <span className="text-lg">🥗</span>
-                  <span className="font-bold text-lg tracking-tight">GetFed</span>
-                </div>
+                <span className="font-bold text-xl tracking-tight">GetFed</span>
                 {/* Right: Print icon */}
                 <button
                   onClick={handlePrintDayRecipes}
@@ -1116,25 +1110,10 @@ export default function WeekView() {
               </>
             )}
           </div>
-
-          {/* Curved bottom edge - only in normal mode */}
-          {!clearSelectionMode && !generateSelectionMode && (
-            <div className="h-3 bg-primary">
-              <div className="h-full bg-background rounded-t-2xl" />
-            </div>
-          )}
         </div>
 
-        {/* Start here hint - shows when no meals exist */}
-        {showFirstDayPulse && !clearSelectionMode && !generateSelectionMode && (
-          <div className="flex items-center justify-center gap-1 py-1.5 bg-green-50 text-primary text-xs font-medium border-b">
-            <span>Tap a day to start</span>
-            <span className="animate-bounce-down">↓</span>
-          </div>
-        )}
-
         {/* 2. DAY STRIP - Below header, horizontally scrollable - NEVER moves */}
-        <div className={`border-b px-2 py-1.5 transition-colors ${
+        <div className={`flex-shrink-0 border-b px-2 py-1.5 transition-colors ${
             clearSelectionMode
               ? 'bg-orange-50'
               : generateSelectionMode
@@ -1143,7 +1122,7 @@ export default function WeekView() {
           }`}>
             <div
               ref={scrollContainerRef}
-              className="flex gap-1 overflow-x-auto snap-x snap-mandatory scroll-smooth"
+              className="flex gap-1 overflow-x-auto snap-x"
               style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
             >
               {allDates.map((date) => {
@@ -1270,7 +1249,7 @@ export default function WeekView() {
                     onMouseUp={handleTouchEnd}
                     onMouseLeave={handleTouchEnd}
                     style={{ WebkitUserSelect: 'none', userSelect: 'none' }}
-                    className={`relative flex-shrink-0 w-[calc((100%-20px)/5)] min-w-[50px] rounded-lg py-1 px-1 text-center snap-start transition-all select-none ${shouldPulse ? 'animate-today-pulse bg-primary text-primary-foreground shadow-lg' : getButtonStyle()}`}
+                    className={`relative flex-shrink-0 w-[calc((100%-20px)/5)] min-w-[50px] rounded-lg py-1 px-1 text-center snap-start transition-all select-none ${shouldPulse ? 'bg-primary text-primary-foreground shadow-md ring-2 ring-primary/30' : getButtonStyle()}`}
                   >
                     {/* Clear mode checkmark badge */}
                     {clearSelectionMode && isSelectedForClearing && (
@@ -1295,11 +1274,7 @@ export default function WeekView() {
                           />
                         ))
                       ) : isToday && !isViewing && !clearSelectionMode && !generateSelectionMode ? (
-                        shouldPulse ? (
-                          <span className="text-[7px] text-primary-foreground font-bold">TAP</span>
-                        ) : (
-                          <span className="text-[7px] text-primary font-bold">TODAY</span>
-                        )
+                        <span className="text-[7px] text-primary font-bold">TODAY</span>
                       ) : null}
                     </div>
                   </button>
@@ -1307,6 +1282,14 @@ export default function WeekView() {
               })}
             </div>
           </div>
+
+        {/* First-use hint - shows below day strip when no meals exist */}
+        {showFirstDayPulse && !clearSelectionMode && !generateSelectionMode && (
+          <div className="flex items-center justify-center gap-1 py-2 bg-green-50 text-primary text-xs font-medium border-b">
+            <span>Tap and hold a day to start</span>
+            <span>↑</span>
+          </div>
+        )}
 
         {/* 3. MAIN CONTENT - Fixed height, no scroll, all 4 meals visible */}
         <div
