@@ -174,10 +174,6 @@ export default function WeekView() {
   const [excludedMeals, setExcludedMeals] = useState([]) // Array of "dateKey-slotId" strings
   const [userDismissedPulse, setUserDismissedPulse] = useState(false)
 
-  // Show pulse on Today button when no meals exist and user hasn't dismissed it
-  // This helps new users or users after clearing know where to start
-  const showFirstDayPulse = totalWeekMeals === 0 && !isInitialLoading && !isGenerating && !userDismissedPulse
-
   // Listen for onboarding completion and meals cleared events
   useEffect(() => {
     const handleOnboardingComplete = () => {
@@ -326,6 +322,10 @@ export default function WeekView() {
     })
     return count
   }, [allDates, meals])
+
+  // Show pulse on Today button when no meals exist and user hasn't dismissed it
+  // This helps new users or users after clearing know where to start
+  const showFirstDayPulse = totalWeekMeals === 0 && !isInitialLoading && !isGenerating && !userDismissedPulse
 
   // Generate meals using AI for the week (auto or manual refresh)
   const handleGenerateWeek = useCallback(async (isAutoGenerate = false) => {
