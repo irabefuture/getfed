@@ -178,15 +178,27 @@ export default function WeekView() {
   // This helps new users or users after clearing know where to start
   const showFirstDayPulse = totalWeekMeals === 0 && !isInitialLoading && !isGenerating && !userDismissedPulse
 
-  // Listen for onboarding completion (keep for backwards compatibility)
+  // Listen for onboarding completion and meals cleared events
   useEffect(() => {
     const handleOnboardingComplete = () => {
       // Pulse will show automatically via showFirstDayPulse computed value
       // Just reset the dismissed state in case user goes through onboarding again
       setUserDismissedPulse(false)
     }
+
+    const handleMealsCleared = () => {
+      // Clear local state when meals are cleared from Settings
+      setMeals({})
+      setExcludedMeals([])
+      setCommittedHash(null)
+    }
+
     window.addEventListener('onboarding-complete', handleOnboardingComplete)
-    return () => window.removeEventListener('onboarding-complete', handleOnboardingComplete)
+    window.addEventListener('meals-cleared', handleMealsCleared)
+    return () => {
+      window.removeEventListener('onboarding-complete', handleOnboardingComplete)
+      window.removeEventListener('meals-cleared', handleMealsCleared)
+    }
   }, [])
 
   // Load committed hash on mount
