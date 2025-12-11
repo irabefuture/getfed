@@ -277,7 +277,7 @@ export async function fetchMealsForShopping(householdId, startDate, endDate) {
   try {
     const { data, error } = await supabase
       .from('planned_meals')
-      .select('date, meal_type, name, ingredients_json, cooking_serves, recipe_json')
+      .select('*')
       .eq('household_id', householdId)
       .eq('excluded', false)
       .gte('date', startDate)
