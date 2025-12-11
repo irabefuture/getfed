@@ -15,8 +15,8 @@ import {
 } from 'lucide-react'
 
 const NAV_ITEMS = [
-  { id: 'planner', icon: CalendarDays, label: 'Meal Planner', shortLabel: 'Planner' },
-  { id: 'shopping', icon: ListChecks, label: 'Shopping List', shortLabel: 'Shopping' },
+  { id: 'planner', icon: CalendarDays, label: 'Planning', shortLabel: 'Plan' },
+  { id: 'shopping', icon: ListChecks, label: 'Shopping', shortLabel: 'Shop' },
   { id: 'discover', icon: Sparkles, label: 'Discover', shortLabel: 'Discover' },
   { id: 'family', icon: Users, label: 'Users', shortLabel: 'Users' },
 ]
@@ -118,10 +118,10 @@ export function DesktopSidebar({ activeView = 'planner', onNavigate }) {
   return (
     <aside className="hidden md:flex w-64 h-screen bg-card border-r flex-col fixed left-0 top-0">
       {/* Logo */}
-      <div className="p-4 border-b">
-        <div className="flex items-center gap-2">
+      <div className="p-4 border-b bg-primary">
+        <div className="flex items-center gap-2 text-white">
           <span className="text-2xl">🥗</span>
-          <span className="font-semibold text-lg">Meal Builder</span>
+          <span className="font-bold text-lg">GetFed</span>
         </div>
       </div>
       
@@ -306,7 +306,7 @@ function MacroBox({ label, current, target, unit = '' }) {
 }
 
 /**
- * Mobile Bottom Navigation - standard always-visible bottom nav
+ * Mobile Bottom Navigation - green themed with white active states
  * Planner | Recipes | Shopping | Family | Settings
  */
 export function MobileBottomNav({ activeView = 'planner', onNavigate }) {
@@ -314,41 +314,80 @@ export function MobileBottomNav({ activeView = 'planner', onNavigate }) {
   const mobileNavItems = [...NAV_ITEMS, { id: 'settings', icon: Settings, label: 'Settings', shortLabel: 'Settings' }]
 
   return (
-    <nav className="md:hidden fixed bottom-0 left-0 right-0 bg-card border-t z-50 safe-area-bottom">
-      <div className="flex justify-around items-center h-16">
-        {mobileNavItems.map((item) => {
-          const isActive = activeView === item.id
-          return (
-            <button
-              key={item.id}
-              onClick={() => onNavigate?.(item.id)}
-              className={`flex flex-col items-center justify-center h-full px-3 min-w-[56px] ${
-                isActive ? 'text-primary' : 'text-muted-foreground'
-              }`}
-            >
-              <item.icon className={`h-5 w-5 ${isActive ? 'stroke-[2.5]' : ''}`} />
-              <span className="text-[10px] mt-1 font-medium">{item.shortLabel}</span>
-            </button>
-          )
-        })}
+    <nav className="md:hidden fixed bottom-0 left-0 right-0 z-50">
+      {/* Curved top edge */}
+      <div className="bg-primary rounded-t-2xl safe-area-bottom shadow-lg">
+        <div className="flex justify-around items-center h-16">
+          {mobileNavItems.map((item) => {
+            const isActive = activeView === item.id
+            return (
+              <button
+                key={item.id}
+                onClick={() => onNavigate?.(item.id)}
+                className={`flex flex-col items-center justify-center h-full px-3 min-w-[56px] transition-opacity ${
+                  isActive ? 'text-white' : 'text-white/60'
+                }`}
+              >
+                <item.icon className={`h-5 w-5 ${isActive ? 'stroke-[2.5]' : ''}`} />
+                <span className={`text-[10px] mt-1 ${isActive ? 'font-semibold' : 'font-medium'}`}>
+                  {item.shortLabel}
+                </span>
+              </button>
+            )
+          })}
+        </div>
       </div>
     </nav>
   )
 }
 
 /**
- * Mobile Header - shows on mobile only
+ * Mobile App Header - consistent green header across all pages
+ * Shows "GetFed" branding with curved bottom edge
  */
-export function MobileHeader() {
+export function MobileAppHeader({ title, rightAction }) {
   return (
-    <header className="md:hidden fixed top-0 left-0 right-0 bg-card border-b z-50 safe-area-top">
-      <div className="flex items-center justify-between h-14 px-4">
+    <header className="md:hidden bg-primary text-white safe-area-top">
+      <div className="flex items-center justify-between h-12 px-4">
+        {/* Left spacer for balance */}
+        <div className="w-8" />
+
+        {/* Center: App name */}
         <div className="flex items-center gap-2">
-          <span className="text-xl">🥗</span>
-          <span className="font-semibold">Meal Builder</span>
+          <span className="text-lg">🥗</span>
+          <span className="font-bold text-lg tracking-tight">GetFed</span>
+        </div>
+
+        {/* Right: Optional action button */}
+        <div className="w-8 flex justify-end">
+          {rightAction}
         </div>
       </div>
+
+      {/* Curved bottom edge */}
+      <div className="h-3 bg-primary">
+        <div className="h-full bg-background rounded-t-2xl" />
+      </div>
     </header>
+  )
+}
+
+/**
+ * Page title bar - shows below app header for page context
+ */
+export function PageTitleBar({ title, subtitle, children }) {
+  return (
+    <div className="px-4 py-3 bg-background">
+      <div className="flex items-center justify-between">
+        <div>
+          <h1 className="text-xl font-bold">{title}</h1>
+          {subtitle && (
+            <p className="text-sm text-muted-foreground">{subtitle}</p>
+          )}
+        </div>
+        {children}
+      </div>
+    </div>
   )
 }
 

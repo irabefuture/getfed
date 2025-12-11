@@ -927,14 +927,20 @@ export default function WeekView() {
   if (isInitialLoading && isGenerating) {
     return (
       <div className="flex-1 flex flex-col">
-        {/* Mobile Header - Green bar */}
-        <div className="md:hidden bg-primary text-primary-foreground px-4 py-3 safe-area-top">
-          <h1 className="text-center font-semibold">Meal Planner</h1>
+        {/* Mobile Header - GetFed branding */}
+        <div className="md:hidden bg-primary text-white safe-area-top">
+          <div className="flex items-center justify-center h-12 px-4 gap-2">
+            <span className="text-lg">🥗</span>
+            <span className="font-bold text-lg tracking-tight">GetFed</span>
+          </div>
+          <div className="h-3 bg-primary">
+            <div className="h-full bg-background rounded-t-2xl" />
+          </div>
         </div>
 
         {/* Desktop Header */}
         <div className="hidden md:block p-6 pb-0">
-          <h1 className="text-2xl font-bold">Meal Planner</h1>
+          <h1 className="text-2xl font-bold">Meal Planning</h1>
           <p className="text-sm text-muted-foreground">
             {weekDateRange ? formatDateRange(weekDateRange.first, weekDateRange.last) : 'This week'}
           </p>
@@ -1052,15 +1058,15 @@ export default function WeekView() {
         className="md:hidden flex flex-col h-full overflow-hidden"
         style={{ overscrollBehavior: 'none' }}
       >
-        {/* 1. HEADER BAR - Fixed at top, transforms when in selection mode */}
+        {/* 1. HEADER BAR - GetFed branding with curved bottom */}
         <div className={`safe-area-top flex-shrink-0 transition-colors ${
           clearSelectionMode
             ? 'bg-orange-500 text-white'
             : generateSelectionMode
               ? 'bg-primary text-white'
-              : 'bg-primary text-primary-foreground'
+              : 'bg-primary text-white'
         }`}>
-          <div className="flex items-center justify-between h-11 px-4">
+          <div className="flex items-center justify-between h-12 px-4">
             {clearSelectionMode ? (
               <>
                 {/* Clear mode header */}
@@ -1091,11 +1097,14 @@ export default function WeekView() {
               </>
             ) : (
               <>
-                {/* Normal header */}
+                {/* Normal header - GetFed branding */}
                 {/* Left: Empty spacer for balance */}
-                <div className="w-8 h-8" />
-                {/* Center: Title */}
-                <h1 className="font-semibold text-base">Meal Planner</h1>
+                <div className="w-8" />
+                {/* Center: App name with emoji */}
+                <div className="flex items-center gap-2">
+                  <span className="text-lg">🥗</span>
+                  <span className="font-bold text-lg tracking-tight">GetFed</span>
+                </div>
                 {/* Right: Print icon */}
                 <button
                   onClick={handlePrintDayRecipes}
@@ -1108,16 +1117,24 @@ export default function WeekView() {
             )}
           </div>
 
-          {/* Start here hint - shows when no meals exist */}
-          {showFirstDayPulse && !clearSelectionMode && !generateSelectionMode && (
-            <div className="flex items-center justify-center gap-1 py-1 bg-primary/10 text-primary text-xs font-medium">
-              <span>Start here</span>
-              <span className="animate-bounce-down">↓</span>
+          {/* Curved bottom edge - only in normal mode */}
+          {!clearSelectionMode && !generateSelectionMode && (
+            <div className="h-3 bg-primary">
+              <div className="h-full bg-background rounded-t-2xl" />
             </div>
           )}
+        </div>
 
-          {/* 2. DAY STRIP - Below header, horizontally scrollable - NEVER moves */}
-          <div className={`border-b px-2 py-1.5 transition-colors ${
+        {/* Start here hint - shows when no meals exist */}
+        {showFirstDayPulse && !clearSelectionMode && !generateSelectionMode && (
+          <div className="flex items-center justify-center gap-1 py-1.5 bg-green-50 text-primary text-xs font-medium border-b">
+            <span>Tap a day to start</span>
+            <span className="animate-bounce-down">↓</span>
+          </div>
+        )}
+
+        {/* 2. DAY STRIP - Below header, horizontally scrollable - NEVER moves */}
+        <div className={`border-b px-2 py-1.5 transition-colors ${
             clearSelectionMode
               ? 'bg-orange-50'
               : generateSelectionMode
@@ -1290,7 +1307,6 @@ export default function WeekView() {
               })}
             </div>
           </div>
-        </div>
 
         {/* 3. MAIN CONTENT - Fixed height, no scroll, all 4 meals visible */}
         <div
@@ -1467,7 +1483,7 @@ export default function WeekView() {
       <div className="hidden md:block flex-1 p-6">
         {/* Header */}
         <div className="mb-6">
-          <h1 className="text-2xl font-bold">Meal Planner</h1>
+          <h1 className="text-2xl font-bold">Meal Planning</h1>
           <p className="text-sm text-muted-foreground">
             {weekDateRange ? formatDateRange(weekDateRange.first, weekDateRange.last) : 'This week'}
             {totalWeekMeals > 0 && ` · ${totalWeekMeals} meals planned`}

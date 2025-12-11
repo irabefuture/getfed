@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { UserProvider } from '@/context/UserContext'
-import { DesktopSidebar, MobileBottomNav } from '@/components/Sidebar'
+import { DesktopSidebar, MobileBottomNav, MobileAppHeader } from '@/components/Sidebar'
 import WeekView from '@/components/WeekView'
 import DiscoverView from '@/components/DiscoverView'
 import ShoppingListView from '@/components/ShoppingListView'
@@ -54,12 +54,15 @@ export default function Home() {
     <PasswordGate>
       <DeviceGate>
         <UserProvider>
-        <div className="h-screen bg-background overflow-hidden md:overflow-auto md:min-h-screen">
+        <div className="h-screen bg-background overflow-hidden md:overflow-auto md:min-h-screen flex flex-col">
           {/* Desktop Sidebar */}
           <DesktopSidebar activeView={activeView} onNavigate={setActiveView} />
 
-          {/* Main Content - fixed on mobile to prevent scroll */}
-          <main className="md:ml-64 h-full md:min-h-screen pb-16 md:pb-0 overflow-hidden md:overflow-auto">
+          {/* Mobile App Header - consistent across non-planner pages */}
+          {activeView !== 'planner' && <MobileAppHeader />}
+
+          {/* Main Content */}
+          <main className="md:ml-64 flex-1 md:min-h-screen pb-16 md:pb-0 overflow-hidden md:overflow-auto">
             {activeView === 'planner' && <WeekView />}
             {activeView === 'shopping' && <ShoppingListView />}
             {activeView === 'discover' && <DiscoverView />}
