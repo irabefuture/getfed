@@ -201,12 +201,8 @@
   }
 }
 
-/* Mobile touch targets - minimum 44px */
-@media (max-width: 768px) {
-  button, a, [role="button"] {
-    min-height: 44px;
-  }
-}
+/* Mobile touch targets - minimum 44px for primary interactive elements */
+/* Note: Applied via explicit classes, not globally to avoid breaking small icon buttons */
 
 /* Generate button progress fill animation */
 @keyframes progressFill {

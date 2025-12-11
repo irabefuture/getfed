@@ -1249,7 +1249,7 @@ export default function WeekView() {
                     onMouseUp={handleTouchEnd}
                     onMouseLeave={handleTouchEnd}
                     style={{ WebkitUserSelect: 'none', userSelect: 'none' }}
-                    className={`relative flex-shrink-0 w-[calc((100%-20px)/5)] min-w-[50px] rounded-lg py-1 px-1 text-center snap-start transition-all select-none ${shouldPulse ? 'bg-primary text-primary-foreground shadow-md ring-2 ring-primary/30' : getButtonStyle()}`}
+                    className={`relative flex-shrink-0 w-[calc((100%-20px)/5)] min-w-[50px] min-h-[44px] rounded-lg py-1.5 px-1 text-center snap-start transition-all select-none ${shouldPulse ? 'bg-primary text-primary-foreground shadow-md ring-2 ring-primary/30' : getButtonStyle()}`}
                   >
                     {/* Clear mode checkmark badge */}
                     {clearSelectionMode && isSelectedForClearing && (
@@ -2393,13 +2393,13 @@ function MealSlotCard({ slot, recipe, onSwap, onClear, isSwapping, members, isHo
             </div>
 
             {/* Recipe title */}
-            <h3 className={`text-base font-medium leading-tight ${isExcluded ? 'text-muted-foreground' : ''}`}>
+            <h3 className={`text-base font-medium leading-tight line-clamp-2 ${isExcluded ? 'text-muted-foreground' : ''}`}>
               {sanitizeText(recipe.name)}
             </h3>
 
             {/* Description */}
             {recipe.description && sanitizeDescription(recipe.description) && (
-              <p className="text-sm text-muted-foreground mt-1 leading-relaxed">
+              <p className="text-sm text-muted-foreground mt-1 leading-relaxed line-clamp-2">
                 {sanitizeDescription(recipe.description)}
               </p>
             )}
