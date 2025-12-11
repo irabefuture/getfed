@@ -237,6 +237,36 @@ export async function deleteMeal(householdId, date, slotId) {
 }
 
 /**
+ * Delete ALL meals for a household (used for fresh start)
+ * @param {string} householdId - Household UUID
+ * @returns {Promise<{success: boolean, deletedCount: number, error: Error|null}>}
+ */
+export async function deleteAllMeals(householdId) {
+  try {
+    // First count how many we're deleting
+    const { count, error: countError } = await supabase
+      .from('planned_meals')
+      .select('*', { count: 'exact', head: true })
+      .eq('household_id', householdId)
+
+    if (countError) throw countError
+
+    // Delete all meals for this household
+    const { error } = await supabase
+      .from('planned_meals')
+      .delete()
+      .eq('household_id', householdId)
+
+    if (error) throw error
+
+    return { success: true, deletedCount: count || 0, error: null }
+  } catch (error) {
+    console.error('Failed to delete all meals:', error)
+    return { success: false, deletedCount: 0, error }
+  }
+}
+
+/**
  * Fetch meals for shopping list (non-excluded only)
  * @param {string} householdId - Household UUID
  * @param {string} startDate - ISO date string (YYYY-MM-DD)
