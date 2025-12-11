@@ -78,7 +78,7 @@ export default function RecipeCard({ recipe, onFavourite, isFavourite = false })
           </span>
           <span className="text-muted-foreground/50">|</span>
           <span>
-            {macros.calories} cal · {macros.protein_g}P · {macros.fat_g}F · {macros.carbs_g}C
+            {macros.calories || 0} cal · {macros.protein_g || 0}P · {macros.fat_g || 0}F · {macros.carbs_g || 0}C
           </span>
         </div>
         

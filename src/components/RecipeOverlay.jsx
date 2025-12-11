@@ -440,13 +440,13 @@ export default function RecipeOverlay({
               </span>
             )}
             <span className="text-muted-foreground">·</span>
-            <span className="font-medium">{macros.calories} cal</span>
+            <span className="font-medium">{macros.calories || 0} cal</span>
             <span className="text-muted-foreground">·</span>
-            <span>{macros.protein_g}P</span>
+            <span>{macros.protein_g || 0}P</span>
             <span className="text-muted-foreground">·</span>
-            <span>{macros.fat_g}F</span>
+            <span>{macros.fat_g || 0}F</span>
             <span className="text-muted-foreground">·</span>
-            <span>{macros.carbs_g}C</span>
+            <span>{macros.carbs_g || 0}C</span>
           </div>
         </div>
 

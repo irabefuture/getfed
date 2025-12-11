@@ -2395,10 +2395,10 @@ function MealSlotCard({ slot, recipe, onSwap, onClear, isSwapping, members, isHo
 
             {/* Macros */}
             <div className="flex gap-3 mt-2 text-xs text-muted-foreground">
-              <span>{macros.calories} cal</span>
-              <span>{macros.protein_g}P</span>
-              <span>{macros.fat_g}F</span>
-              <span>{macros.carbs_g}C</span>
+              <span>{macros.calories || 0} cal</span>
+              <span>{macros.protein_g || 0}P</span>
+              <span>{macros.fat_g || 0}F</span>
+              <span>{macros.carbs_g || 0}C</span>
             </div>
           </div>
 
