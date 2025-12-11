@@ -1253,7 +1253,7 @@ export default function WeekView() {
                     onMouseUp={handleTouchEnd}
                     onMouseLeave={handleTouchEnd}
                     style={{ WebkitUserSelect: 'none', userSelect: 'none' }}
-                    className={`relative flex-shrink-0 w-[calc((100%-20px)/5)] min-w-[50px] rounded-lg py-1 px-1 text-center snap-start transition-all select-none ${getButtonStyle()} ${shouldPulse ? 'animate-today-pulse ring-2 ring-primary ring-offset-2' : ''}`}
+                    className={`relative flex-shrink-0 w-[calc((100%-20px)/5)] min-w-[50px] rounded-lg py-1 px-1 text-center snap-start transition-all select-none ${shouldPulse ? 'animate-today-pulse bg-primary text-primary-foreground shadow-lg' : getButtonStyle()}`}
                   >
                     {/* Clear mode checkmark badge */}
                     {clearSelectionMode && isSelectedForClearing && (
@@ -1279,7 +1279,7 @@ export default function WeekView() {
                         ))
                       ) : isToday && !isViewing && !clearSelectionMode && !generateSelectionMode ? (
                         shouldPulse ? (
-                          <span className="text-[7px] text-primary font-bold">TAP</span>
+                          <span className="text-[7px] text-primary-foreground font-bold">TAP</span>
                         ) : (
                           <span className="text-[7px] text-primary font-bold">TODAY</span>
                         )

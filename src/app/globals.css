@@ -218,20 +218,22 @@
   }
 }
 
-/* Today button pulse animation - prominent glow effect */
-@keyframes todayPulse {
+/* Today button shake/jiggle animation - attention-grabbing wiggle */
+@keyframes todayShake {
   0%, 100% {
-    box-shadow: 0 0 0 0 oklch(0.55 0.16 145 / 0.6);
-    transform: scale(1);
+    transform: translateX(0) rotate(0deg);
   }
-  50% {
-    box-shadow: 0 0 0 10px oklch(0.55 0.16 145 / 0);
-    transform: scale(1.05);
+  10%, 30%, 50%, 70%, 90% {
+    transform: translateX(-2px) rotate(-1deg);
+  }
+  20%, 40%, 60%, 80% {
+    transform: translateX(2px) rotate(1deg);
   }
 }
 
 .animate-today-pulse {
-  animation: todayPulse 1.2s ease-in-out infinite;
+  animation: todayShake 0.6s ease-in-out infinite;
+  animation-delay: 0.5s;
 }
 
 /* Start here arrow bounce animation */
